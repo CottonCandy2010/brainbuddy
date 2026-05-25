@@ -1,4 +1,9 @@
-import pyttsx3
+try:
+    import pyttsx3
+    PYTTSX3_AVAILABLE = True
+except ImportError:
+    PYTTSX3_AVAILABLE = False
+
 import os
 import tempfile
 from flask import send_file
@@ -12,6 +17,9 @@ class AudioService:
     
     def init_engine(self):
         """Initialize the text-to-speech engine"""
+        if not PYTTSX3_AVAILABLE:
+            print("pyttsx3 not installed — TTS unavailable")
+            return
         try:
             self.engine = pyttsx3.init()
             self.setup_default_settings()
