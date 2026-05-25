@@ -1,0 +1,12 @@
+anthropic
+flask
+flask-sqlalchemy
+flask-cors
+flask-login
+gunicorn
+firebase-admin
+psycopg2-binary
+requests
+oauthlib
+pyjwt
+email-validator
