@@ -1,0 +1,16 @@
+.env
+*.env
+__pycache__/
+*.pyc
+*.pyo
+instance/
+.DS_Store
+*.db
+firebase_key.json
+ANTHROPIC_API_KEY
+attached_assets/
+logs/
+.config/
+uv.lock
+*.log
+attached_assets/

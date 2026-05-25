@@ -1,0 +1,808 @@
+{% extends "layout.html" %}
+
+{% block title %}Settings - Brain Buddy{% endblock %}
+
+{% block content %}
+<section class="settings-page animate-fade-in">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Settings Header with Logo -->
+            <div class="settings-header text-center mb-5">
+                <div class="logo-container mb-4">
+                    <img src="{{ url_for('static', filename='images/brain_buddy_logo.png') }}" 
+                         alt="Brain Buddy Logo" class="brain-buddy-logo">
+                </div>
+                <h1 class="settings-title">Brain Buddy Settings</h1>
+                <p class="settings-subtitle">Customize your learning experience to make it perfect for you!</p>
+            </div>
+
+            <!-- Settings Cards Grid -->
+            <div class="row">
+                <!-- Profile Settings -->
+                <div class="col-md-6 mb-4">
+                    <div class="settings-card">
+                        <div class="card-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h3>Profile Settings</h3>
+                        <p>Update your personal information and preferences</p>
+                        
+                        <div class="settings-form">
+                            <div class="mb-3">
+                                <label for="studentName" class="form-label">Your Name</label>
+                                <input type="text" class="form-control settings-input" id="studentName" 
+                                       placeholder="Enter your name" value="Demo Student">
+                            </div>
+                            <div class="mb-3">
+                                <label for="studentAge" class="form-label">Age</label>
+                                <input type="number" class="form-control settings-input" id="studentAge" 
+                                       min="5" max="18" value="14">
+                            </div>
+                            <div class="mb-3">
+                                <label for="gradeLevel" class="form-label">Grade Level</label>
+                                <select class="form-control settings-input" id="gradeLevel">
+                                    <option value="primary">Primary (6-8 years)</option>
+                                    <option value="middle">Middle (9-11 years)</option>
+                                    <option value="secondary" selected>Secondary (12-16 years)</option>
+                                    <option value="college">College Prep (17-18 years)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Preferences -->
+                <div class="col-md-6 mb-4">
+                    <div class="settings-card">
+                        <div class="card-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Learning Preferences</h3>
+                        <p>Choose your favorite learning styles and subjects</p>
+                        
+                        <div class="settings-form">
+                            <div class="mb-3">
+                                <label class="form-label">Preferred Learning Style</label>
+                                <div class="learning-style-options">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="learningStyle" id="visual" value="visual">
+                                        <label class="form-check-label" for="visual">
+                                            <i class="fas fa-eye me-2"></i>Visual
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="learningStyle" id="auditory" value="auditory" checked>
+                                        <label class="form-check-label" for="auditory">
+                                            <i class="fas fa-volume-up me-2"></i>Auditory
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="learningStyle" id="physical" value="physical">
+                                        <label class="form-check-label" for="physical">
+                                            <i class="fas fa-running me-2"></i>Physical
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="favoriteSubjects" class="form-label">Favorite Subjects</label>
+                                <div class="subject-tags">
+                                    <span class="subject-tag active" data-subject="maths">Maths</span>
+                                    <span class="subject-tag" data-subject="science">Science</span>
+                                    <span class="subject-tag active" data-subject="english">English</span>
+                                    <span class="subject-tag" data-subject="art">Art</span>
+                                    <span class="subject-tag" data-subject="geography">Geography</span>
+                                    <span class="subject-tag" data-subject="history">History</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audio Settings -->
+                <div class="col-md-6 mb-4">
+                    <div class="settings-card">
+                        <div class="card-icon">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                        <h3>Audio Settings</h3>
+                        <p>Configure your audio learning experience</p>
+                        
+                        <div class="settings-form">
+                            <div class="mb-3">
+                                <label for="defaultVoice" class="form-label">Default Voice</label>
+                                <select class="form-control settings-input" id="defaultVoice">
+                                    <option value="female-1">Female Voice 1</option>
+                                    <option value="female-2">Female Voice 2</option>
+                                    <option value="male-1">Male Voice 1</option>
+                                    <option value="male-2">Male Voice 2</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="defaultVolume" class="form-label">Default Volume</label>
+                                <input type="range" class="form-range" id="defaultVolume" min="0" max="100" value="80">
+                                <div class="text-center">
+                                    <span id="volumeDisplay">80%</span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="speechRate" class="form-label">Speech Rate</label>
+                                <input type="range" class="form-range" id="speechRate" min="0.5" max="2" step="0.1" value="1">
+                                <div class="text-center">
+                                    <span id="rateDisplay">Normal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Appearance & Accessibility Settings -->
+                <div class="col-md-6 mb-4">
+                    <div class="settings-card">
+                        <div class="card-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>Appearance & Accessibility</h3>
+                        <p>Customize the look and accessibility features</p>
+                        
+                        <div class="settings-form">
+                            <div class="mb-3">
+                                <label class="form-label">Text Size</label>
+                                <div class="text-size-controls-settings">
+                                    <button class="access-btn" onclick="changeTextSize('small')" title="Smaller text">A-</button>
+                                    <button class="access-btn active" onclick="changeTextSize('normal')" title="Normal text">A</button>
+                                    <button class="access-btn" onclick="changeTextSize('large')" title="Larger text">A+</button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="highContrast" onchange="toggleHighContrast()">
+                                    <label class="form-check-label" for="highContrast">
+                                        High Contrast Mode
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="dyslexiaFont" onchange="toggleDyslexiaFont()">
+                                    <label class="form-check-label" for="dyslexiaFont">
+                                        Dyslexia-Friendly Font
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="animationsEnabled" checked>
+                                    <label class="form-check-label" for="animationsEnabled">
+                                        Enable Animations
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="soundEffects" checked>
+                                    <label class="form-check-label" for="soundEffects">
+                                        Sound Effects
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications -->
+                <div class="col-md-6 mb-4">
+                    <div class="settings-card">
+                        <div class="card-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <h3>Notifications</h3>
+                        <p>Choose how Brain Buddy keeps you motivated</p>
+                        
+                        <div class="settings-form">
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="studyReminders" checked>
+                                    <label class="form-check-label" for="studyReminders">
+                                        Daily Study Reminders
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="achievementNotifs" checked>
+                                    <label class="form-check-label" for="achievementNotifs">
+                                        Achievement Celebrations
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="weeklyProgress">
+                                    <label class="form-check-label" for="weeklyProgress">
+                                        Weekly Progress Reports
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Privacy & Safety -->
+                <div class="col-md-6 mb-4">
+                    <div class="settings-card">
+                        <div class="card-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Privacy & Safety</h3>
+                        <p>Control your data and safety settings</p>
+                        
+                        <div class="settings-form">
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="saveProgress" checked>
+                                    <label class="form-check-label" for="saveProgress">
+                                        Save My Progress
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="shareProgress">
+                                    <label class="form-check-label" for="shareProgress">
+                                        Share Progress with Parents/Teachers
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <button class="btn btn-outline-danger">
+                                    <i class="fas fa-trash me-2"></i>Clear All Data
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Error Reporting & System Health -->
+                <div class="col-12 mb-4">
+                    <div class="settings-card">
+                        <div class="card-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <h3>Error Reporting & System Health</h3>
+                        <p>Help us improve Brain Buddy by managing error reporting and system monitoring</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="settings-form">
+                                    <div class="mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="automaticErrorReporting" checked>
+                                            <label class="form-check-label" for="automaticErrorReporting">
+                                                Automatic Error Reporting
+                                            </label>
+                                            <small class="form-text text-muted">Automatically report technical issues to help improve the app</small>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="performanceMonitoring" checked>
+                                            <label class="form-check-label" for="performanceMonitoring">
+                                                Performance Monitoring
+                                            </label>
+                                            <small class="form-text text-muted">Monitor app performance to ensure smooth operation</small>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="crashReporting">
+                                            <label class="form-check-label" for="crashReporting">
+                                                Crash Reporting
+                                            </label>
+                                            <small class="form-text text-muted">Send crash reports to help fix critical issues</small>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="usageAnalytics">
+                                            <label class="form-check-label" for="usageAnalytics">
+                                                Anonymous Usage Analytics
+                                            </label>
+                                            <small class="form-text text-muted">Help us understand how features are used (no personal data)</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="system-health-panel">
+                                    <h5 class="mb-3">System Status</h5>
+                                    <div class="health-metrics">
+                                        <div class="health-metric">
+                                            <div class="metric-label">Error Reporting</div>
+                                            <div class="metric-status active" id="errorReportingStatus">
+                                                <i class="fas fa-check-circle"></i> Active
+                                            </div>
+                                        </div>
+                                        <div class="health-metric">
+                                            <div class="metric-label">Performance</div>
+                                            <div class="metric-status good" id="performanceStatus">
+                                                <i class="fas fa-tachometer-alt"></i> Good
+                                            </div>
+                                        </div>
+                                        <div class="health-metric">
+                                            <div class="metric-label">Storage</div>
+                                            <div class="metric-status good" id="storageStatus">
+                                                <i class="fas fa-database"></i> Available
+                                            </div>
+                                        </div>
+                                        <div class="health-metric">
+                                            <div class="metric-label">Recent Errors</div>
+                                            <div class="metric-value" id="recentErrorCount">0</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="error-actions mt-3">
+                                        <button class="btn btn-sm btn-outline-primary" onclick="refreshSystemStatus()">
+                                            <i class="fas fa-sync-alt"></i> Refresh Status
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-info" onclick="viewErrorLogs()">
+                                            <i class="fas fa-list"></i> View Logs
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-warning" onclick="testErrorReporting()">
+                                            <i class="fas fa-vial"></i> Test System
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger" onclick="clearErrorData()">
+                                            <i class="fas fa-trash"></i> Clear Data
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="error-summary mt-4" id="errorSummary" style="display: none;">
+                            <h6>Recent Error Summary</h6>
+                            <div class="error-summary-content">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="summary-stat">
+                                            <div class="stat-number" id="totalErrors">0</div>
+                                            <div class="stat-label">Total Errors</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="summary-stat">
+                                            <div class="stat-number" id="serverErrors">0</div>
+                                            <div class="stat-label">Server Errors</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="summary-stat">
+                                            <div class="stat-number" id="clientErrors">0</div>
+                                            <div class="stat-label">Client Errors</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="summary-stat">
+                                            <div class="stat-number" id="performanceIssues">0</div>
+                                            <div class="stat-label">Performance Issues</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Save Button -->
+            <div class="text-center mt-4">
+                <button class="btn btn-primary btn-lg save-settings-btn">
+                    <i class="fas fa-save me-2"></i>Save All Settings
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Volume slider display
+    const volumeSlider = document.getElementById('defaultVolume');
+    const volumeDisplay = document.getElementById('volumeDisplay');
+    
+    volumeSlider.addEventListener('input', function() {
+        volumeDisplay.textContent = this.value + '%';
+    });
+
+    // Speech rate slider display
+    const rateSlider = document.getElementById('speechRate');
+    const rateDisplay = document.getElementById('rateDisplay');
+    
+    rateSlider.addEventListener('input', function() {
+        const rate = parseFloat(this.value);
+        if (rate < 0.8) rateDisplay.textContent = 'Slow';
+        else if (rate < 1.2) rateDisplay.textContent = 'Normal';
+        else rateDisplay.textContent = 'Fast';
+    });
+
+    // Subject tags
+    const subjectTags = document.querySelectorAll('.subject-tag');
+    subjectTags.forEach(tag => {
+        tag.addEventListener('click', function() {
+            this.classList.toggle('active');
+        });
+    });
+
+    // Theme selection
+    const themeOptions = document.querySelectorAll('.theme-option');
+    themeOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            themeOptions.forEach(opt => opt.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Save settings
+    const saveBtn = document.querySelector('.save-settings-btn');
+    saveBtn.addEventListener('click', function() {
+        // Collect all settings
+        const settings = {
+            name: document.getElementById('studentName').value,
+            age: document.getElementById('studentAge').value,
+            gradeLevel: document.getElementById('gradeLevel').value,
+            learningStyle: document.querySelector('input[name="learningStyle"]:checked').value,
+            favoriteSubjects: Array.from(document.querySelectorAll('.subject-tag.active')).map(tag => tag.dataset.subject),
+            defaultVoice: document.getElementById('defaultVoice').value,
+            defaultVolume: document.getElementById('defaultVolume').value,
+            speechRate: document.getElementById('speechRate').value,
+            theme: document.querySelector('.theme-option.active').dataset.theme,
+            animationsEnabled: document.getElementById('animationsEnabled').checked,
+            soundEffects: document.getElementById('soundEffects').checked,
+            studyReminders: document.getElementById('studyReminders').checked,
+            achievementNotifs: document.getElementById('achievementNotifs').checked,
+            weeklyProgress: document.getElementById('weeklyProgress').checked,
+            saveProgress: document.getElementById('saveProgress').checked,
+            shareProgress: document.getElementById('shareProgress').checked
+        };
+
+        // Add error reporting settings
+        settings.automaticErrorReporting = document.getElementById('automaticErrorReporting').checked;
+        settings.performanceMonitoring = document.getElementById('performanceMonitoring').checked;
+        settings.crashReporting = document.getElementById('crashReporting').checked;
+        settings.usageAnalytics = document.getElementById('usageAnalytics').checked;
+
+        // Save to localStorage
+        localStorage.setItem('brainBuddySettings', JSON.stringify(settings));
+
+        // Show success message
+        this.innerHTML = '<i class="fas fa-check me-2"></i>Settings Saved!';
+        this.classList.remove('btn-primary');
+        this.classList.add('btn-success');
+
+        setTimeout(() => {
+            this.innerHTML = '<i class="fas fa-save me-2"></i>Save All Settings';
+            this.classList.remove('btn-success');
+            this.classList.add('btn-primary');
+        }, 2000);
+    });
+
+    // Load saved settings
+    const savedSettings = localStorage.getItem('brainBuddySettings');
+    if (savedSettings) {
+        const settings = JSON.parse(savedSettings);
+        
+        // Apply saved settings to form
+        if (settings.name) document.getElementById('studentName').value = settings.name;
+        if (settings.age) document.getElementById('studentAge').value = settings.age;
+        if (settings.gradeLevel) document.getElementById('gradeLevel').value = settings.gradeLevel;
+        
+        // Apply error reporting settings
+        if (settings.automaticErrorReporting !== undefined) {
+            document.getElementById('automaticErrorReporting').checked = settings.automaticErrorReporting;
+        }
+        if (settings.performanceMonitoring !== undefined) {
+            document.getElementById('performanceMonitoring').checked = settings.performanceMonitoring;
+        }
+        if (settings.crashReporting !== undefined) {
+            document.getElementById('crashReporting').checked = settings.crashReporting;
+        }
+        if (settings.usageAnalytics !== undefined) {
+            document.getElementById('usageAnalytics').checked = settings.usageAnalytics;
+        }
+    }
+
+    // Initialize error reporting status
+    loadErrorReportingStatus();
+});
+
+// Error Reporting System Functions
+function loadErrorReportingStatus() {
+    if (window.errorReporter) {
+        document.getElementById('errorReportingStatus').innerHTML = '<i class="fas fa-check-circle"></i> Active';
+        loadErrorStatistics();
+    } else {
+        document.getElementById('errorReportingStatus').innerHTML = '<i class="fas fa-exclamation-circle"></i> Unavailable';
+    }
+}
+
+async function loadErrorStatistics() {
+    try {
+        const response = await fetch('/api/error-stats?days=7');
+        const data = await response.json();
+        
+        if (data.success) {
+            const stats = data.statistics;
+            document.getElementById('recentErrorCount').textContent = stats.total_errors;
+            document.getElementById('totalErrors').textContent = stats.total_errors;
+            document.getElementById('serverErrors').textContent = stats.server_errors;
+            document.getElementById('clientErrors').textContent = stats.client_errors;
+            
+            if (stats.total_errors > 0) {
+                document.getElementById('errorSummary').style.display = 'block';
+            }
+        }
+    } catch (error) {
+        console.error('Failed to load error statistics:', error);
+    }
+}
+
+function refreshSystemStatus() {
+    const btn = event.target;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
+    btn.disabled = true;
+    
+    setTimeout(() => {
+        const performanceData = performance.now();
+        if (performanceData < 1000) {
+            document.getElementById('performanceStatus').innerHTML = '<i class="fas fa-tachometer-alt"></i> Excellent';
+            document.getElementById('performanceStatus').className = 'metric-status excellent';
+        } else if (performanceData < 3000) {
+            document.getElementById('performanceStatus').innerHTML = '<i class="fas fa-tachometer-alt"></i> Good';
+            document.getElementById('performanceStatus').className = 'metric-status good';
+        } else {
+            document.getElementById('performanceStatus').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Slow';
+            document.getElementById('performanceStatus').className = 'metric-status warning';
+        }
+        
+        if (navigator.storage && navigator.storage.estimate) {
+            navigator.storage.estimate().then(quota => {
+                const usagePercent = (quota.usage / quota.quota) * 100;
+                if (usagePercent < 80) {
+                    document.getElementById('storageStatus').innerHTML = '<i class="fas fa-database"></i> Available';
+                    document.getElementById('storageStatus').className = 'metric-status good';
+                } else {
+                    document.getElementById('storageStatus').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Limited';
+                    document.getElementById('storageStatus').className = 'metric-status warning';
+                }
+            });
+        }
+        
+        loadErrorStatistics();
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    }, 1500);
+}
+
+function viewErrorLogs() {
+    if (window.errorReporter) {
+        const storedErrors = errorReporter.getStoredErrors();
+        
+        if (storedErrors.length > 0) {
+            const errorList = storedErrors.map((error, index) => 
+                `${index + 1}. [${error.type}] ${error.message} (${new Date(error.timestamp).toLocaleString()})`
+            ).join('\n');
+            
+            alert('Recent Error Logs:\n\n' + errorList);
+        } else {
+            alert('No local error logs found. This is good news!');
+        }
+    } else {
+        window.open('/admin/errors', '_blank');
+    }
+}
+
+function testErrorReporting() {
+    const btn = event.target;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Testing...';
+    btn.disabled = true;
+    
+    if (window.errorReporter) {
+        errorReporter.reportCustomError('Settings page test error', {
+            context: 'settings_test',
+            user_action: 'test_system_button',
+            timestamp: new Date().toISOString()
+        });
+        
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fas fa-check"></i> Test Complete';
+            btn.className = 'btn btn-sm btn-success';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.className = 'btn btn-sm btn-outline-warning';
+                btn.disabled = false;
+                loadErrorStatistics();
+            }, 2000);
+        }, 1000);
+    } else {
+        btn.innerHTML = '<i class="fas fa-times"></i> Error Reporter Unavailable';
+        btn.className = 'btn btn-sm btn-danger';
+        btn.disabled = false;
+    }
+}
+
+function clearErrorData() {
+    if (confirm('Are you sure you want to clear all local error data? This action cannot be undone.')) {
+        if (window.errorReporter) {
+            errorReporter.clearStoredErrors();
+        }
+        
+        document.getElementById('recentErrorCount').textContent = '0';
+        document.getElementById('totalErrors').textContent = '0';
+        document.getElementById('serverErrors').textContent = '0';
+        document.getElementById('clientErrors').textContent = '0';
+        document.getElementById('performanceIssues').textContent = '0';
+        document.getElementById('errorSummary').style.display = 'none';
+        
+        alert('Local error data has been cleared.');
+    }
+}
+
+function toggleErrorReporting() {
+    const enabled = document.getElementById('automaticErrorReporting').checked;
+    
+    if (window.errorReporter) {
+        localStorage.setItem('errorReportingEnabled', enabled);
+        
+        if (enabled) {
+            document.getElementById('errorReportingStatus').innerHTML = '<i class="fas fa-check-circle"></i> Active';
+            document.getElementById('errorReportingStatus').className = 'metric-status active';
+        } else {
+            document.getElementById('errorReportingStatus').innerHTML = '<i class="fas fa-pause-circle"></i> Disabled';
+            document.getElementById('errorReportingStatus').className = 'metric-status disabled';
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('automaticErrorReporting').addEventListener('change', toggleErrorReporting);
+    document.getElementById('performanceMonitoring').addEventListener('change', function() {
+        localStorage.setItem('performanceMonitoringEnabled', this.checked);
+    });
+    document.getElementById('crashReporting').addEventListener('change', function() {
+        localStorage.setItem('crashReportingEnabled', this.checked);
+    });
+    document.getElementById('usageAnalytics').addEventListener('change', function() {
+        localStorage.setItem('usageAnalyticsEnabled', this.checked);
+    });
+});
+</script>
+
+<style>
+.system-health-panel {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #e9ecef;
+}
+
+.health-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.health-metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.metric-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.metric-status {
+    padding: 4px 8px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+.metric-status.active {
+    background: #d4edda;
+    color: #155724;
+}
+
+.metric-status.good {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.metric-status.warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.metric-status.disabled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.metric-status.excellent {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.metric-value {
+    font-weight: bold;
+    color: #667eea;
+    font-size: 1.1em;
+}
+
+.error-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.error-actions .btn {
+    flex: 1;
+    min-width: 90px;
+}
+
+.error-summary {
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.error-summary-content .row {
+    margin: 0;
+}
+
+.summary-stat {
+    text-align: center;
+    padding: 10px;
+}
+
+.stat-number {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.85em;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+    .error-actions .btn {
+        min-width: auto;
+        font-size: 0.8em;
+        padding: 4px 8px;
+    }
+    
+    .health-metric {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .summary-stat {
+        margin-bottom: 15px;
+    }
+}
+</style>
+{% endblock %}

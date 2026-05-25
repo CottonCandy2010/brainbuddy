@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Brain Buddy Quests - Amazing Adventures Await!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .quest-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        
+        .quest-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid transparent;
+        }
+        
+        .quest-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+        }
+        
+        .quest-card.active {
+            border-color: #28a745;
+            background: linear-gradient(135deg, #d4edda 0%, #f8fff9 100%);
+        }
+        
+        .quest-card.completed {
+            border-color: #ffc107;
+            background: linear-gradient(135deg, #fff3cd 0%, #fffef7 100%);
+        }
+        
+        .quest-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .quest-emoji {
+            font-size: 3rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .quest-info h3 {
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quest-description {
+            color: #6c757d;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .quest-progress {
+            margin: 1.5rem 0;
+        }
+        
+        .progress-bar-custom {
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            border-radius: 10px;
+            height: 8px;
+        }
+        
+        .quest-reward {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+        }
+        
+        .reward-points {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #e74c3c;
+        }
+        
+        .quest-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+        
+        .badge-easy { background: #d4edda; color: #155724; }
+        .badge-medium { background: #fff3cd; color: #856404; }
+        .badge-hard { background: #f8d7da; color: #721c24; }
+        .badge-special { background: #e2e3f3; color: #383d41; }
+        
+        .quest-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #2c3e50;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .weekly-quest {
+            border-left: 5px solid #17a2b8;
+        }
+        
+        .special-quest {
+            border-left: 5px solid #6f42c1;
+            background: linear-gradient(135deg, #f3e5f5 0%, #faf5ff 100%);
+        }
+        
+        .btn-quest {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-quest:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+        
+        .quest-complete-banner {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="quest-container">
+        <div class="container">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <h1 class="display-4 text-white mb-3">
+                    🚀 Amazing Quests Await! 🌟
+                </h1>
+                <p class="lead text-white">
+                    Complete exciting challenges and earn amazing rewards!
+                </p>
+            </div>
+            
+            <!-- Quest Stats -->
+            <div class="quest-stats">
+                <div class="stat-card">
+                    <span class="stat-number">{{ quest_progress.total_points }}</span>
+                    <span class="stat-label">Quest Points</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">{{ quest_progress.badges_earned }}</span>
+                    <span class="stat-label">Badges Earned</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">{{ quest_progress.quests_completed_today or 0 }}</span>
+                    <span class="stat-label">Today's Quests</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">{{ quest_progress.quests_completed_this_week or 0 }}</span>
+                    <span class="stat-label">This Week</span>
+                </div>
+            </div>
+            
+            <!-- Daily Quest -->
+            {% if quest_progress.daily_quest %}
+            <div class="quest-card {% if quest_progress.daily_quest.status == 'completed' %}completed{% else %}active{% endif %}">
+                {% if quest_progress.daily_quest.status == 'completed' %}
+                <div class="quest-complete-banner">
+                    🎉 Quest Completed! Amazing work! 🎉
+                </div>
+                {% endif %}
+                
+                <div class="quest-header">
+                    <div class="quest-emoji">{{ quest_progress.daily_quest.emoji or '🎯' }}</div>
+                    <div class="quest-info">
+                        <h3>Today's Special Quest</h3>
+                        <h4>{{ quest_progress.daily_quest.title }}</h4>
+                        <div class="quest-description">
+                            {{ quest_progress.daily_quest.description }}
+                        </div>
+                        <span class="quest-badge badge-{{ quest_progress.daily_quest.difficulty }}">
+                            {{ quest_progress.daily_quest.difficulty.title() }} Challenge
+                        </span>
+                    </div>
+                </div>
+                
+                {% if quest_progress.daily_quest.status != 'completed' %}
+                <div class="quest-progress">
+                    <div class="d-flex justify-content-between mb-2">
+                        <small>Progress</small>
+                        <small>Keep going!</small>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-custom" style="width: 30%"></div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <div class="quest-reward">
+                    <div>
+                        <strong>Reward:</strong>
+                        <span class="reward-points">+{{ quest_progress.daily_quest.reward.points }} points</span>
+                        {% if quest_progress.daily_quest.reward.badge %}
+                        <span class="badge bg-primary">{{ quest_progress.daily_quest.reward.badge }}</span>
+                        {% endif %}
+                    </div>
+                    {% if quest_progress.daily_quest.status != 'completed' %}
+                    <a href="{{ url_for('curriculum_topics') }}?quest=daily" class="btn btn-quest ms-auto">
+                        Start Quest! 🚀
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Weekly Quests -->
+            {% if quest_progress.weekly_quests %}
+            <h2 class="text-white mb-4">🏆 Weekly Challenges</h2>
+            {% for quest in quest_progress.weekly_quests %}
+            <div class="quest-card weekly-quest {% if quest.status == 'completed' %}completed{% endif %}">
+                <div class="quest-header">
+                    <div class="quest-emoji">{{ quest.emoji or '🏆' }}</div>
+                    <div class="quest-info">
+                        <h4>{{ quest.title }}</h4>
+                        <div class="quest-description">
+                            {{ quest.description }}
+                        </div>
+                        <span class="quest-badge badge-{{ quest.difficulty }}">
+                            {{ quest.difficulty.title() }} Weekly Challenge
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="quest-reward">
+                    <div>
+                        <strong>Reward:</strong>
+                        <span class="reward-points">+{{ quest.reward.points }} points</span>
+                        {% if quest.reward.badge %}
+                        <span class="badge bg-warning">{{ quest.reward.badge }}</span>
+                        {% endif %}
+                        {% if quest.reward.special_avatar %}
+                        <span class="badge bg-success">Special Avatar!</span>
+                        {% endif %}
+                    </div>
+                    {% if quest.status != 'completed' %}
+                    <a href="{{ url_for('curriculum_topics') }}?quest=weekly&quest_id={{ quest.id }}" class="btn btn-quest ms-auto">
+                        Join Challenge! 💪
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+            
+            <!-- Special Quests -->
+            <h2 class="text-white mb-4">✨ Special Adventures</h2>
+            <div class="quest-card special-quest">
+                <div class="quest-header">
+                    <div class="quest-emoji">🎂</div>
+                    <div class="quest-info">
+                        <h4>Birthday Scholar Special</h4>
+                        <div class="quest-description">
+                            Complete extra lessons during your birthday month and earn amazing rewards!
+                        </div>
+                        <span class="quest-badge badge-special">Special Event</span>
+                    </div>
+                </div>
+                
+                <div class="quest-reward">
+                    <div>
+                        <strong>Reward:</strong>
+                        <span class="reward-points">+500 points</span>
+                        <span class="badge bg-info">Special Avatar</span>
+                        <span class="badge bg-warning">Birthday Badge</span>
+                    </div>
+                    <a href="{{ url_for('curriculum_topics') }}?quest=special" class="btn btn-quest ms-auto">
+                        Celebrate & Learn! 🎉
+                    </a>
+                </div>
+            </div>
+            
+            <div class="quest-card special-quest">
+                <div class="quest-header">
+                    <div class="quest-emoji">⚔️</div>
+                    <div class="quest-info">
+                        <h4>Weekend Warrior Quest</h4>
+                        <div class="quest-description">
+                            Study during the weekend when others are playing - show your dedication!
+                        </div>
+                        <span class="quest-badge badge-medium">Weekend Special</span>
+                    </div>
+                </div>
+                
+                <div class="quest-reward">
+                    <div>
+                        <strong>Reward:</strong>
+                        <span class="reward-points">+120 points</span>
+                        <span class="badge bg-danger">Warrior Badge</span>
+                    </div>
+                    <a href="{{ url_for('curriculum_topics') }}?quest=weekend" class="btn btn-quest ms-auto">
+                        Be a Warrior! ⚔️
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="text-center mt-5">
+                <a href="{{ url_for('index') }}" class="btn btn-outline-light btn-lg me-3">
+                    🏠 Home
+                </a>
+                <a href="{{ url_for('curriculum_topics') }}" class="btn btn-outline-light btn-lg me-3">
+                    📚 Start Learning
+                </a>
+                <a href="{{ url_for('dashboard') }}?student_id={{ student_id }}" class="btn btn-outline-light btn-lg">
+                    📊 Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Auto-update quest progress every 30 seconds
+        setInterval(function() {
+            if (document.visibilityState === 'visible') {
+                location.reload();
+            }
+        }, 30000);
+        
+        // Add click animations to quest cards
+        document.querySelectorAll('.quest-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+        
+        // Monitor quest completions for avatar celebrations
+        function checkQuestCompletions() {
+            document.querySelectorAll('.quest-card').forEach(card => {
+                const progressBar = card.querySelector('.progress-bar');
+                const progressText = card.querySelector('.progress-text');
+                
+                if (progressBar && progressText) {
+                    const progressValue = parseInt(progressBar.style.width || '0');
+                    
+                    // Trigger celebration for completed quests
+                    if (progressValue >= 100 && !card.dataset.celebrated) {
+                        card.dataset.celebrated = 'true';
+                        
+                        if (window.BrainBuddyAvatar) {
+                            setTimeout(() => {
+                                window.BrainBuddyAvatar.celebrate('quest_complete');
+                            }, 500);
+                        }
+                        
+                        // Add completion visual effect
+                        card.classList.add('quest-completed-animation');
+                        setTimeout(() => {
+                            card.classList.remove('quest-completed-animation');
+                        }, 2000);
+                    }
+                }
+            });
+        }
+        
+        // Check for quest completions on page load
+        setTimeout(checkQuestCompletions, 1000);
+        
+        // Periodically check for quest completions
+        setInterval(checkQuestCompletions, 5000);
+    </script>
+</body>
+</html>

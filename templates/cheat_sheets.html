@@ -1,0 +1,185 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="cheat-sheets-page">
+    <div class="container">
+        <!-- Header -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-10">
+                <div class="cheat-header text-center">
+                    <div class="cheat-logo mb-3">
+                        <img src="{{ url_for('static', filename='images/brain-buddy-logo.png') }}" 
+                             alt="Brain Buddy" class="page-buddy-logo">
+                    </div>
+                    <div class="level-badge">
+                        <i class="fas fa-clipboard-list me-2"></i>
+                        {{ subject.title() }} Quick Reference
+                    </div>
+                    <h1 class="cheat-title">Cheat Sheets & Formulas</h1>
+                    <p class="cheat-subtitle">Essential formulas, concepts, and quick references for {{ level.title() }} level</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cheat Sheet Categories -->
+        <div class="row">
+            {% for sheet in cheat_sheets %}
+            <div class="col-lg-6 col-md-12 mb-4">
+                <div class="cheat-sheet-card" data-sheet="{{ sheet.id }}">
+                    <div class="sheet-header">
+                        <div class="sheet-icon">
+                            <i class="{{ sheet.icon }}"></i>
+                        </div>
+                        <div class="sheet-info">
+                            <h3 class="sheet-title">{{ sheet.title }}</h3>
+                            <p class="sheet-description">{{ sheet.description }}</p>
+                        </div>
+                    </div>
+                    <div class="sheet-preview">
+                        <div class="preview-content">
+                            {{ sheet.preview_content | safe }}
+                        </div>
+                    </div>
+                    <div class="sheet-footer">
+                        <span class="sheet-type">{{ sheet.type }}</span>
+                        <button class="btn btn-primary btn-sm view-sheet-btn">
+                            View Full Sheet <i class="fas fa-external-link-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Quick Access Toolbar -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="quick-access-toolbar">
+                    <h4>Quick Access</h4>
+                    <div class="toolbar-buttons">
+                        <button class="toolbar-btn" data-action="print">
+                            <i class="fas fa-print"></i>
+                            Print All
+                        </button>
+                        <button class="toolbar-btn" data-action="download">
+                            <i class="fas fa-download"></i>
+                            Download PDF
+                        </button>
+                        <button class="toolbar-btn" data-action="bookmark">
+                            <i class="fas fa-bookmark"></i>
+                            Save Favorites
+                        </button>
+                        <button class="toolbar-btn" data-action="share">
+                            <i class="fas fa-share"></i>
+                            Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back Navigation -->
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <a href="/subject-explorer?subject={{ subject }}&level={{ level }}" class="btn btn-outline-light btn-lg back-btn">
+                    <i class="fas fa-arrow-left me-2"></i>
+                    Back to {{ subject.title() }} Hub
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cheat Sheet Modal -->
+<div class="modal fade" id="cheatSheetModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="modalContent">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="printSheetBtn">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sheetCards = document.querySelectorAll('.cheat-sheet-card');
+    const viewButtons = document.querySelectorAll('.view-sheet-btn');
+    const toolbarButtons = document.querySelectorAll('.toolbar-btn');
+    
+    viewButtons.forEach((btn, index) => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const sheetCard = this.closest('.cheat-sheet-card');
+            const sheetId = sheetCard.dataset.sheet;
+            openCheatSheet(sheetId);
+        });
+    });
+    
+    toolbarButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const action = this.dataset.action;
+            handleToolbarAction(action);
+        });
+    });
+    
+    function openCheatSheet(sheetId) {
+        const subject = '{{ subject }}';
+        const level = '{{ level }}';
+        
+        // Load the full cheat sheet content
+        fetch(`/api/cheat-sheet/${sheetId}?subject=${subject}&level=${level}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('modalTitle').textContent = data.title;
+                document.getElementById('modalContent').innerHTML = data.content;
+                
+                const modal = new bootstrap.Modal(document.getElementById('cheatSheetModal'));
+                modal.show();
+            })
+            .catch(error => {
+                console.error('Error loading cheat sheet:', error);
+            });
+    }
+    
+    function handleToolbarAction(action) {
+        switch(action) {
+            case 'print':
+                window.print();
+                break;
+            case 'download':
+                // Trigger PDF download
+                window.location.href = `/download/cheat-sheets?subject={{ subject }}&level={{ level }}`;
+                break;
+            case 'bookmark':
+                // Save to favorites
+                alert('Cheat sheets saved to favorites!');
+                break;
+            case 'share':
+                // Share functionality
+                if (navigator.share) {
+                    navigator.share({
+                        title: '{{ subject.title() }} Cheat Sheets',
+                        url: window.location.href
+                    });
+                } else {
+                    // Fallback - copy to clipboard
+                    navigator.clipboard.writeText(window.location.href);
+                    alert('Link copied to clipboard!');
+                }
+                break;
+        }
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,51 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="90" fill="#F0F8FF" stroke="#87CEEB" stroke-width="3"/>
+  
+  <!-- Main Purple Circle Character -->
+  <circle cx="100" cy="100" r="60" fill="#8A7CFF" stroke="#6B5CE6" stroke-width="3"/>
+  
+  <!-- Inner Circle Detail -->
+  <circle cx="100" cy="100" r="50" fill="#9D8FFF" opacity="0.8"/>
+  
+  <!-- Eyes -->
+  <circle cx="85" cy="85" r="8" fill="white" stroke="#4A4A4A" stroke-width="2"/>
+  <circle cx="115" cy="85" r="8" fill="white" stroke="#4A4A4A" stroke-width="2"/>
+  
+  <!-- Pupils -->
+  <circle cx="85" cy="85" r="4" fill="#4A4A4A"/>
+  <circle cx="115" cy="85" r="4" fill="#4A4A4A"/>
+  
+  <!-- Eye Highlights -->
+  <circle cx="87" cy="83" r="1.5" fill="white"/>
+  <circle cx="117" cy="83" r="1.5" fill="white"/>
+  
+  <!-- Happy Smile -->
+  <path d="M80,115 Q100,130 120,115" fill="none" stroke="#4A4A4A" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Rosy Cheeks -->
+  <circle cx="65" cy="105" r="6" fill="#FFB3D9" opacity="0.8"/>
+  <circle cx="135" cy="105" r="6" fill="#FFB3D9" opacity="0.8"/>
+  
+  <!-- Small Book/Learning Element -->
+  <rect x="125" y="130" width="20" height="15" fill="#4ECDC4" stroke="#3BABA8" stroke-width="2" rx="2"/>
+  <rect x="127" y="132" width="16" height="2" fill="#3BABA8"/>
+  <rect x="127" y="136" width="16" height="2" fill="#3BABA8"/>
+  <rect x="127" y="140" width="16" height="2" fill="#3BABA8"/>
+  
+  <!-- Decorative Elements -->
+  <circle cx="45" cy="60" r="3" fill="#87CEEB" opacity="0.7"/>
+  <circle cx="155" cy="65" r="3" fill="#87CEEB" opacity="0.7"/>
+  <circle cx="160" cy="140" r="3" fill="#87CEEB" opacity="0.7"/>
+  <circle cx="40" cy="140" r="3" fill="#87CEEB" opacity="0.7"/>
+  
+  <!-- Small Sparkle Effects -->
+  <g fill="#B0E0E6" opacity="0.8">
+    <polygon points="50,40 51,43 54,43 52,45 53,48 50,46 47,48 48,45 46,43 49,43"/>
+    <polygon points="150,45 151,47 153,47 152,48 152.5,50 150,49 147.5,50 148,48 147,47 149,47"/>
+    <polygon points="35,120 36,122 38,122 37,123 37.5,125 35,124 32.5,125 33,123 32,122 34,122"/>
+  </g>
+  
+  <!-- Title Text -->
+  <text x="100" y="185" font-family="'Quicksand', sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#6B5CE6">Brain Buddy</text>
+</svg>

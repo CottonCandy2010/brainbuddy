@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Brain Buddy - AI-powered adaptive learning platform for personalized education">
+    <title>{% block title %}Brain Buddy{% endblock %} | Learning for You</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Nunito:wght@400;600;700;800&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+    <!-- Profile Corner Display - New System -->
+    <script src="{{ url_for('static', filename='js/profile-corner-new.js') }}"></script>
+    
+    {% block extra_head %}{% endblock %}
+    
+    <!-- Page Transition Preload Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('page-transition', 'loaded');
+        });
+    </script>
+    
+    <!-- Accessibility Settings -->
+    <script>
+        // High contrast mode toggle
+        function toggleHighContrast() {
+            document.body.classList.toggle('high-contrast');
+            localStorage.setItem('highContrast', document.body.classList.contains('high-contrast'));
+        }
+        
+        // Font size adjustment
+        function adjustFontSize(direction) {
+            const currentSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+            const newSize = direction === 'increase' ? currentSize + 2 : currentSize - 2;
+            if (newSize >= 12 && newSize <= 24) {
+                document.documentElement.style.fontSize = newSize + 'px';
+                localStorage.setItem('fontSize', newSize);
+            }
+        }
+        
+        // Load saved accessibility preferences
+        document.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('highContrast') === 'true') {
+                document.body.classList.add('high-contrast');
+            }
+            const savedFontSize = localStorage.getItem('fontSize');
+            if (savedFontSize) {
+                document.documentElement.style.fontSize = savedFontSize + 'px';
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- Skip to main content link for screen readers -->
+    <a href="#main-content" class="skip-link sr-only sr-only-focusable">Skip to main content</a>
+    
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav-bar" role="banner" aria-label="Main navigation">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <a href="/" class="text-decoration-none d-flex align-items-center" aria-label="Brain Buddy Kids home">
+                        <img src="{{ url_for('static', filename='images/brain-buddy-logo.png') }}" 
+                             alt="Brain Buddy Kids logo" class="nav-logo me-2">
+                        <div class="brand-container">
+                            <h1 class="app-name m-0">Brain Buddy Kids</h1>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-8">
+                    <!-- Navigation Items -->
+                    <div class="nav-tabs-container d-flex justify-content-end">
+                        <ul class="nav nav-pills top-nav-pills">
+                            <li class="nav-item">
+                                <a class="nav-link top-nav-link" href="{{ url_for('index') }}">
+                                    <i class="fas fa-home me-2"></i>Home
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link top-nav-link" href="{{ url_for('profile') }}">
+                                    <i class="fas fa-user me-2"></i>Profile
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link top-nav-link" href="{{ url_for('settings') }}">
+                                    <i class="fas fa-cog me-2"></i>Settings
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link top-nav-link dropdown-toggle" href="#" id="learningToolsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-tools me-2"></i>Learning Tools
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="learningToolsDropdown">
+                                    <li><a class="dropdown-item" href="/study"><i class="fas fa-book me-2"></i>Study Subjects</a></li>
+                                    <li><a class="dropdown-item" href="/curriculum-topics"><i class="fas fa-list me-2"></i>Topics Explorer</a></li>
+                                    <li><a class="dropdown-item" href="/adaptive-dashboard"><i class="fas fa-brain me-2"></i>Smart Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="/study-buddy"><i class="fas fa-robot me-2"></i>Study Buddy AI</a></li>
+                                    <li><a class="dropdown-item" href="/parent-dashboard"><i class="fas fa-chart-line me-2"></i>Parent Dashboard</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/practice-questions"><i class="fas fa-question-circle me-2"></i>Practice Questions</a></li>
+                                    <li><a class="dropdown-item" href="/auditory-numbers"><i class="fas fa-volume-up me-2"></i>Audio Learning</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="welcome-section text-center">
+                </div>
+
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main-container">
+        <div class="container">
+            <main id="main-content" role="main" tabindex="-1">
+        {% block content %}{% endblock %}
+    </main>
+        </div>
+    </main>
+
+    <!-- Login/Sign Up Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content login-modal">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="loginModalLabel">
+                        <i class="fas fa-brain me-2 text-primary"></i>Join Brain Buddy
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <!-- Tab Navigation -->
+                    <ul class="nav nav-pills nav-justified mb-4" id="loginTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active login-tab-btn" id="login-tab" data-bs-toggle="pill" data-bs-target="#login-pane" type="button" role="tab">
+                                <i class="fas fa-sign-in-alt me-2"></i>Login
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link login-tab-btn" id="signup-tab" data-bs-toggle="pill" data-bs-target="#signup-pane" type="button" role="tab">
+                                <i class="fas fa-user-plus me-2"></i>Sign Up
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content" id="loginTabContent">
+                        <!-- Login Form -->
+                        <div class="tab-pane fade show active" id="login-pane" role="tabpanel">
+                            <form id="loginForm">
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">
+                                        <i class="fas fa-envelope me-2"></i>Email
+                                    </label>
+                                    <input type="email" class="form-control login-input" id="loginEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginPassword" class="form-label">
+                                        <i class="fas fa-lock me-2"></i>Password
+                                    </label>
+                                    <input type="password" class="form-control login-input" id="loginPassword" required>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 login-btn">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Login to Brain Buddy
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Sign Up Form -->
+                        <div class="tab-pane fade" id="signup-pane" role="tabpanel">
+                            <form id="signupForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="signupFirstName" class="form-label">
+                                            <i class="fas fa-user me-2"></i>First Name
+                                        </label>
+                                        <input type="text" class="form-control login-input" id="signupFirstName" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="signupLastName" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control login-input" id="signupLastName" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="signupEmail" class="form-label">
+                                        <i class="fas fa-envelope me-2"></i>Email
+                                    </label>
+                                    <input type="email" class="form-control login-input" id="signupEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="signupPassword" class="form-label">
+                                        <i class="fas fa-lock me-2"></i>Password
+                                    </label>
+                                    <input type="password" class="form-control login-input" id="signupPassword" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                    <input type="password" class="form-control login-input" id="confirmPassword" required>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                                    <label class="form-check-label" for="agreeTerms">
+                                        I agree to the <a href="#" class="text-decoration-none">Terms & Conditions</a>
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100 login-btn">
+                                    <i class="fas fa-user-plus me-2"></i>Create Brain Buddy Account
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Social Login Options -->
+                    <div class="social-login mt-4">
+                        <div class="text-center mb-3">
+                            <small class="text-muted">Or continue with</small>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <button class="btn btn-outline-danger w-100 social-btn">
+                                    <i class="fab fa-google me-2"></i>Google
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-outline-primary w-100 social-btn">
+                                    <i class="fab fa-facebook me-2"></i>Facebook
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="footer-text mb-2">
+                        Brain Buddy &copy; 2023 | Created by Edhita
+                    </p>
+                    
+
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Tutorial System -->
+    <script src="{{ url_for('static', filename='js/tutorial.js') }}"></script>
+    
+    <!-- Error Reporting System -->
+    <script src="{{ url_for('static', filename='js/error_reporting.js') }}"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html>

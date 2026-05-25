@@ -1,0 +1,75 @@
+rain Buddy: Replit AI Project Prompt (Advanced Features)
+Project Goal: I'm expanding my "Brain Buddy" web app for secondary school students (11-16). I want to add a large number of lessons (around 100 per subject initially) and integrate a powerful AI Q&A feature where students can ask anything about the subject/topic they're studying and get an answer tailored to their learning style.
+
+My Current Setup (from previous interactions):
+
+Frontend: HTML, CSS, JavaScript.
+Backend/Data Storage: Firebase (Firestore is preferred for structured data).
+AI Features: OpenAI API (I have a key, ready to use via a backend).
+Current Features: Subject selection (Maths, Science, English), basic learning style choice (Visual, Auditory, Verbal).
+My Vision:
+To have a rich library of content and a truly interactive AI tutor.
+
+Specific Tasks & Features I need help implementing (in priority order):
+
+Part 1: Dynamic Lesson Content & Storage
+
+Firebase Firestore Integration for Lessons:
+
+Goal: Replace hardcoded lesson content with data stored in Firebase Firestore.
+AI Task:
+Show me how to structure a Firestore database for lessons. Each lesson should have:
+subject (e.g., "Maths")
+topic (e.g., "Fractions")
+level (e.g., "Basic", "Intermediate")
+content (An object containing different formats for learning styles, e.g., visual_explanation_text, auditory_explanation_url, verbal_explanation_text).
+keywords (for search/AI context).
+lesson_id (unique identifier).
+Provide example JavaScript code for the frontend to:
+Fetch a specific lesson from Firestore based on subject and topic (e.g., when a user clicks a topic tile).
+Dynamically display the correct content (visual, auditory, or verbal) on lesson.html based on the user's chosen learning style.
+Provide example Python (Flask) backend code if Firebase security rules make direct frontend access too complex for fetching content (though initially, direct frontend Firebase access for reading is simpler).
+Lesson Navigation/Topic Selection UI:
+
+Goal: After a user selects a subject (e.g., "Maths"), display a list of topics/lessons available for that subject, dynamically fetched from Firestore.
+AI Task:
+Modify subject_selection.html (or create a new topic_selection.html) to:
+Fetch all topics/lessons for the selected subject from Firestore.
+Generate clickable tiles/list items for each topic (like the subject selection UI).
+Show how clicking a topic tile navigates to lesson.html and passes the lesson_id and chosen learning_style as URL parameters.
+Part 2: Integrated AI Q&A Tutor
+
+AI Q&A Frontend UI:
+
+Goal: Add a chat interface to the lesson.html page where students can type questions and get AI answers.
+AI Task:
+Add a simple text input field and a "Ask AI" button to lesson.html.
+Add a chat display area (e.g., a div that scrolls) to show the conversation.
+Provide JavaScript code to capture the student's question and send it to the backend.
+AI Q&A Backend (Flask & OpenAI API):
+
+Goal: Create a Flask endpoint that receives student questions, uses the OpenAI API to generate answers, and sends them back.
+AI Task:
+Create a new Flask route (e.g., /api/ask_ai) that accepts a POST request with the student's question, the subject, topic, and their learning_style.
+Show how to construct an effective OpenAI API prompt that:
+Acts as a "helpful, patient tutor."
+Considers the subject, topic (from the current lesson context), and learning_style when generating an answer.
+Answers the student's specific question.
+Example Prompt Idea: "You are Brain Buddy, a patient and knowledgeable tutor for secondary school students (11-16). The current lesson is on [topic] in [subject]. The student is a [learning_style] learner. They asked: '[student_question]'. Provide a clear, concise, and helpful answer. If visual, describe a relevant simple diagram. If auditory, suggest how the explanation might sound. If verbal, provide a clear text explanation."
+Show how to call the OpenAI API (using client.chat.completions.create as discussed previously).
+Return the AI's answer as a JSON response.
+Include basic error handling.
+Connecting Frontend Q&A to Backend:
+
+Goal: Have the frontend JavaScript send the question to the Flask backend and display the AI's response in the chat display area.
+AI Task:
+Provide JavaScript Workspace code to call the /api/ask_ai endpoint.
+Show how to append the student's question and the AI's answer to the chat display area.
+Firebase Setup & Data for Testing:
+
+AI Task: Provide simple, example JSON structures for a few lessons (e.g., 2-3 lessons for Maths) that I can manually add to my Firestore database to test these features.
+Important Considerations for AI (Please remind me):
+
+API Key Security: Reiterate the importance of using Replit Secrets for the OpenAI API key.
+Rate Limits/Costs: Briefly remind me about managing OpenAI usage and potential costs.
+Error Handling: Emphasize basic error handling on both frontend and backend for a better user experience.

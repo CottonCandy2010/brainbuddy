@@ -1,0 +1,477 @@
+{% extends "layout.html" %}
+
+{% block title %}Study Buddy AI - Brain Buddy{% endblock %}
+
+{% block content %}
+<section class="study-buddy-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Study Buddy Header -->
+                <div class="study-buddy-header text-center mb-4">
+                    <div class="buddy-avatar mb-3">
+                        <div class="avatar-circle">🤖</div>
+                    </div>
+                    <h1 class="buddy-title">Study Buddy AI</h1>
+                    <p class="buddy-subtitle">Your intelligent learning companion</p>
+                </div>
+
+                <!-- Chat Interface -->
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <div class="status-info">
+                            <span class="status-dot"></span>
+                            <span class="status-text">AI Assistant Online</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message ai-message">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <strong>Study Buddy AI</strong>
+                                    <span class="timestamp">Now</span>
+                                </div>
+                                <div class="message-text">
+                                    Hello! I'm your AI study companion. I can help you with:
+                                    <div class="help-options">
+                                        <span class="help-tag">📚 Explain concepts</span>
+                                        <span class="help-tag">❓ Answer questions</span>
+                                        <span class="help-tag">📝 Create practice problems</span>
+                                        <span class="help-tag">💡 Study strategies</span>
+                                    </div>
+                                    What would you like to learn about today?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <button class="quick-action-btn" onclick="sendQuickMessage('Explain fractions to me')">
+                            📊 Explain Fractions
+                        </button>
+                        <button class="quick-action-btn" onclick="sendQuickMessage('Help me with my homework')">
+                            📝 Homework Help
+                        </button>
+                        <button class="quick-action-btn" onclick="sendQuickMessage('Create practice questions for me')">
+                            🎯 Practice Questions
+                        </button>
+                        <button class="quick-action-btn" onclick="sendQuickMessage('Give me study tips')">
+                            💡 Study Tips
+                        </button>
+                    </div>
+                    
+                    <div class="chat-input-section">
+                        <div class="input-container">
+                            <input type="text" id="messageInput" class="chat-input" 
+                                   placeholder="Ask me anything about your studies..." 
+                                   onkeypress="handleEnterKey(event)">
+                            <button class="send-button" onclick="sendUserMessage()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <div class="input-help">
+                            <small>Powered by AI • Ask questions about any subject</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.study-buddy-page {
+    padding: 20px 0;
+    min-height: 80vh;
+}
+
+.study-buddy-header {
+    margin-bottom: 30px;
+}
+
+.avatar-circle {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(135, 206, 235, 0.3);
+}
+
+.buddy-title {
+    color: hsl(var(--primary));
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 15px 0 10px 0;
+}
+
+.buddy-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.chat-container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.chat-header {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    color: white;
+    padding: 15px 20px;
+}
+
+.status-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #4CAF50;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.chat-messages {
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+    background: #f8f9fa;
+}
+
+.message {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+}
+
+.message-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: hsl(var(--primary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.user-message .message-avatar {
+    background: #6c757d;
+}
+
+.message-content {
+    flex: 1;
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-message .message-content {
+    background: hsl(var(--primary));
+    color: white;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.timestamp {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.message-text {
+    line-height: 1.5;
+}
+
+.help-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.help-tag {
+    background: #e9ecef;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.quick-actions {
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.quick-action-btn {
+    background: white;
+    border: 1px solid hsl(var(--primary));
+    color: hsl(var(--primary));
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.quick-action-btn:hover {
+    background: hsl(var(--primary));
+    color: white;
+    transform: translateY(-1px);
+}
+
+.chat-input-section {
+    padding: 20px;
+    background: white;
+    border-top: 1px solid #dee2e6;
+}
+
+.input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #dee2e6;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.chat-input:focus {
+    border-color: hsl(var(--primary));
+}
+
+.send-button {
+    background: hsl(var(--primary));
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.send-button:hover {
+    background: hsl(var(--primary-dark));
+    transform: scale(1.05);
+}
+
+.input-help {
+    text-align: center;
+    color: #6c757d;
+}
+
+.typing-indicator {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    background: #6c757d;
+    border-radius: 50%;
+    animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typing {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+    .quick-actions {
+        flex-direction: column;
+    }
+    
+    .quick-action-btn {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .chat-messages {
+        max-height: 300px;
+    }
+}
+</style>
+
+<script>
+let conversationHistory = [];
+
+function sendUserMessage() {
+    const input = document.getElementById('messageInput');
+    const message = input.value.trim();
+    
+    if (!message) return;
+    
+    // Add user message to chat
+    addUserMessage(message);
+    input.value = '';
+    
+    // Show typing indicator
+    showTypingIndicator();
+    
+    // Send to AI
+    fetch('/study-buddy-ai', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            message: message,
+            context: conversationHistory.slice(-5).join('\n')
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        hideTypingIndicator();
+        if (data.response) {
+            addAIMessage(data.response);
+            conversationHistory.push(`User: ${message}`, `AI: ${data.response}`);
+        } else {
+            addAIMessage("I'm having trouble understanding. Could you try asking about a specific subject?");
+        }
+    })
+    .catch(error => {
+        hideTypingIndicator();
+        console.error('Error:', error);
+        addAIMessage("I'm experiencing technical difficulties. Please try again or ask about a specific topic.");
+    });
+}
+
+function sendQuickMessage(message) {
+    document.getElementById('messageInput').value = message;
+    sendUserMessage();
+}
+
+function addUserMessage(text) {
+    const messagesContainer = document.getElementById('chatMessages');
+    const timestamp = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message user-message';
+    messageDiv.innerHTML = `
+        <div class="message-avatar">👤</div>
+        <div class="message-content">
+            <div class="message-header">
+                <strong>You</strong>
+                <span class="timestamp">${timestamp}</span>
+            </div>
+            <div class="message-text">${text}</div>
+        </div>
+    `;
+    
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function addAIMessage(text) {
+    const messagesContainer = document.getElementById('chatMessages');
+    const timestamp = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message ai-message';
+    messageDiv.innerHTML = `
+        <div class="message-avatar">🤖</div>
+        <div class="message-content">
+            <div class="message-header">
+                <strong>Study Buddy AI</strong>
+                <span class="timestamp">${timestamp}</span>
+            </div>
+            <div class="message-text">${text}</div>
+        </div>
+    `;
+    
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function showTypingIndicator() {
+    const messagesContainer = document.getElementById('chatMessages');
+    const indicator = document.createElement('div');
+    indicator.className = 'message ai-message';
+    indicator.id = 'typingIndicator';
+    indicator.innerHTML = `
+        <div class="message-avatar">🤖</div>
+        <div class="message-content">
+            <div class="message-header">
+                <strong>Study Buddy AI</strong>
+                <span class="timestamp">typing...</span>
+            </div>
+            <div class="message-text">
+                <div class="typing-indicator">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    messagesContainer.appendChild(indicator);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function hideTypingIndicator() {
+    const indicator = document.getElementById('typingIndicator');
+    if (indicator) {
+        indicator.remove();
+    }
+}
+
+function handleEnterKey(event) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendUserMessage();
+    }
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Study Buddy AI loaded successfully');
+});
+</script>
+{% endblock %}

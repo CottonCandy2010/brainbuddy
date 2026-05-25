@@ -1,0 +1,702 @@
+/* Emotion Avatar System Styles */
+
+.emotion-avatar-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 120px;
+    height: 150px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.avatar-display {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--avatar-primary, #FFD700), var(--avatar-secondary, #FF69B4));
+    border-radius: 50%;
+    border: 4px solid var(--avatar-accent, #00BFFF);
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    transition: all 0.4s ease;
+}
+
+.avatar-face {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+}
+
+/* Avatar Eyes */
+.avatar-eyes {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.avatar-eyes::before,
+.avatar-eyes::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #333;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+/* Eye Expressions */
+.eyes-bright::before,
+.eyes-bright::after {
+    background: #000;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.eyes-sparkling::before,
+.eyes-sparkling::after {
+    background: radial-gradient(circle, #fff 20%, #000 50%);
+    animation: sparkle 2s infinite;
+}
+
+.eyes-concentrated::before,
+.eyes-concentrated::after {
+    height: 8px;
+    border-radius: 4px;
+}
+
+.eyes-wide::before,
+.eyes-wide::after {
+    width: 16px;
+    height: 16px;
+}
+
+.eyes-squinting::before,
+.eyes-squinting::after {
+    height: 4px;
+    border-radius: 2px;
+}
+
+.eyes-concerned::before,
+.eyes-concerned::after {
+    background: #555;
+    transform: rotate(15deg);
+}
+
+.eyes-confident::before,
+.eyes-confident::after {
+    background: #000;
+    border: 2px solid gold;
+}
+
+.eyes-droopy::before,
+.eyes-droopy::after {
+    transform: translateY(4px);
+    opacity: 0.7;
+}
+
+.eyes-intense::before,
+.eyes-intense::after {
+    background: #ff0000;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.eyes-mischievous::before,
+.eyes-mischievous::after {
+    background: #000;
+    transform: skew(-10deg);
+}
+
+/* Avatar Mouth */
+.avatar-mouth {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+}
+
+/* Mouth Expressions */
+.mouth-smile::after {
+    content: '';
+    width: 25px;
+    height: 12px;
+    border: 3px solid #333;
+    border-top: none;
+    border-radius: 0 0 25px 25px;
+}
+
+.mouth-wide_smile::after {
+    content: '';
+    width: 35px;
+    height: 18px;
+    border: 4px solid #333;
+    border-top: none;
+    border-radius: 0 0 35px 35px;
+    background: #ff69b4;
+}
+
+.mouth-determined::after {
+    content: '';
+    width: 20px;
+    height: 3px;
+    background: #333;
+    border-radius: 2px;
+}
+
+.mouth-interested::after {
+    content: '';
+    width: 15px;
+    height: 15px;
+    border: 3px solid #333;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.mouth-puzzled::after {
+    content: '';
+    width: 20px;
+    height: 10px;
+    border: 3px solid #333;
+    border-bottom: none;
+    border-radius: 20px 20px 0 0;
+}
+
+.mouth-frown::after {
+    content: '';
+    width: 25px;
+    height: 12px;
+    border: 3px solid #333;
+    border-bottom: none;
+    border-radius: 25px 25px 0 0;
+}
+
+.mouth-beaming::after {
+    content: '';
+    width: 40px;
+    height: 20px;
+    border: 4px solid #333;
+    border-top: none;
+    border-radius: 0 0 40px 40px;
+    background: linear-gradient(to bottom, #ffff00, #ff69b4);
+}
+
+.mouth-sleepy::after {
+    content: '';
+    width: 12px;
+    height: 8px;
+    border: 2px solid #666;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    opacity: 0.7;
+}
+
+.mouth-serious::after {
+    content: '';
+    width: 25px;
+    height: 2px;
+    background: #333;
+}
+
+.mouth-grin::after {
+    content: '';
+    width: 30px;
+    height: 15px;
+    border: 3px solid #333;
+    border-top: none;
+    border-radius: 0 0 30px 30px;
+    background: repeating-linear-gradient(
+        90deg,
+        #fff 0px,
+        #fff 3px,
+        #333 3px,
+        #333 4px
+    );
+}
+
+/* Avatar Accessories */
+.avatar-accessories {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.accessory {
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.accessory-confetti {
+    width: 6px;
+    height: 6px;
+    background: #ff69b4;
+    border-radius: 50%;
+    animation: confetti-fall 2s infinite;
+}
+
+.accessory-sparkles {
+    width: 8px;
+    height: 8px;
+    background: #ffd700;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    animation: sparkle 1.5s infinite;
+}
+
+.accessory-stars {
+    width: 10px;
+    height: 10px;
+    background: #00bfff;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    animation: star-twinkle 2s infinite;
+}
+
+.accessory-fireworks {
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, #ff4500, #ffd700);
+    border-radius: 50%;
+    animation: firework-burst 1s infinite;
+}
+
+.accessory-glasses {
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 15px;
+    border: 2px solid #333;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.accessory-book {
+    top: 10%;
+    right: -10px;
+    width: 15px;
+    height: 20px;
+    background: #8b4513;
+    border: 1px solid #654321;
+    border-radius: 2px;
+}
+
+.accessory-magnifying_glass {
+    top: 15%;
+    right: -15px;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.accessory-question_mark {
+    top: 10%;
+    right: -10px;
+    font-size: 18px;
+    color: #ff6347;
+    font-weight: bold;
+}
+
+.accessory-thinking_bubble {
+    top: -10px;
+    right: -20px;
+    width: 25px;
+    height: 15px;
+    background: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    position: relative;
+}
+
+.accessory-thinking_bubble::after {
+    content: '...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10px;
+    color: #666;
+}
+
+.accessory-storm_cloud {
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 15px;
+    background: #696969;
+    border-radius: 15px;
+    animation: storm-hover 2s infinite;
+}
+
+.accessory-helping_hand {
+    top: 20%;
+    right: -20px;
+    font-size: 16px;
+    color: #32cd32;
+}
+
+.accessory-trophy {
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 25px;
+    background: #ffd700;
+    border-radius: 3px 3px 10px 10px;
+    position: relative;
+}
+
+.accessory-trophy::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15px;
+    height: 8px;
+    background: #ffd700;
+    border-radius: 50%;
+}
+
+/* Avatar Effects */
+.avatar-effects {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.effect {
+    position: absolute;
+    pointer-events: none;
+}
+
+.special-effect {
+    z-index: 10;
+}
+
+.background-effect {
+    z-index: -1;
+}
+
+/* Avatar Animations */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes jump {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-15px) scale(1.1); }
+}
+
+@keyframes head-tilt {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-10deg); }
+}
+
+@keyframes gentle-sway {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+}
+
+@keyframes chest-out {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes slow-blink {
+    0%, 90%, 100% { opacity: 1; }
+    95% { opacity: 0.3; }
+}
+
+@keyframes power-stance {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(2deg); }
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}
+
+@keyframes celebration-dance {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.1) rotate(-10deg); }
+    75% { transform: scale(1.1) rotate(10deg); }
+}
+
+@keyframes reveal-unlock {
+    0% { transform: scale(0.8) rotate(-180deg); opacity: 0; }
+    50% { transform: scale(1.2) rotate(0deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes perfect-spin {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes power-surge {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+    50% { transform: scale(1.15); box-shadow: 0 0 40px rgba(255, 215, 0, 0.8); }
+}
+
+/* Animation Classes */
+.anim-bounce { animation: bounce 2s infinite; }
+.anim-jump { animation: jump 1.5s infinite; }
+.anim-steady { animation: none; }
+.anim-lean-forward { transform: rotate(5deg); }
+.anim-head-tilt { animation: head-tilt 3s infinite; }
+.anim-gentle-sway { animation: gentle-sway 4s infinite; }
+.anim-chest-out { animation: chest-out 2s infinite; }
+.anim-slow-blink { animation: slow-blink 4s infinite; }
+.anim-power-stance { animation: power-stance 1.5s infinite; }
+.anim-wiggle { animation: wiggle 1s infinite; }
+.anim-celebration-dance { animation: celebration-dance 0.5s infinite; }
+.anim-reveal-unlock { animation: reveal-unlock 2s ease-out; }
+.anim-perfect-spin { animation: perfect-spin 2s ease-in-out; }
+.anim-power-surge { animation: power-surge 1s infinite; }
+
+/* Effect Animations */
+@keyframes sparkle {
+    0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    50% { opacity: 0.7; transform: scale(1.2) rotate(180deg); }
+}
+
+@keyframes confetti-fall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(120px) rotate(360deg); opacity: 0; }
+}
+
+@keyframes star-twinkle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+@keyframes firework-burst {
+    0% { transform: scale(0.8); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+@keyframes storm-hover {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-3px); }
+}
+
+/* Avatar Message */
+.avatar-message {
+    position: absolute;
+    top: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+
+.avatar-message.message-show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+.message-bubble {
+    background: #ffffff;
+    border: 2px solid var(--avatar-primary, #FFD700);
+    border-radius: 15px;
+    padding: 8px 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+.message-bubble::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid var(--avatar-primary, #FFD700);
+}
+
+.message-text {
+    font-size: 12px;
+    color: #333;
+    font-weight: 600;
+    text-align: center;
+    display: block;
+    line-height: 1.3;
+}
+
+/* Emotion Suggestions */
+.emotion-suggestions {
+    position: absolute;
+    top: 160px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
+}
+
+.suggestion-item {
+    margin-bottom: 5px;
+}
+
+.suggestion-btn {
+    width: 100%;
+    padding: 6px 10px;
+    background: var(--avatar-secondary, #FF69B4);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.suggestion-btn:hover {
+    background: var(--avatar-primary, #FFD700);
+    transform: translateY(-1px);
+}
+
+/* Theme Backgrounds */
+.theme-sunrise {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+}
+
+.theme-study-room {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.theme-cozy-room {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.theme-playground {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* Celebration Overlay */
+.celebration-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.celebration-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle, #ffd700 2px, transparent 2px),
+        radial-gradient(circle, #ff69b4 2px, transparent 2px),
+        radial-gradient(circle, #00bfff 2px, transparent 2px);
+    background-size: 50px 50px, 80px 80px, 60px 60px;
+    background-position: 0 0, 20px 20px, 40px 40px;
+    animation: celebration-particles 3s ease-out;
+}
+
+.celebration-text {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: celebration-text 3s ease-out;
+    z-index: 10;
+}
+
+@keyframes celebration-particles {
+    0% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.2); }
+}
+
+@keyframes celebration-text {
+    0% { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+    50% { opacity: 1; transform: scale(1.1) rotate(5deg); }
+    100% { opacity: 0; transform: scale(1) rotate(0deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .emotion-avatar-container {
+        top: 10px;
+        right: 10px;
+        width: 80px;
+        height: 120px;
+    }
+    
+    .avatar-display {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .avatar-face {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .message-bubble {
+        padding: 6px 8px;
+    }
+    
+    .message-text {
+        font-size: 10px;
+    }
+}
+
+/* Default Expression */
+.default-expression {
+    background: linear-gradient(135deg, #FFD700, #FF69B4);
+    border-color: #00BFFF;
+}
+
+.default-expression .avatar-eyes::before,
+.default-expression .avatar-eyes::after {
+    background: #000;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.default-expression .avatar-mouth::after {
+    content: '';
+    width: 25px;
+    height: 12px;
+    border: 3px solid #333;
+    border-top: none;
+    border-radius: 0 0 25px 25px;
+}

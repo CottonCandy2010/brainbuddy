@@ -1,0 +1,1360 @@
+{% extends "layout.html" %}
+
+{% block title %}Profile - Brain Buddy{% endblock %}
+
+{% block content %}
+<section class="profile-page">
+    <div class="container">
+        <!-- Profile Header -->
+        <div class="profile-header mb-5">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="profile-title">
+                        <i class="fas fa-user me-3"></i>My Profile
+                    </h1>
+                    <p class="profile-subtitle">Customize your profile picture and personal information</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="current-profile-display">
+                        <img src="{{ url_for('static', filename='images/profile-pics/avatar1.jpeg') }}" 
+                             alt="Current profile picture" 
+                             class="current-avatar" 
+                             id="currentAvatar">
+                        <p class="mt-2 text-muted">Current Profile Picture</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Information -->
+        <div class="profile-info-section mb-5">
+            <div class="profile-card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <i class="fas fa-edit me-2"></i>Profile Information
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form id="profileForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="studentName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="studentName" value="Guest" placeholder="Enter your name">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="studentAge" class="form-label">Age</label>
+                                <select class="form-select" id="studentAge">
+                                    <option value="5">5 years old</option>
+                                    <option value="6">6 years old</option>
+                                    <option value="7">7 years old</option>
+                                    <option value="8" selected>8 years old</option>
+                                    <option value="9">9 years old</option>
+                                    <option value="10">10 years old</option>
+                                    <option value="11">11 years old</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="studentGrade" class="form-label">Grade Level</label>
+                                <select class="form-select" id="studentGrade">
+                                    <option value="P1">Primary 1 (P1)</option>
+                                    <option value="P2">Primary 2 (P2)</option>
+                                    <option value="P3" selected>Primary 3 (P3)</option>
+                                    <option value="P4">Primary 4 (P4)</option>
+                                    <option value="P5">Primary 5 (P5)</option>
+                                    <option value="P6">Primary 6 (P6)</option>
+                                    <option value="P7">Primary 7 (P7)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="favoriteSubject" class="form-label">Favorite Subject</label>
+                                <select class="form-select" id="favoriteSubject">
+                                    <option value="maths" selected>Number Magic! 🔢</option>
+                                    <option value="science">Super Science! 🧪</option>
+                                    <option value="english">Word Wizards! 📚</option>
+                                    <option value="art">Creative Artists! 🎨</option>
+                                    <option value="geography">World Explorers! 🌍</option>
+                                    <option value="history">Time Travelers! ⏰</option>
+                                    <option value="computing">Digital Wizards! 💻</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Picture Selection -->
+        <div class="avatar-selection-section">
+            <div class="profile-card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <i class="fas fa-image me-2"></i>Choose Your Profile Picture
+                    </h4>
+                    <p class="card-subtitle">Select from our collection of fun avatar options</p>
+                </div>
+                <div class="card-body">
+                    <div class="avatar-grid">
+                        <div class="avatar-option active" data-avatar="avatar1.jpeg">
+                            <img src="{{ url_for('static', filename='images/profile-pics/avatar1.jpeg') }}" 
+                                 alt="Avatar 1" class="avatar-img">
+                            <div class="avatar-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="avatar-option" data-avatar="avatar2.jpeg">
+                            <img src="{{ url_for('static', filename='images/profile-pics/avatar2.jpeg') }}" 
+                                 alt="Avatar 2" class="avatar-img">
+                            <div class="avatar-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="avatar-option" data-avatar="avatar3.jpeg">
+                            <img src="{{ url_for('static', filename='images/profile-pics/avatar3.jpeg') }}" 
+                                 alt="Avatar 3" class="avatar-img">
+                            <div class="avatar-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="avatar-option" data-avatar="avatar4.jpeg">
+                            <img src="{{ url_for('static', filename='images/profile-pics/avatar4.jpeg') }}" 
+                                 alt="Avatar 4" class="avatar-img">
+                            <div class="avatar-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="avatar-option" data-avatar="avatar5.jpeg">
+                            <img src="{{ url_for('static', filename='images/profile-pics/avatar5.jpeg') }}" 
+                                 alt="Avatar 5" class="avatar-img">
+                            <div class="avatar-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="avatar-option" data-avatar="avatar6.jpeg">
+                            <img src="{{ url_for('static', filename='images/profile-pics/avatar6.jpeg') }}" 
+                                 alt="Avatar 6" class="avatar-img">
+                            <div class="avatar-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="avatar-option" data-avatar="avatar7.jpeg">
+                            <img src="{{ url_for('static', filename='images/profile-pics/avatar7.jpeg') }}" 
+                                 alt="Avatar 7" class="avatar-img">
+                            <div class="avatar-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="avatar-option" data-avatar="avatar8.jpeg">
+                            <img src="{{ url_for('static', filename='images/profile-pics/avatar8.jpeg') }}" 
+                                 alt="Avatar 8" class="avatar-img">
+                            <div class="avatar-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="avatar-option" data-avatar="avatar9.jpeg">
+                            <img src="{{ url_for('static', filename='images/profile-pics/avatar9.jpeg') }}" 
+                                 alt="Avatar 9" class="avatar-img">
+                            <div class="avatar-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="avatar-option" data-avatar="avatar10.jpeg">
+                            <img src="{{ url_for('static', filename='images/profile-pics/avatar10.jpeg') }}" 
+                                 alt="Avatar 10" class="avatar-img">
+                            <div class="avatar-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="avatar-option" data-avatar="avatar11.jpeg">
+                            <img src="{{ url_for('static', filename='images/profile-pics/avatar11.jpeg') }}" 
+                                 alt="Avatar 11" class="avatar-img">
+                            <div class="avatar-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="avatar-option" data-avatar="avatar12.jpeg">
+                            <img src="{{ url_for('static', filename='images/profile-pics/avatar12.jpeg') }}" 
+                                 alt="Avatar 12" class="avatar-img">
+                            <div class="avatar-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="avatar-option" data-avatar="avatar13.jpeg">
+                            <img src="{{ url_for('static', filename='images/profile-pics/avatar13.jpeg') }}" 
+                                 alt="Avatar 13" class="avatar-img">
+                            <div class="avatar-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                        
+
+                        
+
+
+
+                    </div>
+                    
+                    <!-- Achievement Avatars Section -->
+                    <div class="achievement-avatars-section mt-5">
+                        <h5 class="achievement-section-title">
+                            <i class="fas fa-trophy me-2"></i>Achievement Avatars
+                        </h5>
+                        <p class="achievement-section-subtitle">Unlock these special avatars by completing learning challenges!</p>
+                        
+                        <div class="achievement-avatar-grid">
+                            <div class="avatar-option locked" data-avatar="unlock_avatar1.jpeg" data-achievement="math_master">
+                                <img src="{{ url_for('static', filename='images/profile-pics/unlock_avatar1.jpeg') }}" 
+                                     alt="Math Master Avatar" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Math Master</h6>
+                                    <p>Complete 10 math lessons with 90%+ score</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="unlock_avatar2.jpeg" data-achievement="science_explorer">
+                                <img src="{{ url_for('static', filename='images/profile-pics/unlock_avatar2.jpeg') }}" 
+                                     alt="Science Explorer Avatar" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Science Explorer</h6>
+                                    <p>Complete 8 science lessons with 85%+ average</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="unlock_avatar3.jpeg" data-achievement="reading_champion">
+                                <img src="{{ url_for('static', filename='images/profile-pics/unlock_avatar3.jpeg') }}" 
+                                     alt="Reading Champion Avatar" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Reading Champion</h6>
+                                    <p>Complete 12 English lessons with consistent progress</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="unlock_avatar4.jpeg" data-achievement="creative_genius">
+                                <img src="{{ url_for('static', filename='images/profile-pics/unlock_avatar4.jpeg') }}" 
+                                     alt="Creative Genius Avatar" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Creative Genius</h6>
+                                    <p>Complete 5 art lessons and create 3 digital artworks</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="unlock_avatar5.jpeg" data-achievement="learning_streak">
+                                <img src="{{ url_for('static', filename='images/profile-pics/unlock_avatar5.jpeg') }}" 
+                                     alt="Learning Streak Avatar" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Learning Streak</h6>
+                                    <p>Maintain a 14-day learning streak</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="unlock_avatar6.jpeg" data-achievement="multi_subject_star">
+                                <img src="{{ url_for('static', filename='images/profile-pics/unlock_avatar6.jpeg') }}" 
+                                     alt="Multi-Subject Star Avatar" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Multi-Subject Star</h6>
+                                    <p>Complete lessons in all 4 main subjects</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="unlock_avatar7.jpeg" data-achievement="speed_learner">
+                                <img src="{{ url_for('static', filename='images/profile-pics/unlock_avatar7.jpeg') }}" 
+                                     alt="Speed Learner Avatar" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Speed Learner</h6>
+                                    <p>Complete 5 lessons in a single day</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="unlock_avatar8.jpeg" data-achievement="perfect_score">
+                                <img src="{{ url_for('static', filename='images/profile-pics/unlock_avatar8.jpeg') }}" 
+                                     alt="Perfect Score Avatar" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Perfect Score</h6>
+                                    <p>Achieve 100% score on any lesson</p>
+                                </div>
+                            </div>
+                            
+                            <!-- New Achievement Avatars -->
+                            <div class="avatar-option locked" data-avatar="avatar14.jpeg" data-unlock="geography_master">
+                                <img src="{{ url_for('static', filename='images/profile-pics/avatar14.jpeg') }}" 
+                                     alt="Geography Master" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Geography Master</h6>
+                                    <p>Complete 8 geography lessons and explore 5 countries</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="avatar15.jpeg" data-unlock="language_champion">
+                                <img src="{{ url_for('static', filename='images/profile-pics/avatar15.jpeg') }}" 
+                                     alt="Language Champion" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Language Champion</h6>
+                                    <p>Learn 20 new words in a foreign language</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="avatar16.jpeg" data-unlock="computing_genius">
+                                <img src="{{ url_for('static', filename='images/profile-pics/avatar16.jpeg') }}" 
+                                     alt="Computing Genius" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Computing Genius</h6>
+                                    <p>Complete 6 computing lessons and create a program</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="avatar17.jpeg" data-unlock="week_warrior">
+                                <img src="{{ url_for('static', filename='images/profile-pics/avatar17.jpeg') }}" 
+                                     alt="Week Warrior" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Week Warrior</h6>
+                                    <p>Study for 7 consecutive days without missing a day</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="avatar18.jpeg" data-unlock="question_master">
+                                <img src="{{ url_for('static', filename='images/profile-pics/avatar18.jpeg') }}" 
+                                     alt="Question Master" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Question Master</h6>
+                                    <p>Answer 100 practice questions correctly</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="avatar19.jpeg" data-unlock="history_detective">
+                                <img src="{{ url_for('static', filename='images/profile-pics/avatar19.jpeg') }}" 
+                                     alt="History Detective" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>History Detective</h6>
+                                    <p>Complete 10 history lessons and research 3 events</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="avatar20.jpeg" data-unlock="speed_scholar">
+                                <img src="{{ url_for('static', filename='images/profile-pics/avatar20.jpeg') }}" 
+                                     alt="Speed Scholar" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Speed Scholar</h6>
+                                    <p>Complete lesson in under 10 minutes with 90% score</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="avatar21.jpeg" data-unlock="science_experimenter">
+                                <img src="{{ url_for('static', filename='images/profile-pics/avatar21.jpeg') }}" 
+                                     alt="Science Experimenter" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Science Experimenter</h6>
+                                    <p>Complete 12 science lessons and conduct 5 experiments</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="avatar22.jpeg" data-unlock="math_olympian">
+                                <img src="{{ url_for('static', filename='images/profile-pics/avatar22.jpeg') }}" 
+                                     alt="Math Olympian" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Math Olympian</h6>
+                                    <p>Solve 50 advanced math problems with 95% accuracy</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="avatar23.jpeg" data-unlock="early_bird">
+                                <img src="{{ url_for('static', filename='images/profile-pics/avatar23.jpeg') }}" 
+                                     alt="Early Bird" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Early Bird</h6>
+                                    <p>Complete lessons before 9 AM for 5 consecutive days</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="avatar24.jpeg" data-unlock="knowledge_explorer">
+                                <img src="{{ url_for('static', filename='images/profile-pics/avatar24.jpeg') }}" 
+                                     alt="Knowledge Explorer" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Knowledge Explorer</h6>
+                                    <p>Complete 3 lessons in 6 different subjects</p>
+                                </div>
+                            </div>
+                            
+                            <div class="avatar-option locked" data-avatar="avatar25.jpeg" data-unlock="ultimate_scholar">
+                                <img src="{{ url_for('static', filename='images/profile-pics/avatar25.jpeg') }}" 
+                                     alt="Ultimate Scholar" class="avatar-img">
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="unlock-info">
+                                    <h6>Ultimate Scholar</h6>
+                                    <p>Achieve 30-day learning streak with 85% average</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Save Profile Button -->
+        <div class="profile-actions text-center mt-5">
+            <button class="btn btn-primary btn-lg" id="saveProfileBtn">
+                <i class="fas fa-save me-2"></i>Save Profile
+            </button>
+            <button class="btn btn-outline-secondary btn-lg ms-3" id="resetProfileBtn">
+                <i class="fas fa-undo me-2"></i>Reset Changes
+            </button>
+        </div>
+
+        <!-- Family Account Management -->
+        <div class="family-account-section mt-5">
+            <div class="profile-card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <i class="fas fa-users me-2"></i>Family Account Management
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="text-muted mb-4">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Create a family account to manage multiple children and track their progress with parent oversight.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="family-option-card p-4 text-center h-100" style="border: 2px solid #e9ecef; border-radius: 15px; transition: all 0.3s ease;">
+                                <i class="fas fa-sign-in-alt fa-2x text-primary mb-3"></i>
+                                <h5>Existing Family</h5>
+                                <p class="text-muted">Sign in to your family account</p>
+                                <a href="{{ url_for('parent_login') }}" class="btn btn-primary w-100">
+                                    Parent Sign In
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="family-option-card p-4 text-center h-100" style="border: 2px solid #e9ecef; border-radius: 15px; transition: all 0.3s ease;">
+                                <i class="fas fa-user-plus fa-2x text-success mb-3"></i>
+                                <h5>New Family</h5>
+                                <p class="text-muted">Create a new family account</p>
+                                <a href="{{ url_for('parent_signup') }}" class="btn btn-success w-100">
+                                    Create Family Account
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Family Account Benefits -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="benefits-section p-3" style="background: #f8f9fa; border-radius: 10px;">
+                                <h6 class="text-center mb-3">Family Account Benefits</h6>
+                                <div class="row">
+                                    <div class="col-md-3 text-center mb-2">
+                                        <i class="fas fa-child text-info mb-2"></i>
+                                        <small class="d-block">Multiple Children</small>
+                                    </div>
+                                    <div class="col-md-3 text-center mb-2">
+                                        <i class="fas fa-chart-line text-warning mb-2"></i>
+                                        <small class="d-block">Progress Tracking</small>
+                                    </div>
+                                    <div class="col-md-3 text-center mb-2">
+                                        <i class="fas fa-shield-alt text-success mb-2"></i>
+                                        <small class="d-block">Parent Control</small>
+                                    </div>
+                                    <div class="col-md-3 text-center mb-2">
+                                        <i class="fas fa-trophy text-danger mb-2"></i>
+                                        <small class="d-block">Achievements</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<style>
+/* Locked Avatar Styles */
+.avatar-option.locked {
+    position: relative;
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.avatar-option.locked .avatar-img {
+    filter: grayscale(50%) brightness(0.8);
+}
+
+.locked-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.locked-overlay i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    animation: lockShake 2s infinite;
+}
+
+.locked-overlay small {
+    font-size: 0.7rem;
+    text-align: center;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes lockShake {
+    0%, 50%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}
+
+.avatar-option.locked:hover .locked-overlay {
+    background: rgba(231, 76, 60, 0.8);
+}
+
+.unlock-tooltip {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2c3e50;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.avatar-option.locked:hover .unlock-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.unlock-requirements-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.unlock-requirements-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.unlock-requirements-content h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.unlock-requirements-content .requirements-list {
+    text-align: left;
+    margin: 1rem 0;
+}
+
+.unlock-requirements-content .requirements-list li {
+    margin-bottom: 0.5rem;
+    color: #6c757d;
+}
+
+.btn-start-quest {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-start-quest:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    color: white;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Load saved profile data
+    loadProfileData();
+    
+    // Check for unlocked avatars
+    checkUnlockedAvatars();
+    
+    // Avatar selection functionality
+    const avatarOptions = document.querySelectorAll('.avatar-option');
+    const currentAvatar = document.getElementById('currentAvatar');
+    let selectedAvatar = 'avatar1.jpeg';
+    
+    avatarOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            // Check if avatar is locked
+            if (this.classList.contains('locked')) {
+                showUnlockRequirements(this);
+                return;
+            }
+            
+            // Remove active class from all options
+            avatarOptions.forEach(opt => opt.classList.remove('active'));
+            
+            // Add active class to selected option
+            this.classList.add('active');
+            
+            // Update selected avatar
+            selectedAvatar = this.dataset.avatar;
+            
+            // Update current avatar display
+            currentAvatar.src = `{{ url_for('static', filename='images/profile-pics/') }}${selectedAvatar}`;
+            
+            // Update profile corner with selected avatar
+            if (typeof updateProfileAvatar === 'function') {
+                updateProfileAvatar(selectedAvatar);
+            }
+        });
+    });
+    
+    // Save profile functionality
+    document.getElementById('saveProfileBtn').addEventListener('click', function() {
+        saveProfile();
+    });
+    
+    // Reset profile functionality
+    document.getElementById('resetProfileBtn').addEventListener('click', function() {
+        resetProfile();
+    });
+});
+
+function loadProfileData() {
+    // Load profile data from localStorage or server
+    const savedProfile = localStorage.getItem('brainBuddyProfile');
+    if (savedProfile) {
+        const profile = JSON.parse(savedProfile);
+        
+        document.getElementById('studentName').value = profile.name || 'Emma';
+        document.getElementById('studentAge').value = profile.age || '8';
+        document.getElementById('studentGrade').value = profile.grade || 'P3';
+        document.getElementById('favoriteSubject').value = profile.favoriteSubject || 'maths';
+        
+        // Set selected avatar
+        if (profile.avatar) {
+            const avatarOption = document.querySelector(`[data-avatar="${profile.avatar}"]`);
+            if (avatarOption) {
+                document.querySelectorAll('.avatar-option').forEach(opt => opt.classList.remove('active'));
+                avatarOption.classList.add('active');
+                document.getElementById('currentAvatar').src = `{{ url_for('static', filename='images/profile-pics/') }}${profile.avatar}`;
+            }
+        }
+    }
+}
+
+function saveProfile() {
+    const profile = {
+        name: document.getElementById('studentName').value,
+        age: document.getElementById('studentAge').value,
+        grade: document.getElementById('studentGrade').value,
+        favoriteSubject: document.getElementById('favoriteSubject').value,
+        avatar: document.querySelector('.avatar-option.active').dataset.avatar,
+        lastUpdated: new Date().toISOString()
+    };
+    
+    // Save to localStorage
+    localStorage.setItem('brainBuddyProfile', JSON.stringify(profile));
+    
+    // Save to server (if available)
+    fetch('/api/save-profile', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(profile)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showNotification('Profile saved successfully!', 'success');
+        } else {
+            showNotification('Profile saved locally. Server sync will happen when available.', 'warning');
+        }
+    })
+    .catch(error => {
+        // Save locally even if server is unavailable
+        showNotification('Profile saved locally!', 'success');
+    });
+    
+    // Update profile display throughout the app
+    updateProfileDisplay(profile);
+}
+
+function resetProfile() {
+    // Reset to default values
+    document.getElementById('studentName').value = 'Emma';
+    document.getElementById('studentAge').value = '8';
+    document.getElementById('studentGrade').value = 'P3';
+    document.getElementById('favoriteSubject').value = 'maths';
+    
+    // Reset avatar to first option
+    document.querySelectorAll('.avatar-option').forEach(opt => opt.classList.remove('active'));
+    document.querySelector('.avatar-option').classList.add('active');
+    document.getElementById('currentAvatar').src = `{{ url_for('static', filename='images/profile-pics/avatar1.jpeg') }}`;
+}
+
+function checkUnlockedAvatars() {
+    // Check which avatars should be unlocked based on student achievements
+    const studentId = 'demo_student'; // Get from session or URL parameter
+    
+    fetch(`/api/student-achievements?student_id=${studentId}`)
+    .then(response => response.json())
+    .then(data => {
+        if (data.unlockedAvatars) {
+            data.unlockedAvatars.forEach(avatarFile => {
+                const avatarOption = document.querySelector(`[data-avatar="${avatarFile}"]`);
+                if (avatarOption) {
+                    avatarOption.classList.remove('locked');
+                    const overlay = avatarOption.querySelector('.locked-overlay');
+                    if (overlay) {
+                        overlay.innerHTML = '<i class="fas fa-check"></i>';
+                        overlay.classList.remove('locked-overlay');
+                        overlay.classList.add('avatar-overlay');
+                    }
+                }
+            });
+        }
+    })
+    .catch(error => {
+        console.log('Achievement check unavailable in offline mode');
+    });
+}
+
+function showUnlockRequirements(avatarElement) {
+    const unlockType = avatarElement.dataset.unlock;
+    const avatarName = avatarElement.alt;
+    
+    // Achievement requirements mapping
+    const requirements = {
+        'geography_master': {
+            title: 'Geography Master',
+            description: 'Complete 8 geography lessons and explore 5 different countries',
+            tasks: [
+                'Complete 8 geography lessons',
+                'Learn about 5 different countries',
+                'Score 85% or higher average'
+            ]
+        },
+        'language_champion': {
+            title: 'Language Champion',
+            description: 'Learn 20 new words in a foreign language',
+            tasks: [
+                'Learn 20 new vocabulary words',
+                'Complete language lessons',
+                'Score 85% or higher average'
+            ]
+        },
+        'computing_genius': {
+            title: 'Computing Genius',
+            description: 'Complete 6 computing lessons and create a simple program',
+            tasks: [
+                'Complete 6 computing lessons',
+                'Create 1 simple program',
+                'Show technical creativity'
+            ]
+        },
+        'week_warrior': {
+            title: 'Week Warrior',
+            description: 'Study for 7 consecutive days without missing a day',
+            tasks: [
+                'Study every day for 7 days',
+                'No missed days',
+                'Maintain consistency'
+            ]
+        },
+        'question_master': {
+            title: 'Question Master',
+            description: 'Answer 100 practice questions correctly across all subjects',
+            tasks: [
+                'Answer 100 questions correctly',
+                'Use all subject areas',
+                'Show knowledge mastery'
+            ]
+        },
+        'history_detective': {
+            title: 'History Detective',
+            description: 'Complete 10 history lessons and research 3 historical events',
+            tasks: [
+                'Complete 10 history lessons',
+                'Research 3 historical events',
+                'Show curiosity about the past'
+            ]
+        },
+        'speed_scholar': {
+            title: 'Speed Scholar',
+            description: 'Complete any lesson in under 10 minutes with 90% score',
+            tasks: [
+                'Complete lesson in under 10 minutes',
+                'Score 90% or higher',
+                'Show efficiency and accuracy'
+            ]
+        },
+        'science_experimenter': {
+            title: 'Science Experimenter',
+            description: 'Complete 12 science lessons and conduct 5 virtual experiments',
+            tasks: [
+                'Complete 12 science lessons',
+                'Conduct 5 virtual experiments',
+                'Show scientific curiosity'
+            ]
+        },
+        'math_olympian': {
+            title: 'Math Olympian',
+            description: 'Solve 50 advanced math problems with 95% accuracy',
+            tasks: [
+                'Solve 50 advanced math problems',
+                'Achieve 95% accuracy',
+                'Show mathematical excellence'
+            ]
+        },
+        'early_bird': {
+            title: 'Early Bird',
+            description: 'Complete lessons before 9 AM for 5 consecutive days',
+            tasks: [
+                'Study before 9 AM',
+                'Do this for 5 consecutive days',
+                'Show morning dedication'
+            ]
+        },
+        'knowledge_explorer': {
+            title: 'Knowledge Explorer',
+            description: 'Complete at least 3 lessons in 6 different subjects',
+            tasks: [
+                'Try 6 different subjects',
+                'Complete 3 lessons in each',
+                'Show learning versatility'
+            ]
+        },
+        'ultimate_scholar': {
+            title: 'Ultimate Scholar',
+            description: 'Achieve 30-day learning streak with 85% average score',
+            tasks: [
+                'Study for 30 consecutive days',
+                'Maintain 85% average score',
+                'Complete 25+ total lessons'
+            ]
+        }
+    };
+    
+    const requirement = requirements[unlockType];
+    if (!requirement) return;
+    
+    // Create modal HTML
+    const modalHTML = `
+        <div class="unlock-requirements-modal" id="unlockModal">
+            <div class="unlock-requirements-content">
+                <h4>🔒 ${requirement.title}</h4>
+                <p>${requirement.description}</p>
+                <div class="requirements-list">
+                    <h6>To unlock this avatar:</h6>
+                    <ul>
+                        ${requirement.tasks.map(task => `<li>✓ ${task}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="mt-3">
+                    <button class="btn btn-start-quest" onclick="startQuest('${unlockType}')">
+                        Start Your Quest! 🚀
+                    </button>
+                    <button class="btn btn-outline-secondary ms-2" onclick="closeModal()">
+                        Maybe Later
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add modal to page
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // Show modal
+    const modal = document.getElementById('unlockModal');
+    modal.style.display = 'flex';
+    
+    // Close modal when clicking outside
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+}
+
+function startQuest(questType) {
+    closeModal();
+    // Redirect to appropriate learning section
+    window.location.href = `{{ url_for('curriculum_topics') }}?quest=${questType}`;
+}
+
+function closeModal() {
+    const modal = document.getElementById('unlockModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type} notification-toast`;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 3000;
+        min-width: 300px;
+        animation: slideIn 0.3s ease;
+    `;
+    notification.innerHTML = `
+        <strong>${type === 'success' ? '✓' : type === 'warning' ? '⚠' : 'ℹ'}</strong> ${message}
+        <button type="button" class="btn-close" onclick="this.parentElement.remove()"></button>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        if (notification.parentElement) {
+            notification.remove();
+        }
+    }, 5000);
+}
+
+function updateProfileDisplay(profile) {
+    // Update profile display throughout the application
+    const nameElements = document.querySelectorAll('.student-name');
+    nameElements.forEach(el => el.textContent = profile.name);
+    
+    const avatarElements = document.querySelectorAll('.student-avatar');
+    avatarElements.forEach(el => {
+        el.src = `{{ url_for('static', filename='images/profile-pics/') }}${profile.avatar}`;
+    });
+}
+
+function updateProfileDisplay(profile) {
+    // Update profile displays throughout the app
+    const profileElements = document.querySelectorAll('.user-profile-pic');
+    profileElements.forEach(element => {
+        element.src = `{{ url_for('static', filename='images/profile-pics/') }}${profile.avatar}`;
+    });
+    
+    const profileNames = document.querySelectorAll('.user-profile-name');
+    profileNames.forEach(element => {
+        element.textContent = profile.name;
+    });
+}
+
+function showNotification(message, type) {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+    notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+    notification.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto-remove after 3 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 3000);
+}
+
+// Export profile functions for use in other parts of the app
+window.BrainBuddyProfile = {
+    getCurrentProfile: function() {
+        const saved = localStorage.getItem('brainBuddyProfile');
+        return saved ? JSON.parse(saved) : {
+            name: 'Emma',
+            age: '8',
+            grade: 'P3',
+            avatar: 'avatar1.jpeg',
+            favoriteSubject: 'maths'
+        };
+    },
+    
+    getProfilePicture: function() {
+        const profile = this.getCurrentProfile();
+        return `{{ url_for('static', filename='images/profile-pics/') }}${profile.avatar}`;
+    },
+    
+    getProfileName: function() {
+        const profile = this.getCurrentProfile();
+        return profile.name;
+    }
+};
+
+// Achievement Avatar System Functions
+function showUnlockRequirements(avatarElement) {
+    const achievement = avatarElement.dataset.achievement;
+    const unlockInfo = avatarElement.querySelector('.unlock-info');
+    
+    // Show detailed unlock requirements modal
+    const modal = createUnlockRequirementsModal(achievement, unlockInfo);
+    document.body.appendChild(modal);
+    
+    // Auto-remove modal after 5 seconds
+    setTimeout(() => {
+        if (modal.parentNode) {
+            modal.parentNode.removeChild(modal);
+        }
+    }, 5000);
+}
+
+function createUnlockRequirementsModal(achievement, unlockInfo) {
+    const backdrop = document.createElement('div');
+    backdrop.className = 'unlock-backdrop';
+    
+    const modal = document.createElement('div');
+    modal.className = 'unlock-celebration';
+    modal.innerHTML = `
+        <h3>🔒 Avatar Locked</h3>
+        <div class="locked-avatar-preview">
+            <img src="${unlockInfo.parentElement.querySelector('.avatar-img').src}" 
+                 alt="Locked Avatar" class="new-avatar" style="filter: grayscale(50%);">
+        </div>
+        <h4>${unlockInfo.querySelector('h6').textContent}</h4>
+        <p>${unlockInfo.querySelector('p').textContent}</p>
+        <div class="progress-info">
+            <p><strong>Keep learning to unlock this special avatar!</strong></p>
+        </div>
+        <button class="btn" onclick="this.parentElement.parentElement.remove()">Got it!</button>
+    `;
+    
+    backdrop.appendChild(modal);
+    backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) {
+            backdrop.remove();
+        }
+    });
+    
+    return backdrop;
+}
+
+function checkAvatarUnlocks() {
+    // Simulate checking for newly unlocked avatars
+    // In real implementation, this would call the server
+    
+    // For demo purposes, unlock an avatar after some interaction
+    const profile = window.BrainBuddyProfile.getCurrentProfile();
+    const savedData = localStorage.getItem('brainBuddyProgress');
+    
+    if (savedData) {
+        const progress = JSON.parse(savedData);
+        checkSpecificUnlocks(progress);
+    }
+}
+
+function checkSpecificUnlocks(progress) {
+    const achievementRequirements = {
+        'unlock_avatar1.jpeg': { // Math Master
+            mathLessons: 10,
+            mathScore: 90
+        },
+        'unlock_avatar2.jpeg': { // Science Explorer  
+            scienceLessons: 8,
+            scienceScore: 85
+        },
+        'unlock_avatar5.jpeg': { // Learning Streak
+            streak: 14
+        },
+        'unlock_avatar8.jpeg': { // Perfect Score
+            perfectScore: true
+        }
+    };
+    
+    for (const [avatarFile, requirements] of Object.entries(achievementRequirements)) {
+        if (!isAvatarUnlocked(avatarFile)) {
+            if (checkRequirementsMet(progress, requirements)) {
+                unlockAvatar(avatarFile);
+            }
+        }
+    }
+}
+
+function isAvatarUnlocked(avatarFile) {
+    const unlockedAvatars = JSON.parse(localStorage.getItem('unlockedAvatars') || '[]');
+    return unlockedAvatars.includes(avatarFile);
+}
+
+function checkRequirementsMet(progress, requirements) {
+    // Demo logic - in real app this would check actual progress
+    const demoProgress = {
+        mathLessons: 12,
+        mathScore: 95,
+        scienceLessons: 9,
+        scienceScore: 88,
+        streak: 15,
+        perfectScore: true
+    };
+    
+    if (requirements.mathLessons && demoProgress.mathLessons < requirements.mathLessons) return false;
+    if (requirements.mathScore && demoProgress.mathScore < requirements.mathScore) return false;
+    if (requirements.scienceLessons && demoProgress.scienceLessons < requirements.scienceLessons) return false;
+    if (requirements.scienceScore && demoProgress.scienceScore < requirements.scienceScore) return false;
+    if (requirements.streak && demoProgress.streak < requirements.streak) return false;
+    if (requirements.perfectScore && !demoProgress.perfectScore) return false;
+    
+    return true;
+}
+
+function unlockAvatar(avatarFile) {
+    // Mark avatar as unlocked
+    const unlockedAvatars = JSON.parse(localStorage.getItem('unlockedAvatars') || '[]');
+    if (!unlockedAvatars.includes(avatarFile)) {
+        unlockedAvatars.push(avatarFile);
+        localStorage.setItem('unlockedAvatars', JSON.stringify(unlockedAvatars));
+        
+        // Update UI
+        const avatarElement = document.querySelector(`[data-avatar="${avatarFile}"]`);
+        if (avatarElement) {
+            avatarElement.classList.remove('locked');
+            avatarElement.classList.add('unlocked');
+            avatarElement.querySelector('.lock-overlay').remove();
+            
+            // Add selection overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'avatar-overlay';
+            overlay.innerHTML = '<i class="fas fa-check"></i>';
+            avatarElement.appendChild(overlay);
+            
+            // Show celebration
+            showUnlockCelebration(avatarFile);
+        }
+    }
+}
+
+function showUnlockCelebration(avatarFile) {
+    // Create confetti
+    createConfetti();
+    
+    // Get avatar info
+    const avatarElement = document.querySelector(`[data-avatar="${avatarFile}"]`);
+    const avatarName = avatarElement.querySelector('.unlock-info h6').textContent;
+    const avatarImg = avatarElement.querySelector('.avatar-img').src;
+    
+    // Create celebration modal
+    const backdrop = document.createElement('div');
+    backdrop.className = 'unlock-backdrop';
+    
+    const modal = document.createElement('div');
+    modal.className = 'unlock-celebration';
+    modal.innerHTML = `
+        <h3>🎉 Avatar Unlocked!</h3>
+        <img src="${avatarImg}" alt="${avatarName}" class="new-avatar">
+        <h4>${avatarName}</h4>
+        <p>Congratulations! You've earned this special avatar through your amazing learning progress!</p>
+        <button class="btn" onclick="this.parentElement.parentElement.remove(); selectNewAvatar('${avatarFile}')">
+            Use This Avatar!
+        </button>
+        <button class="btn btn-outline-secondary ms-2" onclick="this.parentElement.parentElement.remove()">
+            Maybe Later
+        </button>
+    `;
+    
+    backdrop.appendChild(modal);
+    document.body.appendChild(backdrop);
+    
+    // Play celebration sound (if available)
+    try {
+        const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmMcCDuY3+2vIAIHONX0wqY+DB5Uu+jeuHYdBjSO2/S+bCEFL3fN88WSqA0YX7Xm6KxNEgtBoN3vvZUdCDCL3PLXcSYEQIZY2jzD'); 
+        audio.play().catch(() => {});
+    } catch(e) {}
+    
+    // Auto-remove confetti after 3 seconds
+    setTimeout(() => {
+        const confettiContainer = document.querySelector('.confetti-container');
+        if (confettiContainer) {
+            confettiContainer.remove();
+        }
+    }, 3000);
+}
+
+function selectNewAvatar(avatarFile) {
+    // Select the newly unlocked avatar
+    const avatarOption = document.querySelector(`[data-avatar="${avatarFile}"]`);
+    if (avatarOption) {
+        // Remove active class from all options
+        document.querySelectorAll('.avatar-option').forEach(opt => opt.classList.remove('active'));
+        
+        // Add active class to new avatar
+        avatarOption.classList.add('active');
+        
+        // Update current avatar display
+        document.getElementById('currentAvatar').src = avatarOption.querySelector('.avatar-img').src;
+        
+        // Save profile with new avatar
+        saveProfile();
+    }
+}
+
+function createConfetti() {
+    const confettiContainer = document.createElement('div');
+    confettiContainer.className = 'confetti-container';
+    
+    // Create 50 confetti pieces
+    for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti-piece';
+        
+        // Random positioning and animation delay
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.animationDelay = Math.random() * 2 + 's';
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        
+        // Random size
+        const size = Math.random() * 8 + 6;
+        confetti.style.width = size + 'px';
+        confetti.style.height = size + 'px';
+        
+        confettiContainer.appendChild(confetti);
+    }
+    
+    document.body.appendChild(confettiContainer);
+}
+
+// Initialize achievement system on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Load unlocked avatars and update UI
+    loadUnlockedAvatars();
+    
+    // Check for new unlocks periodically
+    setInterval(checkAvatarUnlocks, 30000);
+    
+    // Simulate unlocking first achievement avatar for demo
+    setTimeout(() => {
+        if (!isAvatarUnlocked('unlock_avatar1.jpeg')) {
+            unlockAvatar('unlock_avatar1.jpeg');
+        }
+    }, 3000);
+});
+
+function loadUnlockedAvatars() {
+    const unlockedAvatars = JSON.parse(localStorage.getItem('unlockedAvatars') || '[]');
+    
+    unlockedAvatars.forEach(avatarFile => {
+        const avatarElement = document.querySelector(`[data-avatar="${avatarFile}"]`);
+        if (avatarElement && avatarElement.classList.contains('locked')) {
+            avatarElement.classList.remove('locked');
+            avatarElement.classList.add('unlocked');
+            
+            // Remove lock overlay
+            const lockOverlay = avatarElement.querySelector('.lock-overlay');
+            if (lockOverlay) {
+                lockOverlay.remove();
+            }
+            
+            // Add selection overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'avatar-overlay';
+            overlay.innerHTML = '<i class="fas fa-check"></i>';
+            avatarElement.appendChild(overlay);
+        }
+    });
+}
+</script>
+{% endblock %}

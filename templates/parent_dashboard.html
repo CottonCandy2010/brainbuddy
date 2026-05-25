@@ -1,0 +1,573 @@
+{% extends "layout.html" %}
+
+{% block title %}Parent Dashboard - Brain Buddy{% endblock %}
+
+{% block content %}
+<section class="parent-dashboard-page">
+    <div class="container">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header mb-5">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="dashboard-title">
+                        <i class="fas fa-chart-line me-3"></i>Parent Dashboard
+                    </h1>
+                    <p class="dashboard-subtitle">Track your child's learning progress and achievements</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="date-range-selector">
+                        <select class="form-select" id="dateRange">
+                            <option value="7">Last 7 days</option>
+                            <option value="30" selected>Last 30 days</option>
+                            <option value="90">Last 3 months</option>
+                            <option value="365">Last year</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Selection -->
+        <div class="student-selector mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <label class="form-label">Select Student:</label>
+                    <select class="form-select student-select" id="studentSelect">
+                        <option value="student1" data-avatar="avatar1.jpeg">Emma (Age 8, P3)</option>
+                        <option value="student2" data-avatar="avatar5.jpeg">James (Age 10, P5)</option>
+                        <option value="student3" data-avatar="avatar8.jpeg">Sophie (Age 6, P2)</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <div class="selected-student-profile d-flex align-items-center">
+                        <img src="{{ url_for('static', filename='images/profile-pics/avatar1.jpeg') }}" 
+                             alt="Student profile picture" 
+                             class="user-profile-pic me-3" 
+                             id="selectedStudentAvatar">
+                        <div>
+                            <h5 class="user-profile-name mb-0" id="selectedStudentName">Emma</h5>
+                            <small class="text-muted" id="selectedStudentInfo">Age 8, Primary 3</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overview Cards -->
+        <div class="overview-cards mb-5">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stats-card learning-time">
+                        <div class="card-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-value" id="totalLearningTime">2h 45m</h3>
+                            <p class="card-label">Learning Time</p>
+                            <span class="change-indicator positive">+15% this week</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stats-card lessons-completed">
+                        <div class="card-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-value" id="lessonsCompleted">18</h3>
+                            <p class="card-label">Lessons Completed</p>
+                            <span class="change-indicator positive">+3 this week</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stats-card average-score">
+                        <div class="card-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-value" id="averageScore">87%</h3>
+                            <p class="card-label">Average Score</p>
+                            <span class="change-indicator positive">+5% this week</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stats-card learning-streak">
+                        <div class="card-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-value" id="learningStreak">12</h3>
+                            <p class="card-label">Day Streak</p>
+                            <span class="change-indicator positive">Keep it up!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts-section mb-5">
+            <div class="row">
+                <!-- Learning Progress Chart -->
+                <div class="col-lg-8 mb-4">
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                <i class="fas fa-chart-line me-2"></i>Learning Progress Over Time
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="progressChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Subject Distribution -->
+                <div class="col-lg-4 mb-4">
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                <i class="fas fa-pie-chart me-2"></i>Subject Focus
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="subjectChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subject Performance -->
+        <div class="subject-performance mb-5">
+            <div class="chart-card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <i class="fas fa-graduation-cap me-2"></i>Subject Performance
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="subject-grid">
+                        <div class="subject-item">
+                            <div class="subject-header">
+                                <span class="subject-name">Number Magic! 🔢</span>
+                                <span class="subject-score">92%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 92%"></div>
+                            </div>
+                            <div class="subject-details">
+                                <span class="lessons-count">8 lessons completed</span>
+                                <span class="time-spent">45 minutes</span>
+                            </div>
+                        </div>
+                        
+                        <div class="subject-item">
+                            <div class="subject-header">
+                                <span class="subject-name">Super Science! 🧪</span>
+                                <span class="subject-score">85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                            <div class="subject-details">
+                                <span class="lessons-count">6 lessons completed</span>
+                                <span class="time-spent">38 minutes</span>
+                            </div>
+                        </div>
+                        
+                        <div class="subject-item">
+                            <div class="subject-header">
+                                <span class="subject-name">Word Wizards! 📚</span>
+                                <span class="subject-score">78%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 78%"></div>
+                            </div>
+                            <div class="subject-details">
+                                <span class="lessons-count">4 lessons completed</span>
+                                <span class="time-spent">32 minutes</span>
+                            </div>
+                        </div>
+                        
+                        <div class="subject-item">
+                            <div class="subject-header">
+                                <span class="subject-name">Creative Artists! 🎨</span>
+                                <span class="subject-score">95%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 95%"></div>
+                            </div>
+                            <div class="subject-details">
+                                <span class="lessons-count">5 lessons completed</span>
+                                <span class="time-spent">28 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="recent-activity mb-5">
+            <div class="chart-card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <i class="fas fa-history me-2"></i>Recent Activity
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="activity-timeline">
+                        <div class="activity-item">
+                            <div class="activity-icon success">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h5>Completed "Counting Fun" lesson</h5>
+                                <p>Number Magic! 🔢 • Score: 95%</p>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon achievement">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h5>Earned "Math Master" badge</h5>
+                                <p>Completed 10 math lessons with high scores</p>
+                                <span class="activity-time">1 day ago</span>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon study">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h5>Started "Animal Homes" lesson</h5>
+                                <p>Super Science! 🧪 • In Progress</p>
+                                <span class="activity-time">2 days ago</span>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon creative">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h5>Created digital artwork</h5>
+                                <p>Creative Artists! 🎨 • Shared with teacher</p>
+                                <span class="activity-time">3 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Goals & Recommendations -->
+        <div class="goals-recommendations mb-5">
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                <i class="fas fa-target me-2"></i>Learning Goals
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="goal-item">
+                                <div class="goal-header">
+                                    <span class="goal-title">Complete 5 Math Lessons</span>
+                                    <span class="goal-progress">4/5</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 80%"></div>
+                                </div>
+                                <p class="goal-description">Almost there! One more lesson to reach the weekly goal.</p>
+                            </div>
+                            
+                            <div class="goal-item">
+                                <div class="goal-header">
+                                    <span class="goal-title">Read 3 Stories</span>
+                                    <span class="goal-progress">2/3</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 67%"></div>
+                                </div>
+                                <p class="goal-description">Great progress on reading comprehension!</p>
+                            </div>
+                            
+                            <div class="goal-item">
+                                <div class="goal-header">
+                                    <span class="goal-title">Study 30 Minutes Daily</span>
+                                    <span class="goal-progress">6/7 days</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 86%"></div>
+                                </div>
+                                <p class="goal-description">Excellent consistency this week!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                <i class="fas fa-lightbulb me-2"></i>Recommendations
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="recommendation-item">
+                                <div class="recommendation-icon">
+                                    <i class="fas fa-calculator text-primary"></i>
+                                </div>
+                                <div class="recommendation-content">
+                                    <h5>Focus on Addition Practice</h5>
+                                    <p>Guest shows great progress in counting. Consider more addition exercises to build on this strength.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="recommendation-item">
+                                <div class="recommendation-icon">
+                                    <i class="fas fa-book text-success"></i>
+                                </div>
+                                <div class="recommendation-content">
+                                    <h5>Reading Comprehension</h5>
+                                    <p>Try interactive story sessions to improve understanding and engagement with texts.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="recommendation-item">
+                                <div class="recommendation-icon">
+                                    <i class="fas fa-clock text-warning"></i>
+                                </div>
+                                <div class="recommendation-content">
+                                    <h5>Consistent Study Schedule</h5>
+                                    <p>Emma learns best in 15-20 minute sessions. Consider shorter, more frequent study periods.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons text-center">
+            <button class="btn btn-primary btn-lg me-3" id="generateReport">
+                <i class="fas fa-file-pdf me-2"></i>Generate Progress Report
+            </button>
+            <button class="btn btn-outline-primary btn-lg me-3" id="scheduleCheckIn">
+                <i class="fas fa-calendar me-2"></i>Schedule Check-in
+            </button>
+            <button class="btn btn-outline-secondary btn-lg" id="exportData">
+                <i class="fas fa-download me-2"></i>Export Data
+            </button>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize charts
+    initProgressChart();
+    initSubjectChart();
+    
+    // Event listeners
+    document.getElementById('dateRange').addEventListener('change', updateDashboard);
+    document.getElementById('studentSelect').addEventListener('change', function() {
+        updateDashboard();
+        updateSelectedStudentProfile();
+    });
+    document.getElementById('generateReport').addEventListener('click', generateProgressReport);
+    document.getElementById('scheduleCheckIn').addEventListener('click', scheduleCheckIn);
+    document.getElementById('exportData').addEventListener('click', exportData);
+    
+    // Load initial data
+    updateDashboard();
+});
+
+function initProgressChart() {
+    const ctx = document.getElementById('progressChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+            datasets: [
+                {
+                    label: 'Number Magic!',
+                    data: [75, 82, 88, 92],
+                    borderColor: '#4285f4',
+                    backgroundColor: 'rgba(66, 133, 244, 0.1)',
+                    tension: 0.4
+                },
+                {
+                    label: 'Super Science!',
+                    data: [70, 78, 83, 85],
+                    borderColor: '#34a853',
+                    backgroundColor: 'rgba(52, 168, 83, 0.1)',
+                    tension: 0.4
+                },
+                {
+                    label: 'Word Wizards!',
+                    data: [65, 70, 75, 78],
+                    borderColor: '#ea4335',
+                    backgroundColor: 'rgba(234, 67, 53, 0.1)',
+                    tension: 0.4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+}
+
+function initSubjectChart() {
+    const ctx = document.getElementById('subjectChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Number Magic!', 'Super Science!', 'Word Wizards!', 'Creative Artists!'],
+            datasets: [{
+                data: [35, 25, 20, 20],
+                backgroundColor: [
+                    '#4285f4',
+                    '#34a853',
+                    '#ea4335',
+                    '#fbbc04'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+}
+
+function updateDashboard() {
+    const dateRange = document.getElementById('dateRange').value;
+    const studentId = document.getElementById('studentSelect').value;
+    
+    // Update stats based on selected filters
+    // This would typically fetch real data from the server
+    console.log(`Updating dashboard for student ${studentId} with ${dateRange} days range`);
+    
+    // Simulate data update
+    updateStatsCards(studentId, dateRange);
+}
+
+function updateStatsCards(studentId, dateRange) {
+    // Simulate different data based on student and date range
+    const mockData = {
+        student1: {
+            learningTime: '2h 45m',
+            lessonsCompleted: 18,
+            averageScore: '87%',
+            learningStreak: 12
+        },
+        student2: {
+            learningTime: '3h 20m',
+            lessonsCompleted: 24,
+            averageScore: '91%',
+            learningStreak: 8
+        },
+        student3: {
+            learningTime: '1h 55m',
+            lessonsCompleted: 12,
+            averageScore: '84%',
+            learningStreak: 15
+        }
+    };
+    
+    const data = mockData[studentId] || mockData.student1;
+    
+    document.getElementById('totalLearningTime').textContent = data.learningTime;
+    document.getElementById('lessonsCompleted').textContent = data.lessonsCompleted;
+    document.getElementById('averageScore').textContent = data.averageScore;
+    document.getElementById('learningStreak').textContent = data.learningStreak;
+}
+
+function generateProgressReport() {
+    // Generate and download progress report
+    alert('Generating comprehensive progress report... This feature will create a detailed PDF with your child\'s learning analytics.');
+    
+    // This would typically trigger a server request to generate the report
+    setTimeout(() => {
+        alert('Progress report generated successfully! Check your downloads folder.');
+    }, 2000);
+}
+
+function scheduleCheckIn() {
+    // Open scheduling modal or redirect to scheduling page
+    alert('Opening scheduling system... You can schedule a check-in with your child\'s learning coordinator.');
+}
+
+function exportData() {
+    // Export learning data
+    alert('Exporting learning data... This will download a CSV file with detailed progress information.');
+    
+    // Simulate data export
+    setTimeout(() => {
+        alert('Data exported successfully! Check your downloads folder for the CSV file.');
+    }, 1500);
+}
+
+function updateSelectedStudentProfile() {
+    const selectElement = document.getElementById('studentSelect');
+    const selectedOption = selectElement.options[selectElement.selectedIndex];
+    const avatar = selectedOption.dataset.avatar;
+    const studentText = selectedOption.text;
+    
+    // Extract name and info from option text
+    const nameMatch = studentText.match(/^([A-Za-z]+)/);
+    const infoMatch = studentText.match(/\(([^)]+)\)/);
+    
+    if (nameMatch) {
+        document.getElementById('selectedStudentName').textContent = nameMatch[1];
+    }
+    
+    if (infoMatch) {
+        document.getElementById('selectedStudentInfo').textContent = infoMatch[1];
+    }
+    
+    if (avatar) {
+        document.getElementById('selectedStudentAvatar').src = `{{ url_for('static', filename='images/profile-pics/') }}${avatar}`;
+    }
+}
+</script>
+{% endblock %}

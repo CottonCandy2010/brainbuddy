@@ -1,0 +1,582 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ lesson_data.title }}{% endblock %}
+
+{% block content %}
+<style>
+/* Interactive Lesson Styles - Beautiful Color Scheme */
+body {
+    background: linear-gradient(135deg, #F0F8FF 0%, #FFFFFF 50%, #E6F3FF 100%);
+    font-family: 'Quicksand', 'Nunito', 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.lesson-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.lesson-header {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+    border: 3px solid #fff;
+}
+
+.lesson-title {
+    color: #2d3436;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.progress-bar-container {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    padding: 5px;
+    margin: 15px 0;
+}
+
+.progress-bar {
+    background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
+    height: 12px;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    color: #2d3436;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.study-technique-selector {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.technique-btn {
+    background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    border: 2px solid transparent;
+}
+
+.technique-btn.active {
+    background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+    border-color: #fff;
+    box-shadow: 0 5px 15px rgba(253, 121, 168, 0.4);
+}
+
+.technique-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(116, 185, 255, 0.4);
+}
+
+.question-card {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(253, 121, 168, 0.3);
+    border: 3px solid #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.question-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.5s;
+    opacity: 0;
+}
+
+.question-card:hover::before {
+    opacity: 1;
+    left: 100%;
+}
+
+.question-number {
+    background: linear-gradient(135deg, #e17055 0%, #d63031 100%);
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(225, 112, 85, 0.4);
+}
+
+.question-title {
+    color: #e17055;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.instruction-box {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border-left: 5px solid #e17055;
+}
+
+.instruction-text {
+    color: #2d3436;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.task-box {
+    background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    border: 3px solid #fff;
+    box-shadow: 0 5px 15px rgba(253, 203, 110, 0.4);
+}
+
+.task-text {
+    color: #2d3436;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.visual-element {
+    background: rgba(255, 255, 255, 0.9);
+    border: 3px solid #ddd;
+    border-radius: 15px;
+    padding: 25px;
+    margin: 20px 0;
+    text-align: center;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.visual-content {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.visual-description {
+    color: #636e72;
+    font-weight: bold;
+}
+
+.answer-section {
+    background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(116, 185, 255, 0.4);
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+.nav-btn {
+    background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 184, 148, 0.3);
+}
+
+.nav-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 184, 148, 0.4);
+}
+
+.nav-btn:disabled {
+    background: #ddd;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.next-btn {
+    background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+    box-shadow: 0 5px 15px rgba(253, 121, 168, 0.3);
+}
+
+.next-btn:hover {
+    box-shadow: 0 8px 20px rgba(253, 121, 168, 0.4);
+}
+
+.study-technique-content {
+    display: none;
+}
+
+.study-technique-content.active {
+    display: block;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .lesson-container {
+        padding: 15px;
+    }
+    
+    .lesson-title {
+        font-size: 1.6rem;
+    }
+    
+    .question-card {
+        padding: 20px;
+    }
+    
+    .question-title {
+        font-size: 1.3rem;
+    }
+    
+    .study-technique-selector {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .technique-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .navigation-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .nav-btn {
+        width: 100%;
+        padding: 12px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .lesson-header {
+        padding: 20px;
+    }
+    
+    .lesson-title {
+        font-size: 1.4rem;
+    }
+    
+    .question-card {
+        padding: 15px;
+    }
+    
+    .visual-content {
+        font-size: 2rem;
+    }
+}
+</style>
+
+<div class="lesson-container">
+    <!-- Lesson Header -->
+    <div class="lesson-header">
+        <h1 class="lesson-title">{{ lesson_data.title }}</h1>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar" style="width: 20%"></div>
+        </div>
+        <div class="progress-text">
+            Question <span id="currentQuestion">1</span> of <span id="totalQuestions">{{ lesson_data.total_questions or 5 }}</span>
+        </div>
+    </div>
+
+    <!-- Study Technique Selector -->
+    <div class="study-technique-selector">
+        <button class="technique-btn active" onclick="switchTechnique('visual')" id="visualBtn">
+            👁️ Visual Learning
+        </button>
+        <button class="technique-btn" onclick="switchTechnique('auditory')" id="auditoryBtn">
+            👂 Auditory Learning
+        </button>
+        <button class="technique-btn" onclick="switchTechnique('kinesthetic')" id="kinestheticBtn">
+            ✋ Hands-On Learning
+        </button>
+        <button class="technique-btn" onclick="switchTechnique('logical')" id="logicalBtn">
+            🧠 Logical Learning
+        </button>
+    </div>
+
+    <!-- Question Content -->
+    <div class="question-card" id="questionCard">
+        <!-- Visual Learning Content -->
+        <div class="study-technique-content active" id="visualContent">
+            <div class="question-number" id="questionNumber">1</div>
+            <h2 class="question-title" id="questionTitle">Loading Question...</h2>
+            
+            <div class="instruction-box">
+                <div class="instruction-text" id="instructionText">Loading instruction...</div>
+            </div>
+            
+            <div class="task-box">
+                <div class="task-text" id="taskText">Loading task...</div>
+            </div>
+            
+            <div class="visual-element">
+                <div class="visual-content" id="visualElement">🎯</div>
+                <div class="visual-description" id="visualDescription">Interactive visual element</div>
+            </div>
+            
+            <div class="answer-section">
+                <div id="answerText">✅ Expected Answer: Loading...</div>
+            </div>
+        </div>
+
+        <!-- Auditory Learning Content -->
+        <div class="study-technique-content" id="auditoryContent">
+            <div class="question-number">🔊</div>
+            <h2 class="question-title">Listen and Learn</h2>
+            
+            <div class="instruction-box">
+                <div class="instruction-text">Listen carefully to the audio explanation and follow along!</div>
+            </div>
+            
+            <div class="task-box">
+                <div class="task-text">🎵 Audio lesson with spoken instructions and examples</div>
+            </div>
+            
+            <div class="visual-element">
+                <div class="visual-content">🎧</div>
+                <div class="visual-description">Audio controls will appear here</div>
+            </div>
+            
+            <div class="answer-section">
+                ✅ Listen to the complete explanation and repeat the answer out loud!
+            </div>
+        </div>
+
+        <!-- Kinesthetic Learning Content -->
+        <div class="study-technique-content" id="kinestheticContent">
+            <div class="question-number">✋</div>
+            <h2 class="question-title">Hands-On Learning</h2>
+            
+            <div class="instruction-box">
+                <div class="instruction-text">Use your hands, move around, and physically interact with the problem!</div>
+            </div>
+            
+            <div class="task-box">
+                <div class="task-text">🏃‍♀️ Physical activity and hands-on exploration</div>
+            </div>
+            
+            <div class="visual-element">
+                <div class="visual-content">🤲</div>
+                <div class="visual-description">Interactive hands-on activities</div>
+            </div>
+            
+            <div class="answer-section">
+                ✅ Complete the physical activity and demonstrate your understanding!
+            </div>
+        </div>
+
+        <!-- Logical Learning Content -->
+        <div class="study-technique-content" id="logicalContent">
+            <div class="question-number">🧠</div>
+            <h2 class="question-title">Step-by-Step Logic</h2>
+            
+            <div class="instruction-box">
+                <div class="instruction-text">Follow the logical steps and understand the reasoning behind each solution!</div>
+            </div>
+            
+            <div class="task-box">
+                <div class="task-text">📝 Systematic problem-solving approach</div>
+            </div>
+            
+            <div class="visual-element">
+                <div class="visual-content">🔍</div>
+                <div class="visual-description">Step-by-step logical breakdown</div>
+            </div>
+            
+            <div class="answer-section">
+                ✅ Explain each step in your own words to show understanding!
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="navigation-buttons">
+        <button class="nav-btn" onclick="previousQuestion()" id="prevBtn" disabled>
+            ⬅️ Previous Question
+        </button>
+        
+        <div style="text-align: center;">
+            <span style="color: #636e72; font-weight: bold;">
+                Question <span id="navCurrentQuestion">1</span> of <span id="navTotalQuestions">{{ lesson_data.total_questions or 5 }}</span>
+            </span>
+        </div>
+        
+        <button class="nav-btn next-btn" onclick="nextQuestion()" id="nextBtn">
+            Next Question ➡️
+        </button>
+    </div>
+</div>
+
+<script>
+// Lesson Navigation and Study Techniques
+let currentQuestionIndex = 0;
+let currentTechnique = 'visual';
+let totalQuestions = {{ lesson_data.total_questions or 5 }};
+let lessonData = {{ lesson_data.examples | tojson }};
+
+function updateQuestion() {
+    const question = lessonData[currentQuestionIndex];
+    if (!question) return;
+    
+    // Update question content
+    document.getElementById('questionNumber').textContent = currentQuestionIndex + 1;
+    document.getElementById('questionTitle').textContent = question.title;
+    document.getElementById('instructionText').textContent = question.instruction;
+    document.getElementById('taskText').textContent = question.task;
+    document.getElementById('visualDescription').textContent = question.visual_aid;
+    document.getElementById('answerText').textContent = '✅ ' + question.expected_answer;
+    
+    // Update visual element based on content
+    updateVisualElement(question);
+    
+    // Update progress
+    updateProgress();
+    
+    // Update navigation
+    updateNavigation();
+}
+
+function updateVisualElement(question) {
+    const visualElement = document.getElementById('visualElement');
+    const task = question.task.toLowerCase();
+    
+    if (task.includes('apple')) {
+        visualElement.innerHTML = '🍎🍎🍎 + 🍏🍏 = ?';
+    } else if (task.includes('cow')) {
+        visualElement.innerHTML = '🐄🐄🐄🐄🐄';
+    } else if (task.includes('finger')) {
+        visualElement.innerHTML = '✋ 👆👆👆👆';
+    } else if (task.includes('balloon')) {
+        visualElement.innerHTML = '🎈🎈🎈🎈🎈';
+    } else if (task.includes('clock') || task.includes('time')) {
+        visualElement.innerHTML = '🕐 8:00';
+    } else if (task.includes('pizza')) {
+        visualElement.innerHTML = '🍕 = 1/2';
+    } else if (task.includes('coin') || task.includes('money')) {
+        visualElement.innerHTML = '🪙🪙🪙 = ?p';
+    } else if (task.includes('ruler') || task.includes('measure')) {
+        visualElement.innerHTML = '📏 ___ cm';
+    } else if (task.includes('balance') || task.includes('weight')) {
+        visualElement.innerHTML = '⚖️ ??? vs ???';
+    } else if (task.includes('shape')) {
+        visualElement.innerHTML = '⭕🔺🟦';
+    } else {
+        visualElement.innerHTML = '🎯';
+    }
+}
+
+function updateProgress() {
+    const progressPercent = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+    document.getElementById('progressBar').style.width = progressPercent + '%';
+    
+    document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+    document.getElementById('navCurrentQuestion').textContent = currentQuestionIndex + 1;
+}
+
+function updateNavigation() {
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    
+    prevBtn.disabled = currentQuestionIndex === 0;
+    
+    if (currentQuestionIndex === totalQuestions - 1) {
+        nextBtn.textContent = '🎉 Complete Lesson';
+        nextBtn.onclick = completeLesson;
+    } else {
+        nextBtn.textContent = 'Next Question ➡️';
+        nextBtn.onclick = nextQuestion;
+    }
+}
+
+function nextQuestion() {
+    if (currentQuestionIndex < totalQuestions - 1) {
+        currentQuestionIndex++;
+        updateQuestion();
+    }
+}
+
+function previousQuestion() {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        updateQuestion();
+    }
+}
+
+function completeLesson() {
+    alert('🎉 Congratulations! You\'ve completed this lesson! Well done!');
+    // Could redirect to next lesson or dashboard
+    window.location.href = '/curriculum_topics?subject=maths&level=primary';
+}
+
+function switchTechnique(technique) {
+    // Hide all technique content
+    document.querySelectorAll('.study-technique-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    // Remove active class from all buttons
+    document.querySelectorAll('.technique-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Show selected technique content
+    document.getElementById(technique + 'Content').classList.add('active');
+    document.getElementById(technique + 'Btn').classList.add('active');
+    
+    currentTechnique = technique;
+}
+
+// Initialize the lesson
+document.addEventListener('DOMContentLoaded', function() {
+    updateQuestion();
+});
+</script>
+
+{% endblock %}

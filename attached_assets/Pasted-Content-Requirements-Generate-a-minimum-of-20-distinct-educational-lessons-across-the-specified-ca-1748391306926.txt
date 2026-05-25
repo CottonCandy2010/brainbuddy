@@ -1,0 +1,173 @@
+Content Requirements:
+
+Generate a minimum of 20 distinct educational lessons across the specified categories.
+For each lesson:
+Provide a clear, child-friendly 'Lesson Title'.
+A concise 'Explanation' of the concept.
+A specific 'Interactive Activity / Game Suggestion'.
+A simple 'Example' with an answer.
+A 'Practice Question' for the student.
+A suggestion for a 'Visual Aid'.
+Language Style: Use very simple, encouraging, and positive language. Avoid jargon.
+Progression: Ensure 'easy' lessons are foundational, and 'medium' lessons build upon them.
+Detailed Content for Brain Buddy App Folders (Ages 6-8 - Maths Focus):
+🔢 Counting and Numbers (Easy)
+Lesson 1: Counting to 10
+
+Explanation: "Let's count! Numbers tell us how many things we have. We'll start by counting from 1 to 10."
+Interactive Activity / Game Suggestion: "Bubble Pop Count: Pop bubbles with numbers 1-10 in order."
+Example: "Count the balloons: 1, 2, 3, 4, 5, 6. There are 6 balloons!"
+Practice Question: "How many ducks are in the pond? (Image: 8 ducks)"
+Visual Aid: Image of a number line 1-10 with corresponding quantities of objects.
+Lesson 2: Number Recognition to 20
+
+Explanation: "Can you spot the numbers? We'll learn what numbers 1 to 20 look like and what they mean."
+Interactive Activity / Game Suggestion: "Number Match: Match the numeral (e.g., '12') to the word ('twelve')."
+Example: "This is the number 15. (Image: Large numeral '15')"
+Practice Question: "Which number is this? (Image: Large numeral '7')"
+Visual Aid: Flashcards showing numerals 1-20.
+Lesson 3: Counting in 1s, 2s, 5s, and 10s
+
+Explanation: "Counting can be super speedy! We can count in steps, like counting by 2s or 10s."
+Interactive Activity / Game Suggestion: "Skip Count Hop: Hop on a number line, counting in 2s (2, 4, 6...). "
+Example: "Counting in 5s: 5, 10, 15, 20."
+Practice Question: "What comes next when counting in 10s? 10, 20, 30, ?"
+Visual Aid: Animated characters skipping on a number line.
+Lesson 4: Before, After, and Between (Numbers to 20)
+
+Explanation: "Numbers have neighbours! Some numbers come before, some come after, and some are in between."
+Interactive Activity / Game Suggestion: "Missing Number Bridge: Fill in the number that comes before, after, or between."
+Example: "What comes after 8? (Answer: 9)"
+Practice Question: "What number is between 12 and 14?"
+Visual Aid: Three houses with numbers, showing which one is "before," "after," or "in between."
+Lesson 5: Place Value (Tens and Ones to 20)
+
+Explanation: "Big numbers are made of smaller groups! 'Place value' tells us how many groups of 10 and how many single ones a number has."
+Interactive Activity / Game Suggestion: "Build a Number: Drag 'ten' sticks and 'one' blocks to make a number (e.g., for 14, drag one 'ten' stick and four 'one' blocks)."
+Example: "The number 17 is 1 ten and 7 ones. (Image: 1 bundle of 10 sticks and 7 loose sticks)"
+Practice Question: "How many tens and ones are in 13?"
+Visual Aid: Image of a tens frame filled with 10 dots, and loose dots for ones.
+➕ Adding and Subtracting (Easy)
+Lesson 6: Adding with Objects (to 10)
+
+Explanation: "Adding means putting groups together to find the total! Let's use our toys to help us."
+Interactive Activity / Game Suggestion: "Toy Collector: Drag 3 red cars and 2 blue cars into a box. How many now?"
+Example: "4 stars + 3 stars = 7 stars."
+Practice Question: "You have 5 apples. Your friend gives you 3 more. How many do you have now?"
+Visual Aid: Simple cartoon drawing of objects being combined.
+Lesson 7: Subtracting by Taking Away (to 10)
+
+Explanation: "Subtracting means taking some away! How many are left?"
+Interactive Activity / Game Suggestion: "Cookie Muncher: Start with 7 cookies. Click to 'eat' 3. How many are left?"
+Example: "8 birds - 2 birds = 6 birds."
+Practice Question: "There are 9 flowers. You pick 4. How many are left?"
+Visual Aid: Animated scene of objects disappearing from a group.
+Lesson 8: Number Bonds to 10
+
+Explanation: "Number bonds are pairs of numbers that add up to a special total, like 10! Knowing these helps us add fast."
+Interactive Activity / Game Suggestion: "Number Bond Pairs: Match the numbers that make 10 (e.g., 3 to 7)."
+Example: "7 + 3 = 10."
+Practice Question: "What number goes with 4 to make 10?"
+Visual Aid: Ten frames with dots filling up.
+Lesson 9: Addition on a Number Line
+
+Explanation: "A number line helps us jump to find the answer! To add, we jump forwards."
+Interactive Activity / Game Suggestion: "Froggy Jumps: Drag a frog on a number line to show 5 + 3."
+Example: "To do 6 + 2, start at 6 and jump 2 times forwards. You land on 8."
+Practice Question: "Use the number line to find 7 + 3." (Image: Number line 0-10)
+Visual Aid: Animated jumps on a number line.
+Lesson 10: Subtraction on a Number Line
+
+Explanation: "To subtract on a number line, we jump backwards! How many jumps back did we make?"
+Interactive Activity / Game Suggestion: "Rabbit Hops Back: Drag a rabbit on a number line to show 9 - 4."
+Example: "To do 10 - 3, start at 10 and jump 3 times backwards. You land on 7."
+Practice Question: "Use the number line to find 8 - 5." (Image: Number line 0-10)
+Visual Aid: Animated backward jumps on a number line.
+🔷 Shapes and Patterns (Easy)
+Lesson 11: Recognising 2D Shapes
+
+Explanation: "Shapes are all around us! 2D shapes are flat, like a picture. Let's find circles, squares, triangles, and rectangles!"
+Interactive Activity / Game Suggestion: "Shape Sorter: Drag shapes into the correct bin (e.g., 'Square Bin')."
+Example: "A door is often a rectangle. (Image: Door)"
+Practice Question: "Which shape has three sides? (Image: A triangle, a circle, a square)"
+Visual Aid: Colourful cartoon representations of 2D shapes.
+Lesson 12: Recognising 3D Shapes
+
+Explanation: "3D shapes are 'fat' shapes, not flat! You can hold them. Like a ball is a sphere, and a box is a cube."
+Interactive Activity / Game Suggestion: "Spin and Name: Spin a 3D shape and guess its name."
+Example: "A dice is a cube. (Image: Dice)"
+Practice Question: "What 3D shape is a can of soup?"
+Visual Aid: Rotatable 3D models of cubes, spheres, cylinders, cones.
+Lesson 13: Making Simple Patterns
+
+Explanation: "Patterns are things that repeat! Like red, blue, red, blue. Can you spot the rule?"
+Interactive Activity / Game Suggestion: "Pattern Builder: Drag and drop coloured blocks to complete an ABAB or ABCABC pattern."
+Example: "Circle, Square, Circle, Square, Circle, ____ (Answer: Square)"
+Practice Question: "What comes next in this pattern? Apple, Banana, Apple, Banana, Apple, ____"
+Visual Aid: Animated repeating patterns.
+Lesson 14: Identifying Properties of 2D Shapes
+
+Explanation: "Shapes have special parts! 'Sides' are the straight lines, and 'vertices' (corners) are the pointy bits where sides meet."
+Interactive Activity / Game Suggestion: "Shape Explorer: Click on a shape, and it highlights its sides and vertices."
+Example: "A triangle has 3 sides and 3 vertices."
+Practice Question: "How many sides does a square have?"
+Visual Aid: Animated highlights of sides and vertices on different 2D shapes.
+🕐 Time and Clocks (Medium)
+Lesson 15: Telling Time to the Hour (O'clock)
+
+Explanation: "Clocks help us know when things happen! When the big hand points to 12, it's 'o'clock'."
+Interactive Activity / Game Suggestion: "Set the Clock: Drag the clock hands to show 4 o'clock."
+Example: "This clock shows 2 o'clock. (Image: Clock showing 2:00)"
+Practice Question: "What time is it? (Image: Clock showing 7:00)"
+Visual Aid: Analog clock faces with clear hour and minute hands.
+Lesson 16: Telling Time to Half Past
+
+Explanation: "When the big hand points to the 6, it means 'half past' the hour."
+Interactive Activity / Game Suggestion: "Time Match: Match the analog clock to the digital time (e.g., 3:30)."
+Example: "This clock shows half past 1. (Image: Clock showing 1:30)"
+Practice Question: "Draw the hands to show half past 5."
+Visual Aid: Analog clocks demonstrating half-hour positions.
+💰 Money and Coins (Medium)
+Lesson 17: Recognizing UK Coins
+
+Explanation: "Money helps us buy things! Let's learn to spot all the different UK coins and what they are worth."
+Interactive Activity / Game Suggestion: "Coin Sorter: Drag coins into bins labelled 1p, 2p, 5p, etc."
+Example: "This is a 10p coin. (Image: 10p coin)"
+Practice Question: "Which coin is worth the most? (Image: 5p, 10p, 2p coins)"
+Visual Aid: Clear, high-resolution images of UK coins (front and back).
+Lesson 18: Counting Small Amounts of Money
+
+Explanation: "Let's count how much money we have! We can add the value of the coins together."
+Interactive Activity / Game Suggestion: "Coin Calculator: Drag coins into a box, and the total value appears."
+Example: "A 5p coin and a 2p coin is 7p. (Image: 5p and 2p coins)"
+Practice Question: "How much money is this? (Image: 10p, 5p, 1p coins)"
+Visual Aid: Groups of coins with their total value shown.
+📏 Measurement Fun (Medium)
+Lesson 19: Comparing Length (Longer/Shorter)
+
+Explanation: "Length tells us how long something is. We can compare objects to see which is longer or shorter."
+Interactive Activity / Game Suggestion: "Ordering Objects: Drag and arrange objects from shortest to longest."
+Example: "The snake is longer than the worm. (Image: Snake and worm side-by-side)"
+Practice Question: "Which pencil is shorter? (Image: Two pencils of different lengths)"
+Visual Aid: Animated comparison of objects changing length.
+Lesson 20: Measuring with Non-Standard Units
+
+Explanation: "We can measure using anything! How many paperclips long is your book? How many handprints long is your table?"
+Interactive Activity / Game Suggestion: "Virtual Ruler: Drag virtual paperclips to measure a line."
+Example: "This desk is 5 handprints long."
+Practice Question: "How many blocks long is this crayon? (Image: Crayon next to building blocks)"
+Visual Aid: Objects next to common non-standard measurement tools (e.g., footsteps, blocks).
+Lesson 21: Comparing Weight (Heavier/Lighter)
+
+Explanation: "Weight tells us how heavy something is. We can lift things to feel which is heavier or lighter."
+Interactive Activity / Game Suggestion: "Balance Scale: Drag two objects onto a virtual balance scale to see which is heavier."
+Example: "An elephant is much heavier than a mouse. (Image: Elephant and mouse)"
+Practice Question: "Is a feather heavier or lighter than a stone?"
+Visual Aid: Simple balance scale with different objects.
+Lesson 22: Comparing Volume/Capacity (Fuller/Empty)
+
+Explanation: "Capacity tells us how much a container can hold. Is the cup full or empty? Which bottle holds more water?"
+Interactive Activity / Game Suggestion: "Pouring Game: Pour water between different sized containers to see which holds more."
+Example: "This big jug can hold more water than this small cup. (Image: Large jug and small cup)"
+Practice Question: "Which glass is fuller? (Image: Two glasses, one half-full, one nearly full)"
+Visual Aid: Containers with varying liquid levels.

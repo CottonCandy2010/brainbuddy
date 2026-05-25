@@ -1,0 +1,78 @@
+<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#333">Visual Guide to Fractions</text>
+  
+  <!-- 1/2 Section -->
+  <g transform="translate(50, 100)">
+    <!-- Whole circle reference -->
+    <circle cx="100" cy="100" r="80" fill="none" stroke="#ccc" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="100" y="200" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#666">1 whole</text>
+    
+    <!-- Half circle -->
+    <path d="M 100 20 A 80 80 0 0 1 100 180 L 100 100 Z" fill="#ff6b6b" stroke="#333" stroke-width="2"/>
+    <path d="M 100 20 A 80 80 0 0 0 100 180 L 100 100 Z" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+    
+    <!-- Labels -->
+    <text x="70" y="100" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#fff">1/2</text>
+    <text x="100" y="240" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">One Half</text>
+  </g>
+  
+  <!-- 1/4 Section -->
+  <g transform="translate(300, 100)">
+    <!-- Whole circle reference -->
+    <circle cx="100" cy="100" r="80" fill="none" stroke="#ccc" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="100" y="200" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#666">1 whole</text>
+    
+    <!-- Quarter circle -->
+    <path d="M 100 20 A 80 80 0 0 1 180 100 L 100 100 Z" fill="#4ecdc4" stroke="#333" stroke-width="2"/>
+    <path d="M 100 20 A 80 80 0 0 0 20 100 L 100 100 Z" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+    <path d="M 100 180 A 80 80 0 0 0 180 100 L 100 100 Z" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+    <path d="M 100 180 A 80 80 0 0 1 20 100 L 100 100 Z" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+    
+    <!-- Labels -->
+    <text x="140" y="60" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#fff">1/4</text>
+    <text x="100" y="240" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">One Quarter</text>
+  </g>
+  
+  <!-- 3/4 Section -->
+  <g transform="translate(550, 100)">
+    <!-- Whole circle reference -->
+    <circle cx="100" cy="100" r="80" fill="none" stroke="#ccc" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="100" y="200" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#666">1 whole</text>
+    
+    <!-- Three-quarters circle -->
+    <path d="M 100 20 A 80 80 0 0 1 180 100 L 100 100 Z" fill="#ffd166" stroke="#333" stroke-width="2"/>
+    <path d="M 100 20 A 80 80 0 0 0 20 100 L 100 100 Z" fill="#ffd166" stroke="#333" stroke-width="2"/>
+    <path d="M 100 180 A 80 80 0 0 0 180 100 L 100 100 Z" fill="#ffd166" stroke="#333" stroke-width="2"/>
+    <path d="M 100 180 A 80 80 0 0 1 20 100 L 100 100 Z" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+    
+    <!-- Labels -->
+    <text x="100" y="100" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#333">3/4</text>
+    <text x="100" y="240" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Three Quarters</text>
+  </g>
+  
+  <!-- Fraction Bar Representation -->
+  <g transform="translate(100, 350)">
+    <text x="300" y="0" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#333">Fraction Bars</text>
+    
+    <!-- Whole bar -->
+    <rect x="0" y="20" width="600" height="30" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+    <text x="300" y="40" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#333">1 whole</text>
+    
+    <!-- Half bars -->
+    <rect x="0" y="70" width="300" height="30" fill="#ff6b6b" stroke="#333" stroke-width="2"/>
+    <rect x="300" y="70" width="300" height="30" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+    <text x="150" y="90" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#fff">1/2</text>
+    <text x="450" y="90" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#333">1/2</text>
+    
+    <!-- Quarter bars -->
+    <rect x="0" y="120" width="150" height="30" fill="#4ecdc4" stroke="#333" stroke-width="2"/>
+    <rect x="150" y="120" width="150" height="30" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+    <rect x="300" y="120" width="150" height="30" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+    <rect x="450" y="120" width="150" height="30" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+    <text x="75" y="140" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#fff">1/4</text>
+    <text x="225" y="140" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#333">1/4</text>
+    <text x="375" y="140" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#333">1/4</text>
+    <text x="525" y="140" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#333">1/4</text>
+  </g>
+</svg>

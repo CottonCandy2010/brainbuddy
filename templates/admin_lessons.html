@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="content-card">
+                <h2 class="mb-4"><i class="fas fa-database text-primary me-2"></i>Lesson Generation System</h2>
+                
+                <div class="alert alert-info">
+                    <h5><i class="fas fa-info-circle me-2"></i>Firebase Firestore Integration</h5>
+                    <p>This system will generate comprehensive lessons for all subjects and learning styles, then store them in Firebase Firestore for fast retrieval.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h4>What This Will Generate:</h4>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">📚 <strong>8 Subjects:</strong> Maths, Science, English, Computing, History, Geography, Art, Music</li>
+                        <li class="list-group-item">🎯 <strong>7 Learning Styles:</strong> Visual, Verbal, Auditory, Physical, Logical, Social, Solitary</li>
+                        <li class="list-group-item">📖 <strong>50+ Topics:</strong> Age-appropriate content for secondary school students</li>
+                        <li class="list-group-item">🔧 <strong>Multiple Levels:</strong> Beginner and Intermediate difficulty</li>
+                    </ul>
+                </div>
+                
+                <div class="alert alert-warning">
+                    <h5><i class="fas fa-exclamation-triangle me-2"></i>Important Notes:</h5>
+                    <ul class="mb-0">
+                        <li>This will make multiple OpenAI API calls (monitor your usage)</li>
+                        <li>Generation process may take 10-15 minutes</li>
+                        <li>Lessons will be stored in your Firebase Firestore database</li>
+                        <li>Run this only when you want to populate your lesson library</li>
+                    </ul>
+                </div>
+                
+                <div class="text-center">
+                    <button id="testFirebaseBtn" class="btn btn-brain-buddy me-3">
+                        <i class="fas fa-plug me-2"></i>Test Firebase Connection
+                    </button>
+                    
+                    <button id="generateLessonsBtn" class="btn btn-success">
+                        <i class="fas fa-magic me-2"></i>Generate All Lessons
+                    </button>
+                </div>
+                
+                <div id="statusDiv" class="mt-4" style="display: none;">
+                    <div class="alert alert-info">
+                        <div id="statusText">Testing connection...</div>
+                        <div class="progress mt-2" style="display: none;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('testFirebaseBtn').addEventListener('click', function() {
+    const statusDiv = document.getElementById('statusDiv');
+    const statusText = document.getElementById('statusText');
+    
+    statusDiv.style.display = 'block';
+    statusText.textContent = 'Testing Firebase connection...';
+    
+    fetch('/api/test-firebase')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                statusText.innerHTML = '<i class="fas fa-check text-success me-2"></i>Firebase connection successful! Ready to generate lessons.';
+            } else {
+                statusText.innerHTML = '<i class="fas fa-times text-danger me-2"></i>Firebase connection failed: ' + data.error;
+            }
+        })
+        .catch(error => {
+            statusText.innerHTML = '<i class="fas fa-times text-danger me-2"></i>Error testing connection: ' + error;
+        });
+});
+
+document.getElementById('generateLessonsBtn').addEventListener('click', function() {
+    if (confirm('This will generate 50+ lessons using OpenAI API. This may take time and use API credits. Continue?')) {
+        const statusDiv = document.getElementById('statusDiv');
+        const statusText = document.getElementById('statusText');
+        
+        statusDiv.style.display = 'block';
+        statusText.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Starting lesson generation... This may take 10-15 minutes.';
+        
+        this.disabled = true;
+        
+        fetch('/api/generate-lessons', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    statusText.innerHTML = '<i class="fas fa-check text-success me-2"></i>Lesson generation completed successfully!';
+                } else {
+                    statusText.innerHTML = '<i class="fas fa-times text-danger me-2"></i>Generation failed: ' + data.error;
+                }
+                this.disabled = false;
+            })
+            .catch(error => {
+                statusText.innerHTML = '<i class="fas fa-times text-danger me-2"></i>Error during generation: ' + error;
+                this.disabled = false;
+            });
+    }
+});
+</script>
+{% endblock %}

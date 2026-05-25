@@ -1,0 +1,396 @@
+{% extends "layout.html" %}
+
+{% block title %}Welcome to Brain Buddy!{% endblock %}
+
+{% block content %}
+<section class="onboarding-container">
+    <!-- Step 1: Welcome Animation -->
+    <div class="onboarding-step active" id="step1">
+        <div class="welcome-animation">
+            <div class="brain-buddy-intro">
+                <img src="{{ url_for('static', filename='images/brain_buddy_logo.png') }}" 
+                     alt="Brain Buddy" class="buddy-mascot bounce-in">
+                <div class="speech-bubble appear-delayed">
+                    <div class="bubble-text">
+                        <h2>Hi there! I'm Brain Buddy! 🧠✨</h2>
+                        <p>I'm here to make learning super fun and personalized just for you!</p>
+                    </div>
+                    <div class="bubble-pointer"></div>
+                </div>
+            </div>
+            
+            <div class="welcome-content fade-in-delayed">
+                <h1 class="welcome-title">Welcome to Your Learning Adventure!</h1>
+                <p class="welcome-subtitle">Let's discover how you learn best and create amazing lessons together!</p>
+                <button class="btn btn-primary btn-lg next-btn pulse-button" data-next="step2">
+                    <i class="fas fa-rocket me-2"></i>Let's Start!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 2: Learning Styles Introduction -->
+    <div class="onboarding-step" id="step2">
+        <div class="learning-styles-intro">
+            <div class="brain-buddy-guide">
+                <img src="{{ url_for('static', filename='images/brain_buddy_logo.png') }}" 
+                     alt="Brain Buddy" class="buddy-guide floating">
+                <div class="guide-speech">
+                    <h3>Everyone learns differently!</h3>
+                    <p>I'll help you discover your unique learning superpowers!</p>
+                </div>
+            </div>
+            
+            <div class="learning-styles-showcase">
+                <h2 class="section-title">Discover Your Learning Style</h2>
+                <div class="styles-grid">
+                    <div class="style-card visual-style slide-in" style="--delay: 0.2s">
+                        <div class="style-icon">👁️</div>
+                        <h4>Visual</h4>
+                        <p>Learn with colorful diagrams and pictures</p>
+                    </div>
+                    <div class="style-card auditory-style slide-in" style="--delay: 0.4s">
+                        <div class="style-icon">🎧</div>
+                        <h4>Auditory</h4>
+                        <p>Learn through sounds and voices</p>
+                    </div>
+                    <div class="style-card physical-style slide-in" style="--delay: 0.6s">
+                        <div class="style-icon">🤲</div>
+                        <h4>Physical</h4>
+                        <p>Learn by doing and moving</p>
+                    </div>
+                    <div class="style-card logical-style slide-in" style="--delay: 0.8s">
+                        <div class="style-icon">🧮</div>
+                        <h4>Logical</h4>
+                        <p>Learn through patterns and reasoning</p>
+                    </div>
+                    <div class="style-card social-style slide-in" style="--delay: 1.0s">
+                        <div class="style-icon">👥</div>
+                        <h4>Social</h4>
+                        <p>Learn better with friends</p>
+                    </div>
+                    <div class="style-card solitary-style slide-in" style="--delay: 1.2s">
+                        <div class="style-icon">🧘</div>
+                        <h4>Solitary</h4>
+                        <p>Learn best when studying alone</p>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-lg next-btn" data-next="step3">
+                    <i class="fas fa-arrow-right me-2"></i>Amazing! What's Next?
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 3: Features Showcase -->
+    <div class="onboarding-step" id="step3">
+        <div class="features-showcase">
+            <div class="brain-buddy-excited">
+                <img src="{{ url_for('static', filename='images/brain_buddy_logo.png') }}" 
+                     alt="Brain Buddy" class="buddy-excited wiggle">
+                <div class="excited-speech">
+                    <h3>Look at all the cool things we can do together!</h3>
+                </div>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card curriculum-feature zoom-in" style="--delay: 0.3s">
+                    <div class="feature-icon">📚</div>
+                    <h4>Curriculum Index</h4>
+                    <p>Browse topics from Math to Modern Languages</p>
+                    <div class="feature-demo">
+                        <div class="mini-subjects">
+                            <span class="mini-subject">📐 Maths</span>
+                            <span class="mini-subject">🔬 Science</span>
+                            <span class="mini-subject">🌍 Languages</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card mood-feature zoom-in" style="--delay: 0.6s">
+                    <div class="feature-icon">😊</div>
+                    <h4>Mood-Based Learning</h4>
+                    <p>Study content that matches how you feel</p>
+                    <div class="feature-demo">
+                        <div class="mood-emojis">
+                            <span class="mood-emoji bounce">😊</span>
+                            <span class="mood-emoji bounce" style="--delay: 0.2s">🚀</span>
+                            <span class="mood-emoji bounce" style="--delay: 0.4s">😌</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card ai-feature zoom-in" style="--delay: 0.9s">
+                    <div class="feature-icon">🤖</div>
+                    <h4>AI Study Buddy</h4>
+                    <p>Get help and encouragement anytime</p>
+                    <div class="feature-demo">
+                        <div class="chat-preview">
+                            <div class="chat-bubble">How can I help you learn today?</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card progress-feature zoom-in" style="--delay: 1.2s">
+                    <div class="feature-icon">🏆</div>
+                    <h4>Progress Tracking</h4>
+                    <p>Earn points, badges, and build streaks</p>
+                    <div class="feature-demo">
+                        <div class="achievement-preview">
+                            <span class="mini-badge">🥇</span>
+                            <span class="points">+50 points!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary btn-lg next-btn" data-next="step4">
+                <i class="fas fa-star me-2"></i>This Looks Amazing!
+            </button>
+        </div>
+    </div>
+
+    <!-- Step 4: Age Setup -->
+    <div class="onboarding-step" id="step4">
+        <div class="age-setup-intro">
+            <div class="brain-buddy-ready">
+                <img src="{{ url_for('static', filename='images/brain_buddy_logo.png') }}" 
+                     alt="Brain Buddy" class="buddy-ready spin-gentle">
+                <div class="ready-speech">
+                    <h3>Almost ready! Just tell me your age so I can personalize everything perfectly!</h3>
+                </div>
+            </div>
+            
+            <div class="age-selection-fun">
+                <h2 class="final-title">Let's Personalize Your Experience!</h2>
+                <p class="final-subtitle">This helps me choose the perfect lessons for you</p>
+                
+                <div class="fun-age-buttons">
+                    <button class="fun-age-btn primary-btn" data-age="7">
+                        <div class="age-icon">🎨</div>
+                        <div class="age-text">
+                            <strong>Primary School</strong>
+                            <span>Ages 6-8</span>
+                        </div>
+                    </button>
+                    
+                    <button class="fun-age-btn highschool-btn" data-age="13">
+                        <div class="age-icon">🎓</div>
+                        <div class="age-text">
+                            <strong>High School</strong>
+                            <span>Ages 9-16</span>
+                        </div>
+                    </button>
+                    
+                    <button class="fun-age-btn college-btn" data-age="17">
+                        <div class="age-icon">🎯</div>
+                        <div class="age-text">
+                            <strong>College Prep</strong>
+                            <span>Ages 17-18</span>
+                        </div>
+                    </button>
+                </div>
+                
+                <div class="custom-age-input">
+                    <p>Or enter your exact age:</p>
+                    <div class="age-input-group">
+                        <input type="number" id="exactAge" placeholder="Your age" min="5" max="18" class="form-control age-input">
+                        <button class="btn btn-outline-primary" id="setExactAge">Set Age</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 5: Final Welcome -->
+    <div class="onboarding-step" id="step5">
+        <div class="final-welcome">
+            <div class="celebration-animation">
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+            </div>
+            
+            <div class="brain-buddy-celebration">
+                <img src="{{ url_for('static', filename='images/brain_buddy_logo.png') }}" 
+                     alt="Brain Buddy" class="buddy-celebrate jump-celebration">
+                <div class="celebration-speech">
+                    <h2>🎉 Welcome to the Brain Buddy family! 🎉</h2>
+                    <p>You're all set! Let's start your amazing learning journey!</p>
+                </div>
+            </div>
+            
+            <div class="final-actions">
+                <h3>Ready to explore?</h3>
+                <div class="action-buttons">
+                    <button class="btn btn-primary btn-lg start-learning" id="startLearning">
+                        <i class="fas fa-play me-2"></i>Start Learning Now!
+                    </button>
+                    <button class="btn btn-outline-secondary btn-lg" id="exploreFeatures">
+                        <i class="fas fa-compass me-2"></i>Explore Features First
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-steps">
+            <div class="step-dot active" data-step="1">1</div>
+            <div class="step-dot" data-step="2">2</div>
+            <div class="step-dot" data-step="3">3</div>
+            <div class="step-dot" data-step="4">4</div>
+            <div class="step-dot" data-step="5">5</div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let currentStep = 1;
+    const totalSteps = 5;
+    
+    // Initialize progress
+    updateProgress();
+    
+    // Handle next button clicks
+    document.querySelectorAll('.next-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const nextStep = this.dataset.next;
+            if (nextStep) {
+                goToStep(parseInt(nextStep.replace('step', '')));
+            }
+        });
+    });
+    
+    // Handle age selection
+    document.querySelectorAll('.fun-age-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const age = this.dataset.age;
+            selectAge(parseInt(age));
+            
+            // Highlight selected button
+            document.querySelectorAll('.fun-age-btn').forEach(b => b.classList.remove('selected'));
+            this.classList.add('selected');
+            
+            // Auto-advance to final step
+            setTimeout(() => {
+                goToStep(5);
+            }, 1000);
+        });
+    });
+    
+    // Handle exact age input
+    document.getElementById('setExactAge').addEventListener('click', function() {
+        const age = parseInt(document.getElementById('exactAge').value);
+        if (age && age >= 5 && age <= 18) {
+            selectAge(age);
+            setTimeout(() => {
+                goToStep(5);
+            }, 500);
+        }
+    });
+    
+    // Handle final actions
+    document.getElementById('startLearning').addEventListener('click', function() {
+        // Store onboarding completion
+        localStorage.setItem('onboardingCompleted', 'true');
+        // Go to subject selection
+        window.location.href = '/age-setup';
+    });
+    
+    document.getElementById('exploreFeatures').addEventListener('click', function() {
+        // Store onboarding completion
+        localStorage.setItem('onboardingCompleted', 'true');
+        // Go to main page
+        window.location.href = '/';
+    });
+    
+    function goToStep(stepNumber) {
+        // Hide current step
+        document.querySelectorAll('.onboarding-step').forEach(step => {
+            step.classList.remove('active');
+        });
+        
+        // Show new step
+        const newStep = document.getElementById(`step${stepNumber}`);
+        if (newStep) {
+            setTimeout(() => {
+                newStep.classList.add('active');
+                currentStep = stepNumber;
+                updateProgress();
+                
+                // Trigger animations for the new step
+                triggerStepAnimations(stepNumber);
+            }, 300);
+        }
+    }
+    
+    function updateProgress() {
+        const progressPercent = (currentStep / totalSteps) * 100;
+        document.getElementById('progressFill').style.width = progressPercent + '%';
+        
+        // Update step dots
+        document.querySelectorAll('.step-dot').forEach((dot, index) => {
+            if (index + 1 <= currentStep) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+    
+    function triggerStepAnimations(stepNumber) {
+        const step = document.getElementById(`step${stepNumber}`);
+        const animatedElements = step.querySelectorAll('[class*="slide-in"], [class*="zoom-in"], [class*="fade-in"]');
+        
+        animatedElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.classList.add('animated');
+            }, index * 200);
+        });
+    }
+    
+    function selectAge(age) {
+        // Store age information
+        localStorage.setItem('studentAge', age);
+        
+        // Determine age group
+        let ageGroup;
+        if (age >= 5 && age <= 8) ageGroup = 'primary';
+        else if (age >= 9 && age <= 16) ageGroup = 'highschool';
+        else if (age >= 17 && age <= 18) ageGroup = 'college';
+        
+        localStorage.setItem('ageGroup', ageGroup);
+        
+        // Show selection feedback
+        showAgeConfirmation(age, ageGroup);
+    }
+    
+    function showAgeConfirmation(age, ageGroup) {
+        const buddy = document.querySelector('.buddy-ready');
+        const speech = document.querySelector('.ready-speech h3');
+        
+        buddy.classList.add('excited-bounce');
+        speech.textContent = `Perfect! I've personalized everything for a ${age}-year-old ${ageGroup} student! 🎯`;
+        
+        setTimeout(() => {
+            buddy.classList.remove('excited-bounce');
+        }, 1000);
+    }
+    
+    // Auto-start animations when page loads
+    setTimeout(() => {
+        triggerStepAnimations(1);
+    }, 500);
+});
+</script>
+{% endblock %}

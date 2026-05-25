@@ -1,0 +1,60 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Brain Buddy Logo with Soft Blue Theme -->
+  
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="90" fill="#F0F8FF" stroke="#B0D4FF" stroke-width="3"/>
+  
+  <!-- Floating Elements (Books/Knowledge) -->
+  <rect x="30" y="40" width="8" height="12" fill="#87CEEB" opacity="0.7" rx="1" transform="rotate(15 34 46)"/>
+  <rect x="50" y="30" width="10" height="14" fill="#B0E0E6" opacity="0.7" rx="1" transform="rotate(-10 55 37)"/>
+  <rect x="160" y="50" width="8" height="12" fill="#87CEEB" opacity="0.7" rx="1" transform="rotate(20 164 56)"/>
+  <rect x="170" y="70" width="10" height="14" fill="#B0E0E6" opacity="0.7" rx="1" transform="rotate(-15 175 77)"/>
+  
+  <!-- Main Brain Shape -->
+  <ellipse cx="100" cy="95" rx="60" ry="50" fill="#FFB6C1" stroke="#FF91A4" stroke-width="2"/>
+  
+  <!-- Brain Texture Lines -->
+  <path d="M60,85 C75,70 85,100 100,85 C115,70 130,100 140,85" 
+        fill="none" stroke="#FF91A4" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <path d="M60,105 C75,90 85,120 100,105 C115,90 130,120 140,105" 
+        fill="none" stroke="#FF91A4" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  
+  <!-- Brain Stem -->
+  <ellipse cx="100" cy="140" rx="12" ry="20" fill="#FFB6C1" stroke="#FF91A4" stroke-width="2"/>
+  
+  <!-- Graduation Cap -->
+  <!-- Cap Base -->
+  <ellipse cx="100" cy="60" rx="35" ry="8" fill="#4682B4"/>
+  <!-- Cap Top -->
+  <path d="M65,60 Q100,40 135,60 Q100,50 65,60" fill="#4682B4"/>
+  <!-- Tassel -->
+  <line x1="120" y1="50" x2="125" y2="65" stroke="#FFD700" stroke-width="2"/>
+  <circle cx="125" cy="65" r="3" fill="#FFD700"/>
+  
+  <!-- Happy Eyes -->
+  <circle cx="85" cy="80" r="6" fill="white" stroke="#4682B4" stroke-width="1"/>
+  <circle cx="115" cy="80" r="6" fill="white" stroke="#4682B4" stroke-width="1"/>
+  <circle cx="85" cy="80" r="3" fill="#4682B4"/>
+  <circle cx="115" cy="80" r="3" fill="#4682B4"/>
+  
+  <!-- Eye Highlights -->
+  <circle cx="86" cy="78" r="1" fill="white"/>
+  <circle cx="116" cy="78" r="1" fill="white"/>
+  
+  <!-- Happy Smile -->
+  <path d="M85,105 Q100,120 115,105" fill="none" stroke="#4682B4" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Rosy Cheeks -->
+  <circle cx="70" cy="100" r="5" fill="#FFB6C1" opacity="0.6"/>
+  <circle cx="130" cy="100" r="5" fill="#FFB6C1" opacity="0.6"/>
+  
+  <!-- Sparkles/Stars around -->
+  <g fill="#87CEEB" opacity="0.8">
+    <polygon points="40,120 41,124 45,124 42,126 43,130 40,128 37,130 38,126 35,124 39,124"/>
+    <polygon points="160,120 161,123 164,123 162,125 163,128 160,126 157,128 158,125 156,123 159,123"/>
+    <polygon points="170,140 171,142 173,142 172,143 172.5,145 170,144 167.5,145 168,143 167,142 169,142"/>
+  </g>
+  
+  <!-- Title Text -->
+  <text x="100" y="185" font-family="'Quicksand', 'Nunito', sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#4682B4">Brain Buddy</text>
+</svg>

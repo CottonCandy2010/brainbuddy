@@ -1,0 +1,66 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="90" fill="#F0F8FF" stroke="#87CEEB" stroke-width="3"/>
+  
+  <!-- Main Brain Shape (Pink) -->
+  <ellipse cx="100" cy="105" rx="55" ry="45" fill="#FFB6C1" stroke="#FF91A4" stroke-width="2"/>
+  
+  <!-- Brain Texture/Segments -->
+  <path d="M65,90 C75,85 85,95 90,90 C95,85 105,95 110,90 C115,85 125,95 135,90" 
+        fill="none" stroke="#FF91A4" stroke-width="2" stroke-linecap="round"/>
+  <path d="M65,105 C75,100 85,110 90,105 C95,100 105,110 110,105 C115,100 125,110 135,105" 
+        fill="none" stroke="#FF91A4" stroke-width="2" stroke-linecap="round"/>
+  <path d="M65,120 C75,115 85,125 90,120 C95,115 105,125 110,120 C115,115 125,125 135,120" 
+        fill="none" stroke="#FF91A4" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Brain Stem -->
+  <ellipse cx="100" cy="145" rx="8" ry="15" fill="#FFB6C1" stroke="#FF91A4" stroke-width="2"/>
+  
+  <!-- Graduation Cap -->
+  <!-- Cap Base (Dark Blue) -->
+  <ellipse cx="100" cy="70" rx="30" ry="6" fill="#2F4F4F"/>
+  <!-- Cap Top -->
+  <path d="M70,70 Q100,55 130,70 Q100,60 70,70" fill="#2F4F4F"/>
+  <!-- Tassel (Golden Yellow) -->
+  <line x1="115" y1="60" x2="120" y2="75" stroke="#FFD700" stroke-width="2"/>
+  <circle cx="120" cy="75" r="2" fill="#FFD700"/>
+  
+  <!-- Eyes (Large and Expressive) -->
+  <ellipse cx="88" cy="95" rx="8" ry="10" fill="white" stroke="#2F4F4F" stroke-width="1"/>
+  <ellipse cx="112" cy="95" rx="8" ry="10" fill="white" stroke="#2F4F4F" stroke-width="1"/>
+  <!-- Pupils -->
+  <circle cx="88" cy="95" r="4" fill="#2F4F4F"/>
+  <circle cx="112" cy="95" r="4" fill="#2F4F4F"/>
+  <!-- Eye Highlights -->
+  <circle cx="90" cy="93" r="1.5" fill="white"/>
+  <circle cx="114" cy="93" r="1.5" fill="white"/>
+  
+  <!-- Happy Smile -->
+  <path d="M85,115 Q100,125 115,115" fill="none" stroke="#2F4F4F" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Rosy Cheeks -->
+  <circle cx="70" cy="110" r="4" fill="#FFB6C1" opacity="0.8"/>
+  <circle cx="130" cy="110" r="4" fill="#FFB6C1" opacity="0.8"/>
+  
+  <!-- Floating Knowledge Elements (Books/Papers) -->
+  <!-- Top Left -->
+  <rect x="35" y="40" width="6" height="8" fill="#87CEEB" rx="1" transform="rotate(15 38 44)"/>
+  <rect x="25" y="50" width="8" height="10" fill="#B0E0E6" rx="1" transform="rotate(-10 29 55)"/>
+  <rect x="40" y="30" width="5" height="7" fill="#98FB98" rx="1" transform="rotate(25 42.5 33.5)"/>
+  
+  <!-- Top Right -->
+  <rect x="160" y="45" width="6" height="8" fill="#87CEEB" rx="1" transform="rotate(-15 163 49)"/>
+  <rect x="170" y="35" width="8" height="10" fill="#B0E0E6" rx="1" transform="rotate(10 174 40)"/>
+  <rect x="155" y="60" width="5" height="7" fill="#98FB98" rx="1" transform="rotate(-25 157.5 63.5)"/>
+  
+  <!-- Bottom Left -->
+  <rect x="30" y="160" width="6" height="8" fill="#87CEEB" rx="1" transform="rotate(20 33 164)"/>
+  <rect x="20" y="170" width="8" height="10" fill="#B0E0E6" rx="1" transform="rotate(-5 24 175)"/>
+  
+  <!-- Bottom Right -->
+  <rect x="165" y="165" width="6" height="8" fill="#87CEEB" rx="1" transform="rotate(-20 168 169)"/>
+  <rect x="175" y="155" width="8" height="10" fill="#B0E0E6" rx="1" transform="rotate(5 179 160)"/>
+  
+  <!-- Title Text -->
+  <text x="100" y="190" font-family="'Quicksand', sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#4682B4">Brain Buddy</text>
+</svg>

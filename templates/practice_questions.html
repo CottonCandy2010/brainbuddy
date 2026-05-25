@@ -1,0 +1,124 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="practice-questions-page">
+    <div class="container">
+        <!-- Header -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-10">
+                <div class="practice-header text-center">
+                    <div class="practice-logo mb-3">
+                        <img src="{{ url_for('static', filename='images/brain-buddy-logo.png') }}" 
+                             alt="Brain Buddy" class="page-buddy-logo">
+                    </div>
+                    <div class="level-badge">
+                        <i class="fas fa-brain me-2"></i>
+                        {{ subject.title() }} Practice
+                    </div>
+                    <h1 class="practice-title">Interactive Practice Questions</h1>
+                    <p class="practice-subtitle">Test your knowledge with {{ level.title() }} level questions</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question Categories -->
+        <div class="row">
+            {% for category in question_categories %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="question-category-card" data-category="{{ category.id }}">
+                    <div class="category-icon">
+                        <i class="{{ category.icon }}"></i>
+                    </div>
+                    <h3 class="category-title">{{ category.name }}</h3>
+                    <p class="category-description">{{ category.description }}</p>
+                    <div class="category-stats">
+                        <span class="stat-item">
+                            <i class="fas fa-question"></i>
+                            {{ category.question_count }} Questions
+                        </span>
+                        <span class="stat-item">
+                            <i class="fas fa-clock"></i>
+                            {{ category.estimated_time }} min
+                        </span>
+                    </div>
+                    <div class="difficulty-indicator">
+                        <span class="difficulty-badge {{ category.difficulty }}">{{ category.difficulty.title() }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Quick Practice Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="quick-practice-section">
+                    <h3 class="section-title">Quick Practice Modes</h3>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="practice-mode-card" data-mode="timed">
+                                <i class="fas fa-stopwatch"></i>
+                                <h4>Timed Challenge</h4>
+                                <p>5 minutes, 10 questions</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="practice-mode-card" data-mode="adaptive">
+                                <i class="fas fa-chart-line"></i>
+                                <h4>Adaptive Practice</h4>
+                                <p>Questions adjust to your level</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="practice-mode-card" data-mode="review">
+                                <i class="fas fa-redo"></i>
+                                <h4>Review Mistakes</h4>
+                                <p>Practice questions you got wrong</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back Navigation -->
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <a href="/subject-explorer?subject={{ subject }}&level={{ level }}" class="btn btn-outline-light btn-lg back-btn">
+                    <i class="fas fa-arrow-left me-2"></i>
+                    Back to {{ subject.title() }} Hub
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const categoryCards = document.querySelectorAll('.question-category-card');
+    const modeCards = document.querySelectorAll('.practice-mode-card');
+    
+    categoryCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const category = this.dataset.category;
+            const subject = '{{ subject }}';
+            const level = '{{ level }}';
+            
+            this.classList.add('loading');
+            window.location.href = `/quiz?subject=${subject}&level=${level}&category=${category}`;
+        });
+    });
+    
+    modeCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const mode = this.dataset.mode;
+            const subject = '{{ subject }}';
+            const level = '{{ level }}';
+            
+            this.classList.add('loading');
+            window.location.href = `/quiz?subject=${subject}&level=${level}&mode=${mode}`;
+        });
+    });
+});
+</script>
+{% endblock %}

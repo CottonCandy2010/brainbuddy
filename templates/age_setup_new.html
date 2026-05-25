@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+
+{% block title %}Choose Your Level - Brain Buddy{% endblock %}
+
+{% block content %}
+<section class="simple-age-setup-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="text-center mb-5">
+                    <h1 class="setup-title">
+                        <i class="fas fa-child me-3"></i>
+                        Let's Start Your Learning Adventure!
+                    </h1>
+                </div>
+                
+                <div class="education-levels">
+                    <div class="level-card" data-level="p1" data-age="5">
+                        <div class="level-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3>Primary 1</h3>
+                        <p>Age 5</p>
+                        <div class="level-description">
+                            <p>Starting your amazing learning journey!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="level-card" data-level="p2" data-age="6">
+                        <div class="level-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Primary 2</h3>
+                        <p>Age 6</p>
+                        <div class="level-description">
+                            <p>Building awesome learning skills!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="level-card" data-level="p3" data-age="7">
+                        <div class="level-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Primary 3</h3>
+                        <p>Age 7</p>
+                        <div class="level-description">
+                            <p>Ready for bigger adventures!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="level-card" data-level="p4" data-age="8">
+                        <div class="level-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Primary 4</h3>
+                        <p>Age 8</p>
+                        <div class="level-description">
+                            <p>Becoming a super learner!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="level-card" data-level="p5" data-age="9">
+                        <div class="level-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h3>Primary 5</h3>
+                        <p>Age 9</p>
+                        <div class="level-description">
+                            <p>Mastering amazing skills!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="level-card" data-level="p6" data-age="10">
+                        <div class="level-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3>Primary 6</h3>
+                        <p>Age 10</p>
+                        <div class="level-description">
+                            <p>Almost ready for big challenges!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="level-card" data-level="p7" data-age="11">
+                        <div class="level-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Primary 7</h3>
+                        <p>Age 11</p>
+                        <div class="level-description">
+                            <p>The ultimate primary school hero!</p>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const levelCards = document.querySelectorAll('.level-card');
+    
+    levelCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Get selected data
+            const selectedLevel = this.dataset.level;
+            const selectedAge = this.dataset.age;
+            
+            // Store the selection
+            localStorage.setItem('studentAge', selectedAge);
+            localStorage.setItem('ageGroup', selectedLevel);
+            
+            // Redirect directly to curriculum topics for the selected level
+            window.location.href = `/curriculum-topics?level=${selectedLevel}&age=${selectedAge}`;
+        });
+    });
+});
+</script>
+{% endblock %}

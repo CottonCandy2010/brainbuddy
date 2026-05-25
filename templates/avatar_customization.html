@@ -1,0 +1,918 @@
+{% extends "layout.html" %}
+
+{% block title %}Customize Your Avatar - Brain Buddy{% endblock %}
+
+{% block content %}
+<section class="avatar-customization-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <!-- Header -->
+                <div class="avatar-header text-center mb-5">
+                    <h1 class="page-title">
+                        <i class="fas fa-user-circle me-3"></i>
+                        Create Your Learning Buddy!
+                    </h1>
+                    <p class="page-subtitle">Design your super cool friend who will help you learn and have fun together!</p>
+                </div>
+
+                <div class="row">
+                    <!-- Avatar Preview -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="avatar-preview-section">
+                            <div class="preview-header text-center mb-4">
+                                <h3>Your Avatar</h3>
+                                <p class="text-muted">See how your avatar looks</p>
+                            </div>
+                            
+                            <div class="avatar-display-container">
+                                <div class="avatar-display" id="avatarDisplay">
+                                    <!-- Avatar SVG will be rendered here -->
+                                    <svg width="300" height="300" viewBox="0 0 300 300" id="avatarSvg">
+                                        <!-- Background circle -->
+                                        <circle cx="150" cy="150" r="140" fill="#f0f8ff" stroke="#ddd" stroke-width="2"/>
+                                        
+                                        <!-- Face -->
+                                        <circle cx="150" cy="140" r="80" fill="#fdbcb4" id="faceColor"/>
+                                        
+                                        <!-- Hair -->
+                                        <path d="M80 120 Q150 60 220 120 Q220 80 180 70 Q150 50 120 70 Q80 80 80 120" 
+                                              fill="#8B4513" id="hairColor"/>
+                                        
+                                        <!-- Eyes -->
+                                        <circle cx="125" cy="125" r="8" fill="white"/>
+                                        <circle cx="175" cy="125" r="8" fill="white"/>
+                                        <circle cx="125" cy="125" r="4" fill="#333" id="eyeColor"/>
+                                        <circle cx="175" cy="125" r="4" fill="#333" id="eyeColor2"/>
+                                        
+                                        <!-- Nose -->
+                                        <ellipse cx="150" cy="140" rx="3" ry="5" fill="#f4a792"/>
+                                        
+                                        <!-- Mouth -->
+                                        <path d="M135 155 Q150 165 165 155" stroke="#333" stroke-width="2" 
+                                              fill="none" stroke-linecap="round" id="mouthShape"/>
+                                        
+                                        <!-- Shirt -->
+                                        <rect x="100" y="210" width="100" height="80" fill="#4285f4" 
+                                              rx="10" id="shirtColor"/>
+                                        
+                                        <!-- Accessories will be added here -->
+                                        <g id="accessories"></g>
+                                    </svg>
+                                </div>
+                                
+                                <div class="avatar-name-display text-center mt-3">
+                                    <h4 id="avatarNameDisplay">My Avatar</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Customization Controls -->
+                    <div class="col-lg-6">
+                        <div class="customization-panel">
+                            <div class="panel-header mb-4">
+                                <h3>Customize Your Look</h3>
+                                <p class="text-muted">Choose colors, features, and accessories</p>
+                            </div>
+
+                            <!-- Avatar Name -->
+                            <div class="customization-section mb-4">
+                                <h5><i class="fas fa-signature me-2"></i>Avatar Name</h5>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="avatarName" 
+                                           placeholder="Enter your avatar's name" maxlength="20">
+                                </div>
+                            </div>
+
+                            <!-- Skin Tone -->
+                            <div class="customization-section mb-4">
+                                <h5><i class="fas fa-palette me-2"></i>Skin Tone</h5>
+                                <div class="color-options" id="skinToneOptions">
+                                    <div class="color-option" data-color="#fdbcb4" data-active="true">
+                                        <div class="color-circle" style="background-color: #fdbcb4;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#f1c27d">
+                                        <div class="color-circle" style="background-color: #f1c27d;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#e0ac69">
+                                        <div class="color-circle" style="background-color: #e0ac69;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#c68642">
+                                        <div class="color-circle" style="background-color: #c68642;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#8d5524">
+                                        <div class="color-circle" style="background-color: #8d5524;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hair Color -->
+                            <div class="customization-section mb-4">
+                                <h5><i class="fas fa-brush me-2"></i>Hair Color</h5>
+                                <div class="color-options" id="hairColorOptions">
+                                    <div class="color-option" data-color="#8B4513" data-active="true">
+                                        <div class="color-circle" style="background-color: #8B4513;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#654321">
+                                        <div class="color-circle" style="background-color: #654321;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#000000">
+                                        <div class="color-circle" style="background-color: #000000;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#FFD700">
+                                        <div class="color-circle" style="background-color: #FFD700;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#DC143C">
+                                        <div class="color-circle" style="background-color: #DC143C;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#9370DB">
+                                        <div class="color-circle" style="background-color: #9370DB;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Eye Color -->
+                            <div class="customization-section mb-4">
+                                <h5><i class="fas fa-eye me-2"></i>Eye Color</h5>
+                                <div class="color-options" id="eyeColorOptions">
+                                    <div class="color-option" data-color="#333333" data-active="true">
+                                        <div class="color-circle" style="background-color: #333333;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#8B4513">
+                                        <div class="color-circle" style="background-color: #8B4513;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#4682B4">
+                                        <div class="color-circle" style="background-color: #4682B4;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#228B22">
+                                        <div class="color-circle" style="background-color: #228B22;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#9370DB">
+                                        <div class="color-circle" style="background-color: #9370DB;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Shirt Color -->
+                            <div class="customization-section mb-4">
+                                <h5><i class="fas fa-tshirt me-2"></i>Shirt Color</h5>
+                                <div class="color-options" id="shirtColorOptions">
+                                    <div class="color-option" data-color="#4285f4" data-active="true">
+                                        <div class="color-circle" style="background-color: #4285f4;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#ea4335">
+                                        <div class="color-circle" style="background-color: #ea4335;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#34a853">
+                                        <div class="color-circle" style="background-color: #34a853;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#fbbc05">
+                                        <div class="color-circle" style="background-color: #fbbc05;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#9333ea">
+                                        <div class="color-circle" style="background-color: #9333ea;"></div>
+                                    </div>
+                                    <div class="color-option" data-color="#f97316">
+                                        <div class="color-circle" style="background-color: #f97316;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Accessories -->
+                            <div class="customization-section mb-4">
+                                <h5><i class="fas fa-glasses me-2"></i>Accessories</h5>
+                                <div class="accessory-options">
+                                    <div class="accessory-option" data-accessory="none" data-active="true">
+                                        <div class="accessory-preview">
+                                            <i class="fas fa-ban"></i>
+                                        </div>
+                                        <span>None</span>
+                                    </div>
+                                    <div class="accessory-option" data-accessory="glasses">
+                                        <div class="accessory-preview">
+                                            <i class="fas fa-glasses"></i>
+                                        </div>
+                                        <span>Glasses</span>
+                                    </div>
+                                    <div class="accessory-option" data-accessory="hat">
+                                        <div class="accessory-preview">
+                                            <i class="fas fa-graduation-cap"></i>
+                                        </div>
+                                        <span>Hat</span>
+                                    </div>
+                                    <div class="accessory-option" data-accessory="bow">
+                                        <div class="accessory-preview">
+                                            <i class="fas fa-ribbon"></i>
+                                        </div>
+                                        <span>Bow</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Expression -->
+                            <div class="customization-section mb-4">
+                                <h5><i class="fas fa-smile me-2"></i>Expression</h5>
+                                <div class="expression-options">
+                                    <div class="expression-option" data-expression="happy" data-active="true">
+                                        <i class="fas fa-smile"></i>
+                                        <span>Happy</span>
+                                    </div>
+                                    <div class="expression-option" data-expression="excited">
+                                        <i class="fas fa-grin-stars"></i>
+                                        <span>Excited</span>
+                                    </div>
+                                    <div class="expression-option" data-expression="cool">
+                                        <i class="fas fa-grin-wink"></i>
+                                        <span>Cool</span>
+                                    </div>
+                                    <div class="expression-option" data-expression="focused">
+                                        <i class="fas fa-meh"></i>
+                                        <span>Focused</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="row mt-5">
+                    <div class="col-12 text-center">
+                        <div class="action-buttons">
+                            <button class="btn btn-primary btn-lg me-3" id="saveAvatarBtn">
+                                <i class="fas fa-heart me-2"></i>Save My Buddy!
+                            </button>
+                            <button class="btn btn-outline-secondary btn-lg me-3" id="randomizeBtn">
+                                <i class="fas fa-magic me-2"></i>Surprise Me!
+                            </button>
+                            <button class="btn btn-outline-info btn-lg" id="previewBtn">
+                                <i class="fas fa-eye me-2"></i>See My Buddy!
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Avatar Gallery -->
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="avatar-gallery-section">
+                            <h3 class="text-center mb-4">Ready-Made Friends!</h3>
+                            <div class="avatar-templates" id="avatarTemplates">
+                                <!-- Templates will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Avatar Preview Modal -->
+<div class="modal fade" id="avatarPreviewModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Avatar in Action</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="avatar-action-preview">
+                    <div class="animated-avatar" id="animatedAvatar">
+                        <!-- Animated avatar will be shown here -->
+                    </div>
+                    <div class="speech-bubble mt-3">
+                        <p>"Hi! I'm <span id="modalAvatarName">your avatar</span>! Ready to learn together?"</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="confirmSaveBtn">
+                    <i class="fas fa-check me-2"></i>Looks Great!
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.avatar-customization-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 40px 0;
+}
+
+.avatar-header .page-title {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.avatar-header .page-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+    margin-bottom: 0;
+}
+
+.avatar-preview-section, .customization-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+}
+
+.avatar-display-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar-display {
+    background: #f8f9fa;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 1rem;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.customization-section {
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 1.5rem;
+}
+
+.customization-section h5 {
+    color: #495057;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.color-options {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.color-option {
+    cursor: pointer;
+    padding: 5px;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.color-option[data-active="true"] {
+    border-color: #4285f4;
+    transform: scale(1.1);
+}
+
+.color-option:hover {
+    transform: scale(1.1);
+}
+
+.color-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #dee2e6;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.accessory-options, .expression-options {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.accessory-option, .expression-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 80px;
+}
+
+.accessory-option[data-active="true"], 
+.expression-option[data-active="true"] {
+    border-color: #4285f4;
+    background: #f0f8ff;
+}
+
+.accessory-option:hover, 
+.expression-option:hover {
+    border-color: #4285f4;
+    transform: translateY(-2px);
+}
+
+.accessory-preview {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: #6c757d;
+}
+
+.accessory-option span, 
+.expression-option span {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #495057;
+}
+
+.action-buttons {
+    margin: 2rem 0;
+}
+
+.avatar-templates {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 2rem;
+}
+
+.template-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #e9ecef;
+}
+
+.template-card:hover {
+    border-color: #4285f4;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-gallery-section {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.speech-bubble {
+    background: #f0f8ff;
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #f0f8ff;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.animated-avatar {
+    animation: bounce 2s infinite;
+}
+
+@media (max-width: 768px) {
+    .avatar-customization-page {
+        padding: 20px 0;
+    }
+    
+    .avatar-header .page-title {
+        font-size: 2rem;
+    }
+    
+    .color-options, .accessory-options, .expression-options {
+        justify-content: center;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .action-buttons .btn {
+        margin: 5px 0 !important;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Avatar configuration object
+    let avatarConfig = {
+        name: 'My Avatar',
+        skinTone: '#fdbcb4',
+        hairColor: '#8B4513',
+        eyeColor: '#333333',
+        shirtColor: '#4285f4',
+        accessory: 'none',
+        expression: 'happy'
+    };
+
+    // Avatar templates
+    const avatarTemplates = [
+        {
+            name: 'Friendly Sam',
+            skinTone: '#fdbcb4',
+            hairColor: '#8B4513',
+            eyeColor: '#4682B4',
+            shirtColor: '#34a853',
+            accessory: 'none',
+            expression: 'happy'
+        },
+        {
+            name: 'Smart Alex',
+            skinTone: '#f1c27d',
+            hairColor: '#000000',
+            eyeColor: '#8B4513',
+            shirtColor: '#4285f4',
+            accessory: 'glasses',
+            expression: 'focused'
+        },
+        {
+            name: 'Cool Maya',
+            skinTone: '#e0ac69',
+            hairColor: '#DC143C',
+            eyeColor: '#228B22',
+            shirtColor: '#9333ea',
+            accessory: 'bow',
+            expression: 'cool'
+        },
+        {
+            name: 'Happy Taylor',
+            skinTone: '#c68642',
+            hairColor: '#FFD700',
+            eyeColor: '#9370DB',
+            shirtColor: '#ea4335',
+            accessory: 'hat',
+            expression: 'excited'
+        }
+    ];
+
+    // Initialize avatar customization
+    function initializeAvatarCustomization() {
+        setupColorOptions();
+        setupAccessoryOptions();
+        setupExpressionOptions();
+        setupNameInput();
+        setupActionButtons();
+        generateAvatarTemplates();
+        updateAvatarDisplay();
+    }
+
+    // Setup color options
+    function setupColorOptions() {
+        // Skin tone options
+        document.querySelectorAll('#skinToneOptions .color-option').forEach(option => {
+            option.addEventListener('click', function() {
+                updateSelection(this, '#skinToneOptions');
+                avatarConfig.skinTone = this.dataset.color;
+                updateAvatarDisplay();
+            });
+        });
+
+        // Hair color options
+        document.querySelectorAll('#hairColorOptions .color-option').forEach(option => {
+            option.addEventListener('click', function() {
+                updateSelection(this, '#hairColorOptions');
+                avatarConfig.hairColor = this.dataset.color;
+                updateAvatarDisplay();
+            });
+        });
+
+        // Eye color options
+        document.querySelectorAll('#eyeColorOptions .color-option').forEach(option => {
+            option.addEventListener('click', function() {
+                updateSelection(this, '#eyeColorOptions');
+                avatarConfig.eyeColor = this.dataset.color;
+                updateAvatarDisplay();
+            });
+        });
+
+        // Shirt color options
+        document.querySelectorAll('#shirtColorOptions .color-option').forEach(option => {
+            option.addEventListener('click', function() {
+                updateSelection(this, '#shirtColorOptions');
+                avatarConfig.shirtColor = this.dataset.color;
+                updateAvatarDisplay();
+            });
+        });
+    }
+
+    // Setup accessory options
+    function setupAccessoryOptions() {
+        document.querySelectorAll('.accessory-option').forEach(option => {
+            option.addEventListener('click', function() {
+                updateSelection(this, '.accessory-options');
+                avatarConfig.accessory = this.dataset.accessory;
+                updateAvatarDisplay();
+            });
+        });
+    }
+
+    // Setup expression options
+    function setupExpressionOptions() {
+        document.querySelectorAll('.expression-option').forEach(option => {
+            option.addEventListener('click', function() {
+                updateSelection(this, '.expression-options');
+                avatarConfig.expression = this.dataset.expression;
+                updateAvatarDisplay();
+            });
+        });
+    }
+
+    // Setup name input
+    function setupNameInput() {
+        const nameInput = document.getElementById('avatarName');
+        nameInput.addEventListener('input', function() {
+            avatarConfig.name = this.value || 'My Avatar';
+            document.getElementById('avatarNameDisplay').textContent = avatarConfig.name;
+        });
+    }
+
+    // Setup action buttons
+    function setupActionButtons() {
+        // Save avatar button
+        document.getElementById('saveAvatarBtn').addEventListener('click', function() {
+            saveAvatar();
+        });
+
+        // Randomize button
+        document.getElementById('randomizeBtn').addEventListener('click', function() {
+            randomizeAvatar();
+        });
+
+        // Preview button
+        document.getElementById('previewBtn').addEventListener('click', function() {
+            showAvatarPreview();
+        });
+
+        // Confirm save button in modal
+        document.getElementById('confirmSaveBtn').addEventListener('click', function() {
+            saveAvatar();
+            bootstrap.Modal.getInstance(document.getElementById('avatarPreviewModal')).hide();
+        });
+    }
+
+    // Update selection state
+    function updateSelection(selectedElement, containerSelector) {
+        // Remove active state from all options in container
+        document.querySelectorAll(`${containerSelector} [data-active]`).forEach(option => {
+            option.dataset.active = 'false';
+        });
+        
+        // Set active state for selected option
+        selectedElement.dataset.active = 'true';
+    }
+
+    // Update avatar display
+    function updateAvatarDisplay() {
+        const svg = document.getElementById('avatarSvg');
+        
+        // Update face color
+        svg.querySelector('#faceColor').setAttribute('fill', avatarConfig.skinTone);
+        
+        // Update hair color
+        svg.querySelector('#hairColor').setAttribute('fill', avatarConfig.hairColor);
+        
+        // Update eye colors
+        svg.querySelector('#eyeColor').setAttribute('fill', avatarConfig.eyeColor);
+        svg.querySelector('#eyeColor2').setAttribute('fill', avatarConfig.eyeColor);
+        
+        // Update shirt color
+        svg.querySelector('#shirtColor').setAttribute('fill', avatarConfig.shirtColor);
+        
+        // Update expression
+        updateExpression();
+        
+        // Update accessories
+        updateAccessories();
+        
+        // Update name display
+        document.getElementById('avatarNameDisplay').textContent = avatarConfig.name;
+    }
+
+    // Update facial expression
+    function updateExpression() {
+        const mouthElement = document.getElementById('mouthShape');
+        
+        switch(avatarConfig.expression) {
+            case 'happy':
+                mouthElement.setAttribute('d', 'M135 155 Q150 165 165 155');
+                break;
+            case 'excited':
+                mouthElement.setAttribute('d', 'M130 155 Q150 170 170 155');
+                break;
+            case 'cool':
+                mouthElement.setAttribute('d', 'M135 158 Q150 162 165 158');
+                break;
+            case 'focused':
+                mouthElement.setAttribute('d', 'M140 160 L160 160');
+                break;
+        }
+    }
+
+    // Update accessories
+    function updateAccessories() {
+        const accessoriesGroup = document.getElementById('accessories');
+        accessoriesGroup.innerHTML = '';
+        
+        switch(avatarConfig.accessory) {
+            case 'glasses':
+                accessoriesGroup.innerHTML = `
+                    <rect x="115" y="120" width="25" height="15" fill="none" stroke="#333" stroke-width="2" rx="3"/>
+                    <rect x="160" y="120" width="25" height="15" fill="none" stroke="#333" stroke-width="2" rx="3"/>
+                    <line x1="140" y1="127" x2="160" y2="127" stroke="#333" stroke-width="2"/>
+                `;
+                break;
+            case 'hat':
+                accessoriesGroup.innerHTML = `
+                    <ellipse cx="150" cy="85" rx="45" ry="8" fill="#2c3e50"/>
+                    <path d="M120 85 Q150 60 180 85 Q180 70 150 65 Q120 70 120 85" fill="#34495e"/>
+                `;
+                break;
+            case 'bow':
+                accessoriesGroup.innerHTML = `
+                    <path d="M130 95 Q140 85 150 95 Q160 85 170 95 Q165 100 150 98 Q135 100 130 95" fill="#e74c3c"/>
+                    <circle cx="150" cy="95" r="3" fill="#c0392b"/>
+                `;
+                break;
+        }
+    }
+
+    // Generate avatar templates
+    function generateAvatarTemplates() {
+        const templatesContainer = document.getElementById('avatarTemplates');
+        
+        templatesContainer.innerHTML = avatarTemplates.map((template, index) => `
+            <div class="template-card" data-template="${index}">
+                <div class="template-avatar mb-3">
+                    <svg width="120" height="120" viewBox="0 0 300 300">
+                        <circle cx="150" cy="150" r="140" fill="#f0f8ff" stroke="#ddd" stroke-width="2"/>
+                        <circle cx="150" cy="140" r="80" fill="${template.skinTone}"/>
+                        <path d="M80 120 Q150 60 220 120 Q220 80 180 70 Q150 50 120 70 Q80 80 80 120" 
+                              fill="${template.hairColor}"/>
+                        <circle cx="125" cy="125" r="8" fill="white"/>
+                        <circle cx="175" cy="125" r="8" fill="white"/>
+                        <circle cx="125" cy="125" r="4" fill="${template.eyeColor}"/>
+                        <circle cx="175" cy="125" r="4" fill="${template.eyeColor}"/>
+                        <ellipse cx="150" cy="140" rx="3" ry="5" fill="#f4a792"/>
+                        <path d="M135 155 Q150 165 165 155" stroke="#333" stroke-width="2" 
+                              fill="none" stroke-linecap="round"/>
+                        <rect x="100" y="210" width="100" height="80" fill="${template.shirtColor}" rx="10"/>
+                    </svg>
+                </div>
+                <h6>${template.name}</h6>
+                <button class="btn btn-outline-primary btn-sm">Use Template</button>
+            </div>
+        `).join('');
+
+        // Add click handlers for templates
+        document.querySelectorAll('.template-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const templateIndex = parseInt(this.dataset.template);
+                applyTemplate(avatarTemplates[templateIndex]);
+            });
+        });
+    }
+
+    // Apply avatar template
+    function applyTemplate(template) {
+        avatarConfig = { ...template };
+        
+        // Update UI to reflect template
+        updateUIFromConfig();
+        updateAvatarDisplay();
+        
+        // Show success message
+        showNotification('Template applied successfully!', 'success');
+    }
+
+    // Update UI from config
+    function updateUIFromConfig() {
+        // Update name input
+        document.getElementById('avatarName').value = avatarConfig.name;
+        
+        // Update color selections
+        updateColorSelection('#skinToneOptions', avatarConfig.skinTone);
+        updateColorSelection('#hairColorOptions', avatarConfig.hairColor);
+        updateColorSelection('#eyeColorOptions', avatarConfig.eyeColor);
+        updateColorSelection('#shirtColorOptions', avatarConfig.shirtColor);
+        
+        // Update accessory selection
+        updateOptionSelection('.accessory-option', avatarConfig.accessory);
+        
+        // Update expression selection
+        updateOptionSelection('.expression-option', avatarConfig.expression);
+    }
+
+    // Update color selection in UI
+    function updateColorSelection(containerSelector, color) {
+        document.querySelectorAll(`${containerSelector} .color-option`).forEach(option => {
+            option.dataset.active = option.dataset.color === color ? 'true' : 'false';
+        });
+    }
+
+    // Update option selection in UI
+    function updateOptionSelection(selector, value) {
+        document.querySelectorAll(selector).forEach(option => {
+            const optionValue = option.dataset.accessory || option.dataset.expression;
+            option.dataset.active = optionValue === value ? 'true' : 'false';
+        });
+    }
+
+    // Randomize avatar
+    function randomizeAvatar() {
+        const randomTemplate = avatarTemplates[Math.floor(Math.random() * avatarTemplates.length)];
+        applyTemplate(randomTemplate);
+        showNotification('Avatar randomized!', 'info');
+    }
+
+    // Show avatar preview
+    function showAvatarPreview() {
+        // Update modal content
+        document.getElementById('modalAvatarName').textContent = avatarConfig.name;
+        
+        // Copy avatar to modal
+        const modalAvatar = document.getElementById('animatedAvatar');
+        modalAvatar.innerHTML = document.getElementById('avatarDisplay').innerHTML;
+        
+        // Show modal
+        new bootstrap.Modal(document.getElementById('avatarPreviewModal')).show();
+    }
+
+    // Save avatar
+    function saveAvatar() {
+        // Save to localStorage
+        localStorage.setItem('brainBuddyAvatar', JSON.stringify(avatarConfig));
+        
+        // Show success message
+        showNotification('Avatar saved successfully!', 'success');
+        
+        // Redirect to dashboard or main app
+        setTimeout(() => {
+            window.location.href = '/dashboard';
+        }, 1500);
+    }
+
+    // Show notification
+    function showNotification(message, type = 'info') {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+        notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+        notification.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Auto remove after 3 seconds
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 3000);
+    }
+
+    // Load saved avatar if exists
+    function loadSavedAvatar() {
+        const savedAvatar = localStorage.getItem('brainBuddyAvatar');
+        if (savedAvatar) {
+            avatarConfig = JSON.parse(savedAvatar);
+            updateUIFromConfig();
+            updateAvatarDisplay();
+        }
+    }
+
+    // Initialize everything
+    loadSavedAvatar();
+    initializeAvatarCustomization();
+});
+</script>
+{% endblock %}

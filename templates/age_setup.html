@@ -1,0 +1,176 @@
+{% extends "layout.html" %}
+
+{% block title %}Age Setup - Brain Buddy{% endblock %}
+
+{% block content %}
+<section class="age-setup-page animate-fade-in">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-6">
+            <!-- Age Setup Card -->
+            <div class="age-setup-card">
+                <div class="card-header text-center">
+                    <div class="age-icon mb-3">
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <h2 class="setup-title">Let's Make Learning Super Fun!</h2>
+                    <p class="setup-subtitle">Tell us how old you are so we can create the most amazing learning adventure just for you!</p>
+                </div>
+
+                <div class="card-body">
+                    <!-- Primary School Level Selection -->
+                    <div class="level-selection-section">
+                        <div class="level-cards-grid">
+                            <div class="level-card clickable-card" data-level="p1" data-age="5">
+                                <div class="level-icon">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <h3>Primary 1</h3>
+                                <p>Age 5</p>
+                                <div class="level-description">
+                                    <p>Starting your learning adventure!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="level-card clickable-card" data-level="p2" data-age="6">
+                                <div class="level-icon">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <h3>Primary 2</h3>
+                                <p>Age 6</p>
+                                <div class="level-description">
+                                    <p>Growing your knowledge!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="level-card clickable-card" data-level="p3" data-age="7">
+                                <div class="level-icon">
+                                    <i class="fas fa-tree"></i>
+                                </div>
+                                <h3>Primary 3</h3>
+                                <p>Age 7</p>
+                                <div class="level-description">
+                                    <p>Building strong foundations!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="level-card clickable-card" data-level="p4" data-age="8">
+                                <div class="level-icon">
+                                    <i class="fas fa-rocket"></i>
+                                </div>
+                                <h3>Primary 4</h3>
+                                <p>Age 8</p>
+                                <div class="level-description">
+                                    <p>Ready for new challenges!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="level-card clickable-card" data-level="p5" data-age="9">
+                                <div class="level-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <h3>Primary 5</h3>
+                                <p>Age 9</p>
+                                <div class="level-description">
+                                    <p>Becoming a learning star!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="level-card clickable-card" data-level="p6" data-age="10">
+                                <div class="level-icon">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <h3>Primary 6</h3>
+                                <p>Age 10</p>
+                                <div class="level-description">
+                                    <p>Almost ready for big challenges!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="level-card clickable-card" data-level="p7" data-age="11">
+                                <div class="level-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <h3>Primary 7</h3>
+                                <p>Age 11</p>
+                                <div class="level-description">
+                                    <p>The ultimate primary school hero!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefits Section -->
+            <div class="benefits-section mt-5">
+                <div class="row">
+                    <div class="col-md-4 text-center mb-4">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h5>Age-Appropriate Content</h5>
+                            <p>Lessons matched to your cognitive development and interests</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center mb-4">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h5>Perfect Difficulty</h5>
+                            <p>Challenging but achievable content that grows with you</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center mb-4">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <h5>Relevant Goals</h5>
+                            <p>Achievement systems designed for your age group</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Hidden input for form data -->
+<input type="hidden" id="selectedAge" value="">
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const levelCards = document.querySelectorAll('.clickable-card');
+    
+    levelCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Get selected data
+            const selectedLevel = this.dataset.level;
+            const selectedAge = this.dataset.age;
+            
+            // Store the selection
+            localStorage.setItem('studentAge', selectedAge);
+            localStorage.setItem('ageGroup', selectedLevel);
+            
+            // Redirect directly to curriculum topics for the selected level
+            window.location.href = `/curriculum-topics?level=${selectedLevel}&age=${selectedAge}`;
+        });
+        
+        // Add hover effects
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) scale(1.05)';
+            this.style.boxShadow = '0 15px 35px rgba(0,0,0,0.2)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+            this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+        });
+    });
+});
+</script>
+{% endblock %}

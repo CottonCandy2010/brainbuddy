@@ -1,0 +1,238 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="subject-explorer-page">
+    <div class="container">
+        <!-- Header -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-10">
+                <div class="explorer-header text-center">
+                    <div class="explorer-logo mb-3">
+                        <img src="{{ url_for('static', filename='images/brain-buddy-logo.png') }}" 
+                             alt="Brain Buddy" class="page-buddy-logo">
+                    </div>
+                    <div class="level-badge">
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        {{ level.title() }} Level
+                    </div>
+                    <h1 class="explorer-title">{{ subject.title() }} Mastery Hub</h1>
+                    <p class="explorer-subtitle">Complete learning resources, practice materials, and study guides</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Resources Grid -->
+        <div class="row">
+            <!-- Study Materials Card -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="resource-card study-materials" data-resource="materials">
+                    <div class="resource-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="resource-title">Study Materials</h3>
+                    <p class="resource-description">Comprehensive lessons and learning content</p>
+                    <div class="resource-stats">
+                        <span class="stat-item">
+                            <i class="fas fa-file-alt"></i>
+                            {{ materials_count }} Lessons
+                        </span>
+                    </div>
+                    <div class="resource-action">
+                        <span class="action-text">Explore Now</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Practice Questions Card -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="resource-card practice-questions" data-resource="practice">
+                    <div class="resource-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3 class="resource-title">Practice Questions</h3>
+                    <p class="resource-description">Test your knowledge with interactive quizzes</p>
+                    <div class="resource-stats">
+                        <span class="stat-item">
+                            <i class="fas fa-brain"></i>
+                            {{ practice_count }} Questions
+                        </span>
+                    </div>
+                    <div class="resource-action">
+                        <span class="action-text">Start Quiz</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Study Guides Card -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="resource-card study-guides" data-resource="guides">
+                    <div class="resource-icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <h3 class="resource-title">Study Guides</h3>
+                    <p class="resource-description">Step-by-step learning roadmaps</p>
+                    <div class="resource-stats">
+                        <span class="stat-item">
+                            <i class="fas fa-route"></i>
+                            {{ guides_count }} Guides
+                        </span>
+                    </div>
+                    <div class="resource-action">
+                        <span class="action-text">View Guides</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cheat Sheets Card -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="resource-card cheat-sheets" data-resource="cheatsheets">
+                    <div class="resource-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h3 class="resource-title">Cheat Sheets</h3>
+                    <p class="resource-description">Quick reference guides and formulas</p>
+                    <div class="resource-stats">
+                        <span class="stat-item">
+                            <i class="fas fa-sticky-note"></i>
+                            {{ cheatsheets_count }} Sheets
+                        </span>
+                    </div>
+                    <div class="resource-action">
+                        <span class="action-text">Quick Ref</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Tutorials Card -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="resource-card video-tutorials" data-resource="videos">
+                    <div class="resource-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h3 class="resource-title">Video Tutorials</h3>
+                    <p class="resource-description">Visual learning with step-by-step videos</p>
+                    <div class="resource-stats">
+                        <span class="stat-item">
+                            <i class="fas fa-video"></i>
+                            {{ videos_count }} Videos
+                        </span>
+                    </div>
+                    <div class="resource-action">
+                        <span class="action-text">Watch Now</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flashcards Card -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="resource-card flashcards" data-resource="flashcards">
+                    <div class="resource-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="resource-title">Flashcards</h3>
+                    <p class="resource-description">Memorize key concepts and definitions</p>
+                    <div class="resource-stats">
+                        <span class="stat-item">
+                            <i class="fas fa-cards-blank"></i>
+                            {{ flashcards_count }} Cards
+                        </span>
+                    </div>
+                    <div class="resource-action">
+                        <span class="action-text">Study Cards</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Overview -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="progress-overview">
+                    <h3 class="progress-title">Your {{ subject.title() }} Progress</h3>
+                    <div class="row">
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="progress-stat">
+                                <div class="stat-number">{{ completion_percentage }}%</div>
+                                <div class="stat-label">Completed</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="progress-stat">
+                                <div class="stat-number">{{ study_hours }}</div>
+                                <div class="stat-label">Hours Studied</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="progress-stat">
+                                <div class="stat-number">{{ quiz_score }}%</div>
+                                <div class="stat-label">Quiz Average</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="progress-stat">
+                                <div class="stat-number">{{ streak_days }}</div>
+                                <div class="stat-label">Day Streak</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back Navigation -->
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <a href="/curriculum-topics?level={{ level }}" class="btn btn-outline-light btn-lg back-btn">
+                    <i class="fas fa-arrow-left me-2"></i>
+                    Back to Topics
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const resourceCards = document.querySelectorAll('.resource-card');
+    
+    resourceCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const resource = this.dataset.resource;
+            const subject = '{{ subject }}';
+            const level = '{{ level }}';
+            
+            // Add loading animation
+            this.classList.add('loading');
+            
+            // Redirect based on resource type
+            switch(resource) {
+                case 'materials':
+                    window.location.href = `/curriculum-topics?level=${level}&subject=${subject}`;
+                    break;
+                case 'practice':
+                    window.location.href = `/practice-questions?subject=${subject}&level=${level}`;
+                    break;
+                case 'guides':
+                    window.location.href = `/study-guides?subject=${subject}&level=${level}`;
+                    break;
+                case 'cheatsheets':
+                    window.location.href = `/cheat-sheets?subject=${subject}&level=${level}`;
+                    break;
+                case 'videos':
+                    window.location.href = `/video-tutorials?subject=${subject}&level=${level}`;
+                    break;
+                case 'flashcards':
+                    window.location.href = `/flashcards?subject=${subject}&level=${level}`;
+                    break;
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

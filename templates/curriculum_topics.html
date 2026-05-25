@@ -1,0 +1,512 @@
+{% extends "layout.html" %}
+
+{% block title %}Choose Your Topic - Brain Buddy{% endblock %}
+
+{% block content %}
+<section class="curriculum-topics-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
+                <!-- Header with Education Level -->
+                <div class="topics-header text-center mb-5">
+                    <div class="level-badge" id="levelBadge">
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        <span id="levelName">High School</span>
+                    </div>
+                    <h1 class="topics-title">What Do You Want to Explore Today?</h1>
+                    <p class="topics-subtitle">Pick something super cool to learn about and let's have an adventure!</p>
+                </div>
+
+                <!-- Subject Navigation -->
+                <div class="subject-nav-tabs mb-4">
+                    <ul class="nav nav-pills justify-content-center subject-grid" id="subjectTabs">
+                        <li class="nav-item">
+                            <button class="nav-link subject-nav-link active" data-subject="maths">
+                                <i class="fas fa-calculator me-2"></i>Number Magic! 🔢
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link subject-nav-link" data-subject="science">
+                                <i class="fas fa-microscope me-2"></i>Super Science! 🧪
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link subject-nav-link" data-subject="english">
+                                <i class="fas fa-book me-2"></i>Word Wizards! 📚
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link subject-nav-link" data-subject="history">
+                                <i class="fas fa-landmark me-2"></i>Time Travelers! 🏰
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link subject-nav-link" data-subject="geography">
+                                <i class="fas fa-globe me-2"></i>World Wanderers! 🌍
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link subject-nav-link" data-subject="languages">
+                                <i class="fas fa-language me-2"></i>Language Stars! 🌟
+                            </button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link subject-nav-link" data-subject="computing">
+                                <i class="fas fa-laptop-code me-2"></i>Tech Explorers! 💻
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Topics Content -->
+                <div class="topics-content" id="topicsContent">
+                    <div class="topics-grid">
+                        {% for topic in curriculum_data %}
+                        <div class="topic-card animate-fade-in" data-topic="{{ topic.id }}">
+                            <div class="topic-icon">{{ topic.icon }}</div>
+                            <h3 class="topic-title">{{ topic.title }}</h3>
+                            <p class="topic-description">{{ topic.description }}</p>
+                            <div class="topic-year-info">
+                                <span class="year-badge">{{ topic.year }}</span>
+                                <span class="difficulty-badge {{ topic.difficulty }}">{{ topic.difficulty }}</span>
+                            </div>
+                            <div class="topic-lessons">
+                                <h4>What You'll Learn:</h4>
+                                <ul>
+                                    {% for lesson in topic.lessons %}
+                                    <li>{{ lesson }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% if topic.activities %}
+                            <div class="topic-activities">
+                                <h4>Fun Activities:</h4>
+                                <ul class="activities-list">
+                                    {% for activity in topic.activities %}
+                                    <li>{{ activity }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %}
+                            <div class="topic-actions">
+                                <a href="{{ url_for('select_style', subject=subject, topic=topic.title) }}" class="btn btn-primary start-topic-btn">
+                                    <i class="fas fa-play me-2"></i>Start Learning
+                                </a>
+                                <a href="{{ url_for('practice_questions', subject=subject, topic=topic.title) }}" class="btn btn-outline-secondary practice-btn">
+                                    <i class="fas fa-dumbbell me-2"></i>Practice
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                        {% if not curriculum_data %}
+                        <div class="no-content-message text-center">
+                            <div class="empty-state">
+                                <i class="fas fa-book-open fa-3x mb-3 text-muted"></i>
+                                <h3>Content Coming Soon!</h3>
+                                <p>We're preparing amazing learning materials for this subject and level.</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Scottish Primary curriculum data
+const curriculumData = {
+    p1: {
+        maths: [
+            { title: "Numbers 1-10", description: "Learn to count and recognize your first numbers", difficulty: "easy", icon: "🔢" },
+            { title: "Big & Small", description: "Compare sizes and learn about bigger and smaller", difficulty: "easy", icon: "📏" },
+            { title: "Shapes Around Us", description: "Find circles, squares, and triangles everywhere", difficulty: "easy", icon: "🔷" }
+        ],
+        science: [
+            { title: "My Body", description: "Learn about your amazing body parts and what they do", difficulty: "easy", icon: "👶" },
+            { title: "Animals I Know", description: "Discover pets, farm animals, and wild creatures", difficulty: "easy", icon: "🐕" },
+            { title: "Weather Today", description: "Is it sunny, rainy, or snowy? Let's find out!", difficulty: "easy", icon: "☀️" },
+            { title: "Plants & Trees", description: "Explore flowers, trees, and growing things", difficulty: "easy", icon: "🌱" }
+        ],
+        english: [
+            { title: "Letter Sounds", description: "Learn the sounds that letters make", difficulty: "easy", icon: "🔤" },
+            { title: "My First Words", description: "Read and write simple words like 'cat' and 'dog'", difficulty: "easy", icon: "📝" },
+            { title: "Story Time", description: "Listen to amazing stories and adventures", difficulty: "easy", icon: "📚" },
+            { title: "Nursery Rhymes", description: "Sing and learn traditional rhymes and songs", difficulty: "easy", icon: "🎵" }
+        ]
+    },
+    p2: {
+        maths: [
+            { title: "Numbers 1-20", description: "Master counting and number recognition up to 20", difficulty: "easy", icon: "🔢" },
+            { title: "Simple Adding", description: "Add numbers together with fun games", difficulty: "easy", icon: "➕" },
+            { title: "Taking Away", description: "Learn subtraction with pictures and objects", difficulty: "easy", icon: "➖" },
+            { title: "Clock Time", description: "Read clocks and understand time", difficulty: "medium", icon: "🕐" }
+        ],
+        science: [
+            { title: "Animal Homes", description: "Where do different animals live and sleep?", difficulty: "easy", icon: "🏠" },
+            { title: "Growing Plants", description: "How do plants grow from seeds?", difficulty: "easy", icon: "🌱" },
+            { title: "Hot & Cold", description: "Explore temperature and how things feel", difficulty: "easy", icon: "🌡️" },
+            { title: "Day & Night", description: "Why does it get dark? Learn about day and night", difficulty: "easy", icon: "🌙" }
+        ],
+        english: [
+            { title: "Reading Words", description: "Put letters together to read bigger words", difficulty: "easy", icon: "📖" },
+            { title: "Writing Letters", description: "Practice writing neat letters and words", difficulty: "easy", icon: "✏️" },
+            { title: "Picture Stories", description: "Tell stories using pictures and words", difficulty: "easy", icon: "🖼️" },
+            { title: "Rhyming Words", description: "Find words that sound the same at the end", difficulty: "easy", icon: "🎵" }
+        ],
+        art: [
+            { title: "Drawing Pictures", description: "Draw people, animals, and objects", difficulty: "easy", icon: "✏️" },
+            { title: "Making Models", description: "Build 3D models with clay and materials", difficulty: "easy", icon: "🧱" },
+            { title: "Painting Fun", description: "Use brushes and paints to create art", difficulty: "easy", icon: "🎨" },
+            { title: "Creative Collages", description: "Combine pictures and materials", difficulty: "easy", icon: "🖼️" }
+        ],
+        music: [
+            { title: "Singing Together", description: "Join in with group singing", difficulty: "easy", icon: "🎤" },
+            { title: "Instrument Sounds", description: "Recognize different instrument sounds", difficulty: "easy", icon: "🎸" },
+            { title: "Making Rhythms", description: "Create rhythms with instruments", difficulty: "easy", icon: "🥁" },
+            { title: "Moving to Music", description: "Dance and move with the beat", difficulty: "easy", icon: "💃" }
+        ]
+    },
+    p3: {
+        maths: [
+            { title: "Numbers 1-50", description: "Work with numbers up to 50", difficulty: "medium", icon: "🔢" },
+            { title: "Addition & Subtraction", description: "Math operations with larger numbers", difficulty: "medium", icon: "🧮" },
+            { title: "Shape Patterns", description: "Create and continue patterns", difficulty: "medium", icon: "🔷" },
+            { title: "Money Counting", description: "Count coins and notes", difficulty: "medium", icon: "💰" }
+        ],
+        science: [
+            { title: "Life Cycles", description: "How animals and plants grow and change", difficulty: "medium", icon: "🔄" },
+            { title: "Materials & Objects", description: "Different materials and their properties", difficulty: "medium", icon: "🧱" },
+            { title: "Light & Shadows", description: "How light works and makes shadows", difficulty: "medium", icon: "💡" },
+            { title: "Sounds Around Us", description: "Different sounds and how we hear them", difficulty: "medium", icon: "🔊" }
+        ],
+        english: [
+            { title: "Reading Stories", description: "Read longer stories and understand them", difficulty: "medium", icon: "📚" },
+            { title: "Writing Sentences", description: "Write complete sentences about pictures", difficulty: "medium", icon: "✍️" },
+            { title: "Word Families", description: "Groups of words that sound similar", difficulty: "medium", icon: "👨‍👩‍👧‍👦" },
+            { title: "Poetry Fun", description: "Simple poems and rhythmic language", difficulty: "medium", icon: "🎭" }
+        ],
+        art: [
+            { title: "Detailed Drawing", description: "Add details and textures to drawings", difficulty: "medium", icon: "✏️" },
+            { title: "Sculpture Making", description: "Create 3D sculptures from different materials", difficulty: "medium", icon: "🗿" },
+            { title: "Print Making", description: "Make prints using stamps and stencils", difficulty: "medium", icon: "🖨️" },
+            { title: "Art Appreciation", description: "Look at and talk about famous artworks", difficulty: "medium", icon: "👁️" }
+        ]
+    },
+    p4: {
+        maths: [
+            { title: "Numbers 1-100", description: "Master all numbers up to 100", difficulty: "medium", icon: "🔢" },
+            { title: "Times Tables", description: "Learn multiplication tables", difficulty: "medium", icon: "✖️" },
+            { title: "Basic Fractions", description: "Half, quarter, and simple fractions", difficulty: "medium", icon: "🍕" },
+            { title: "Measurement", description: "Length, weight, and capacity", difficulty: "medium", icon: "📏" }
+        ],
+        science: [
+            { title: "Minibeasts & Habitats", description: "Insects, spiders, and small creatures", difficulty: "medium", icon: "🐛" },
+            { title: "Forces & Motion", description: "How things move and what makes them stop", difficulty: "medium", icon: "🚀" },
+            { title: "Healthy Living", description: "How to stay healthy and strong", difficulty: "medium", icon: "❤️" },
+            { title: "Our Environment", description: "Taking care of our world", difficulty: "medium", icon: "🌍" }
+        ],
+        english: [
+            { title: "Chapter Books", description: "Read longer books with chapters", difficulty: "medium", icon: "📖" },
+            { title: "Creative Writing", description: "Write your own amazing stories", difficulty: "medium", icon: "✨" },
+            { title: "Grammar Basics", description: "Learn about nouns, verbs, and adjectives", difficulty: "medium", icon: "📝" },
+            { title: "Spelling Patterns", description: "Learn spelling rules and patterns", difficulty: "medium", icon: "🔤" }
+        ]
+    },
+    highschool: {
+        maths: [
+            { title: "Algebra Basics", description: "Introduction to variables and equations", difficulty: "medium", icon: "🔢" },
+            { title: "Geometry", description: "Shapes, angles, and spatial reasoning", difficulty: "medium", icon: "📐" },
+            { title: "Statistics", description: "Data analysis and probability", difficulty: "medium", icon: "📊" }
+        ],
+        science: [
+            { title: "Animals and Their Homes", description: "Learn where different animals live and what they eat", difficulty: "easy", icon: "🐾" },
+            { title: "Plants and Growing", description: "How plants grow, what they need, and parts of a plant", difficulty: "easy", icon: "🌱" },
+            { title: "Weather and Seasons", description: "Understanding sunny, rainy, snowy days and the four seasons", difficulty: "easy", icon: "🌤️" },
+            { title: "Our Amazing Bodies", description: "Learn about your five senses and how your body works", difficulty: "medium", icon: "👂" },
+            { title: "Earth and Space", description: "Day and night, the moon, stars, and our planet Earth", difficulty: "medium", icon: "🌍" },
+            { title: "Simple Machines", description: "Wheels, levers, and pulleys that help us do work", difficulty: "medium", icon: "⚙️" }
+        ],
+        english: [
+            { title: "Letters and Sounds", description: "Learn the alphabet and the sounds each letter makes", difficulty: "easy", icon: "🔤" },
+            { title: "Reading Simple Words", description: "Put letters together to make and read simple words", difficulty: "easy", icon: "📖" },
+            { title: "Story Time", description: "Listen to stories and talk about what happens", difficulty: "easy", icon: "📚" },
+            { title: "Writing My Name", description: "Practice writing your name and simple sentences", difficulty: "medium", icon: "✏️" },
+            { title: "Rhyming Words", description: "Find words that sound alike and make up rhymes", difficulty: "medium", icon: "🎵" },
+            { title: "Describing Things", description: "Use fun words to describe colors, sizes, and feelings", difficulty: "medium", icon: "🎨" }
+        ],
+        history: [
+            { title: "My Family Story", description: "Learn about your family and how families are different", difficulty: "easy", icon: "👨‍👩‍👧‍👦" },
+            { title: "Long, Long Ago", description: "Discover how people lived before you were born", difficulty: "easy", icon: "🏛️" },
+            { title: "Famous People", description: "Meet important people who did amazing things", difficulty: "medium", icon: "⭐" },
+            { title: "Holidays and Traditions", description: "Why we celebrate different holidays and traditions", difficulty: "medium", icon: "🎉" }
+        ],
+        geography: [
+            { title: "My Home and School", description: "Explore your neighborhood and community", difficulty: "easy", icon: "🏠" },
+            { title: "Maps and Directions", description: "Learn about maps and finding your way around", difficulty: "medium", icon: "🗺️" },
+            { title: "Different Places", description: "Discover cities, farms, mountains, and beaches", difficulty: "medium", icon: "🏔️" },
+            { title: "People Around the World", description: "Learn how children live in different countries", difficulty: "medium", icon: "🌎" }
+        ],
+        languages: [
+            { title: "Hello in Many Languages", description: "Learn to say hello and basic words in different languages", difficulty: "easy", icon: "👋" },
+            { title: "Fun with Spanish", description: "Colors, numbers, and simple Spanish words", difficulty: "medium", icon: "🇪🇸" },
+            { title: "French Fun", description: "Basic French words and phrases for kids", difficulty: "medium", icon: "🇫🇷" }
+        ],
+        computing: [
+            { title: "Computer Parts", description: "Learn about keyboards, mice, and computer screens", difficulty: "easy", icon: "💻" },
+            { title: "Simple Coding", description: "Use blocks to create simple computer programs", difficulty: "medium", icon: "🧩" },
+            { title: "Digital Art", description: "Create pictures and drawings on the computer", difficulty: "medium", icon: "🎨" },
+            { title: "Internet Safety", description: "Learn how to stay safe when using computers", difficulty: "easy", icon: "🛡️" }
+        ]
+    },
+    college: {
+        maths: [
+            { title: "Calculus I", description: "Limits, derivatives, and applications of differentiation", difficulty: "hard", icon: "∞" },
+            { title: "Linear Algebra", description: "Matrices, vector spaces, and linear transformations", difficulty: "hard", icon: "📊" },
+            { title: "Statistics and Probability", description: "Advanced statistical analysis and probability theory", difficulty: "hard", icon: "📈" },
+            { title: "Discrete Mathematics", description: "Logic, sets, combinatorics, and graph theory", difficulty: "hard", icon: "🔢" },
+            { title: "Differential Equations", description: "Solving and analyzing differential equations", difficulty: "hard", icon: "📐" },
+            { title: "Mathematical Modeling", description: "Real-world applications and mathematical modeling", difficulty: "hard", icon: "🧮" }
+        ],
+        science: [
+            { title: "Organic Chemistry", description: "Carbon compounds, reactions, and synthesis", difficulty: "hard", icon: "🧪" },
+            { title: "Advanced Physics", description: "Quantum mechanics, relativity, and modern physics", difficulty: "hard", icon: "⚛️" },
+            { title: "Molecular Biology", description: "DNA, RNA, protein synthesis, and gene expression", difficulty: "hard", icon: "🧬" },
+            { title: "Biochemistry", description: "Chemical processes in living organisms", difficulty: "hard", icon: "🔬" },
+            { title: "Research Methods", description: "Scientific method, experimental design, and analysis", difficulty: "medium", icon: "📋" },
+            { title: "Environmental Science", description: "Ecology, conservation, and environmental policy", difficulty: "medium", icon: "🌿" }
+        ],
+        english: [
+            { title: "Advanced Composition", description: "Academic writing, research papers, and rhetoric", difficulty: "medium", icon: "📝" },
+            { title: "Literary Theory", description: "Critical approaches to literature and analysis", difficulty: "hard", icon: "📚" },
+            { title: "Creative Writing Workshop", description: "Fiction, poetry, and advanced creative techniques", difficulty: "medium", icon: "✍️" },
+            { title: "Linguistics", description: "Language structure, phonetics, and language change", difficulty: "hard", icon: "🗣️" },
+            { title: "World Literature", description: "Global literary traditions and comparative analysis", difficulty: "medium", icon: "🌍" },
+            { title: "Technical Writing", description: "Professional writing for specific audiences", difficulty: "medium", icon: "💼" }
+        ],
+        history: [
+            { title: "Historical Research Methods", description: "Primary sources, historiography, and research techniques", difficulty: "medium", icon: "🔍" },
+            { title: "Modern World History", description: "20th and 21st century global developments", difficulty: "medium", icon: "🌍" },
+            { title: "American History", description: "Colonial period through contemporary United States", difficulty: "medium", icon: "🇺🇸" },
+            { title: "European History", description: "Medieval through modern European developments", difficulty: "medium", icon: "🏰" },
+            { title: "Social History", description: "History of everyday people and social movements", difficulty: "medium", icon: "👥" },
+            { title: "Digital History", description: "Technology and historical research methods", difficulty: "hard", icon: "💻" }
+        ],
+        geography: [
+            { title: "GIS and Mapping", description: "Geographic Information Systems and spatial analysis", difficulty: "hard", icon: "🗺️" },
+            { title: "Urban Geography", description: "City development, planning, and urban issues", difficulty: "medium", icon: "🏙️" },
+            { title: "Cultural Geography", description: "Culture, identity, and place in geographic context", difficulty: "medium", icon: "🌍" },
+            { title: "Environmental Geography", description: "Human-environment interactions and sustainability", difficulty: "medium", icon: "🌱" },
+            { title: "Economic Geography", description: "Global economy, trade, and spatial economics", difficulty: "hard", icon: "💼" },
+            { title: "Political Geography", description: "Borders, sovereignty, and geopolitics", difficulty: "medium", icon: "🏛️" }
+        ],
+        languages: [
+            { title: "Advanced Spanish", description: "Literature, culture, and advanced grammar", difficulty: "hard", icon: "🇪🇸" },
+            { title: "French Literature", description: "Classic and contemporary French texts", difficulty: "hard", icon: "🇫🇷" },
+            { title: "German Studies", description: "Advanced German language and culture", difficulty: "hard", icon: "🇩🇪" },
+            { title: "Linguistics Theory", description: "Language structure, acquisition, and change", difficulty: "hard", icon: "🗣️" },
+            { title: "Translation Studies", description: "Theory and practice of translation", difficulty: "hard", icon: "📖" },
+            { title: "Comparative Literature", description: "Literature across languages and cultures", difficulty: "hard", icon: "📚" }
+        ],
+        computing: [
+            { title: "Data Structures and Algorithms", description: "Advanced programming concepts and algorithm analysis", difficulty: "hard", icon: "⚡" },
+            { title: "Software Engineering", description: "Large-scale software development and project management", difficulty: "hard", icon: "🏗️" },
+            { title: "Database Systems", description: "Advanced database design and management systems", difficulty: "hard", icon: "🗄️" },
+            { title: "Computer Networks", description: "Network protocols, security, and distributed systems", difficulty: "hard", icon: "🌐" },
+            { title: "Artificial Intelligence", description: "Machine learning algorithms and AI system design", difficulty: "hard", icon: "🤖" },
+            { title: "Cybersecurity", description: "Security protocols, cryptography, and ethical hacking", difficulty: "hard", icon: "🔒" }
+        ]
+    },
+    
+    university: {
+        maths: [
+            { title: "Real Analysis", description: "Rigorous foundations of calculus and mathematical analysis", difficulty: "hard", icon: "∞" },
+            { title: "Abstract Algebra", description: "Groups, rings, fields, and algebraic structures", difficulty: "hard", icon: "🔢" },
+            { title: "Complex Analysis", description: "Functions of complex variables and applications", difficulty: "hard", icon: "📐" },
+            { title: "Topology", description: "Continuous deformations and topological spaces", difficulty: "hard", icon: "🌐" },
+            { title: "Number Theory", description: "Properties of integers and prime numbers", difficulty: "hard", icon: "🧮" },
+            { title: "Mathematical Logic", description: "Formal logic, proof theory, and foundations", difficulty: "hard", icon: "⚡" }
+        ],
+        science: [
+            { title: "Quantum Mechanics", description: "Advanced quantum theory and applications", difficulty: "hard", icon: "⚛️" },
+            { title: "Advanced Biochemistry", description: "Metabolic pathways and enzyme kinetics", difficulty: "hard", icon: "🧪" },
+            { title: "Theoretical Physics", description: "Mathematical foundations of physical theories", difficulty: "hard", icon: "🌌" },
+            { title: "Computational Biology", description: "Bioinformatics and computational methods", difficulty: "hard", icon: "💻" },
+            { title: "Research Methodology", description: "Advanced research design and statistical analysis", difficulty: "medium", icon: "📊" },
+            { title: "Scientific Writing", description: "Publishing research and grant writing", difficulty: "medium", icon: "📝" }
+        ],
+        english: [
+            { title: "Critical Theory", description: "Advanced literary and cultural theory", difficulty: "hard", icon: "📚" },
+            { title: "Dissertation Writing", description: "Independent research and thesis development", difficulty: "hard", icon: "📖" },
+            { title: "Digital Humanities", description: "Technology in literary and cultural studies", difficulty: "hard", icon: "💻" },
+            { title: "Postcolonial Literature", description: "Literature from formerly colonized nations", difficulty: "hard", icon: "🌍" },
+            { title: "Rhetoric and Composition", description: "Advanced theories of writing and communication", difficulty: "hard", icon: "🗣️" },
+            { title: "Academic Publishing", description: "Scholarly writing and publication process", difficulty: "medium", icon: "📄" }
+        ],
+        history: [
+            { title: "Historiography", description: "History of historical writing and methodology", difficulty: "hard", icon: "📚" },
+            { title: "Primary Source Analysis", description: "Advanced archival research and analysis", difficulty: "hard", icon: "🔍" },
+            { title: "Comparative History", description: "Cross-cultural and comparative historical analysis", difficulty: "hard", icon: "🌍" },
+            { title: "Digital History Methods", description: "Technology in historical research and presentation", difficulty: "hard", icon: "💻" },
+            { title: "Public History", description: "History in museums, media, and public spaces", difficulty: "medium", icon: "🏛️" },
+            { title: "Thesis Research", description: "Independent historical research project", difficulty: "hard", icon: "📖" }
+        ],
+        geography: [
+            { title: "Advanced GIS Analysis", description: "Spatial modeling and advanced GIS techniques", difficulty: "hard", icon: "🗺️" },
+            { title: "Geographic Research Methods", description: "Quantitative and qualitative research in geography", difficulty: "hard", icon: "📊" },
+            { title: "Climate Science", description: "Advanced climatology and climate change research", difficulty: "hard", icon: "🌡️" },
+            { title: "Geopolitical Analysis", description: "Advanced political geography and international relations", difficulty: "hard", icon: "🌍" },
+            { title: "Urban Planning Theory", description: "Advanced urban development and planning concepts", difficulty: "hard", icon: "🏙️" },
+            { title: "Geographic Thesis", description: "Independent geographic research project", difficulty: "hard", icon: "📖" }
+        ],
+        languages: [
+            { title: "Advanced Linguistics", description: "Theoretical linguistics and language research", difficulty: "hard", icon: "🗣️" },
+            { title: "Literature Specialization", description: "Focused study in specific literary periods or authors", difficulty: "hard", icon: "📚" },
+            { title: "Language Teaching Methods", description: "Pedagogy and second language acquisition", difficulty: "hard", icon: "👨‍🏫" },
+            { title: "Translation Theory", description: "Advanced translation studies and practice", difficulty: "hard", icon: "📖" },
+            { title: "Cultural Studies", description: "Advanced cultural analysis through language", difficulty: "hard", icon: "🌍" },
+            { title: "Research Project", description: "Independent language or literature research", difficulty: "hard", icon: "📝" }
+        ],
+        computing: [
+            { title: "Advanced Algorithms", description: "Complex data structures and optimization techniques", difficulty: "hard", icon: "⚡" },
+            { title: "Machine Learning", description: "AI algorithms and deep learning systems", difficulty: "hard", icon: "🤖" },
+            { title: "Software Architecture", description: "Large-scale system design and patterns", difficulty: "hard", icon: "🏗️" },
+            { title: "Cybersecurity", description: "Advanced security protocols and ethical hacking", difficulty: "hard", icon: "🔒" },
+            { title: "Research Project", description: "Independent computer science research", difficulty: "hard", icon: "🔬" },
+            { title: "Industry Capstone", description: "Real-world software development project", difficulty: "hard", icon: "💼" }
+        ]
+    }
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get education level from URL or localStorage
+    const urlParams = new URLSearchParams(window.location.search);
+    const educationLevel = urlParams.get('level') || localStorage.getItem('ageGroup') || 'p5';
+    const selectedSubject = urlParams.get('subject') || 'maths';
+    
+    // Update header
+    updateHeader(educationLevel);
+    
+    // Setup subject navigation
+    setupSubjectNavigation(educationLevel, selectedSubject);
+    
+    // Show initial content
+    showTopics(educationLevel, selectedSubject);
+});
+
+function updateHeader(level) {
+    const levelNames = {
+        p1: 'Primary School',
+        p2: 'Primary School', 
+        p3: 'Primary School',
+        p4: 'Primary School',
+        p5: 'Primary School',
+        p6: 'Primary School',
+        p7: 'Primary School',
+        primary: 'Primary School',
+        highschool: 'High School',
+        college: 'College',
+        university: 'University'
+    };
+    
+    const levelIcons = {
+        p1: 'fas fa-child',
+        p2: 'fas fa-child',
+        p3: 'fas fa-child',
+        p4: 'fas fa-child',
+        p5: 'fas fa-child',
+        p6: 'fas fa-child',
+        p7: 'fas fa-child',
+        primary: 'fas fa-child',
+        highschool: 'fas fa-graduation-cap',
+        college: 'fas fa-university',
+        university: 'fas fa-user-graduate'
+    };
+    
+    document.getElementById('levelName').textContent = levelNames[level] || 'Primary School';
+    document.querySelector('#levelBadge i').className = levelIcons[level] || 'fas fa-child';
+}
+
+function setupSubjectNavigation(level, selectedSubject) {
+    const subjectTabs = document.querySelectorAll('.subject-nav-link');
+    
+    // Hide subjects not available for this level
+    const availableSubjects = Object.keys(curriculumData[level] || curriculumData.highschool);
+    subjectTabs.forEach(tab => {
+        const subject = tab.dataset.subject;
+        if (availableSubjects.includes(subject)) {
+            tab.style.display = 'block';
+            if (subject === selectedSubject) {
+                tab.classList.add('active');
+            } else {
+                tab.classList.remove('active');
+            }
+        } else {
+            tab.style.display = 'none';
+        }
+    });
+    
+    // Add click handlers
+    subjectTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const subject = this.dataset.subject;
+            
+            // Update active tab
+            subjectTabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Show topics for this subject
+            showTopics(level, subject);
+        });
+    });
+}
+
+function showTopics(level, subject) {
+    const container = document.getElementById('topicsContent');
+    const topics = curriculumData[level]?.[subject] || curriculumData.highschool[subject] || [];
+    
+    if (topics.length === 0) {
+        container.innerHTML = '<div class="no-topics">No topics available for this subject at this level.</div>';
+        return;
+    }
+    
+    container.innerHTML = `
+        <div class="topics-grid">
+            ${topics.map(topic => `
+                <div class="topic-card ${topic.difficulty}" data-topic="${topic.title}" data-subject="${subject}">
+                    <div class="topic-icon">${topic.icon}</div>
+                    <h3 class="topic-title">${topic.title}</h3>
+                    <p class="topic-description">${topic.description}</p>
+                    <div class="topic-difficulty">
+                        <span class="difficulty-badge ${topic.difficulty}">${topic.difficulty}</span>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+    
+    // Add click handlers to topic cards
+    container.querySelectorAll('.topic-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const topic = this.dataset.topic;
+            const subject = this.dataset.subject;
+            
+            // Store selection
+            localStorage.setItem('selectedTopic', topic);
+            localStorage.setItem('selectedSubject', subject);
+            
+            // Show loading state
+            this.classList.add('loading');
+            
+            // Redirect to learning style selection
+            window.location.href = `/select-style?subject=${subject}&topic=${encodeURIComponent(topic)}`;
+        });
+    });
+}
+</script>
+{% endblock %}

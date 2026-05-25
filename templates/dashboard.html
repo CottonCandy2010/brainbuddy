@@ -1,0 +1,614 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container-fluid dashboard-container">
+    <div class="row">
+        <!-- Main Dashboard Content -->
+        <div class="col-lg-8 main-content">
+            <!-- Welcome Header -->
+            <div class="card shadow-sm mb-4 animate-slide-in" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <div class="card-body text-white">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <img src="{{ url_for('static', filename='images/brain-buddy-logo.png') }}" 
+                                 alt="Brain Buddy Kids" class="dashboard-buddy-logo">
+                        </div>
+                        <div class="col-md-6">
+                            <h2 class="mb-2">Welcome Back, Super Learner!</h2>
+                            <p class="mb-0">Keep exploring, keep discovering! See how awesome you're doing and unlock cool rewards!</p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <div class="d-flex flex-column align-items-end">
+                                <h3 class="mb-1">{{ data.total_points }} pts</h3>
+                                <small>Total Points</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning Streak -->
+            {% if data.streak %}
+            <div class="card shadow-sm mb-4 animate-fade-in-up" style="animation-delay: 0.2s;">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h5 class="card-title mb-3">🔥 Learning Streak - You're On Fire!</h5>
+                            <div class="d-flex align-items-center">
+                                <div class="streak-circle me-3">
+                                    <span class="streak-number">{{ data.streak.current_streak }}</span>
+                                    <small>days</small>
+                                </div>
+                                <div>
+                                    <p class="mb-1">Current streak: {{ data.streak.current_streak }} days</p>
+                                    <p class="mb-0 text-muted">Best streak: {{ data.streak.longest_streak }} days</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="streak-flames">
+                                {% set flame_count = data.streak.current_streak if data.streak.current_streak <= 7 else 7 %}
+                                {% for i in range(flame_count) %}
+                                <span class="flame">🔥</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Active Challenges -->
+            {% if data.active_challenges %}
+            <div class="card shadow-sm mb-4 animate-fade-in-up" style="animation-delay: 0.4s;">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">🎯 Daily Challenges</h5>
+                    {% for challenge in data.active_challenges %}
+                    <div class="challenge-item p-3 mb-3 rounded" style="background-color: #f8f9fa; border-left: 4px solid #007bff;">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h6 class="mb-1">{{ challenge.challenge_name }}</h6>
+                                <div class="progress mb-2" style="height: 8px;">
+                                    <div class="progress-bar" role="progressbar" 
+                                         style="width: {{ (challenge.current_progress / challenge.target_value * 100) }}%"></div>
+                                </div>
+                                <small class="text-muted">{{ challenge.current_progress }}/{{ challenge.target_value }}</small>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <span class="badge bg-warning">{{ challenge.reward_points }} pts</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Recent Progress -->
+            <div class="card shadow-sm mb-4 animate-fade-in-up" style="animation-delay: 0.6s;">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">📈 Recent Activity</h5>
+                    {% if data.recent_progress %}
+                    <div class="timeline">
+                        {% for progress in data.recent_progress[:5] %}
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-primary"></div>
+                            <div class="timeline-content">
+                                <h6 class="mb-1">{{ progress.subject.title() }} - {{ progress.topic }}</h6>
+                                <p class="mb-1">
+                                    <span class="badge bg-success">{{ progress.completion_percentage }}%</span>
+                                    <span class="badge bg-info">{{ progress.learning_style }}</span>
+                                    <span class="badge bg-warning">+{{ progress.points_earned }} pts</span>
+                                </p>
+                                <small class="text-muted">{{ progress.completed_at.strftime('%B %d, %Y at %I:%M %p') }}</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-chart-line fa-3x text-muted mb-3"></i>
+                        <p>Start learning to see your progress here!</p>
+                        <a href="{{ url_for('select_subject') }}" class="btn btn-primary">Start Learning</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Subject Progress -->
+            {% if data.subject_stats %}
+            <div class="card shadow-sm mb-4 animate-fade-in-up" style="animation-delay: 0.8s;">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">📚 Subject Progress</h5>
+                    <div class="row">
+                        {% for stat in data.subject_stats %}
+                        <div class="col-md-6 mb-3">
+                            <div class="subject-card p-3 rounded" style="background-color: #f8f9fa;">
+                                <h6 class="mb-2">{{ stat.subject.title() }}</h6>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <small>Lessons: {{ stat.lessons_completed }}</small>
+                                    <small>Avg: {{ "%.1f"|format(stat.avg_score) }}%</small>
+                                </div>
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar bg-success" role="progressbar" 
+                                         style="width: {{ stat.avg_score }}%"></div>
+                                </div>
+                                <small class="text-muted">{{ stat.total_time }} minutes studied</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4 sidebar-content">
+            <!-- Achievements -->
+            <div class="card shadow-sm mb-4 animate-slide-in-right" style="animation-delay: 0.3s;">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">🏆 Achievements</h5>
+                    {% if data.achievements %}
+                    <div class="achievements-grid">
+                        {% for achievement in data.achievements[:6] %}
+                        <div class="achievement-badge text-center p-2 m-1 rounded" 
+                             style="background-color: #f8f9fa; border: 2px solid #{{ achievement.badge_color == 'success' and '28a745' or achievement.badge_color == 'info' and '17a2b8' or achievement.badge_color == 'warning' and 'ffc107' or '6c757d' }};">
+                            <i class="{{ achievement.badge_icon }} fa-2x mb-2" 
+                               style="color: #{{ achievement.badge_color == 'success' and '28a745' or achievement.badge_color == 'info' and '17a2b8' or achievement.badge_color == 'warning' and 'ffc107' or '6c757d' }};"></i>
+                            <h6 class="mb-1" style="font-size: 0.8rem;">{{ achievement.badge_name }}</h6>
+                            <small class="text-muted">{{ achievement.points_value }} pts</small>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-3">
+                        <i class="fas fa-trophy fa-3x text-muted mb-2"></i>
+                        <p class="text-muted">Complete lessons to earn achievements!</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Leaderboard -->
+            <div class="card shadow-sm mb-4 animate-slide-in-right" style="animation-delay: 0.5s;">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">🎖️ Leaderboard</h5>
+                    {% if leaderboard %}
+                    <div class="leaderboard">
+                        {% for student in leaderboard[:5] %}
+                        <div class="leaderboard-item d-flex align-items-center justify-content-between p-2 mb-2 rounded"
+                             style="background-color: {% if loop.index == 1 %}#fff3cd{% elif loop.index == 2 %}#d1ecf1{% elif loop.index == 3 %}#d4edda{% else %}#f8f9fa{% endif %};">
+                            <div class="d-flex align-items-center">
+                                <span class="rank-badge me-2">{{ loop.index }}</span>
+                                <div>
+                                    <h6 class="mb-0" style="font-size: 0.9rem;">{{ student.student_id.title().replace('_', ' ') }}</h6>
+                                    <small class="text-muted">{{ student.total_lessons }} lessons</small>
+                                </div>
+                            </div>
+                            <div class="text-end">
+                                <span class="badge bg-primary">{{ student.total_points }} pts</span>
+                                {% if student.current_streak > 0 %}
+                                <br><small class="text-muted">{{ student.current_streak }}🔥</small>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-3">
+                        <i class="fas fa-users fa-3x text-muted mb-2"></i>
+                        <p class="text-muted">Be the first on the leaderboard!</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="card shadow-sm animate-slide-in-right" style="animation-delay: 0.7s;">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">🚀 Quick Actions</h5>
+                    <div class="d-grid gap-2">
+                        <a href="{{ url_for('select_subject') }}?student_id={{ student_id }}" 
+                           class="btn btn-primary">Start New Lesson</a>
+                        <a href="{{ url_for('dashboard') }}?student_id={{ student_id }}" 
+                           class="btn btn-outline-secondary">Refresh Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Dashboard Container Animations */
+.dashboard-container {
+    opacity: 0;
+    animation: dashboardFadeIn 0.8s ease-out forwards;
+}
+
+@keyframes dashboardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Main Content Animations */
+.main-content {
+    opacity: 0;
+    animation: slideInLeft 0.6s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+.sidebar-content {
+    opacity: 0;
+    animation: slideInRight 0.6s ease-out forwards;
+    animation-delay: 0.4s;
+}
+
+/* Slide-in Animations */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Individual Card Animations */
+.animate-slide-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.animate-slide-in-right {
+    opacity: 0;
+    transform: translateX(30px);
+    animation: slideInFromRight 0.5s ease-out forwards;
+}
+
+@keyframes slideInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Card Hover Effects */
+.card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Challenge Items Animation */
+.challenge-item {
+    transition: all 0.3s ease;
+    transform: translateX(0);
+}
+
+.challenge-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0,123,255,0.2);
+}
+
+/* Timeline Animations */
+.timeline-item {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: timelineSlideIn 0.4s ease-out forwards;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.2s; }
+.timeline-item:nth-child(3) { animation-delay: 0.3s; }
+.timeline-item:nth-child(4) { animation-delay: 0.4s; }
+.timeline-item:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes timelineSlideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -34px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    animation: markerPulse 2s infinite;
+}
+
+@keyframes markerPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: -29px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #007bff, #6c757d);
+    animation: timelineGrow 1s ease-out;
+}
+
+@keyframes timelineGrow {
+    from { height: 0; }
+    to { height: 100%; }
+}
+
+/* Progress Bar Animations */
+.progress-bar {
+    transition: width 1s ease-in-out;
+    animation: progressGlow 2s infinite alternate;
+}
+
+@keyframes progressGlow {
+    0% { box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); }
+    100% { box-shadow: 0 0 20px rgba(40, 167, 69, 0.8); }
+}
+
+/* Achievement Badge Effects */
+.achievement-badge {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+}
+
+.achievement-badge:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+/* Leaderboard Animations */
+.leaderboard-item {
+    opacity: 0;
+    transform: translateX(20px);
+    animation: leaderboardSlideIn 0.4s ease-out forwards;
+    transition: all 0.3s ease;
+}
+
+.leaderboard-item:nth-child(1) { 
+    animation-delay: 0.1s;
+    background: linear-gradient(45deg, #fff3cd, #ffeaa7) !important;
+}
+.leaderboard-item:nth-child(2) { 
+    animation-delay: 0.2s;
+    background: linear-gradient(45deg, #d1ecf1, #81ecec) !important;
+}
+.leaderboard-item:nth-child(3) { 
+    animation-delay: 0.3s;
+    background: linear-gradient(45deg, #d4edda, #00b894) !important;
+}
+.leaderboard-item:nth-child(4) { animation-delay: 0.4s; }
+.leaderboard-item:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes leaderboardSlideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.leaderboard-item:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    color: white;
+    font-weight: bold;
+    font-size: 0.8rem;
+    animation: badgeRotate 3s linear infinite;
+}
+
+@keyframes badgeRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Streak Circle Enhanced */
+.streak-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    animation: streakPulse 2s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+}
+
+@keyframes streakPulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(255, 107, 107, 0.8);
+    }
+}
+
+.streak-number {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.streak-flames {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+}
+
+.flame {
+    font-size: 1.2rem;
+    animation: flicker 2s infinite alternate;
+    text-shadow: 0 0 10px rgba(255, 165, 0, 0.8);
+}
+
+@keyframes flicker {
+    0% { 
+        transform: scale(1) rotate(-2deg);
+        text-shadow: 0 0 10px rgba(255, 165, 0, 0.8);
+    }
+    100% { 
+        transform: scale(1.1) rotate(2deg);
+        text-shadow: 0 0 15px rgba(255, 165, 0, 1);
+    }
+}
+
+/* Button Hover Effects */
+.btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    position: relative;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Subject Cards Animation */
+.subject-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.subject-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    background: linear-gradient(45deg, #f8f9fa, #e9ecef) !important;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    .main-content, .sidebar-content {
+        animation: fadeInUp 0.5s ease-out forwards;
+    }
+    
+    .animate-slide-in-right {
+        animation: fadeInUp 0.5s ease-out forwards;
+    }
+}
+
+/* Loading States */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+{% endblock %}

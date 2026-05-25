@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}Custom Lesson Content{% endblock %}
+
+{% block content %}
+<section class="lesson-page animate-fade-in">
+    <!-- Clean lesson header -->
+    <div class="lesson-header">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="lesson-title">Ready for Your Content</h1>
+                <p class="lesson-subtitle">Custom Study Materials</p>
+            </div>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                <button class="btn btn-primary back-btn" onclick="window.history.back()">
+                    <i class="fas fa-arrow-left me-2"></i> Back
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Content area ready for your materials -->
+    <div class="content-container">
+        <div class="content-placeholder">
+            <h3>Content Area Ready</h3>
+            <p>This space is ready for your custom study guides and educational materials.</p>
+            <p>You can now add your own content using Gemini assistance.</p>
+        </div>
+    </div>
+</section>
+
+<style>
+.content-placeholder {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(135, 206, 235, 0.2);
+    border: 2px dashed #87CEEB;
+}
+
+.content-placeholder h3 {
+    color: hsl(var(--primary));
+    margin-bottom: 20px;
+}
+
+.content-placeholder p {
+    color: #666;
+    margin-bottom: 15px;
+}
+</style>
+{% endblock %}

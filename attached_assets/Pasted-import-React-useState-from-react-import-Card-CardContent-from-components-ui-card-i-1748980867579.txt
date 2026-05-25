@@ -1,0 +1,68 @@
+import React, { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Select, SelectItem } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
+const skinTones = ["White", "Brown", "Black", "Chinese", "Vitiligo"];
+const hairTypes = ["Straight", "Short", "Medium", "Long", "Afro", "Braids", "Hijab", "Curly", "Wavy"];
+const eyeShapes = ["Almond", "Round", "Hooded", "Monolid", "Upturned", "Downturned"];
+const outfits = ["Cultural", "Hoodie", "Dress", "T-shirt", "Shorts"];
+
+export default function CharacterCreator() {
+  const [skin, setSkin] = useState("White");
+  const [hairColor, setHairColor] = useState("Brown");
+  const [hairType, setHairType] = useState("Straight");
+  const [eyeShape, setEyeShape] = useState("Almond");
+  const [eyeColor, setEyeColor] = useState("Blue");
+  const [outfit, setOutfit] = useState("Hoodie");
+
+  return (
+    <div className="p-4 grid gap-4 max-w-xl mx-auto">
+      <h1 className="text-2xl font-bold text-center">Create Your Character</h1>
+      <Card>
+        <CardContent className="grid gap-4 p-4">
+          <Select label="Skin Tone" value={skin} onValueChange={setSkin}>
+            {skinTones.map(tone => (
+              <SelectItem key={tone} value={tone}>{tone}</SelectItem>
+            ))}
+          </Select>
+
+          <Input
+            type="text"
+            placeholder="Hair Color"
+            value={hairColor}
+            onChange={e => setHairColor(e.target.value)}
+          />
+
+          <Select label="Hair Type" value={hairType} onValueChange={setHairType}>
+            {hairTypes.map(type => (
+              <SelectItem key={type} value={type}>{type}</SelectItem>
+            ))}
+          </Select>
+
+          <Select label="Eye Shape" value={eyeShape} onValueChange={setEyeShape}>
+            {eyeShapes.map(shape => (
+              <SelectItem key={shape} value={shape}>{shape}</SelectItem>
+            ))}
+          </Select>
+
+          <Input
+            type="text"
+            placeholder="Eye Color"
+            value={eyeColor}
+            onChange={e => setEyeColor(e.target.value)}
+          />
+
+          <Select label="Outfit" value={outfit} onValueChange={setOutfit}>
+            {outfits.map(o => (
+              <SelectItem key={o} value={o}>{o}</SelectItem>
+            ))}
+          </Select>
+
+          <Button className="mt-4">Generate Character</Button>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

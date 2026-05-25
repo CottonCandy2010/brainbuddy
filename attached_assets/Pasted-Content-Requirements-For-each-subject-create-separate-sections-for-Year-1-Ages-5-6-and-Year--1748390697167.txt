@@ -1,0 +1,368 @@
+Content Requirements:
+
+For each subject, create separate sections for 'Year 1 (Ages 5-6)' and 'Year 2 (Ages 6-7)', with a brief mention of 'Early Year 3 (Ages 7-8)' concepts where appropriate.
+Language Style: Use very simple, child-friendly language. Avoid jargon.
+Explanations: Concise and easy to understand.
+Visuals: Suggest accompanying visual elements (e.g., "Image: Colourful diagram of a plant").
+Interactive Elements: Suggest types of interactive activities (e.g., "Activity: Drag-and-drop game").
+Examples: Provide clear, simple examples relevant to the age group.
+Practice: Include simple practice questions or activity ideas.
+Tone: Engaging, encouraging, and positive.
+Detailed Content for Brain Buddy App Folders (Ages 6-8):
+1. Maths Folder
+Year 1 (Ages 5-6):
+Topic: Numbers to 20
+Explanation: "Let's learn about numbers! We can count how many things there are, like toys or friends. Numbers help us know 'how many'."
+Activity: "Match the number to the correct group of objects (e.g., connect '3' to three apples)."
+Example: "Count the stars: 1, 2, 3, 4, 5. There are 5 stars!" (Image: 5 stars)
+Practice: "How many balloons? (Image: 7 balloons)"
+Topic: Adding & Subtracting to 10
+Explanation: "Adding means putting things together to find the total. Subtracting means taking things away to find what's left."
+Activity: "Interactive: Click on fingers to show addition (e.g., 3 + 2 = ?)."
+Example: "3 apples + 2 apples = 5 apples. (Image: 3 apples + 2 apples = 5 apples)"
+Practice: "5 birds - 2 birds = ? birds (Image: 5 birds, 2 flying away)"
+Topic: Shapes & Patterns
+Explanation: "Shapes are all around us! Circles are round, squares have four equal sides."
+Visual: "Image: Pictures of a circle, square, triangle, rectangle."
+Activity: "Find the circles in the picture of a house."
+Practice: "What shape is this? (Image: a triangle)"
+Topic: Time (O'clock & Half Past)
+Explanation: "Clocks help us know when to play or eat! O'clock is when the big hand points to 12. Half past is when it points to 6."
+Visual: "Image: Clock faces showing '3 o'clock' and 'half past 7'."
+Activity: "Match the clock to the time word (e.g., connect clock showing '9:00' to 'Nine o'clock')."
+Year 2 (Ages 6-7):
+Topic: Numbers to 100 & Place Value
+Explanation: "Numbers can be big! 'Place value' tells us what a digit is worth. In 23, the '2' means 2 tens, and the '3' means 3 ones."
+Visual: "Image: Number 47 with '4 tens' and '7 ones' highlighted."
+Activity: "Build a number: Drag blocks (tens and ones) to make 54."
+Practice: "What does the '6' mean in 61? (6 ones / 6 tens)"
+Topic: Multiplication & Division (2s, 5s, 10s)
+Explanation: "Multiplication is like adding groups quickly (3 groups of 2). Division is sharing things equally."
+Activity: "Times table pop-quiz game (e.g., 2 x 4 = ?)."
+Example: "2 groups of 5 sweets is 10 sweets (2 x 5 = 10). (Image: 2 bags, 5 sweets in each)"
+Practice: "Share 10 cookies between 2 friends. How many do they get each?"
+Topic: Fractions (Halves, Quarters, Thirds)
+Explanation: "Fractions are parts of a whole! Half means 1 out of 2 equal parts. Quarter means 1 out of 4 equal parts."
+Visual: "Image: Pizza cut into halves, quarters, thirds."
+Activity: "Drag and drop the correct fraction (e.g., place '1/2' on a half-shaded circle)."
+Practice: "Colour in one quarter of the shape. (Image: a circle divided into 4 quarters)"
+Topic: Money & Change
+Explanation: "We use money to buy things! Let's learn to count coins and work out change."
+Visual: "Image: UK coins (1p, 2p, 5p, 10p, 20p, 50p, £1, £2)."
+Activity: "Shopping game: Pick coins to buy an item (e.g., a toy car for 35p)."
+Practice: "If you buy a sweet for 10p and pay with 20p, how much change do you get?"
+Early Year 3 (Ages 7-8):
+Topic: Numbers to 1000
+Explanation: "Numbers can go up to hundreds! In 345, '3' means 3 hundreds, '4' means 4 tens, and '5' means 5 ones."
+Visual: "Image: Place value chart for hundreds, tens, ones."
+Practice: "What number is 7 hundreds, 2 tens, and 8 ones?"
+2. Science Folder
+Year 1 (Ages 5-6):
+Topic: Living Things
+Explanation: "Living things grow, move, and need food. Non-living things don't do these things."
+Visual: "Image: A child, a cat, a plant (living); a rock, a toy car (non-living)."
+Activity: "Sort into 'Living' or 'Not Living' categories."
+Practice: "Is a bird a living thing? Why?"
+Topic: Animals, Including Humans
+Explanation: "Animals are different! Some have fur, some have feathers. We have body parts that help us do things."
+Visual: "Image: Different animals (dog, bird, fish); Diagram of human body parts (head, arms, legs)."
+Activity: "Match the animal to its habitat (e.g., fish to water)."
+Practice: "Name two animals that have wings."
+Topic: Everyday Materials
+Explanation: "Everything around us is made of materials. Some are hard, some are soft!"
+Visual: "Image: Objects made of different materials (wooden chair, metal spoon, plastic bottle)."
+Activity: "Touch and feel: Which material is smooth? Which is rough?"
+Practice: "What material is a window made from?"
+Year 2 (Ages 6-7):
+Topic: Plants
+Explanation: "Plants grow from seeds! They need light, water, and warmth to be healthy."
+Visual: "Image: Diagram showing parts of a plant (root, stem, leaf, flower)."
+Activity: "Drag and drop the plant parts to their correct labels."
+Practice: "What three things do plants need to grow?"
+Topic: Animal Life Cycles
+Explanation: "Animals grow and change during their lives. This is called a life cycle!"
+Visual: "Image: Simple life cycle of a butterfly (egg, caterpillar, chrysalis, butterfly)."
+Activity: "Put the pictures in order for the frog's life cycle."
+Practice: "How does a caterpillar change into a butterfly?"
+Topic: Uses of Materials
+Explanation: "We choose materials because of what they're good at. Wood is strong for a table, glass is clear for a window."
+Visual: "Image: Different materials and their uses."
+Activity: "Which material is best for making a stretchy band? (rubber/wood/metal)"
+Practice: "Why are raincoats made of waterproof material?"
+Early Year 3 (Ages 7-8):
+Topic: Light & Shadows
+Explanation: "Light helps us to see! Shadows are made when something blocks the light."
+Visual: "Image: A child's shadow."
+Activity: "Experiment: Shine a torch at different objects to see their shadows."
+3. English Folder
+Year 1 (Ages 5-6):
+Topic: Phonics Fun
+Explanation: "Sounds help us read and write! Let's learn our letter sounds and how to put them together."
+Audio/Activity: "Listen to the sound 's'. Find words that start with 's' (e.g., sun, snake)."
+Visual: "Image: Letter 'a' with apple, letter 't' with tiger."
+Practice: "Blend these sounds to read the word: c-a-t."
+Topic: Capital Letters & Full Stops
+Explanation: "Every sentence starts with a capital letter! We use a full stop at the end of a sentence."
+Visual: "Image: A sentence with the capital letter highlighted and full stop at the end."
+Activity: "Drag the capital letter to the start of the sentence."
+Practice: "Write this sentence correctly: 'the dog ran fast.'"
+Topic: Reading Stories
+Explanation: "Stories take us on adventures! We can think about the characters and what happens."
+Video/Audio: "Listen to a short story being read aloud."
+Activity: "Quiz: Who is the main character in the story?"
+Practice: "What happened at the beginning of the story?"
+Topic: Writing Simple Sentences
+Explanation: "Let's write! Sentences have words that make sense together."
+Visual: "Image: Prompts for writing (e.g., 'The big ____ ran ____.')."
+Activity: "Complete the sentence: 'I like to play with my ____.'"
+Practice: "Write a sentence about your favourite animal."
+Year 2 (Ages 6-7):
+Topic: Spelling Power
+Explanation: "Let's learn new spelling rules! Like adding '-ing' to words, or knowing tricky words like 'because'."
+Activity: "Interactive spelling game: Type the missing letters in a word (e.g., 'bec__se')."
+Example: "play + -ing = playing. (Image: 'play' and 'playing' written)"
+Practice: "Spell the word: 'friend'."
+Topic: Adjectives & Nouns
+Explanation: "Nouns are naming words (person, place, thing). Adjectives are describing words (big, happy, blue)."
+Activity: "Highlight the adjectives in a sentence. (e.g., 'The fluffy cat sat on the red mat.')"
+Practice: "Write an adjective to describe the sun."
+Topic: Writing Stories with Detail
+Explanation: "Let's make our stories more exciting by adding details and description!"
+Prompt: "Write a short story about a magic key."
+Visual: "Image: Story mountain graphic organizer (beginning, middle, end)."
+Practice: "Write three sentences describing a brave knight."
+Topic: Punctuation Adventures (Commas & Apostrophes)
+Explanation: "Commas help us list things. Apostrophes help us shorten words (like 'don't')."
+Example: "I like apples, bananas, and grapes. Don't go there!"
+Activity: "Drag the comma to the right place in a list."
+Practice: "Write a sentence using 'I'm'."
+Early Year 3 (Ages 7-8):
+Topic: Verbs & Adverbs
+Explanation: "Verbs are doing words (run, jump). Adverbs tell us how something is done (quickly, slowly)."
+Activity: "Identify verbs and adverbs in a short passage."
+4. Music Folder
+Year 1 (Ages 5-6):
+Topic: Listening & Moving
+Explanation: "Music has sounds that can be loud or quiet, fast or slow. Let's listen and move!"
+Audio/Activity: "Play a fast song, then a slow song. Ask children to move like the music."
+Visual: "Image: Children dancing to music."
+Practice: "Is this music fast or slow? (Audio: short music clip)"
+Topic: Singing Fun
+Explanation: "Singing is fun! We can sing songs about animals, toys, and happy things."
+Audio: "Sing-along version of a simple nursery rhyme."
+Activity: "Sing a song and make animal noises."
+Practice: "Can you sing 'Twinkle, Twinkle Little Star'?"
+Topic: Exploring Sounds
+Explanation: "We can make sounds with our bodies or with simple instruments like shakers or drums."
+Visual: "Image: Children playing different un-tuned percussion instruments."
+Activity: "Interactive drum pad: Tap to make different drum sounds."
+Practice: "What sound does a shaker make?"
+Year 2 (Ages 6-7):
+Topic: Rhythm & Pulse
+Explanation: "Pulse is the steady beat of the music, like your heartbeat. Rhythm is the pattern of sounds."
+Audio/Activity: "Clap the pulse of a song. Tap out a rhythm pattern."
+Visual: "Image: Simple beat dots and rhythm patterns."
+Practice: "Clap this rhythm: (Audio: short clap rhythm)"
+Topic: Playing Melodies
+Explanation: "Melody is the tune of a song. We can play simple melodies on instruments like a glockenspiel."
+Visual: "Image: Glockenspiel with notes labelled."
+Activity: "Interactive glockenspiel: Play a simple tune by tapping the notes."
+Practice: "Can you play 'Twinkle, Twinkle Little Star' on the glockenspiel?"
+Topic: Storytelling with Music
+Explanation: "Music can tell a story or describe things. It can sound happy, sad, or exciting!"
+Audio: "Short musical piece that sounds like a storm."
+Activity: "Listen to the music. What story do you imagine?"
+Practice: "Choose music that sounds like a calm morning."
+Early Year 3 (Ages 7-8):
+Topic: Instrument Families
+Explanation: "Instruments can be grouped into families, like strings, woodwind, brass, and percussion."
+Visual: "Image: Pictures of instruments from different families."
+Activity: "Match the instrument sound to its picture."
+5. Computing Folder
+Year 1 (Ages 5-6):
+Topic: What is a Computer?
+Explanation: "Computers are clever machines that help us learn and play! They can be big or small."
+Visual: "Image: Different types of computers (laptop, tablet, phone)."
+Activity: "Point to the screen, keyboard, and mouse."
+Practice: "Name two things you can do with a computer."
+Topic: Following Instructions (Algorithms)
+Explanation: "A computer needs very clear instructions, step-by-step! This is called an 'algorithm'."
+Activity: "Unplugged game: Give instructions for a character to move across a grid."
+Visual: "Image: Simple flowchart for making a sandwich."
+Practice: "Write down the steps to brush your teeth."
+Topic: Being Safe Online
+Explanation: "The internet is a fun place, but we need to be safe! Only talk to people you know with an adult."
+Visual: "Image: Friendly cartoon characters reminding children to be safe online."
+Activity: "Click on the safe choices for online activities."
+Practice: "What should you do if you see something online that makes you feel worried?"
+Year 2 (Ages 6-7):
+Topic: Simple Programming (Sequences)
+Explanation: "We can tell computers what to do using code! 'Sequence' means putting instructions in order."
+Activity: "Use a block-based coding tool (e.g., Scratch Jr. simulator) to make a character move in a straight line."
+Visual: "Image: Screenshot of Scratch Jr. blocks for movement."
+Practice: "Put these instructions in order to make a robot walk to the door."
+Topic: Loops & Repetition
+Explanation: "If we want to do something many times, we can use a 'loop' instead of writing the same instruction over and over!"
+Activity: "Code a character to jump 5 times using a loop block."
+Visual: "Image: Loop block in block-based coding."
+Practice: "Why is using a loop helpful?"
+Topic: Digital Creations
+Explanation: "We can use computers to create amazing things like drawings, stories, and presentations!"
+Activity: "Use a simple paint program simulator to draw a picture."
+Visual: "Image: Example of a simple digital drawing."
+Practice: "What kind of picture would you like to draw on a computer?"
+Early Year 3 (Ages 7-8):
+Topic: Debugging (Fixing Errors)
+Explanation: "When code doesn't work, we 'debug' it to find and fix the mistakes."
+Activity: "Find the error in a simple block-based code sequence."
+6. History Folder
+Year 1 (Ages 5-6):
+Topic: My Family's Past
+Explanation: "History is about things that happened a long time ago. Let's learn about our own family's history!"
+Activity: "Create a simple timeline of your life (baby, toddler, now)."
+Visual: "Image: Old photos of family members."
+Practice: "Ask a grown-up about a toy they played with when they were little."
+Topic: Toys Long Ago
+Explanation: "Toys used to be very different! Some were made of wood or tin."
+Visual: "Image: Old wooden toy vs. modern plastic toy."
+Activity: "Match old toys to new toys."
+Practice: "How is a toy from long ago different from a toy you have now?"
+Topic: The Great Fire of London
+Explanation: "Many years ago, a big fire happened in London. It started in a bakery!"
+Visual: "Image: Simple animated sequence of the Great Fire."
+Activity: "Order the events of the fire (e.g., start in bakery, houses burn, people flee)."
+Practice: "Where did the Great Fire of London start?"
+Year 2 (Ages 6-7):
+Topic: Famous People from the Past
+Explanation: "Some people from history did amazing things! Like Florence Nightingale who helped sick people."
+Visual: "Image: Portrait of Florence Nightingale, Mary Seacole."
+Story: "Read a simple story about Florence Nightingale's life."
+Practice: "What was Florence Nightingale famous for?"
+Topic: Castles & Knights
+Explanation: "Long ago, people lived in strong castles to protect themselves. Knights were brave warriors!"
+Visual: "Image: Parts of a castle (drawbridge, tower, moat)."
+Activity: "Label the parts of a castle."
+Practice: "Why were castles built?"
+Topic: Victorian Times (Simple Introduction)
+Explanation: "In Victorian times, things were different! Children went to school in different ways."
+Visual: "Image: Victorian school children, old classroom."
+Compare: "How was a Victorian school like your school? How was it different?"
+Early Year 3 (Ages 7-8):
+Topic: Ancient Egypt (Pyramids & Pharaohs)
+Explanation: "Ancient Egypt was a very old civilization. They built huge pyramids!"
+Visual: "Image: Pyramids, mummies (simplified)."
+Practice: "What is a pharaoh?"
+7. Geography Folder
+Year 1 (Ages 5-6):
+Topic: My Local Area
+Explanation: "Geography helps us learn about places. Let's look at our school and the area around it!"
+Visual: "Image: Aerial photo of a school and surrounding streets."
+Activity: "Identify features on a map of the local area (e.g., park, shop, road)."
+Practice: "Name two things you can see on the way to school."
+Topic: Weather & Seasons
+Explanation: "The weather changes! We have sunny days, rainy days, and snowy days. The year has four seasons."
+Visual: "Image: Photos showing different weather (sun, rain, snow) and seasons."
+Activity: "Match the weather to the right clothing."
+Practice: "What is your favourite season and why?"
+Topic: Continents & Oceans
+Explanation: "Our world is made of big pieces of land called continents and huge areas of water called oceans."
+Visual: "Image: Simple world map showing continents and oceans."
+Activity: "Click on the continent of Asia. Find the Atlantic Ocean."
+Practice: "Name one ocean."
+Year 2 (Ages 6-7):
+Topic: The United Kingdom
+Explanation: "We live in the United Kingdom! It has four countries: England, Scotland, Wales, and Northern Ireland."
+Visual: "Image: Map of the UK with countries and capital cities labelled."
+Activity: "Drag and drop the capital cities to the correct countries."
+Practice: "What is the capital city of England?"
+Topic: Hot & Cold Places
+Explanation: "Some places on Earth are very hot, like the desert. Some are very cold, like the North Pole!"
+Visual: "Image: Pictures of desert, polar region, rainforest."
+Activity: "Match animals to their hot or cold habitat."
+Practice: "Which place would you need a warm coat in?"
+Topic: Mapping My World
+Explanation: "Maps help us find our way. They use symbols and a key to show us things."
+Visual: "Image: Simple map with a key (e.g., tree symbol, house symbol)."
+Activity: "Follow a simple route on a map."
+Practice: "What does this symbol mean on a map? (Image: a small tree symbol)"
+Early Year 3 (Ages 7-8):
+Topic: Rivers & Mountains (Basic)
+Explanation: "Rivers are flowing water, and mountains are very tall land!"
+Visual: "Image: A river and a mountain."
+Practice: "Name a famous river or mountain in the UK."
+8. Art Folder
+Year 1 (Ages 5-6):
+Topic: Colour Mixing Fun
+Explanation: "We can make new colours by mixing old ones! Red and yellow make orange!"
+Visual: "Image: Colour wheel showing primary and secondary colours."
+Activity: "Interactive colour mixer: Drag red and yellow paint together to see orange appear."
+Practice: "What colour do you get if you mix blue and yellow?"
+Topic: Drawing & Mark-Making
+Explanation: "We can use lines, dots, and scribbles to draw! Drawing helps us show our ideas."
+Visual: "Image: Examples of different lines (straight, curvy, zig-zag)."
+Activity: "Draw a picture using only curvy lines."
+Practice: "Draw your favourite animal using different kinds of lines."
+Topic: Exploring Textures
+Explanation: "Texture is how something feels! Is it rough, smooth, bumpy, or soft?"
+Visual: "Image: Pictures of objects with different textures (e.g., fluffy toy, rough tree bark)."
+Activity: "Match the texture word to the picture."
+Practice: "Draw a picture of something bumpy."
+Year 2 (Ages 6-7):
+Topic: Painting & Blending
+Explanation: "We can use paint to create beautiful pictures. Try blending colours together gently!"
+Visual: "Image: Example of blended paint colours."
+Activity: "Paint a sunset, blending red, orange, and yellow."
+Practice: "How can you make two colours join smoothly?"
+Topic: Making 3D Art (Sculpture)
+Explanation: "Sculpture is art you can hold! We can make 3D art with clay, playdough, or recycled materials."
+Visual: "Image: Simple sculptures made from clay or junk."
+Activity: "Make a creature using playdough."
+Practice: "What kind of materials could you use to make a sculpture?"
+Topic: Famous Art & Artists (Simple)
+Explanation: "Let's look at famous paintings! Artists like Van Gogh used lots of bright colours."
+Visual: "Image: A famous painting (e.g., a simple Van Gogh sunflower, a colourful abstract piece)."
+Activity: "What colours can you see in this painting?"
+Practice: "What do you think the artist was trying to show in this picture?"
+Early Year 3 (Ages 7-8):
+Topic: Introduction to Perspective
+Explanation: "Perspective helps us make things look closer or further away in a drawing."
+Visual: "Image: Simple drawing showing a path getting narrower in the distance."
+Activity: "Draw a road that goes far away."
+9. Business Folder
+Year 1 (Ages 5-6):
+Topic: Needs and Wants
+Explanation: "Needs are things we must have to live (like food and water). Wants are things we wish for (like a new toy)."
+Visual: "Image: Pictures of food, water, house (needs); toy, ice cream, bike (wants)."
+Activity: "Sort pictures into 'Needs' and 'Wants' categories."
+Practice: "Name one thing you need and one thing you want."
+Topic: What is Money For?
+Explanation: "Money helps us buy the things we need and want. We can use coins and notes."
+Visual: "Image: UK coins and notes."
+Activity: "Match the coin to its value."
+Practice: "What can you buy with money?"
+Topic: Helping Out (Earning)
+Explanation: "Grown-ups work to earn money. Children can help too!"
+Visual: "Image: Child helping with chores, grown-up at work."
+Activity: "What jobs can you do to help at home?"
+Practice: "Why do grown-ups go to work?"
+Year 2 (Ages 6-7):
+Topic: Saving and Spending
+Explanation: "When you have money, you can choose to save it for something big, or spend it now."
+Visual: "Image: Piggy bank for saving; person buying something."
+Activity: "Story: A child saves up for a new toy. What did they learn?"
+Practice: "What would you save your money for?"
+Topic: Running a Small 'Business' (Idea)
+Explanation: "A 'business' is when people make or sell things. Maybe you could make something to sell!"
+Visual: "Image: A lemonade stand or a child selling handmade cards."
+Activity: "Idea brainstorm: What could you make to 'sell' to your family?"
+Practice: "What is one thing you would need to start a lemonade stand?"
+Topic: Being a Good Customer
+Explanation: "When we buy things, we are customers. It's good to be polite and say thank you!"
+Visual: "Image: A child politely buying something from a shopkeeper."
+Activity: "Role-play: Buying sweets from a shop."
+Practice: "What should you say to a shopkeeper?"
+Early Year 3 (Ages 7-8):
+Topic: Basic Costs & Profit
+Explanation: "It costs money to make things. 'Profit' is when you sell something for more money than it cost to make."
+Example: "If you make a card for 5p and sell it for 10p, you make 5p profit."
+Practice: "You sell a cookie for 20p. It cost you 10p to make. How much profit did you make?"

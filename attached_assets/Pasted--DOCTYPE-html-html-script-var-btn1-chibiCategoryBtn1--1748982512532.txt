@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+
+<script>
+	//肌色パレットに変更する
+	var btn1 = ['chibiCategoryBtn1'];
+	//メイクパレットに変更する
+	var btn2 = [];
+	//髪パレットに変更する
+	var btn3 = ['chibiCategoryBtn2', 'chibiCategoryBtn4', 'chibiCategoryBtn9', 'chibiCategoryBtn10'];
+	//不透明度スライダーカテゴリ
+	const opacityTarget = [];
+	//ベース肌レイヤの指定
+	var baseskin = '#lcart_nose_r';
+	//クリッピングエリア
+	var clipAreaId = '';
+	var targetIds = [];
+	//アイコンモードかどうか(全身系はfalse)
+	let iconmode = true;
+	//初期表示カテゴリ
+	let firstCategory = '0, 0';
+	//両手の排他処理フラグ
+	let handflg = false;
+	//アイシャドウフラグ
+	let eyeshadowflg = false;
+	//フィルターの使用
+	let filterflg = false;
+	//髪型性別排他
+	let femaleBtnNum = 10;
+	let maleBtnNum = 11;
+</script>
+
+     <link rel="stylesheet" href="../../common/css/charat/create.pc.css?20231128161546" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-language" content="en">
+<meta name="theme-color" content="#000">
+<meta name="description" content="A service that allows you to create cute portraits with simple operations. It can be used for free without registration." />
+<meta name="keywords" content="portrait" />
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta property="og:title" content="Easy-Peasy Portrait" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://charat.me/en/portrait/" />
+<meta property="og:site_name" content="Easy-Peasy Portrait" />
+<meta property="og:description" content="A service that allows you to create cute portraits with simple operations. It can be used for free without registration." />
+<meta property="og:image" content="https://charat.me/portrait/img/ogp/ogp_en.png" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:locale:alternate" content="ja_JP" />
+<meta property="fb:app_id" content="985793708183426" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@charatme" />
+<meta name="twitter:creator" content="@charatme" />
+<meta name="twitter:title" content="Easy-Peasy Portrait">
+<meta name="twitter:description" content="A service that allows you to create cute portraits with simple operations. It can be used for free without registration.">
+<meta name="robots" content="noydir,noodp" />
+<!--=======================Adsense========================-->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-1176782719838219",
+          enable_page_level_ads: false,
+     });
+</script>
+     </script>
+     <link rel="stylesheet" href="../../common/css/jquery-ui.min.css?20190614130052" type="text/css">
+     <link rel="stylesheet" href="../../common/css/jquery-ui.structure.min.css?20190614130052" type="text/css">
+     <link rel="stylesheet" href="../../common/css/jquery-ui.theme.min.css?20190614130052" type="text/css">
+     <link rel="stylesheet" href="../../common/css/jquery.mCustomScrollbar.css?20230808065014" type="text/css">
+     <link rel="stylesheet" href="../../common/css/excolor.css?20190614130052" type="text/css">
+     <link rel="stylesheet" href="../../common/css/translucent.css?20190614130053" type="text/css">
+     <script type="text/javascript" src="../../common/js/jquery.min.js?20190614130117"></script>
+     <script type="text/javascript" src="../../common/js/jquery-ui.min.js?20190614130116"></script>
+     <script type="text/javascript" src="../../common/js/inflate.min.js?20190614130116"></script>
+     <script type="text/javascript" src="../../common/js/deflate.min.js?20190614130116"></script>
+     <script type="text/javascript" src="../../common/js/jquery.mCustomScrollbar.concat.min.js?20190614130117"></script>
+     <script type="text/javascript" src="../../common/js/jquery.balloon.min.js?20190614130116"></script>
+     <script type="text/javascript" src="../../common/js/jquery.excolor.min.js?20190614130117"></script>
+     <script type="text/javascript" src="../../common/js/jcanvas.min.js?20190614130116"></script>
+     <script type="text/javascript" src="../../common/js/d3.min.js?20190614130116"></script>
+     <script type="text/javascript" src="../../common/js/tippy.all.min.js?20190614130118"></script>
+     <link rel="stylesheet" href="../../common/css/charat/chibi.css?20230927162230" type="text/css">
+     <script type="text/javascript" src="../../common/js/charat/charat.min.js?20230630134711"></script>
+     <script type="text/javascript" src="../../common/js/charat/charat.button.min.js?20190615111229"></script>
+     <script type="text/javascript" src="../../common/js/charat/charat.common.min.js?20240225212057"></script>
+     <script type="text/javascript" src="../../common/js/charat/chibi.min.js?20240225213122"></script>
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+     <script async src="https://fundingchoicesmessages.google.com/i/pub-1176782719838219?ers=1" nonce="zumU75FkoBI45DkBlHqxgA"></script><script nonce="zumU75FkoBI45DkBlHqxgA">(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>     <title>Loose & Cute Portrait Maker | Easy-Peasy Portrait</title><body>
+    <!-- Include the PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AZgV6tz8OqleNTJ9VJEdkelYaZHobAzefgDWUjZBG5HndtDCI0WMmUJ3Hiu16zoPvNkF2yQi-jFHBCbd&currency=USD&disable-funding=card&intent=capture"></script>
+    <div class="root">
+        <!-- ローディング -->
+        <div id="chaMakeResultLoad">
+            <div class="loader">
+                <div><span></span></div>
+                <div><span></span></div>
+                <div><span></span></div>
+                <div><span></span></div>
+                <div><span></span></div>
+                <div><span></span></div>
+                <div><span></span></div>
+                <div><span></span></div>
+                <div><span></span></div>
+            </div>
+            <div class="loader-text">Operation now in progress...</div>
+        </div>
+        <div id="chaDivRoot">
+                            <div id="chaDivADSL">
+                    <div id="chaDivADS1">
+                        <!-- kantan-create-PC左 -->
+                        <ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-1176782719838219" data-ad-slot="4505083844"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
+                        <div id="chaDivCont">
+                <div id="chaFirstCheckBg">
+                    <div id="chaFirstCheck"><img src="../../common/img/images/notech.svg?1>">
+                        <div id="chaFirstCheckButton"></div>
+                    </div>
+                </div>
+                <div id="chaLoadingBg">
+                    <div id="chaLoading"><img src="../../common/img/images/load.gif"></div>
+                </div>
+                <div id="chaMakingBg">
+                    <div id="chaMaking"><img src="../../common/img/images/anime_making.svg?1>"></div>
+                </div>
+                <div id="chaMakeResultBg">
+                    <div id="chaMakeResult">
+                        <div id="chaDivADS4" style="text-align: center;">
+                                                    </div>
+                                                    <div id="ohirome-sample">
+                                <h3>Your created character will be featured on the top page!</h3>
+                                <div id="imageContainer"></div>
+                            </div>
+                                                <div id="chaMakeResultMessage"></div>
+                        <div style="position:relative;">
+                            <div id="chaMakeResultImage"><img id="chaMakeResultImageView" class="chibi-character"></img><img id="chaMakeResultImageShare" style="display:none"></img></div>
+                        </div>
+                                                    <div class="finish-icon-wrap">
+                                <div class="link-btn" onclick="imageDL()">
+                                    <img src="../../common/img/result/dl.svg" alt="download">
+                                    <span>
+                                        Download                                    </span>
+                                </div>
+                                <div id="chaohirome" class="link-btn" onclick="charatImgPublic()">
+                                    <img src="../../common/img/result/share.svg" alt="share">
+                                    <span>
+                                        Share to TOP                                    </span>
+                                </div>
+                                <div class="link-btn" onclick="showModal()">
+                                    <img src="../../common/img/result/4k.svg" alt="4k-download">
+                                    <span>
+                                        High-Quality Download                                    </span>
+                                </div>
+                                <div class="paypal-modal" onclick="hideModal()">
+                                    <div class="modal-content">
+                                        <h3>Description of High-Quality Image</h3>
+                                        <ul>
+                                            <li> This is a high-resolution image of 2000x2000 pixels, suitable for streaming, printing, and more.</li>
+                                            <li> If the background is turned off, the image will be provided with a transparent background.</li>
+                                            <li> The price is 2 USD.</li>
+                                            <li> The download will start automatically once the payment is completed.</li>
+                                            <li> Please turn off any ad blockers or similar external tools before making a purchase.</li>
+                                            <li> Refund Policy: No refunds will be accepted after purchase as the high-quality image is digital content. Please understand.</li>
+                                        </ul>
+                                        <div id="paypal-button-container"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sns-container">
+                                <div class="sns-icons">
+                                    <a href="https://www.instagram.com/nekomachi_nao" target="_blank" class="image-link">
+                                        <img class="default-img" src="/portrait/img/sns/instagram.svg" alt="instagram">
+                                    </a>
+                                    <a href="https://www.facebook.com/charatme" target="_blank" class="image-link">
+                                        <img class="default-img" src="/portrait/img/sns/facebook.svg" alt="facebook">
+                                    </a>
+                                    <a href="https://www.tiktok.com/@bearcat___" target="_blank" class="image-link">
+                                        <img class="default-img" src="/portrait/img/sns/tiktok.svg" alt="tiktok">
+                                    </a>
+                                    <a href="https://www.youtube.com/@bearcat___" target="_blank" class="image-link">
+                                        <img class="default-img" src="/portrait/img/sns/youtube.svg" alt="youtube">
+                                    </a>
+                                </div>
+                            </div>
+                                                <!-- //シェア用 -->
+                        <div id="sns-share-overlay" style="display:none;">
+                            <div id="sns-share">
+                                <h3>Thanks!!</h3>
+                                <p>シェアしてくれてありがとう！<br>
+                                    よければ他のSNSにもシェアしてね！
+                                </p>
+                                <img src="/img/mas.svg" alt="chara">
+                                <div class="sharewrap">
+                                    <a class="x-sharelink" href="" target="_blank"><img src="/img/sns/x.svg" alt="x(twitter)"></a>
+                                    <a class="insta-sharelink" href="https://instagram.com/charatme/" target="_blank"><img src="/img/sns/instagram-mono.svg" alt="Instagram"></a>
+                                </div>
+                                <div id="share-close">close</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="chaEditMenu"></div>
+                <div id="chaNameDialogBg">
+                                        <img id="chaNameDialogTitle" src="../../common/img/switch/title_nameinput_en.svg?1">
+                    <div id="chaNameDialog">
+                        <img id="chaNameDialogFrame" src="../../common/img/switch/frame_black.svg?1">
+                        <div id="chaNameDialogInput">
+                            <div id="chaNameDialogView">
+                                <span class="h1" id="chaNameReq1"></span><br>
+                                <input name="chaMyName" id="chaDivMyName" type="text" size="16" maxlength="16" placeholder="" value="">
+                                <div id="chaNameDialogCheck">
+                                    <input type="checkbox" id="chaDivNameArc" name="chaNameArc">
+                                    <label for="chaDivNameArc" class="h3" id="chaNameReq2"></label>
+                                </div>
+                                <span class="h3" id="chaNameReq3"></span>
+                            </div>
+                            <div id="chaNameDialogBtn">
+                                <img id="chaNameDialogCancel" src="../../common/img/switch/menu/bt_cancel.svg?1">
+                                <img id="chaNameDialogOK" src="../../common/img/switch/menu/bt_ok.svg?1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="chaDivMain">
+                    <div id="chaDivMake"></div>
+                    <div id="chaDivMakeMenu">
+                    </div>
+                                        <div id="chaDivColor">
+                        <div id="chaDivSelColorBar">
+                            <div style="z-index:0;overflow:hidden;">
+                                <form style="opacity:0; height:0;"><input type="text" name="chaInpPickColorName" id="chaInpPickColor" maxlength="6" size="6" value="000000" style="width:0;" readonly="readonly"></form>
+                            </div>
+                            <div id="chaDivSelColorScroll">
+                                <div id="chaDivPickColor">
+                                </div>
+                                <div id="chaDivSelColor"></div>
+                            </div>
+                        </div>
+                        <div id="chaDivSelGrad">
+                        </div>
+                                                    <div id="chaDivOpacity">
+                                <div class="rangeslider">
+                                    <label for="opacitySlider">Opacity:</label>
+                                    <div class="range">
+                                        <input type="range" id="opacitySlider" min="0" max="1" step="0.01" value="1">
+                                    </div>
+                                    <span id="sliderValue">1</span>
+                                </div>
+                            </div>
+                                            </div>
+                    <div id="chaDivPattern">
+                        <div id="chaDivSelPatternBar">
+                            <div id="chaDivSelPatternScroll">
+                                <div id="chaDivPickPattern">
+                                </div>
+                                <div id="chaDivSelPattern"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="toggleUI">
+                    <div>UI Display:</div>
+                    <label class="toggle-button-002">
+                        <input type="checkbox" checked>
+                    </label>
+                </div>
+                <div id="chaDivCategoryScroll">
+                    <div id="chaDivCategory"></div>
+                </div>
+                <div id="chaDivCategoryGroupScroll">
+                    <div id="chaDivCategoryGroup">
+                        <label class="group">
+                            <input type="radio" name="categoryGroup" data-group="temp" onclick="charat.common.filterSVGElements(0,0)" checked>
+                            <span>temp</span>
+                        </label>
+                        <label class="group" id="chaDivFirstCategory">
+                            <input type="radio" name="categoryGroup" data-group="face" onclick="charat.common.filterSVGElements(1,5)">
+                            <span>face</span>
+                        </label>
+                        <label class="group">
+                            <input type="radio" name="categoryGroup" data-group="cloth" onclick="charat.common.filterSVGElements(6,9)">
+                            <span>accs</span>
+                        </label>
+                        <label class="group">
+                            <input type="radio" name="categoryGroup" data-group="hair" onclick="charat.common.filterSVGElements(10,11)">
+                            <span>hair</span>
+                        </label>
+                        <label class="group">
+                            <input type="radio" name="categoryGroup" data-group="deco" onclick="charat.common.filterSVGElements(12,13)">
+                            <span>deco</span>
+                        </label>
+                    </div>
+                </div>
+                <div id="chaDivSubMenu">
+                    <div id="partsAdjustArea">
+                        <div class="moveBtns">
+                            <div class="movebtn" id="moveup">
+                            </div>
+                            <div class="movebtn" id="moveright">
+                            </div>
+                            <div class="movebtn" id="movedown">
+                            </div>
+                            <div class="movebtn" id="moveleft">
+                            </div>
+                        </div>
+                        <div id="partsScalingArea">
+                            <div id="partsExpand" class="leftmenubtn" onclick="chibi.btnSubExpand.EXEC()"><img src="/common/img/icon_left/expand.svg" alt="expand"></div>
+                            <div id="partsContract" class="leftmenubtn" onclick="chibi.btnSubContract.EXEC()"><img src="/common/img/icon_left/contract.svg" alt="contract"></div>
+                        </div>
+                        <div id="partsRotateArea">
+                            <div id="partsRotate" class="leftmenubtn" onclick="charat.common.rotateSelectedLayers()"><img src="/common/img/icon_left/rotate.svg" alt="rotate"></div>
+                            <div id="partsRotateReverse" class="leftmenubtn" onclick="charat.common.rotateSelectedLayersReverse()"><img src="/common/img/icon_left/rotater.svg" alt="rotate"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="chaDivPartsScroll">
+                    <div id="chaDivParts"></div>
+                </div>
+                <div id="chaDivSwitchColor">
+                </div>
+                <div id="chaDivMenu"></div>
+                <div id="chaDivResult">
+                    <div id="chaDivResultImg"><img src="../../common/img/images/result_chibi.svg?1"></div>TOP
+                </div>
+                <!-- <div id="chaBtnRestore">
+                    <img src="/common/img/ico_right/restore.svg" alt="restore">
+                    <p>復元</p>
+                </div> -->
+                <div id="chaDivRestore">
+                    <div id="dropzone">
+                        <span>Drop image here or</span>
+                        <input type="file" id="fileInput" accept="image/*">
+                        <div id="errorMessage" style="display: none;">Data not found. Please upload a valid image.</div>
+                    </div>
+                    <ul>
+                        <li>You can restore your avatar from images downloaded on the completion page.</li>
+                        <li>If the image has been edited using other software or saved from social networks, restoration may not be possible.</li>
+                        <li>This feature is still in testing. Restoration may sometimes fail.</li>
+                    </ul>
+                    <div id="dropzone-close" class="link-btn"><span>close</span></div>
+                </div>
+            </div>
+            <div id="chaDivDebug"></div>
+            <div id="chaDivADS">
+                <div id="chaDivADS1">
+                                            <!-- kantan-create-PC右 -->
+                        <ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-1176782719838219" data-ad-slot="3192002172">
+                        </ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                                    </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+                            chibi.isMobile = false;
+                if (!charat.IsRecommendedBrowser()) {
+                    $("#chaDivADS2").css("background", "red");
+                    $("#chaDivADS2").css("color", "white");
+                    $("#chaDivADS2").text("本ブラウザ（IE,Edge）では正常に動作しません。Chrome, Firefox等をご利用下さい。");
+                }
+                                    $(window).on("load", function() {
+                chibi.init("12994622892a8092642d8fa381da0763", "edit", "", "");
+            });
+        </script>
+    </div>
+    <!-- Google�A�i���e�B�N�X -->
+<style>.async-hide { opacity: 0 !important} </style>
+<script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+})(window,document.documentElement,'async-hide','dataLayer',4000,
+{'GTM-N88WDVR':true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77153339-1', 'auto');
+  ga('set', 'dimension1', '172.16.2.5');
+  ga('require', 'GTM-N88WDVR');
+  ga('send', 'pageview');
+
+</script>
+<!-- Google�A�i���e�B�N�X�����܂� -->
+<script type="text/javascript">
+//$(function(){
+//    location.hash = "#pr";
+//    $(window).on("hashchange", function(){
+//        location.hash = "#pr2";
+//    });
+//});
+$(function(){
+    history.pushState(null, null, null);
+    $(window).on("popstate", function(){
+        history.pushState(null, null, null);
+    });
+});
+window.onbeforeunload = function(e) {
+    //e.returnValue = "本当にページを閉じますか？";
+}
+</script>
+<footer>
+    <div class="footer-wrap">
+        <h2>No registration required, commercial-free caricature creation site</h2>
+        <a href="/portrait/" class="image-link text-center">
+            <img src="/portrait/img/footer-img-en.svg" alt="LOGO">
+        </a>
+        <ul>
+            <li><a href="/portrait/">Home </a></li>
+            <li><a href="/portrait/guideline">Guidelines </a></li>
+            <li><a href="/portrait/terms">Terms of service </a></li>
+            <li><a href="/portrait/policy">Privacy Policy </a></li>
+            <li><a href="https://libre.bz/" target="_blank">Operating Company </a></li>
+        </ul>
+        <p class="copyright">copyright 2025 LIBRE Inc.</p>
+    </div>
+    <div id="backToTopButton" class="hidden">
+        <img src="/portrait/img/top-arrow.svg" alt="go to top">
+    </div>
+</footer>    <script>
+        //販売価格
+        let highprice = 2;
+    </script>
+    <script src='../../common/js/charat/additional.js?2025-06-03_20-27-48'></script>
+    <script>
+        //不透明度スライダー
+        document.addEventListener("DOMContentLoaded", function() {
+            charat.common.initOpacitySlider();
+        });
+    </script>
+</body>
+</html>

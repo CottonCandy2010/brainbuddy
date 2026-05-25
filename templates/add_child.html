@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Child - Brain Buddy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    <style>
+        .add-child-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .form-control, .form-select {
+            border-radius: 15px;
+            padding: 15px 20px;
+            border: 2px solid #e9ecef;
+            margin-bottom: 20px;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 15px;
+            padding: 15px 30px;
+            font-weight: 600;
+            width: 100%;
+        }
+        .avatar-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .avatar-option {
+            position: relative;
+            cursor: pointer;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .avatar-option:hover {
+            border-color: #4a90e2;
+            transform: scale(1.05);
+        }
+        .avatar-option.selected {
+            border-color: #28a745;
+            box-shadow: 0 0 15px rgba(40, 167, 69, 0.3);
+        }
+        .avatar-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .grade-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh;">
+    <div class="container">
+        <div class="add-child-container">
+            <div class="header-section">
+                <h2><i class="fas fa-user-plus"></i> Add New Child</h2>
+                <p class="text-muted">Create a personalized learning profile</p>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" id="addChildForm">
+                <!-- Child Name -->
+                <label class="form-label fw-bold">Child's Name</label>
+                <input type="text" class="form-control" name="student_name" placeholder="Enter child's name" required>
+
+                <!-- Age Selection -->
+                <label class="form-label fw-bold">Age</label>
+                <select class="form-select" name="age" id="ageSelect" required>
+                    <option value="">Select age</option>
+                    <option value="5">5 years old</option>
+                    <option value="6">6 years old</option>
+                    <option value="7">7 years old</option>
+                    <option value="8">8 years old</option>
+                    <option value="9">9 years old</option>
+                    <option value="10">10 years old</option>
+                    <option value="11">11 years old</option>
+                </select>
+
+                <!-- Grade Level -->
+                <label class="form-label fw-bold">School Year</label>
+                <select class="form-select" name="grade_level" id="gradeLevelSelect" required>
+                    <option value="">Select school year</option>
+                    <option value="P1">Primary 1 (P1)</option>
+                    <option value="P2">Primary 2 (P2)</option>
+                    <option value="P3">Primary 3 (P3)</option>
+                    <option value="P4">Primary 4 (P4)</option>
+                    <option value="P5">Primary 5 (P5)</option>
+                    <option value="P6">Primary 6 (P6)</option>
+                    <option value="P7">Primary 7 (P7)</option>
+                </select>
+
+                <div class="grade-info" id="gradeInfo" style="display: none;">
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle"></i> 
+                        <span id="gradeDescription"></span>
+                    </small>
+                </div>
+
+                <!-- Learning Style -->
+                <label class="form-label fw-bold">Learning Style</label>
+                <select class="form-select" name="learning_style" required>
+                    <option value="">How does your child learn best?</option>
+                    <option value="visual">Visual (Pictures, diagrams, colors)</option>
+                    <option value="auditory">Auditory (Sounds, music, speaking)</option>
+                    <option value="verbal">Verbal (Reading, writing, discussion)</option>
+                </select>
+
+                <!-- Avatar Selection -->
+                <label class="form-label fw-bold">Choose Avatar</label>
+                <div class="avatar-selection">
+                    {% for i in range(1, 19) %}
+                        <div class="avatar-option" data-avatar="avatar{{ i }}.jpeg">
+                            <img src="{{ url_for('static', filename='images/profile-pics/avatar' + i|string + '.jpeg') }}" 
+                                 alt="Avatar {{ i }}" class="avatar-img">
+                        </div>
+                    {% endfor %}
+                </div>
+                <input type="hidden" name="avatar_image" id="selectedAvatar" value="avatar1.jpeg">
+
+                <button type="submit" class="btn btn-primary mt-4">
+                    <i class="fas fa-plus-circle"></i> Add Child to Family
+                </button>
+            </form>
+
+            <div class="text-center mt-4">
+                <a href="{{ url_for('family_dashboard') }}" class="text-muted">
+                    <i class="fas fa-arrow-left"></i> Back to Family Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Avatar Selection
+        document.querySelectorAll('.avatar-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from all avatars
+                document.querySelectorAll('.avatar-option').forEach(av => av.classList.remove('selected'));
+                
+                // Add selected class to clicked avatar
+                this.classList.add('selected');
+                
+                // Update hidden input
+                document.getElementById('selectedAvatar').value = this.dataset.avatar;
+            });
+        });
+
+        // Set first avatar as default selected
+        document.querySelector('.avatar-option').classList.add('selected');
+
+        // Grade Level Information
+        const gradeDescriptions = {
+            'P1': 'Ages 5-6: Beginning primary education with basic literacy and numeracy',
+            'P2': 'Ages 6-7: Building foundational skills in reading, writing, and mathematics',
+            'P3': 'Ages 7-8: Developing core academic skills across all subjects',
+            'P4': 'Ages 8-9: Strengthening knowledge and introducing more complex concepts',
+            'P5': 'Ages 9-10: Advanced primary learning with increased independence',
+            'P6': 'Ages 10-11: Preparing for secondary school transition',
+            'P7': 'Ages 11-12: Final year of primary education with comprehensive preparation'
+        };
+
+        document.getElementById('gradeLevelSelect').addEventListener('change', function() {
+            const gradeInfo = document.getElementById('gradeInfo');
+            const gradeDescription = document.getElementById('gradeDescription');
+            
+            if (this.value && gradeDescriptions[this.value]) {
+                gradeDescription.textContent = gradeDescriptions[this.value];
+                gradeInfo.style.display = 'block';
+            } else {
+                gradeInfo.style.display = 'none';
+            }
+        });
+
+        // Age and Grade Level Sync
+        document.getElementById('ageSelect').addEventListener('change', function() {
+            const age = parseInt(this.value);
+            const gradeSelect = document.getElementById('gradeLevelSelect');
+            
+            // Auto-suggest grade based on age
+            const ageToPrimary = {
+                5: 'P1', 6: 'P2', 7: 'P3', 8: 'P4', 
+                9: 'P5', 10: 'P6', 11: 'P7'
+            };
+            
+            if (ageToPrimary[age]) {
+                gradeSelect.value = ageToPrimary[age];
+                gradeSelect.dispatchEvent(new Event('change'));
+            }
+        });
+    </script>
+</body>
+</html>

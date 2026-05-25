@@ -1,0 +1,46 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cute Brain Buddy Logo with Pastel Pink Theme -->
+  
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="90" fill="#FFE4E6" stroke="#FFB3BA" stroke-width="4"/>
+  
+  <!-- Main Brain Shape -->
+  <ellipse cx="100" cy="95" rx="65" ry="55" fill="#FFB3D9" stroke="#FF8FAB" stroke-width="3"/>
+  
+  <!-- Brain Texture - Cute Wavy Lines -->
+  <path d="M55,85 C70,70 85,100 100,85 C115,70 130,100 145,85" 
+        fill="none" stroke="#FF69B4" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+  <path d="M55,105 C70,90 85,120 100,105 C115,90 130,120 145,105" 
+        fill="none" stroke="#FF69B4" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+  
+  <!-- Cute Eyes -->
+  <circle cx="85" cy="80" r="8" fill="white" stroke="#FF8FAB" stroke-width="2"/>
+  <circle cx="115" cy="80" r="8" fill="white" stroke="#FF8FAB" stroke-width="2"/>
+  <circle cx="85" cy="80" r="4" fill="#FF69B4"/>
+  <circle cx="115" cy="80" r="4" fill="#FF69B4"/>
+  
+  <!-- Cute highlight in eyes -->
+  <circle cx="87" cy="78" r="1.5" fill="white"/>
+  <circle cx="117" cy="78" r="1.5" fill="white"/>
+  
+  <!-- Happy Smile -->
+  <path d="M85,115 Q100,130 115,115" fill="none" stroke="#FF69B4" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Rosy Cheeks -->
+  <circle cx="70" cy="105" r="6" fill="#FFB3D9" opacity="0.8"/>
+  <circle cx="130" cy="105" r="6" fill="#FFB3D9" opacity="0.8"/>
+  
+  <!-- Cute Little Hearts Floating Around -->
+  <path d="M40,50 C40,45 45,40 50,40 C55,40 60,45 60,50 C60,55 50,65 50,65 C50,65 40,55 40,50 Z" fill="#FFB3D9" opacity="0.6"/>
+  <path d="M140,160 C140,157 142,155 145,155 C148,155 150,157 150,160 C150,163 145,168 145,168 C145,168 140,163 140,160 Z" fill="#FFB3D9" opacity="0.6"/>
+  
+  <!-- Sparkles -->
+  <g fill="#FFE4E6" opacity="0.8">
+    <polygon points="160,40 162,46 168,46 163,50 165,56 160,52 155,56 157,50 152,46 158,46"/>
+    <polygon points="30,120 31,124 35,124 32,126 33,130 30,128 27,130 28,126 25,124 29,124"/>
+    <polygon points="170,120 171,123 174,123 172,125 173,128 170,126 167,128 168,125 166,123 169,123"/>
+  </g>
+  
+  <!-- Title Text -->
+  <text x="100" y="185" font-family="'Comic Neue', 'Nunito', sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#FF69B4">Brain Buddy</text>
+</svg>

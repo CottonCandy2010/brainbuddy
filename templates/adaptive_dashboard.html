@@ -1,0 +1,439 @@
+{% extends "layout.html" %}
+
+{% block title %}Smart Learning Dashboard - Brain Buddy Kids{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-header mb-4">
+                <h1 class="page-title">
+                    <i class="fas fa-brain me-3"></i>
+                    Your Smart Learning Dashboard
+                </h1>
+                <p class="page-subtitle">See how well you're learning and what to try next!</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Performance Overview -->
+    <div class="row mb-4">
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card performance-card">
+                <div class="card-body text-center">
+                    <div class="performance-icon mb-2">
+                        <i class="fas fa-trophy text-warning fa-2x"></i>
+                    </div>
+                    <h3 class="card-title" id="accuracyRate">--</h3>
+                    <p class="card-text">Your Success Rate</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card performance-card">
+                <div class="card-body text-center">
+                    <div class="performance-icon mb-2">
+                        <i class="fas fa-chart-line text-success fa-2x"></i>
+                    </div>
+                    <h3 class="card-title" id="difficultyLevel">--</h3>
+                    <p class="card-text">Current Level</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card performance-card">
+                <div class="card-body text-center">
+                    <div class="performance-icon mb-2">
+                        <i class="fas fa-clock text-info fa-2x"></i>
+                    </div>
+                    <h3 class="card-title" id="totalTime">--</h3>
+                    <p class="card-text">Learning Time</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card performance-card">
+                <div class="card-body text-center">
+                    <div class="performance-icon mb-2">
+                        <i class="fas fa-star text-primary fa-2x"></i>
+                    </div>
+                    <h3 class="card-title" id="topicsCount">--</h3>
+                    <p class="card-text">Topics Explored</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Adaptive Recommendations -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">
+                        <i class="fas fa-lightbulb me-2"></i>
+                        Smart Recommendations Just For You!
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div id="recommendationsContainer">
+                        <div class="text-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading recommendations...</span>
+                            </div>
+                            <p class="mt-2">Finding the perfect lessons for you...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Subject Progress -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">
+                        <i class="fas fa-graduation-cap me-2"></i>
+                        Your Learning Progress
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div id="subjectProgress">
+                        <!-- Progress bars will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Recent Activity -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">
+                        <i class="fas fa-history me-2"></i>
+                        Your Recent Learning Adventures
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div id="recentActivity">
+                        <!-- Recent activity will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+.performance-card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.performance-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.performance-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(66, 133, 244, 0.1);
+}
+
+.recommendation-card {
+    border-left: 4px solid #4285f4;
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8f0fe 100%);
+    transition: all 0.3s ease;
+}
+
+.recommendation-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.difficulty-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.activity-item {
+    border-bottom: 1px solid #e9ecef;
+    padding: 1rem 0;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.subject-progress {
+    margin-bottom: 1rem;
+}
+
+.progress {
+    height: 20px;
+    border-radius: 10px;
+}
+
+.progress-bar {
+    border-radius: 10px;
+    transition: width 0.6s ease;
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Get student ID from session or generate one
+const studentId = sessionStorage.getItem('student_id') || 'demo_student_' + Date.now();
+sessionStorage.setItem('student_id', studentId);
+
+// Load adaptive dashboard data
+document.addEventListener('DOMContentLoaded', function() {
+    loadStudentAnalytics();
+    loadAdaptiveRecommendations();
+});
+
+async function loadStudentAnalytics() {
+    try {
+        const response = await fetch(`/api/student-analytics/${studentId}`);
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+            updatePerformanceCards(data.analytics);
+            updateSubjectProgress(data.analytics.subjects_breakdown);
+            updateRecentActivity(data.analytics.recent_activity);
+        }
+    } catch (error) {
+        console.error('Error loading analytics:', error);
+        showErrorMessage('Unable to load your learning statistics right now.');
+    }
+}
+
+async function loadAdaptiveRecommendations() {
+    try {
+        const response = await fetch('/api/adaptive-recommendation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                student_id: studentId,
+                subject: 'maths'  // Default to maths for recommendations
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+            updateRecommendations(data.recommendations);
+        }
+    } catch (error) {
+        console.error('Error loading recommendations:', error);
+        document.getElementById('recommendationsContainer').innerHTML = 
+            '<div class="alert alert-info">We\'re preparing personalized recommendations for you!</div>';
+    }
+}
+
+function updatePerformanceCards(analytics) {
+    document.getElementById('accuracyRate').textContent = 
+        analytics.average_accuracy ? Math.round(analytics.average_accuracy) + '%' : '0%';
+    
+    document.getElementById('difficultyLevel').textContent = 
+        getDifficultyName(analytics.current_difficulty || 2);
+    
+    document.getElementById('totalTime').textContent = 
+        formatTime(analytics.total_time_spent || 0);
+    
+    document.getElementById('topicsCount').textContent = 
+        analytics.total_topics_attempted || 0;
+}
+
+function updateSubjectProgress(subjectsBreakdown) {
+    const container = document.getElementById('subjectProgress');
+    
+    if (!subjectsBreakdown || Object.keys(subjectsBreakdown).length === 0) {
+        container.innerHTML = '<p class="text-muted">Start learning to see your progress here!</p>';
+        return;
+    }
+    
+    let html = '';
+    for (const [subject, data] of Object.entries(subjectsBreakdown)) {
+        const completionRate = Math.round(data.completion_rate || 0);
+        const accuracyRate = Math.round(data.average_accuracy || 0);
+        
+        html += `
+            <div class="subject-progress">
+                <div class="d-flex justify-content-between mb-2">
+                    <h6 class="mb-0">${formatSubjectName(subject)}</h6>
+                    <small class="text-muted">${completionRate}% complete • ${accuracyRate}% accuracy</small>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar bg-primary" role="progressbar" 
+                         style="width: ${completionRate}%" 
+                         aria-valuenow="${completionRate}" 
+                         aria-valuemin="0" 
+                         aria-valuemax="100">
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    container.innerHTML = html;
+}
+
+function updateRecentActivity(recentActivity) {
+    const container = document.getElementById('recentActivity');
+    
+    if (!recentActivity || recentActivity.length === 0) {
+        container.innerHTML = '<p class="text-muted">Your recent learning adventures will appear here!</p>';
+        return;
+    }
+    
+    let html = '';
+    recentActivity.forEach(activity => {
+        const timeAgo = formatTimeAgo(activity.completed_at);
+        const score = Math.round(activity.score || 0);
+        const difficultyName = getDifficultyName(activity.difficulty);
+        
+        html += `
+            <div class="activity-item">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1">${formatSubjectName(activity.subject)} - ${formatTopicName(activity.topic)}</h6>
+                        <small class="text-muted">
+                            <i class="fas fa-clock me-1"></i>${timeAgo} • 
+                            <i class="fas fa-trophy me-1"></i>${score}% • 
+                            ${activity.time_spent} minutes
+                        </small>
+                    </div>
+                    <span class="badge ${getDifficultyColor(activity.difficulty)} difficulty-badge">
+                        ${difficultyName}
+                    </span>
+                </div>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+function updateRecommendations(recommendations) {
+    const container = document.getElementById('recommendationsContainer');
+    
+    if (!recommendations || recommendations.length === 0) {
+        container.innerHTML = '<div class="alert alert-info">Keep learning to get personalized recommendations!</div>';
+        return;
+    }
+    
+    let html = '<div class="row">';
+    recommendations.forEach(rec => {
+        html += `
+            <div class="col-md-6 mb-3">
+                <div class="card recommendation-card">
+                    <div class="card-body">
+                        <h6 class="card-title">${rec.title || 'Recommended Topic'}</h6>
+                        <p class="card-text">${rec.description || 'Perfect for your current level!'}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge ${getDifficultyColor(rec.difficulty)} difficulty-badge">
+                                ${getDifficultyName(rec.difficulty)}
+                            </span>
+                            <a href="/lesson?subject=${rec.subject}&topic=${rec.topic}&style=visual" 
+                               class="btn btn-sm btn-primary">
+                                Start Learning!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    html += '</div>';
+    
+    container.innerHTML = html;
+}
+
+// Helper functions
+function formatSubjectName(subject) {
+    const names = {
+        'maths': 'Number Fun',
+        'science': 'Science Adventures',
+        'english': 'Reading & Writing',
+        'art': 'Art & Creativity',
+        'music': 'Musical Fun'
+    };
+    return names[subject] || subject.charAt(0).toUpperCase() + subject.slice(1);
+}
+
+function formatTopicName(topic) {
+    return topic.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+}
+
+function getDifficultyName(level) {
+    const names = {
+        1: 'Beginner',
+        2: 'Easy',
+        3: 'Medium',
+        4: 'Hard',
+        5: 'Expert'
+    };
+    return names[level] || 'Medium';
+}
+
+function getDifficultyColor(level) {
+    const colors = {
+        1: 'bg-success',
+        2: 'bg-info',
+        3: 'bg-warning',
+        4: 'bg-danger',
+        5: 'bg-dark'
+    };
+    return colors[level] || 'bg-warning';
+}
+
+function formatTime(minutes) {
+    if (minutes < 60) {
+        return minutes + ' min';
+    }
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    return `${hours}h ${remainingMinutes}m`;
+}
+
+function formatTimeAgo(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffMs = now - date;
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    const diffDays = Math.floor(diffHours / 24);
+    
+    if (diffDays > 0) {
+        return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+    } else if (diffHours > 0) {
+        return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+    } else {
+        return 'Just now';
+    }
+}
+
+function showErrorMessage(message) {
+    // You could implement a toast notification here
+    console.error(message);
+}
+</script>
+{% endblock %}

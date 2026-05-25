@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Character Creator</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-blue-100 min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white shadow-xl rounded-2xl w-full max-w-md p-6">
+    <h1 class="text-2xl font-bold text-center mb-4">Create Your Character</h1>
+    <form id="characterForm" class="grid gap-4">
+      <div>
+        <label class="block mb-1 font-medium">Skin Tone</label>
+        <select id="skinTone" class="w-full border rounded px-3 py-2">
+          <option>White</option>
+          <option>Brown</option>
+          <option>Black</option>
+          <option>Chinese</option>
+          <option>Vitiligo</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block mb-1 font-medium">Hair Color</label>
+        <input type="text" id="hairColor" placeholder="e.g., Pink, Black" class="w-full border rounded px-3 py-2">
+      </div>
+
+      <div>
+        <label class="block mb-1 font-medium">Hair Type</label>
+        <select id="hairType" class="w-full border rounded px-3 py-2">
+          <option>Straight</option>
+          <option>Short</option>
+          <option>Medium</option>
+          <option>Long</option>
+          <option>Afro</option>
+          <option>Braids</option>
+          <option>Hijab</option>
+          <option>Curly</option>
+          <option>Wavy</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block mb-1 font-medium">Eye Shape</label>
+        <select id="eyeShape" class="w-full border rounded px-3 py-2">
+          <option>Almond</option>
+          <option>Round</option>
+          <option>Hooded</option>
+          <option>Monolid</option>
+          <option>Upturned</option>
+          <option>Downturned</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block mb-1 font-medium">Eye Color</label>
+        <input type="text" id="eyeColor" placeholder="e.g., Blue, Green, Hazel" class="w-full border rounded px-3 py-2">
+      </div>
+
+      <div>
+        <label class="block mb-1 font-medium">Outfit</label>
+        <select id="outfit" class="w-full border rounded px-3 py-2">
+          <option>Cultural</option>
+          <option>Hoodie</option>
+          <option>Dress</option>
+          <option>T-shirt</option>
+          <option>Shorts</option>
+        </select>
+      </div>
+
+      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white rounded px-4 py-2 font-semibold">Generate Character</button>
+    </form>
+
+    <div id="preview" class="mt-6 text-center hidden">
+      <h2 class="text-xl font-bold mb-2">Character Preview</h2>
+      <p id="previewText" class="text-gray-700"></p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('characterForm');
+    const preview = document.getElementById('preview');
+    const previewText = document.getElementById('previewText');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const skin = document.getElementById('skinTone').value;
+      const hairColor = document.getElementById('hairColor').value;
+      const hairType = document.getElementById('hairType').value;
+      const eyeShape = document.getElementById('eyeShape').value;
+      const eyeColor = document.getElementById('eyeColor').value;
+      const outfit = document.getElementById('outfit').value;
+
+      previewText.innerText = `Skin: ${skin}, Hair: ${hairColor} & ${hairType}, Eyes: ${eyeColor} & ${eyeShape}, Outfit: ${outfit}`;
+      preview.classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>

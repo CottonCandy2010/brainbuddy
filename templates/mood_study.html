@@ -1,0 +1,378 @@
+{% extends "layout.html" %}
+
+{% block title %}Mood-Based Study - Brain Buddy{% endblock %}
+
+{% block content %}
+<section class="mood-study-page animate-fade-in">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Mood Study Header -->
+            <div class="mood-header text-center mb-5">
+                <div class="mood-logo mb-4">
+                    <img src="{{ url_for('static', filename='images/brain_buddy_logo.png') }}" 
+                         alt="Brain Buddy" class="mood-buddy-logo">
+                </div>
+                <h1 class="mood-title">How Are You Feeling Today?</h1>
+                <p class="mood-subtitle">Let's find the perfect study approach that matches your current mood!</p>
+            </div>
+
+            <!-- Mood Selection Grid -->
+            <div class="mood-selection-grid">
+                <div class="mood-card" data-mood="excited" data-energy="high" data-focus="high">
+                    <div class="mood-emoji">🚀</div>
+                    <h3>Super Excited!</h3>
+                    <p>Ready to tackle anything and everything</p>
+                    <div class="mood-tags">
+                        <span class="tag high-energy">High Energy</span>
+                        <span class="tag high-focus">Sharp Focus</span>
+                    </div>
+                </div>
+
+                <div class="mood-card" data-mood="happy" data-energy="medium" data-focus="high">
+                    <div class="mood-emoji">😊</div>
+                    <h3>Happy & Focused</h3>
+                    <p>Feeling good and ready to learn</p>
+                    <div class="mood-tags">
+                        <span class="tag medium-energy">Good Energy</span>
+                        <span class="tag high-focus">Focused</span>
+                    </div>
+                </div>
+
+                <div class="mood-card" data-mood="calm" data-energy="medium" data-focus="medium">
+                    <div class="mood-emoji">😌</div>
+                    <h3>Calm & Peaceful</h3>
+                    <p>Relaxed and steady learning pace</p>
+                    <div class="mood-tags">
+                        <span class="tag medium-energy">Steady Energy</span>
+                        <span class="tag medium-focus">Balanced</span>
+                    </div>
+                </div>
+
+                <div class="mood-card" data-mood="curious" data-energy="medium" data-focus="high">
+                    <div class="mood-emoji">🤔</div>
+                    <h3>Curious & Thoughtful</h3>
+                    <p>Want to explore and understand deeply</p>
+                    <div class="mood-tags">
+                        <span class="tag medium-energy">Reflective</span>
+                        <span class="tag high-focus">Deep Focus</span>
+                    </div>
+                </div>
+
+                <div class="mood-card" data-mood="tired" data-energy="low" data-focus="low">
+                    <div class="mood-emoji">😴</div>
+                    <h3>A Bit Tired</h3>
+                    <p>Low energy but still want to learn</p>
+                    <div class="mood-tags">
+                        <span class="tag low-energy">Low Energy</span>
+                        <span class="tag low-focus">Light Study</span>
+                    </div>
+                </div>
+
+                <div class="mood-card" data-mood="stressed" data-energy="medium" data-focus="low">
+                    <div class="mood-emoji">😰</div>
+                    <h3>Feeling Stressed</h3>
+                    <p>Need some support and gentle learning</p>
+                    <div class="mood-tags">
+                        <span class="tag medium-energy">Anxious</span>
+                        <span class="tag low-focus">Need Support</span>
+                    </div>
+                </div>
+
+                <div class="mood-card" data-mood="playful" data-energy="high" data-focus="medium">
+                    <div class="mood-emoji">🎮</div>
+                    <h3>Playful & Fun</h3>
+                    <p>Want to learn through games and activities</p>
+                    <div class="mood-tags">
+                        <span class="tag high-energy">Playful</span>
+                        <span class="tag medium-focus">Interactive</span>
+                    </div>
+                </div>
+
+                <div class="mood-card" data-mood="determined" data-energy="high" data-focus="high">
+                    <div class="mood-emoji">💪</div>
+                    <h3>Determined</h3>
+                    <p>Ready for challenges and hard work</p>
+                    <div class="mood-tags">
+                        <span class="tag high-energy">Strong Will</span>
+                        <span class="tag high-focus">Challenge Ready</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Study Recommendations Panel -->
+            <div class="study-recommendations" id="studyRecommendations" style="display: none;">
+                <div class="recommendations-header">
+                    <h2 id="recommendationTitle">Perfect Study Plan for You!</h2>
+                    <p id="recommendationSubtitle">Based on your current mood</p>
+                </div>
+
+                <div class="row">
+                    <!-- Study Methods -->
+                    <div class="col-md-6 mb-4">
+                        <div class="recommendation-card">
+                            <div class="card-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h4>Recommended Study Methods</h4>
+                            <div id="studyMethods" class="method-list">
+                                <!-- Methods will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subject Suggestions -->
+                    <div class="col-md-6 mb-4">
+                        <div class="recommendation-card">
+                            <div class="card-icon">
+                                <i class="fas fa-books"></i>
+                            </div>
+                            <h4>Best Subjects for Right Now</h4>
+                            <div id="subjectSuggestions" class="subject-list">
+                                <!-- Subjects will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Study Duration -->
+                    <div class="col-md-6 mb-4">
+                        <div class="recommendation-card">
+                            <div class="card-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h4>Recommended Study Time</h4>
+                            <div id="studyDuration" class="duration-info">
+                                <!-- Duration will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Motivational Message -->
+                    <div class="col-md-6 mb-4">
+                        <div class="recommendation-card motivational">
+                            <div class="card-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h4>Your Personal Message</h4>
+                            <div id="motivationalMessage" class="motivation-text">
+                                <!-- Message will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons text-center mt-4">
+                    <button class="btn btn-primary btn-lg me-3" id="startStudying">
+                        <i class="fas fa-play me-2"></i>Start Studying Now
+                    </button>
+                    <button class="btn btn-outline-secondary btn-lg" id="changeMood">
+                        <i class="fas fa-redo me-2"></i>Change Mood
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Mood-based study recommendations system
+const moodRecommendations = {
+    excited: {
+        title: "Channel That Amazing Energy! 🚀",
+        subtitle: "You're fired up and ready to conquer the world!",
+        methods: [
+            "🎯 Tackle challenging problems head-on",
+            "🏃‍♂️ Use active learning with movement",
+            "🎵 Study with upbeat background music",
+            "📝 Create mind maps and colorful notes",
+            "🎮 Try gamified learning activities"
+        ],
+        subjects: ["Maths", "Science", "Computing", "Art"],
+        duration: "45-60 minute sessions with 10-minute active breaks",
+        message: "Your enthusiasm is your superpower! Use this amazing energy to tackle your biggest challenges. You've got this! 🌟"
+    },
+    happy: {
+        title: "Ride the Wave of Positivity! 😊",
+        subtitle: "You're in the perfect headspace for productive learning",
+        methods: [
+            "📚 Read and summarize key concepts",
+            "👥 Study with friends or join study groups",
+            "🎨 Use visual learning techniques",
+            "💭 Practice explaining topics out loud",
+            "✅ Set achievable goals and celebrate wins"
+        ],
+        subjects: ["English", "History", "Geography", "Art"],
+        duration: "30-45 minute focused sessions with 5-minute breaks",
+        message: "Your positive attitude makes everything easier! Keep that smile and let your natural curiosity guide your learning journey. 💫"
+    },
+    calm: {
+        title: "Embrace Your Inner Zen 😌",
+        subtitle: "Perfect for deep, thoughtful learning",
+        methods: [
+            "🧘‍♂️ Practice mindful reading and reflection",
+            "📖 Focus on comprehension over speed",
+            "🎧 Use soft background sounds or silence",
+            "📝 Take detailed, organized notes",
+            "🤔 Spend time on deeper understanding"
+        ],
+        subjects: ["English", "History", "Philosophy", "Geography"],
+        duration: "25-30 minute calm sessions with mindful 5-minute breaks",
+        message: "Your peaceful energy is perfect for absorbing knowledge deeply. Take your time and trust the process. 🌸"
+    },
+    curious: {
+        title: "Feed Your Brilliant Mind! 🤔",
+        subtitle: "Time for exploration and discovery",
+        methods: [
+            "🔍 Research beyond the textbook",
+            "❓ Ask 'why' and 'how' questions",
+            "🧪 Try hands-on experiments",
+            "📊 Connect ideas across subjects",
+            "💡 Explore real-world applications"
+        ],
+        subjects: ["Science", "Maths", "Computing", "Geography"],
+        duration: "40-50 minute exploration sessions with reflection breaks",
+        message: "Your curiosity is the key to true understanding! Follow your questions and discover amazing connections. 🔗"
+    },
+    tired: {
+        title: "Gentle Learning for Tired Heroes 😴",
+        subtitle: "Even small steps count when you're tired",
+        methods: [
+            "👂 Listen to audio lessons or podcasts",
+            "👀 Watch educational videos",
+            "📚 Light reading with frequent breaks",
+            "🎵 Use relaxing background music",
+            "✨ Review familiar topics to build confidence"
+        ],
+        subjects: ["Music", "Art", "Light English", "Geography"],
+        duration: "15-20 minute gentle sessions with longer breaks",
+        message: "Be kind to yourself! Even when tired, you're still learning. Every small effort matters and adds up. 💙"
+    },
+    stressed: {
+        title: "You're Stronger Than You Know 😰",
+        subtitle: "Let's reduce stress while keeping you moving forward",
+        methods: [
+            "🌱 Start with easy, familiar topics",
+            "📋 Break tasks into tiny steps",
+            "🎵 Use calming music or nature sounds",
+            "🤗 Practice self-compassion",
+            "✅ Celebrate every small achievement"
+        ],
+        subjects: ["Art", "Music", "Easy Maths review", "Geography"],
+        duration: "10-15 minute stress-free sessions with relaxation breaks",
+        message: "You're doing great, even when it doesn't feel like it. Take one small step at a time. You are capable and brave! 💚"
+    },
+    playful: {
+        title: "Learning Through Play! 🎮",
+        subtitle: "Make studying feel like the best game ever",
+        methods: [
+            "🎲 Turn lessons into games and quizzes",
+            "🎭 Role-play historical characters",
+            "🧩 Use puzzles and brain teasers",
+            "🎨 Create fun projects and artwork",
+            "🏆 Set up friendly competitions"
+        ],
+        subjects: ["Maths", "Science", "History", "Art"],
+        duration: "30-40 minute fun sessions with playful 10-minute breaks",
+        message: "Learning should be fun, and you know how to make it amazing! Keep that playful spirit alive. 🎊"
+    },
+    determined: {
+        title: "Unleash Your Inner Champion! 💪",
+        subtitle: "Time to tackle your biggest goals",
+        methods: [
+            "🎯 Set ambitious but achievable goals",
+            "🔥 Practice intensive problem-solving",
+            "📊 Track your progress visually",
+            "🏋️‍♂️ Challenge yourself with harder topics",
+            "⚡ Use focused, high-intensity sessions"
+        ],
+        subjects: ["Maths", "Science", "Computing", "Advanced topics"],
+        duration: "50-60 minute power sessions with strategic 10-minute breaks",
+        message: "Your determination is unstoppable! Channel this incredible energy into achieving something amazing today. 🔥"
+    }
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+    const moodCards = document.querySelectorAll('.mood-card');
+    const recommendationsPanel = document.getElementById('studyRecommendations');
+    const changeMoodBtn = document.getElementById('changeMood');
+    const startStudyingBtn = document.getElementById('startStudying');
+    
+    // Handle mood selection
+    moodCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Remove previous selections
+            moodCards.forEach(c => c.classList.remove('selected'));
+            
+            // Select current card
+            this.classList.add('selected');
+            
+            // Get mood data
+            const mood = this.dataset.mood;
+            const recommendations = moodRecommendations[mood];
+            
+            // Update recommendations
+            updateRecommendations(recommendations);
+            
+            // Show recommendations panel
+            recommendationsPanel.style.display = 'block';
+            recommendationsPanel.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+    
+    // Handle change mood button
+    changeMoodBtn.addEventListener('click', function() {
+        recommendationsPanel.style.display = 'none';
+        moodCards.forEach(c => c.classList.remove('selected'));
+        document.querySelector('.mood-selection-grid').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Handle start studying button
+    startStudyingBtn.addEventListener('click', function() {
+        // Get selected mood
+        const selectedCard = document.querySelector('.mood-card.selected');
+        if (selectedCard) {
+            const mood = selectedCard.dataset.mood;
+            const recommendations = moodRecommendations[mood];
+            
+            // Store mood preference
+            localStorage.setItem('currentMood', mood);
+            localStorage.setItem('moodTimestamp', Date.now());
+            
+            // Redirect to lesson selection with mood context
+            window.location.href = `/?mood=${mood}`;
+        }
+    });
+    
+    function updateRecommendations(recommendations) {
+        // Update title and subtitle
+        document.getElementById('recommendationTitle').textContent = recommendations.title;
+        document.getElementById('recommendationSubtitle').textContent = recommendations.subtitle;
+        
+        // Update study methods
+        const methodsList = document.getElementById('studyMethods');
+        methodsList.innerHTML = recommendations.methods.map(method => 
+            `<div class="method-item">${method}</div>`
+        ).join('');
+        
+        // Update subject suggestions
+        const subjectsList = document.getElementById('subjectSuggestions');
+        subjectsList.innerHTML = recommendations.subjects.map(subject => 
+            `<span class="subject-chip">${subject}</span>`
+        ).join('');
+        
+        // Update study duration
+        document.getElementById('studyDuration').innerHTML = `
+            <div class="duration-display">
+                <i class="fas fa-stopwatch me-2"></i>
+                ${recommendations.duration}
+            </div>
+        `;
+        
+        // Update motivational message
+        document.getElementById('motivationalMessage').textContent = recommendations.message;
+    }
+});
+</script>
+{% endblock %}

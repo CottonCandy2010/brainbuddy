@@ -1,0 +1,40 @@
+I'm Edhita, 14, and I'm building my first web app called 'Brain Buddy.' My goal is to create an AI-powered learning app for secondary school students (11-16) that adapts to their preferred learning styles.
+
+Here's the plan for my initial version:
+
+App Goal: Help students learn core subjects better using AI lessons and personalized styles.
+Target Audience: Secondary students (11-16).
+Initial Learning Styles:
+Visual: Diagrams, pictures.
+Auditory: Audio explanations.
+Verbal: Written explanations.
+(I'll add Physical, Logical, Social, Solitary later).
+Core Subjects:
+Maths
+Science
+English
+(I'll add Computing, History, etc., later).
+Tech Tools I want to use:
+Frontend: HTML, CSS, JavaScript.
+Backend/Data Storage: Firebase (for simple progress tracking, but optional for the very first step).
+AI Features: OpenAI API or Google Gemini API for explanations. Chart.js for progress visuals (later).
+Current Features I want to build:
+Subject selection (Math, Science, English).
+Learning style choice (Visual, Verbal, Auditory).
+An AI tutor that explains topics based on style.
+Basic UI: Cute and Easy.
+I'm a beginner working solo, learning step-by-step.
+
+My immediate focus is on getting a very basic lesson with AI explanation working for ONE subject and ONE learning style.
+
+Please help me with:
+
+Project Setup: How do I best organize my HTML, CSS, and JavaScript files for a simple web app structure?
+Initial HTML Structure: Provide basic HTML for an index.html (welcome page) and a lesson.html template.
+Basic CSS: Give me some simple CSS to make the index.html look 'cute and easy.'
+JavaScript for Subject/Style Selection: Show me how to use JavaScript to:
+Allow a user to pick 'Maths' and then 'Visual.'
+Pass these choices to the lesson.html page (e.g., using URL parameters).
+Simulated AI Explanation (before actual API): How can I make the lesson.html dynamically display different content (text for verbal, an image for visual, an audio tag for auditory) based on the chosen style, without calling the AI API yet? (I'll integrate the API later once I have the basic structure).
+Guidance on Firebase and AI API integration: Briefly explain where Firebase would fit in for saving user choices and where the OpenAI/Gemini API call would happen in this basic structure.
+I want to start with a Maths lesson for a Visual learner first. Let's make it a simple explanation of "Fractions

@@ -1,0 +1,615 @@
+{% extends "layout.html" %}
+
+{% block title %}Emotion & Mood Dashboard - Brain Buddy Kids{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-11">
+            <!-- Header -->
+            <div class="mood-header text-center mb-5">
+                <h1 class="page-title">
+                    <i class="fas fa-heart me-3"></i>
+                    Emotion & Mood Dashboard
+                </h1>
+                <p class="page-subtitle">Watch how your learning friend feels and reacts during your amazing adventures!</p>
+            </div>
+
+            <div class="row">
+                <!-- Live Mood Display -->
+                <div class="col-lg-6 mb-4">
+                    <div class="mood-display-card">
+                        <h4 class="text-center mb-4">
+                            <i class="fas fa-smile text-warning"></i>
+                            Your Friend's Current Mood
+                        </h4>
+                        
+                        <div class="current-mood-display" id="currentMoodDisplay">
+                            <div class="mood-avatar" id="moodAvatar">
+                                <!-- Avatar will be displayed here -->
+                                <div class="mood-placeholder">
+                                    <i class="fas fa-heart fa-4x text-primary"></i>
+                                    <p class="mt-3 text-primary">Your friend's mood will appear here!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mood-info mt-4">
+                                <div class="current-mood-label">
+                                    <span id="currentMoodName">Happy</span>
+                                </div>
+                                <div class="mood-message mt-3">
+                                    <p id="moodMessage">Ready for an amazing learning adventure!</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Mood Testing Controls -->
+                        <div class="mood-controls mt-4">
+                            <h6 class="mb-3">Test Different Learning Situations:</h6>
+                            <div class="situation-buttons">
+                                <button class="btn btn-success btn-sm me-2 mb-2" onclick="testSituation('correct_answer')">
+                                    <i class="fas fa-check me-1"></i>Got It Right!
+                                </button>
+                                <button class="btn btn-warning btn-sm me-2 mb-2" onclick="testSituation('wrong_answer')">
+                                    <i class="fas fa-times me-1"></i>Oops, Try Again
+                                </button>
+                                <button class="btn btn-info btn-sm me-2 mb-2" onclick="testSituation('lesson_start')">
+                                    <i class="fas fa-play me-1"></i>Start Learning
+                                </button>
+                                <button class="btn btn-primary btn-sm me-2 mb-2" onclick="testSituation('lesson_complete')">
+                                    <i class="fas fa-trophy me-1"></i>Lesson Done!
+                                </button>
+                                <button class="btn btn-secondary btn-sm me-2 mb-2" onclick="testSituation('break_time')">
+                                    <i class="fas fa-coffee me-1"></i>Break Time
+                                </button>
+                                <button class="btn btn-danger btn-sm me-2 mb-2" onclick="testSituation('struggle_detected')">
+                                    <i class="fas fa-question me-1"></i>Need Help
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mood History & Analytics -->
+                <div class="col-lg-6 mb-4">
+                    <div class="analytics-panel">
+                        <h4 class="text-center mb-4">
+                            <i class="fas fa-chart-line text-info"></i>
+                            Emotion Journey
+                        </h4>
+                        
+                        <!-- Mood History Timeline -->
+                        <div class="mood-timeline mb-4">
+                            <h6>Recent Mood Changes:</h6>
+                            <div id="moodTimeline" class="timeline-container">
+                                <!-- Timeline will be populated here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Mood Statistics -->
+                        <div class="mood-stats">
+                            <h6>This Week's Emotions:</h6>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-icon">😊</div>
+                                    <div class="stat-label">Happy Moments</div>
+                                    <div class="stat-value" id="happyCount">0</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">🤩</div>
+                                    <div class="stat-label">Excited Times</div>
+                                    <div class="stat-value" id="excitedCount">0</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">🤓</div>
+                                    <div class="stat-label">Focus Mode</div>
+                                    <div class="stat-value" id="focusedCount">0</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">🏆</div>
+                                    <div class="stat-label">Proud Wins</div>
+                                    <div class="stat-value" id="proudCount">0</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Engagement Score -->
+                        <div class="engagement-score mt-4">
+                            <h6>Emotional Engagement Score:</h6>
+                            <div class="score-display">
+                                <div class="score-circle">
+                                    <span id="engagementScore">85</span>%
+                                </div>
+                                <p class="score-description">Your friend loves learning with you!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Interactive Mood Expressions -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="expressions-showcase">
+                        <h4 class="text-center mb-4">
+                            <i class="fas fa-masks-theater text-primary"></i>
+                            All Your Friend's Expressions
+                        </h4>
+                        
+                        <div class="expressions-grid">
+                            <div class="expression-card" data-mood="happy">
+                                <div class="expression-preview">😊</div>
+                                <h6>Super Happy</h6>
+                                <p>When you get answers right!</p>
+                                <button class="btn btn-sm btn-outline-primary" onclick="previewMood('happy')">Try It!</button>
+                            </div>
+                            
+                            <div class="expression-card" data-mood="excited">
+                                <div class="expression-preview">🤩</div>
+                                <h6>Excited</h6>
+                                <p>Starting new adventures!</p>
+                                <button class="btn btn-sm btn-outline-primary" onclick="previewMood('excited')">Try It!</button>
+                            </div>
+                            
+                            <div class="expression-card" data-mood="focused">
+                                <div class="expression-preview">🤓</div>
+                                <h6>Ready to Learn</h6>
+                                <p>Time to concentrate!</p>
+                                <button class="btn btn-sm btn-outline-primary" onclick="previewMood('focused')">Try It!</button>
+                            </div>
+                            
+                            <div class="expression-card" data-mood="curious">
+                                <div class="expression-preview">🧐</div>
+                                <h6>Curious</h6>
+                                <p>Wondering about new things!</p>
+                                <button class="btn btn-sm btn-outline-primary" onclick="previewMood('curious')">Try It!</button>
+                            </div>
+                            
+                            <div class="expression-card" data-mood="supportive">
+                                <div class="expression-preview">🤗</div>
+                                <h6>Supportive</h6>
+                                <p>Always here to help!</p>
+                                <button class="btn btn-sm btn-outline-primary" onclick="previewMood('supportive')">Try It!</button>
+                            </div>
+                            
+                            <div class="expression-card" data-mood="proud">
+                                <div class="expression-preview">🏆</div>
+                                <h6>So Proud</h6>
+                                <p>When you achieve something amazing!</p>
+                                <button class="btn btn-sm btn-outline-primary" onclick="previewMood('proud')">Try It!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let currentMood = 'happy';
+let moodHistory = [];
+
+// Initialize mood dashboard
+document.addEventListener('DOMContentLoaded', function() {
+    updateMoodDisplay('happy', 'Ready for an amazing learning adventure!');
+    loadMoodAnalytics();
+});
+
+function testSituation(situation) {
+    fetch(`/api/mood-response?context=${situation}&student_id=demo_student&accuracy=0.8&engagement=0.7`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const moodData = data.mood_data;
+                const newMood = moodData.mood;
+                const message = moodData.expression.message;
+                
+                updateMoodDisplay(newMood, message);
+                addToMoodHistory(newMood, situation, message);
+                animateMoodTransition(currentMood, newMood);
+                currentMood = newMood;
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function previewMood(mood) {
+    const messages = {
+        'happy': "I'm so happy to be learning with you!",
+        'excited': "This is going to be amazing!",
+        'focused': "Let's concentrate and learn together!",
+        'curious': "I wonder what we'll discover next!",
+        'supportive': "I believe in you! You can do this!",
+        'proud': "I'm so proud of how hard you're working!"
+    };
+    
+    updateMoodDisplay(mood, messages[mood]);
+    animateMoodTransition(currentMood, mood);
+    currentMood = mood;
+}
+
+function updateMoodDisplay(mood, message) {
+    document.getElementById('currentMoodName').textContent = capitalizeFirst(mood);
+    document.getElementById('moodMessage').textContent = message;
+    
+    // Update avatar mood (simplified for demo)
+    const avatar = document.getElementById('moodAvatar');
+    const moodEmojis = {
+        'happy': '😊',
+        'excited': '🤩',
+        'focused': '🤓',
+        'curious': '🧐',
+        'supportive': '🤗',
+        'proud': '🏆',
+        'sleepy': '😴',
+        'cool': '😎'
+    };
+    
+    avatar.innerHTML = `
+        <div class="animated-avatar ${mood}">
+            <div class="avatar-face">${moodEmojis[mood] || '😊'}</div>
+            <div class="avatar-glow"></div>
+        </div>
+    `;
+}
+
+function addToMoodHistory(mood, situation, message) {
+    const timestamp = new Date().toLocaleTimeString();
+    moodHistory.unshift({
+        mood: mood,
+        situation: situation,
+        message: message,
+        timestamp: timestamp
+    });
+    
+    // Keep only last 10 entries
+    if (moodHistory.length > 10) {
+        moodHistory = moodHistory.slice(0, 10);
+    }
+    
+    updateMoodTimeline();
+}
+
+function updateMoodTimeline() {
+    const timeline = document.getElementById('moodTimeline');
+    timeline.innerHTML = '';
+    
+    moodHistory.forEach((entry, index) => {
+        const timelineItem = document.createElement('div');
+        timelineItem.className = 'timeline-item';
+        timelineItem.innerHTML = `
+            <div class="timeline-icon ${entry.mood}">
+                ${getMoodEmoji(entry.mood)}
+            </div>
+            <div class="timeline-content">
+                <div class="timeline-title">${capitalizeFirst(entry.mood)}</div>
+                <div class="timeline-situation">${entry.situation.replace('_', ' ')}</div>
+                <div class="timeline-time">${entry.timestamp}</div>
+            </div>
+        `;
+        timeline.appendChild(timelineItem);
+    });
+}
+
+function animateMoodTransition(fromMood, toMood) {
+    const avatar = document.getElementById('moodAvatar');
+    avatar.classList.add('mood-transition');
+    
+    setTimeout(() => {
+        avatar.classList.remove('mood-transition');
+    }, 1000);
+}
+
+function loadMoodAnalytics() {
+    // Simulate loading analytics data
+    setTimeout(() => {
+        updateMoodStats({
+            happy: Math.floor(Math.random() * 20) + 10,
+            excited: Math.floor(Math.random() * 15) + 5,
+            focused: Math.floor(Math.random() * 25) + 15,
+            proud: Math.floor(Math.random() * 10) + 5
+        });
+        
+        updateEngagementScore(Math.floor(Math.random() * 20) + 80);
+    }, 1000);
+}
+
+function updateMoodStats(stats) {
+    document.getElementById('happyCount').textContent = stats.happy || 0;
+    document.getElementById('excitedCount').textContent = stats.excited || 0;
+    document.getElementById('focusedCount').textContent = stats.focused || 0;
+    document.getElementById('proudCount').textContent = stats.proud || 0;
+}
+
+function updateEngagementScore(score) {
+    document.getElementById('engagementScore').textContent = score;
+}
+
+function getMoodEmoji(mood) {
+    const emojis = {
+        'happy': '😊',
+        'excited': '🤩',
+        'focused': '🤓',
+        'curious': '🧐',
+        'supportive': '🤗',
+        'proud': '🏆',
+        'sleepy': '😴',
+        'cool': '😎'
+    };
+    return emojis[mood] || '😊';
+}
+
+function capitalizeFirst(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+</script>
+{% endblock %}
+
+{% block styles %}
+<style>
+.mood-header {
+    background: linear-gradient(135deg, #ff6b9d 0%, #4ecdc4 50%, #45b7d1 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.mood-display-card, .analytics-panel, .expressions-showcase {
+    background: linear-gradient(145deg, #fef7ff 0%, #f0f9ff 100%);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    border: 3px solid #fbbf24;
+}
+
+.current-mood-display {
+    min-height: 300px;
+    border: 4px dashed #fbbf24;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #fff7ed 0%, #fef3c7 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.animated-avatar {
+    font-size: 4rem;
+    animation: mood-float 3s ease-in-out infinite;
+    position: relative;
+}
+
+.animated-avatar.happy { animation: mood-bounce 2s ease-in-out infinite; }
+.animated-avatar.excited { animation: mood-shake 1s ease-in-out infinite; }
+.animated-avatar.focused { animation: mood-pulse 2s ease-in-out infinite; }
+.animated-avatar.curious { animation: mood-tilt 3s ease-in-out infinite; }
+.animated-avatar.supportive { animation: mood-glow 2s ease-in-out infinite; }
+.animated-avatar.proud { animation: mood-grow 1.5s ease-in-out infinite; }
+
+@keyframes mood-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes mood-bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes mood-shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}
+
+@keyframes mood-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes mood-tilt {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+
+@keyframes mood-glow {
+    0%, 100% { box-shadow: 0 0 10px rgba(255, 182, 193, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(255, 182, 193, 0.8); }
+}
+
+@keyframes mood-grow {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.mood-transition {
+    animation: transition-effect 1s ease-in-out;
+}
+
+@keyframes transition-effect {
+    0% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.2) rotate(180deg); }
+    100% { transform: scale(1) rotate(360deg); }
+}
+
+.current-mood-label {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #7c3aed;
+    text-align: center;
+}
+
+.mood-message {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #4b5563;
+    font-style: italic;
+}
+
+.situation-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.timeline-container {
+    max-height: 250px;
+    overflow-y: auto;
+    border: 2px solid #fbbf24;
+    border-radius: 10px;
+    padding: 1rem;
+    background: linear-gradient(145deg, #fff7ed 0%, #fef3c7 100%);
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    width: 40px;
+    text-align: center;
+}
+
+.timeline-content {
+    flex: 1;
+}
+
+.timeline-title {
+    font-weight: bold;
+    color: #7c3aed;
+}
+
+.timeline-situation {
+    font-size: 0.9rem;
+    color: #6b7280;
+    text-transform: capitalize;
+}
+
+.timeline-time {
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #fbbf24;
+}
+
+.stat-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #7c3aed;
+}
+
+.engagement-score {
+    text-align: center;
+}
+
+.score-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6b9d 0%, #4ecdc4 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.score-description {
+    color: #6b7280;
+    font-style: italic;
+}
+
+.expressions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.expression-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 3px solid #fbbf24;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.expression-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border-color: #ff6b9d;
+}
+
+.expression-preview {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: gentle-bounce 3s ease-in-out infinite;
+}
+
+@keyframes gentle-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.expression-card h6 {
+    color: #7c3aed;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.expression-card p {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+</style>
+{% endblock %}

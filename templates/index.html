@@ -1,0 +1,272 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {% if step == 'subject' %}Choose a Subject - Brain Buddy Kids
+    {% elif step == 'style' %}Choose a Learning Style - Brain Buddy Kids
+    {% else %}Welcome to Brain Buddy Kids{% endif %}
+{% endblock %}
+
+{% block content %}
+    <!-- Welcome Section (Initial View) -->
+    {% if not step %}
+    <section class="welcome-section animate-fade-in">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="content-card text-center p-4 p-md-5">
+                    <!-- Brain Buddy Logo -->
+                    <div class="welcome-logo mb-4">
+                        <img src="{{ url_for('static', filename='images/brain-buddy-logo.png') }}" 
+                             alt="Brain Buddy Kids" class="brain-logo animate-bounce">
+                    </div>
+                    <h1 class="welcome-title">Welcome to Brain Buddy Kids!</h1>
+                    <p class="welcome-subtitle">Your magical learning friend that makes education super fun!</p>
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="{{ url_for('age_setup') }}" class="btn btn-brain-buddy btn-lg animate-fade-in">
+                                Start My Adventure! <i class="fas fa-rocket ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+
+                </div>
+            </div>
+        </div>
+        
+        <!-- Study Tools Section - Mobile Friendly -->
+        <div class="study-tools-section mt-5">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="content-card">
+                        <h3 class="text-center mb-4 study-tools-title">
+                            <i class="fas fa-tools me-2"></i>Study Tools & Features
+                        </h3>
+                        
+                        <!-- Study Tools Grid -->
+                        <div class="row g-3" id="study-tools-grid">
+                            <!-- Curriculum Index -->
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <a href="{{ url_for('study_index') }}" class="study-tool-card text-decoration-none">
+                                    <div class="tool-icon">📚</div>
+                                    <div class="tool-title">Curriculum</div>
+                                    <div class="tool-subtitle">Browse Topics</div>
+                                </a>
+                            </div>
+                            
+                            <!-- Quick Challenges -->
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <a href="{{ url_for('quick_burst') }}" class="study-tool-card text-decoration-none">
+                                    <div class="tool-icon">⚡</div>
+                                    <div class="tool-title">Quick Burst</div>
+                                    <div class="tool-subtitle">Fast Challenges</div>
+                                </a>
+                            </div>
+                            
+                            <!-- Progress Dashboard -->
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <a href="{{ url_for('dashboard') }}?student_id=demo_student" class="study-tool-card text-decoration-none">
+                                    <div class="tool-icon">📊</div>
+                                    <div class="tool-title">Progress</div>
+                                    <div class="tool-subtitle">Track Learning</div>
+                                </a>
+                            </div>
+                            
+                            <!-- Study Buddy AI -->
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <a href="{{ url_for('study_buddy') }}" class="study-tool-card text-decoration-none">
+                                    <div class="tool-icon">🤖</div>
+                                    <div class="tool-title">Study Buddy</div>
+                                    <div class="tool-subtitle">AI Helper</div>
+                                </a>
+                            </div>
+                            
+                            <!-- Learning Soundtrack -->
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <a href="{{ url_for('soundtrack_generator') }}" class="study-tool-card text-decoration-none">
+                                    <div class="tool-icon">🎵</div>
+                                    <div class="tool-title">Soundtrack</div>
+                                    <div class="tool-subtitle">Study Music</div>
+                                </a>
+                            </div>
+                            
+                            <!-- Mood Study -->
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <a href="{{ url_for('mood_study') }}" class="study-tool-card text-decoration-none">
+                                    <div class="tool-icon">😊</div>
+                                    <div class="tool-title">Mood Study</div>
+                                    <div class="tool-subtitle">Adaptive Learning</div>
+                                </a>
+                            </div>
+                            
+                            <!-- Practice Questions -->
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <a href="{{ url_for('practice_questions') }}" class="study-tool-card text-decoration-none">
+                                    <div class="tool-icon">📝</div>
+                                    <div class="tool-title">Practice</div>
+                                    <div class="tool-subtitle">Test Skills</div>
+                                </a>
+                            </div>
+                            
+                            <!-- Settings -->
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <a href="{{ url_for('settings') }}" class="study-tool-card text-decoration-none">
+                                    <div class="tool-icon">⚙️</div>
+                                    <div class="tool-title">Settings</div>
+                                    <div class="tool-subtitle">Customize</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    
+    <!-- Subject Selection -->
+    {% if step == 'subject' %}
+    <section class="subject-selection animate-fade-in">
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-8 col-lg-6">
+                <div class="content-card text-center">
+                    <h2 class="mb-3">Choose Your Subject</h2>
+                    <p class="mb-4">Explore any of our 8 subjects designed for secondary school students</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="maths">
+                    <i class="fas fa-calculator"></i>
+                    <h3 class="selection-title">Number Magic! 🔢</h3>
+                    <p class="selection-description">Amazing numbers, fun counting, and math adventures</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="science">
+                    <i class="fas fa-flask"></i>
+                    <h3 class="selection-title">Super Science! 🧪</h3>
+                    <p class="selection-description">Cool experiments, amazing discoveries, and fun facts</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="english">
+                    <i class="fas fa-book"></i>
+                    <h3 class="selection-title">Word Wizards! 📚</h3>
+                    <p class="selection-description">Story adventures, reading fun, and writing magic</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="music">
+                    <i class="fas fa-music"></i>
+                    <h3 class="selection-title">Musical Marvels! 🎵</h3>
+                    <p class="selection-description">Sing, play, dance, and create amazing music</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="computing">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3 class="selection-title">Tech Explorers! 💻</h3>
+                    <p class="selection-description">Coding adventures, computer fun, and digital magic</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="history">
+                    <i class="fas fa-landmark"></i>
+                    <h3 class="selection-title">Time Travelers! 🏰</h3>
+                    <p class="selection-description">Amazing stories from the past and ancient adventures</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="geography">
+                    <i class="fas fa-globe-americas"></i>
+                    <h3 class="selection-title">World Wanderers! 🌍</h3>
+                    <p class="selection-description">Explore amazing places, countries, and our planet</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="art">
+                    <i class="fas fa-palette"></i>
+                    <h3 class="selection-title">Creative Artists! 🎨</h3>
+                    <p class="selection-description">Draw, paint, create, and make beautiful masterpieces</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="business">
+                    <i class="fas fa-briefcase"></i>
+                    <h3 class="selection-title">Money Masters! 💰</h3>
+                    <p class="selection-description">Learn about shops, money, and how businesses work</p>
+                </div>
+            </div>
+        </div>
+        
+
+    </section>
+    {% endif %}
+    
+    <!-- Learning Style Selection -->
+    {% if step == 'style' %}
+    <section class="style-selection animate-fade-in">
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-8 col-lg-6">
+                <div class="content-card text-center">
+                    <h2 class="mb-4">How Do You Learn Best?</h2>
+                    <p class="mb-4">Choose from 3 different learning styles tailored for {{ subject|capitalize }}:</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="selection-card style-card animate-fade-in" data-category="style" data-value="visual">
+                    <i class="fas fa-eye"></i>
+                    <h3 class="selection-title">Visual</h3>
+                    <p class="selection-description">Learn through pictures, diagrams, and charts</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="selection-card style-card animate-fade-in" data-category="style" data-value="verbal">
+                    <i class="fas fa-align-left"></i>
+                    <h3 class="selection-title">Verbal</h3>
+                    <p class="selection-description">Learn through written explanations and reading</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="selection-card style-card animate-fade-in" data-category="style" data-value="auditory">
+                    <i class="fas fa-volume-up"></i>
+                    <h3 class="selection-title">Auditory</h3>
+                    <p class="selection-description">Learn by listening to explanations</p>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8 col-lg-6 text-center">
+                <button class="btn btn-brain-buddy-secondary back-btn me-2" data-step="style">
+                    <i class="fas fa-arrow-left me-2"></i> Back
+                </button>
+                <button id="continue-btn" class="btn btn-brain-buddy continue-btn" data-step="style" disabled>
+                    Start Lesson <i class="fas fa-arrow-right ms-2"></i>
+                </button>
+            </div>
+        </div>
+        
+        <input type="hidden" id="selected-style" value="">
+        <input type="hidden" id="subject-value" value="{{ subject }}">
+    </section>
+    {% endif %}
+{% endblock %}

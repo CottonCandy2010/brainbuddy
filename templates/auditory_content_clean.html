@@ -1,0 +1,776 @@
+{% extends "layout.html" %}
+
+{% block title %}Listen & Learn: Numbers 1-20 - Brain Buddy{% endblock %}
+
+{% block content %}
+<div class="auditory-container">
+    <!-- Header -->
+    <div class="lesson-header">
+        <h1>🎧 Listen & Learn</h1>
+        <h2>Numbers 1-20</h2>
+    </div>
+    
+    <!-- Audio Controls Section -->
+    <div class="controls-section">
+        <div class="audio-controls">
+            <div class="control-group">
+                <label>Choose Voice:</label>
+                <select id="voiceSelect">
+                    <option value="female">👩 Female Voice</option>
+                    <option value="male">👨 Male Voice</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>🔊 Volume:</label>
+                <input type="range" id="volumeSlider" min="0" max="100" value="70">
+                <span id="volumeDisplay">70%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-section">
+        <div class="lesson-info">
+            <h2>🔢 Learn to Count 1-20!</h2>
+            <p>Lesson <span id="lessonNumber">1</span> of 20</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content" id="lessonContent">
+            <h3 id="lessonTitle">Number One</h3>
+            <div class="number-display" id="numberDisplay">1</div>
+            <p id="lessonText">This is the number ONE. It looks like a straight line standing tall. One means just one thing - like one apple, one book, or one friend!</p>
+            
+            <div class="examples" id="examplesSection">
+                <h4>Examples:</h4>
+                <ul id="examplesList">
+                    <li>1 sun in the sky</li>
+                    <li>1 nose on your face</li>
+                    <li>1 birthday each year</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Audio Controls -->
+        <div class="audio-player">
+            <button class="audio-btn play-btn" id="playBtn" onclick="playLesson()">
+                <i class="fas fa-play"></i>
+                PLAY
+            </button>
+            <button class="audio-btn pause-btn" id="pauseBtn" onclick="pauseLesson()" style="display: none;">
+                <i class="fas fa-pause"></i>
+                PAUSE
+            </button>
+            <button class="audio-btn stop-btn" id="stopBtn" onclick="stopLesson()">
+                <i class="fas fa-stop"></i>
+                STOP
+            </button>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <div class="nav-row">
+                <button class="nav-btn" id="prevBtn" onclick="previousLesson()" disabled>
+                    <i class="fas fa-arrow-left"></i> PREVIOUS
+                </button>
+                <button class="nav-btn" id="nextBtn" onclick="nextLesson()">
+                    NEXT <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+            <div class="nav-row">
+                <button class="nav-btn repeat-btn" onclick="repeatLesson()">
+                    <i class="fas fa-redo"></i> REPEAT
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.auditory-container {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 15px;
+    font-family: 'Nunito', sans-serif;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.lesson-header {
+    text-align: center;
+    background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+    color: white;
+    padding: 20px 15px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 25px rgba(108, 92, 231, 0.3);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.lesson-header h1 {
+    font-size: 2.2em;
+    margin-bottom: 5px;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+.lesson-header h2 {
+    font-size: 1.4em;
+    margin-bottom: 0;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+
+
+.controls-section {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.audio-controls {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+}
+
+.control-group label {
+    font-weight: 600;
+    font-size: 0.9em;
+    color: #2c3e50;
+    min-width: fit-content;
+}
+
+#voiceSelect {
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    min-width: 150px;
+}
+
+#volumeSlider {
+    width: 120px;
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+#volumeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #6c5ce7;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#volumeSlider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #6c5ce7;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#volumeSlider::-webkit-slider-track {
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(to right, #6c5ce7 0%, #6c5ce7 var(--volume-percent, 70%), #e9ecef var(--volume-percent, 70%), #e9ecef 100%);
+    border-radius: 4px;
+}
+
+#volumeDisplay {
+    font-weight: 600;
+    font-size: 0.9em;
+    min-width: 35px;
+}
+
+.content-section {
+    background: white;
+    border-radius: 15px;
+    padding: 20px 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.lesson-info {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.lesson-info h2 {
+    color: #6c5ce7;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    background: #ecf0f1;
+    border-radius: 10px;
+    height: 8px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.progress-fill {
+    background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    width: 5%;
+}
+
+.lesson-content {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.lesson-content h3 {
+    color: #2c3e50;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+.number-display {
+    font-size: 6em;
+    font-weight: 900;
+    color: #6c5ce7;
+    margin: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    line-height: 1;
+}
+
+.lesson-content p {
+    font-size: 1.2em;
+    color: #2c3e50;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.examples {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.examples h4 {
+    color: #6c5ce7;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.examples ul {
+    list-style: none;
+    padding: 0;
+}
+
+.examples li {
+    background: white;
+    padding: 8px 15px;
+    margin: 5px 0;
+    border-radius: 20px;
+    color: #2c3e50;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.audio-player {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.audio-btn {
+    background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+    border: none;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.audio-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+}
+
+.audio-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    background: #74b9ff;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 120px;
+    justify-content: center;
+}
+
+.repeat-btn {
+    background: #00b894;
+    box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
+}
+
+.nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(116, 185, 255, 0.4);
+}
+
+.nav-btn:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+@media (max-width: 768px) {
+    .auditory-container {
+        padding: 10px;
+    }
+    
+    .lesson-header {
+        padding: 15px 10px;
+        margin-bottom: 15px;
+    }
+    
+    .lesson-header h1 {
+        font-size: 1.8em;
+    }
+    
+    .lesson-header h2 {
+        font-size: 1.2em;
+    }
+    
+    .controls-section {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .audio-controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .control-group {
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .content-section {
+        padding: 15px 10px;
+    }
+    
+    .audio-player {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .audio-btn, .nav-btn {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+        justify-content: center;
+    }
+    
+    .number-display {
+        font-size: 4em;
+    }
+    
+    .lesson-content p {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .lesson-header h1 {
+        font-size: 1.3em;
+    }
+    
+    .number-display {
+        font-size: 3em;
+    }
+    
+    .lesson-content h3 {
+        font-size: 1.5em;
+    }
+    
+    .lesson-content p {
+        font-size: 1em;
+    }
+}
+
+/* Ensure no horizontal overflow */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+}
+</style>
+
+<script>
+// Lesson data
+const lessons = [
+    {
+        number: 1,
+        title: "Number One",
+        content: "This is the number ONE. It looks like a straight line standing tall. One means just one thing - like one apple, one book, or one friend!",
+        examples: ["1 sun in the sky", "1 nose on your face", "1 birthday each year"]
+    },
+    {
+        number: 2,
+        title: "Number Two",
+        content: "This is the number TWO. It has a curve at the top and a line at the bottom. Two means a pair - like two eyes, two hands, or two shoes!",
+        examples: ["2 eyes to see", "2 hands to clap", "2 feet to walk"]
+    },
+    {
+        number: 3,
+        title: "Number Three",
+        content: "This is the number THREE. It has two curves, one on top and one on the bottom. Three is like a triangle - it has three sides!",
+        examples: ["3 wheels on a tricycle", "3 bears in the story", "3 wishes from a genie"]
+    },
+    {
+        number: 4,
+        title: "Number Four",
+        content: "This is the number FOUR. It looks like two lines making a triangle shape with an open bottom. Four is like a table with four legs!",
+        examples: ["4 legs on a dog", "4 wheels on a car", "4 seasons in a year"]
+    },
+    {
+        number: 5,
+        title: "Number Five",
+        content: "This is the number FIVE. It has a straight line at the top, a line down, and a curve at the bottom. Five is like your hand - you have five fingers!",
+        examples: ["5 fingers on one hand", "5 toes on one foot", "5 points on a star"]
+    }
+];
+
+// Global variables
+let currentLessonIndex = 0;
+let isPlaying = false;
+let currentAudio = null;
+let selectedVoice = 'female';
+let audioVolume = 0.7;
+
+// Initialize page
+function initializePage() {
+    loadLesson(0);
+    updateProgress();
+    
+    // Initialize volume slider appearance
+    const volumeSlider = document.getElementById('volumeSlider');
+    const initialValue = volumeSlider.value;
+    volumeSlider.style.background = `linear-gradient(to right, #6c5ce7 0%, #6c5ce7 ${initialValue}%, #e9ecef ${initialValue}%, #e9ecef 100%)`;
+    
+    // Set up volume control
+    document.getElementById('volumeSlider').addEventListener('input', function() {
+        audioVolume = this.value / 100;
+        document.getElementById('volumeDisplay').textContent = this.value + '%';
+        
+        // Update the visual progress of the slider
+        const percent = this.value;
+        this.style.setProperty('--volume-percent', percent + '%');
+        
+        // Update the background gradient for visual feedback
+        this.style.background = `linear-gradient(to right, #6c5ce7 0%, #6c5ce7 ${percent}%, #e9ecef ${percent}%, #e9ecef 100%)`;
+    });
+    
+    // Set up voice selection
+    document.getElementById('voiceSelect').addEventListener('change', function() {
+        selectedVoice = this.value;
+    });
+}
+
+// Load lesson content
+function loadLesson(index) {
+    if (index < 0 || index >= lessons.length) return;
+    
+    const lesson = lessons[index];
+    
+    document.getElementById('lessonNumber').textContent = index + 1;
+    document.getElementById('lessonTitle').textContent = lesson.title;
+    document.getElementById('numberDisplay').textContent = lesson.number;
+    document.getElementById('lessonText').textContent = lesson.content;
+    
+    // Update examples
+    const examplesList = document.getElementById('examplesList');
+    examplesList.innerHTML = '';
+    lesson.examples.forEach(example => {
+        const li = document.createElement('li');
+        li.textContent = example;
+        examplesList.appendChild(li);
+    });
+    
+    // Update navigation buttons
+    document.getElementById('prevBtn').disabled = index === 0;
+    document.getElementById('nextBtn').disabled = index === lessons.length - 1;
+    
+    currentLessonIndex = index;
+}
+
+// Update progress bar
+function updateProgress() {
+    const progressPercent = ((currentLessonIndex + 1) / lessons.length) * 100;
+    document.getElementById('progressBar').style.width = progressPercent + '%';
+}
+
+// Audio functions
+function playLesson() {
+    console.log('Playing lesson audio');
+    
+    if (!window.speechSynthesis) {
+        console.error('Speech synthesis not supported');
+        alert('Audio playback is not supported in this browser. Please try Chrome, Firefox, or Safari.');
+        return;
+    }
+    
+    const lesson = lessons[currentLessonIndex];
+    const textToSpeak = lesson.title + '. ' + lesson.content;
+    
+    console.log('Text to speak:', textToSpeak);
+    
+    // Stop any existing speech
+    speechSynthesis.cancel();
+    
+    // Wait for voices to load
+    if (speechSynthesis.getVoices().length === 0) {
+        console.log('Waiting for voices to load...');
+        speechSynthesis.addEventListener('voiceschanged', function() {
+            console.log('Voices loaded, retrying...');
+            playLessonWithVoices(textToSpeak);
+        }, { once: true });
+        
+        // Trigger voice loading
+        speechSynthesis.speak(new SpeechSynthesisUtterance(''));
+        speechSynthesis.cancel();
+        
+        return;
+    }
+    
+    playLessonWithVoices(textToSpeak);
+}
+
+function playLessonWithVoices(textToSpeak) {
+    // Update UI
+    document.getElementById('playBtn').style.display = 'none';
+    document.getElementById('pauseBtn').style.display = 'inline-flex';
+    
+    try {
+        // Create speech utterance
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.volume = audioVolume;
+        utterance.rate = 0.9;
+        utterance.pitch = 1.0;
+        utterance.lang = 'en-US';
+        
+        utterance.onstart = function() {
+            console.log('Speech started successfully');
+            isPlaying = true;
+        };
+        
+        utterance.onend = function() {
+            console.log('Speech completed');
+            stopLesson();
+        };
+        
+        utterance.onerror = function(event) {
+            console.error('Speech error:', event.error, event);
+            
+            // Show user-friendly error message
+            let errorMessage = 'Audio playback failed. ';
+            switch(event.error) {
+                case 'network':
+                    errorMessage += 'Please check your internet connection.';
+                    break;
+                case 'synthesis-unavailable':
+                    errorMessage += 'Speech synthesis is not available.';
+                    break;
+                case 'synthesis-failed':
+                    errorMessage += 'Speech synthesis failed. Please try again.';
+                    break;
+                default:
+                    errorMessage += 'Please refresh the page and try again.';
+            }
+            
+            alert(errorMessage);
+            stopLesson();
+        };
+        
+        // Find and set appropriate voice
+        const voices = speechSynthesis.getVoices();
+        console.log('Available voices:', voices.length);
+        
+        if (voices.length > 0) {
+            let voice = null;
+            
+            // Try to find a good English voice
+            if (selectedVoice === 'female') {
+                voice = voices.find(v => 
+                    v.lang.includes('en') && 
+                    (v.name.toLowerCase().includes('female') || 
+                     v.name.toLowerCase().includes('woman') ||
+                     v.name.toLowerCase().includes('samantha') ||
+                     v.name.toLowerCase().includes('zira'))
+                );
+            } else {
+                voice = voices.find(v => 
+                    v.lang.includes('en') && 
+                    (v.name.toLowerCase().includes('male') || 
+                     v.name.toLowerCase().includes('man') ||
+                     v.name.toLowerCase().includes('alex') ||
+                     v.name.toLowerCase().includes('david'))
+                );
+            }
+            
+            // Fallback to any English voice
+            if (!voice) {
+                voice = voices.find(v => v.lang.includes('en-US')) ||
+                       voices.find(v => v.lang.includes('en')) ||
+                       voices[0];
+            }
+            
+            if (voice) {
+                utterance.voice = voice;
+                console.log('Using voice:', voice.name, '| Language:', voice.lang);
+            } else {
+                console.log('Using default voice');
+            }
+        }
+        
+        currentAudio = utterance;
+        
+        // Start speaking
+        speechSynthesis.speak(utterance);
+        console.log('Speech synthesis command sent');
+        
+    } catch (error) {
+        console.error('Error creating speech:', error);
+        alert('Failed to create audio. Please refresh the page and try again.');
+        stopLesson();
+    }
+}
+
+function pauseLesson() {
+    if (speechSynthesis.speaking) {
+        speechSynthesis.pause();
+        document.getElementById('playBtn').style.display = 'inline-flex';
+        document.getElementById('pauseBtn').style.display = 'none';
+        isPlaying = false;
+    }
+}
+
+function stopLesson() {
+    speechSynthesis.cancel();
+    document.getElementById('playBtn').style.display = 'inline-flex';
+    document.getElementById('pauseBtn').style.display = 'none';
+    isPlaying = false;
+    currentAudio = null;
+}
+
+function repeatLesson() {
+    stopLesson();
+    setTimeout(playLesson, 200);
+}
+
+// Navigation functions
+function previousLesson() {
+    if (currentLessonIndex > 0) {
+        stopLesson();
+        loadLesson(currentLessonIndex - 1);
+        updateProgress();
+    }
+}
+
+function nextLesson() {
+    if (currentLessonIndex < lessons.length - 1) {
+        stopLesson();
+        loadLesson(currentLessonIndex + 1);
+        updateProgress();
+    }
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', initializePage);
+
+// Enable speech synthesis on first user interaction
+document.addEventListener('click', function() {
+    if (!window.speechEnabled) {
+        const utterance = new SpeechSynthesisUtterance('');
+        utterance.volume = 0;
+        speechSynthesis.speak(utterance);
+        window.speechEnabled = true;
+    }
+}, { once: true });
+</script>
+{% endblock %}

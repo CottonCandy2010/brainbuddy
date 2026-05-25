@@ -1,0 +1,307 @@
+<!-- Avatar Widget - Reusable component for displaying student's avatar -->
+<div class="avatar-widget" id="avatarWidget">
+    <div class="avatar-container">
+        <div class="avatar-display-mini" id="miniAvatarDisplay">
+            <!-- Avatar SVG will be loaded here -->
+            <svg width="60" height="60" viewBox="0 0 300 300" id="miniAvatarSvg">
+                <!-- Default avatar -->
+                <circle cx="150" cy="150" r="140" fill="#f0f8ff" stroke="#ddd" stroke-width="2"/>
+                <circle cx="150" cy="140" r="80" fill="#fdbcb4"/>
+                <path d="M80 120 Q150 60 220 120 Q220 80 180 70 Q150 50 120 70 Q80 80 80 120" fill="#8B4513"/>
+                <circle cx="125" cy="125" r="8" fill="white"/>
+                <circle cx="175" cy="125" r="8" fill="white"/>
+                <circle cx="125" cy="125" r="4" fill="#333"/>
+                <circle cx="175" cy="125" r="4" fill="#333"/>
+                <ellipse cx="150" cy="140" rx="3" ry="5" fill="#f4a792"/>
+                <path d="M135 155 Q150 165 165 155" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="100" y="210" width="100" height="80" fill="#4285f4" rx="10"/>
+            </svg>
+        </div>
+        <div class="avatar-info">
+            <div class="avatar-name" id="widgetAvatarName">Learning Buddy</div>
+            <div class="avatar-mood" id="widgetAvatarMood">Ready to learn!</div>
+        </div>
+    </div>
+    <div class="avatar-actions">
+        <button class="btn btn-sm btn-outline-primary" onclick="customizeAvatar()" title="Customize Avatar">
+            <i class="fas fa-palette"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-success" onclick="avatarCheer()" title="Cheer">
+            <i class="fas fa-star"></i>
+        </button>
+    </div>
+</div>
+
+<style>
+.avatar-widget {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.avatar-widget:hover {
+    border-color: #4285f4;
+    box-shadow: 0 6px 20px rgba(66, 133, 244, 0.15);
+}
+
+.avatar-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.avatar-display-mini {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #4285f4;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.avatar-display-mini:hover {
+    transform: scale(1.1);
+}
+
+.avatar-info {
+    flex: 1;
+}
+
+.avatar-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.avatar-mood {
+    color: #6c757d;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+.avatar-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.avatar-actions .btn {
+    border-radius: 20px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* Animation classes */
+.avatar-cheer {
+    animation: avatarCheerAnimation 0.6s ease-in-out;
+}
+
+@keyframes avatarCheerAnimation {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.1) rotate(-5deg); }
+    50% { transform: scale(1.2) rotate(0deg); }
+    75% { transform: scale(1.1) rotate(5deg); }
+}
+
+.avatar-notification {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ea4335;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .avatar-widget {
+        padding: 12px;
+    }
+    
+    .avatar-container {
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+    
+    .avatar-display-mini {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .avatar-name {
+        font-size: 0.9rem;
+    }
+    
+    .avatar-mood {
+        font-size: 0.8rem;
+    }
+}
+</style>
+
+<script>
+// Avatar widget functionality
+document.addEventListener('DOMContentLoaded', function() {
+    loadAvatarWidget();
+});
+
+function loadAvatarWidget() {
+    // Load saved avatar configuration
+    const savedAvatar = localStorage.getItem('brainBuddyAvatar');
+    if (savedAvatar) {
+        try {
+            const avatarConfig = JSON.parse(savedAvatar);
+            updateAvatarWidget(avatarConfig);
+        } catch (e) {
+            console.error('Error loading avatar:', e);
+        }
+    }
+}
+
+function updateAvatarWidget(avatarConfig) {
+    // Update avatar name
+    const nameElement = document.getElementById('widgetAvatarName');
+    if (nameElement) {
+        nameElement.textContent = avatarConfig.name || 'Learning Buddy';
+    }
+    
+    // Update avatar SVG
+    const svgElement = document.getElementById('miniAvatarSvg');
+    if (svgElement) {
+        updateMiniAvatarSvg(svgElement, avatarConfig);
+    }
+    
+    // Set mood based on time of day or recent activity
+    const moodElement = document.getElementById('widgetAvatarMood');
+    if (moodElement) {
+        moodElement.textContent = getRandomMood();
+    }
+}
+
+function updateMiniAvatarSvg(svgElement, config) {
+    // Update face color
+    const face = svgElement.querySelector('circle:nth-child(2)');
+    if (face) face.setAttribute('fill', config.skinTone || '#fdbcb4');
+    
+    // Update hair color
+    const hair = svgElement.querySelector('path');
+    if (hair) hair.setAttribute('fill', config.hairColor || '#8B4513');
+    
+    // Update eye colors
+    const eyes = svgElement.querySelectorAll('circle');
+    if (eyes.length >= 6) {
+        eyes[4].setAttribute('fill', config.eyeColor || '#333');
+        eyes[5].setAttribute('fill', config.eyeColor || '#333');
+    }
+    
+    // Update shirt color
+    const shirt = svgElement.querySelector('rect');
+    if (shirt) shirt.setAttribute('fill', config.shirtColor || '#4285f4');
+}
+
+function getRandomMood() {
+    const moods = [
+        "Ready to learn!",
+        "Excited for today!",
+        "Let's explore together!",
+        "Adventure awaits!",
+        "Feeling curious!",
+        "Ready for challenges!",
+        "Let's discover new things!",
+        "Learning is fun!"
+    ];
+    return moods[Math.floor(Math.random() * moods.length)];
+}
+
+function customizeAvatar() {
+    window.location.href = '/avatar-customization';
+}
+
+function avatarCheer() {
+    const avatarDisplay = document.getElementById('miniAvatarDisplay');
+    const moodElement = document.getElementById('widgetAvatarMood');
+    
+    // Add cheer animation
+    avatarDisplay.classList.add('avatar-cheer');
+    
+    // Update mood temporarily
+    const originalMood = moodElement.textContent;
+    moodElement.textContent = "Yay! Great job!";
+    
+    // Remove animation and restore mood after animation completes
+    setTimeout(() => {
+        avatarDisplay.classList.remove('avatar-cheer');
+        moodElement.textContent = originalMood;
+    }, 600);
+}
+
+// Function to update avatar mood based on student progress
+function updateAvatarMood(mood) {
+    const moodElement = document.getElementById('widgetAvatarMood');
+    if (moodElement) {
+        const moodMessages = {
+            'success': "So proud of you!",
+            'encouragement': "You can do it!",
+            'celebration': "Amazing work!",
+            'thinking': "Let's think together!",
+            'learning': "This is exciting!"
+        };
+        
+        moodElement.textContent = moodMessages[mood] || getRandomMood();
+    }
+}
+
+// Function to show avatar notifications
+function showAvatarNotification(count = 1) {
+    const avatarDisplay = document.getElementById('miniAvatarDisplay');
+    
+    // Remove existing notification
+    const existingNotification = avatarDisplay.querySelector('.avatar-notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+    
+    // Add new notification
+    const notification = document.createElement('div');
+    notification.className = 'avatar-notification';
+    notification.textContent = count;
+    avatarDisplay.style.position = 'relative';
+    avatarDisplay.appendChild(notification);
+    
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 5000);
+}
+
+// Export functions for use in other pages
+window.avatarWidget = {
+    updateMood: updateAvatarMood,
+    showNotification: showAvatarNotification,
+    cheer: avatarCheer,
+    load: loadAvatarWidget
+};
+</script>

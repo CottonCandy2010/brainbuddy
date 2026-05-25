@@ -1,0 +1,1173 @@
+{% extends "layout.html" %}
+
+{% block title %}Custom Lesson Content{% endblock %}
+
+{% block content %}
+<section class="lesson-page animate-fade-in">
+    <div class="lesson-header">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="lesson-title">Ready for Your Content</h1>
+                <p class="lesson-subtitle">Custom Study Materials</p>
+            </div>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                <button class="btn btn-primary back-btn" onclick="window.history.back()">
+                    <i class="fas fa-arrow-left me-2"></i> Back
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-container">
+        <div class="content-placeholder">
+            <h3>Content Area Ready</h3>
+            <p>This space is ready for your custom study guides and educational materials.</p>
+            <p>You can now add your own content using Gemini assistance.</p>
+        </div>
+    </div>
+</section>
+
+<style>
+.content-placeholder {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(135, 206, 235, 0.2);
+    border: 2px dashed #87CEEB;
+}
+
+.content-placeholder h3 {
+    color: hsl(var(--primary));
+    margin-bottom: 20px;
+}
+
+.content-placeholder p {
+    color: #666;
+    margin-bottom: 15px;
+}
+</style>
+{% endblock %}
+    
+    .lesson-header {
+        background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+        border-radius: 20px;
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        border: 3px solid #fff;
+    }
+    
+    .lesson-title {
+        color: #2d3436;
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    }
+    
+    .lesson-breadcrumb {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+        color: #636e72;
+    }
+    
+    .lesson-description {
+        color: #2d3436;
+        font-size: 1rem;
+        margin: 0;
+    }
+    
+    .example-card {
+        background: linear-gradient(135deg, #F0F8FF 0%, #E6F3FF 100%);
+        border-radius: 20px;
+        padding: 25px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 25px rgba(135, 206, 235, 0.15);
+        border: 1px solid rgba(135, 206, 235, 0.2);
+        overflow: hidden;
+    }
+    
+    .example-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .example-header h3 {
+        color: #303F4F;
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin: 0;
+        flex: 1;
+    }
+    
+    .difficulty-badge {
+        background: linear-gradient(135deg, #87CEEB 0%, #6BB6FF 100%);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    .example-content p {
+        margin-bottom: 10px;
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+    
+    .instruction {
+        color: #2d3436;
+        font-weight: bold;
+    }
+    
+    .task {
+        color: #636e72;
+        background: rgba(255, 255, 255, 0.6);
+        padding: 10px;
+        border-radius: 10px;
+        border-left: 4px solid #e17055;
+    }
+    
+        background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+        border: 2px solid #fff;
+        border-radius: 12px;
+        padding: 15px;
+        text-align: center;
+        font-weight: bold;
+        color: #2d3436;
+        position: relative;
+        overflow: hidden;
+    }
+    
+        content: '🎨';
+        font-size: 1.5rem;
+        margin-right: 8px;
+    }
+    
+    .expected-answer {
+        background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        font-weight: bold;
+        text-align: center;
+    }
+    
+    .expected-answer::before {
+        content: '✅ ';
+        font-size: 1.1rem;
+    }
+    
+    .visual-icon {
+        font-size: 2rem;
+        margin: 10px 0;
+        display: block;
+        text-align: center;
+    }
+    
+    .interactive-element {
+        background: rgba(255, 255, 255, 0.8);
+        border: 2px dashed #e17055;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px 0;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .interactive-element:hover {
+        background: rgba(255, 255, 255, 0.9);
+        transform: scale(1.02);
+    }
+    
+    .number-display {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #e17055;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        text-align: center;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 15px;
+        margin: 10px 0;
+    }
+    
+    .counting-objects {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 15px 0;
+    }
+    
+    .counting-object {
+        font-size: 2rem;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .lesson-title {
+            font-size: 1.5rem;
+        }
+        
+        .example-header h3 {
+            font-size: 1.1rem;
+        }
+        
+        .example-content p {
+            font-size: 0.9rem;
+        }
+        
+        .number-display {
+            font-size: 2.5rem;
+            padding: 15px;
+        }
+        
+        .counting-object {
+            font-size: 1.5rem;
+            padding: 8px;
+        }
+        
+        .difficulty-badge {
+            font-size: 0.7rem;
+            padding: 4px 8px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .lesson-content-page {
+            padding: 5px;
+        }
+        
+        .lesson-header {
+            padding: 15px;
+            border-radius: 15px;
+        }
+        
+        .lesson-title {
+            font-size: 1.3rem;
+        }
+        
+        .example-card {
+            padding: 12px;
+            border-radius: 12px;
+        }
+        
+        .example-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .difficulty-badge {
+            margin-left: 0;
+            margin-top: 5px;
+        }
+        
+        .number-display {
+            font-size: 2rem;
+            padding: 12px;
+        }
+    }
+</style>
+
+<div class="lesson-content-page">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <!-- Lesson Header -->
+                <div class="lesson-header">
+                    <div class="lesson-breadcrumb">
+                        <a href="{{ url_for('index') }}">Brain Buddy</a> > 
+                        <a href="{{ url_for('select_subject') }}">Subjects</a> > 
+                        <a href="{{ url_for('curriculum_topics', level='primary', subject='maths') }}">Mathematics</a> > 
+                        <span>{{ lesson_data.title }}</span>
+                    </div>
+                    <h1 class="lesson-title">{{ lesson_data.title }}</h1>
+                </div>
+
+                <!-- Interactive Mathematics Examples -->
+                <div class="examples-container">
+                    {% for example in lesson_data.examples %}
+                    <div class="example-card" role="article" aria-labelledby="example-{{ loop.index }}-title">
+                        <div class="example-header">
+                            <h3 id="example-{{ loop.index }}-title">{{ loop.index }}. {{ example.title }}</h3>
+                            <span class="difficulty-badge difficulty-{{ example.get('difficulty', 'easy').lower() }}" aria-label="Difficulty level: {{ example.get('difficulty', 'Easy') }}">{{ example.get('difficulty', 'Easy') }}</span>
+                        </div>
+                        <div class="example-content">
+                            <p class="instruction">{{ example.instruction }}</p>
+                            <p class="task">{{ example.task }}</p>
+                            
+                            <!-- Visual Elements for Mobile -->
+                                {{ example.visual_aid }}
+                                
+                                <!-- Add interactive visual elements based on content -->
+                                {% if 'apples' in example.task.lower() %}
+                                    <div class="counting-objects">
+                                        <span class="counting-object">🍎</span>
+                                        <span class="counting-object">🍎</span>
+                                        <span class="counting-object">🍎</span>
+                                        <span class="counting-object">🍏</span>
+                                        <span class="counting-object">🍏</span>
+                                    </div>
+                                {% elif 'cows' in example.task.lower() %}
+                                    <div class="counting-objects">
+                                        <span class="counting-object">🐄</span>
+                                        <span class="counting-object">🐄</span>
+                                        <span class="counting-object">🐄</span>
+                                        <span class="counting-object">🐄</span>
+                                        <span class="counting-object">🐄</span>
+                                    </div>
+                                {% elif 'fingers' in example.task.lower() %}
+                                    <div class="number-display">✋ 4 fingers</div>
+                                {% elif 'balloons' in example.task.lower() %}
+                                    <div class="counting-objects">
+                                        <span class="counting-object">🎈</span>
+                                        <span class="counting-object">🎈</span>
+                                        <span class="counting-object">🎈</span>
+                                        <span class="counting-object">🎈</span>
+                                        <span class="counting-object">🎈</span>
+                                    </div>
+                                {% elif 'circle' in example.task.lower() %}
+                                    <div class="counting-objects">
+                                        <span class="counting-object">⭕</span>
+                                        <span class="counting-object">⭕</span>
+                                        <span class="counting-object">⭕</span>
+                                    </div>
+                                {% elif 'clock' in example.task.lower() or 'time' in example.task.lower() %}
+                                    <div class="number-display">🕐 8:00</div>
+                                {% elif 'pizza' in example.task.lower() %}
+                                    <div class="number-display">🍕 = 1/2</div>
+                                {% elif 'coins' in example.task.lower() or 'money' in example.task.lower() %}
+                                    <div class="counting-objects">
+                                        <span class="counting-object">🪙</span>
+                                        <span class="counting-object">🪙</span>
+                                        <span class="counting-object">🪙</span>
+                                    </div>
+                                {% elif 'ruler' in example.task.lower() or 'measuring' in example.task.lower() %}
+                                    <div class="number-display">📏 12 cm</div>
+                                {% elif 'butterfly' in example.task.lower() %}
+                                    <div class="number-display">🦋 symmetry</div>
+                                {% elif 'graph' in example.task.lower() or 'chart' in example.task.lower() %}
+                                    <div class="number-display">📊 Data</div>
+                                {% elif 'pattern' in example.task.lower() %}
+                                    <div class="counting-objects">
+                                        <span class="counting-object">🔴</span>
+                                        <span class="counting-object">🔵</span>
+                                        <span class="counting-object">🔴</span>
+                                        <span class="counting-object">🔵</span>
+                                        <span class="counting-object">❓</span>
+                                    </div>
+                                {% else %}
+                                    <div class="interactive-element">
+                                        <span class="visual-icon">🎯</span>
+                                        <div>Tap to interact!</div>
+
+                            
+                            <p class="expected-answer">{{ example.expected_answer }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                        </div>
+                    </div>
+
+                        </div>
+                    </div>
+
+                        </div>
+                    </div>
+
+                        </div>
+                    </div>
+
+                        </div>
+                    </div>
+
+                        </div>
+                    </div>
+
+                        </div>
+                    </div>
+
+                        </div>
+                    </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Display all 30 examples adapted for learning style -->
+                    {% for example in lesson_data.examples %}
+                    <div class="example-card {{ lesson_data.style }}-style">
+                        <div class="example-header">
+                            <h3>{{ example.id }}. {{ example.title }}</h3>
+                            <span class="difficulty-badge easy">Easy</span>
+                            <span class="style-badge">{{ lesson_data.style.title() }}</span>
+                        </div>
+                        <div class="example-content">
+                            {% if lesson_data.style == 'visual' %}
+                                <p class="instruction"><strong>👁️ See and Learn:</strong> {{ example.instruction }}</p>
+                                <p class="task"><strong>🎯 Visual Task:</strong> {{ example.task }}</p>
+                                
+                                <!-- Visual Examples -->
+                                <div class="visual-examples">
+                                    {% if example.id == 1 %}
+                                        <div class="visual-demo">
+                                            <h5>🐄 Count the Cows:</h5>
+                                            <div class="cow-counting">
+                                                <span class="cow">🐄</span><span class="cow">🐄</span><span class="cow">🐄</span><span class="cow">🐄</span><span class="cow">🐄</span>
+                                            </div>
+                                            <p class="count-display">Count: 1, 2, 3, 4, 5 = <strong>5 cows</strong></p>
+                                        </div>
+                                    {% elif example.id == 2 %}
+                                        <div class="visual-demo">
+                                            <h5>🔵 Match Dots to Numbers:</h5>
+                                            <div class="dots-demo">
+                                                <div class="dots">🔵🔵🔵</div>
+                                                <div class="number-options">
+                                                    <span class="number-choice">2</span>
+                                                    <span class="number-choice correct">3</span>
+                                                    <span class="number-choice">4</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% elif example.id == 3 %}
+                                        <div class="visual-demo">
+                                            <h5>✋ Count Your Fingers:</h5>
+                                            <div class="hand-visual">
+                                                <span class="finger">👆</span><span class="finger">👆</span><span class="finger">👆</span><span class="finger">👆</span>
+                                            </div>
+                                            <p>4 fingers shown</p>
+                                        </div>
+                                    {% elif example.id == 11 %}
+                                        <div class="visual-demo">
+                                            <h5>👟 Count by 2s:</h5>
+                                            <div class="skip-counting">
+                                                <div class="pair">👟👟<br><span>2</span></div>
+                                                <div class="pair">👟👟<br><span>4</span></div>
+                                                <div class="pair">👟👟<br><span>6</span></div>
+                                                <div class="pair">👟👟<br><span>?</span></div>
+                                                <div class="pair">👟👟<br><span>10</span></div>
+                                            </div>
+                                        </div>
+                                    {% elif example.id == 18 %}
+                                        <div class="visual-demo">
+                                            <h5>📊 Tally Marks:</h5>
+                                            <div class="tally-visual">
+                                                <span class="tally-group">||||</span> <span class="tally-marks">||</span> = <strong>7</strong>
+                                            </div>
+                                            <p>5 + 2 = 7 butterflies</p>
+                                        </div>
+                                    {% else %}
+                                        <div class="visual-demo">
+                                            <div class="number-line">
+                                                <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                
+                                <p class="expected-answer"><strong>✅ Show Your Answer:</strong> {{ example.expected_answer }}</p>
+                            {% elif lesson_data.style == 'auditory' %}
+                                <p class="instruction"><strong>👂 Listen and Learn:</strong> {{ example.instruction }}</p>
+                                <p class="task"><strong>🗣️ Say It Out Loud:</strong> {{ example.task }}</p>
+                                
+                                <!-- Audio Controls -->
+                                <div class="audio-controls">
+                                    <button class="audio-btn" onclick="speakText('{{ example.instruction | replace("'", "") }}')">
+                                        🔊 Listen to Instructions
+                                    </button>
+                                    <button class="audio-btn" onclick="speakText('{{ example.task | replace("'", "") }}')">
+                                        🎤 Hear the Task
+                                    </button>
+                                    
+                                    <!-- Specific Audio for Each Example -->
+                                    {% if example.id == 1 %}
+                                        <button class="audio-btn" onclick="countAloud([1,2,3,4,5])">
+                                            🔢 Count Along: 1, 2, 3, 4, 5
+                                        </button>
+                                    {% elif example.id == 2 %}
+                                        <button class="audio-btn" onclick="speakText('Look at the dots. Count them: one, two, three. Match to number 3.')">
+                                            🔵 Dot Counting Audio
+                                        </button>
+                                    {% elif example.id == 3 %}
+                                        <button class="audio-btn" onclick="countAloud([1,2,3,4])">
+                                            ✋ Finger Count: 1, 2, 3, 4
+                                        </button>
+                                    {% elif example.id == 4 %}
+                                        <button class="audio-btn" onclick="speakText('Count the toys carefully. Start with one, then two, then three.')">
+                                            🧸 Toy Counting Audio
+                                        </button>
+                                    {% elif example.id == 5 %}
+                                        <button class="audio-btn" onclick="speakText('Let us count together from 1 to 10. Ready? One, two, three, four, five, six, seven, eight, nine, ten!')">
+                                            🔢 Count to 10 Audio
+                                        </button>
+                                    {% elif example.id == 6 %}
+                                        <button class="audio-btn" onclick="speakText('Write the number that comes next: six, seven, eight, nine, what comes next?')">
+                                            ❓ Number Sequence Audio
+                                        </button>
+                                    {% elif example.id == 7 %}
+                                        <button class="audio-btn" onclick="speakText('Count backwards from five: five, four, three, two, one, zero!')">
+                                            ⬇️ Count Backwards Audio
+                                        </button>
+                                    {% elif example.id == 8 %}
+                                        <button class="audio-btn" onclick="countdownAloud()">
+                                            🚀 Countdown: 10, 9, 8, 7, 6, 5, 4
+                                        </button>
+                                    {% elif example.id == 9 %}
+                                        <button class="audio-btn" onclick="speakText('Which group has more? Count each group and compare.')">
+                                            ⚖️ Comparison Audio
+                                        </button>
+                                    {% elif example.id == 10 %}
+                                        <button class="audio-btn" onclick="speakText('Circle the bigger number. Is 7 bigger than 4? Yes!')">
+                                            🔴 Circle Bigger Audio
+                                        </button>
+                                    {% elif example.id == 11 %}
+                                        <button class="audio-btn" onclick="skipCountAloud()">
+                                            👟 Skip Count: 2, 4, 6, 8, 10
+                                        </button>
+                                    {% elif example.id == 12 %}
+                                        <button class="audio-btn" onclick="skipCountBy5()">
+                                            ✋ Count by 5s: 5, 10, 15, 20
+                                        </button>
+                                    {% elif example.id == 13 %}
+                                        <button class="audio-btn" onclick="skipCountBy10()">
+                                            🔟 Count by 10s: 10, 20, 30
+                                        </button>
+                                    {% elif example.id >= 14 and example.id <= 20 %}
+                                        <button class="audio-btn" onclick="speakText('Listen carefully to this math exercise and count along.')">
+                                            🎵 Math Song Audio
+                                        </button>
+                                    {% else %}
+                                        <button class="audio-btn" onclick="speakText('Let me help you count and learn!')">
+                                            🎯 Learning Helper Audio
+                                        </button>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="speaking-practice">
+                                    <p><strong>🗣️ Practice Saying:</strong></p>
+                                    <div class="speech-bubble">
+                                        "{{ example.task }}"
+                                    </div>
+                                </div>
+                                
+                                
+                                <p class="expected-answer"><strong>🎤 Speak Your Answer:</strong> {{ example.expected_answer }}</p>
+                            {% elif lesson_data.style == 'kinesthetic' %}
+                                <p class="instruction"><strong>🤲 Touch and Learn:</strong> {{ example.instruction }}</p>
+                                <p class="task"><strong>🏃 Physical Task:</strong> Use your hands - {{ example.task }}</p>
+                                
+                                <!-- Kinesthetic Activities -->
+                                <div class="kinesthetic-activities">
+                                    {% if example.id == 1 %}
+                                        <div class="movement-demo">
+                                            <h5>🖱️ Click Each Cow to Count:</h5>
+                                            <div class="clickable-cows">
+                                                <span class="clickable-cow" onclick="countCow(1)">🐄</span>
+                                                <span class="clickable-cow" onclick="countCow(2)">🐄</span>
+                                                <span class="clickable-cow" onclick="countCow(3)">🐄</span>
+                                                <span class="clickable-cow" onclick="countCow(4)">🐄</span>
+                                                <span class="clickable-cow" onclick="countCow(5)">🐄</span>
+                                            </div>
+                                            <div id="cow-counter">Click each cow to count: <span id="cow-count">0</span></div>
+                                        </div>
+                                    {% elif example.id == 3 %}
+                                        <div class="movement-demo">
+                                            <h5>✋ Tap Your Screen 4 Times:</h5>
+                                            <div class="tap-area" onclick="tapCount()">
+                                                <p>Tap Here!</p>
+                                                <div id="tap-counter">Taps: <span id="tap-count">0</span>/4</div>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="movement-demo">
+                                            <h5>🤲 Physical Activity:</h5>
+                                            <p>Stand up and do this with your body:</p>
+                                            <div class="action-prompt">
+                                                <strong>Move your hands to count along!</strong>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                
+                                <p class="expected-answer"><strong>👍 Show With Actions:</strong> {{ example.expected_answer }}</p>
+                            {% elif lesson_data.style == 'logical' %}
+                                <p class="instruction"><strong>🧠 Think and Learn:</strong> {{ example.instruction }}</p>
+                                <p class="task"><strong>📊 Logic Task:</strong> {{ example.task }}</p>
+                                
+                                <!-- Logical Reasoning -->
+                                <div class="logical-reasoning">
+                                    {% if example.id == 1 %}
+                                        <div class="logic-demo">
+                                            <h5>🔍 Pattern Analysis:</h5>
+                                            <div class="logic-steps">
+                                                <div class="step">Step 1: Observe → 🐄 (1 cow)</div>
+                                                <div class="step">Step 2: Count → 🐄🐄 (2 cows)</div>
+                                                <div class="step">Step 3: Continue → 🐄🐄🐄 (3 cows)</div>
+                                                <div class="step">Step 4: Pattern → +1 each time</div>
+                                                <div class="step">Step 5: Result → 5 total cows</div>
+                                            </div>
+                                        </div>
+                                    {% elif example.id == 11 %}
+                                        <div class="logic-demo">
+                                            <h5>🔢 Mathematical Pattern:</h5>
+                                            <div class="pattern-table">
+                                                <table>
+                                                    <tr><th>Pairs</th><th>Count</th><th>Pattern</th></tr>
+                                                    <tr><td>👟👟</td><td>2</td><td>2 × 1</td></tr>
+                                                    <tr><td>👟👟</td><td>4</td><td>2 × 2</td></tr>
+                                                    <tr><td>👟👟</td><td>6</td><td>2 × 3</td></tr>
+                                                    <tr><td>👟👟</td><td>?</td><td>2 × 4 = 8</td></tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="logic-demo">
+                                            <h5>🧩 Problem Solving Steps:</h5>
+                                            <ol class="logic-steps">
+                                                <li>Identify the problem</li>
+                                                <li>Find the pattern</li>
+                                                <li>Apply the rule</li>
+                                                <li>Check your answer</li>
+                                            </ol>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                
+                                <p class="expected-answer"><strong>💡 Logical Answer:</strong> {{ example.expected_answer }}</p>
+                            {% elif lesson_data.style == 'social' %}
+                                <p class="instruction"><strong>👥 Learn Together:</strong> {{ example.instruction }}</p>
+                                <p class="task"><strong>🤝 Group Task:</strong> Work with friends - {{ example.task }}</p>
+                                
+                                <!-- Social Learning Activities -->
+                                <div class="social-activities">
+                                    <div class="group-demo">
+                                        <h5>👫 Team Activities:</h5>
+                                        <div class="social-suggestions">
+                                            <div class="suggestion">
+                                                <strong>🎯 Partner Activity:</strong>
+                                                <p>Take turns counting with a friend. One person points, the other counts out loud.</p>
+                                            </div>
+                                            <div class="suggestion">
+                                                <strong>🎪 Group Game:</strong>
+                                                <p>Make a counting circle! Each person says the next number: "1!" "2!" "3!"</p>
+                                            </div>
+                                            <div class="suggestion">
+                                                <strong>🏆 Team Challenge:</strong>
+                                                <p>Work together to find all the {{ example.title.lower() }} in your classroom!</p>
+                                            </div>
+                                        </div>
+                                        <div class="discussion-prompt">
+                                            <h6>💭 Discussion Questions:</h6>
+                                            <ul>
+                                                <li>"How did you count? Show your friend!"</li>
+                                                <li>"Did you get the same answer? Let's check together!"</li>
+                                                <li>"What's another way we could count these?"</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                <p class="expected-answer"><strong>🗣️ Share Your Answer:</strong> {{ example.expected_answer }}</p>
+                            {% elif lesson_data.style == 'solitary' %}
+                                <p class="instruction"><strong>🤔 Learn Alone:</strong> {{ example.instruction }}</p>
+                                <p class="task"><strong>📝 Solo Task:</strong> Work by yourself - {{ example.task }}</p>
+                                
+                                <!-- Solitary Learning -->
+                                <div class="solitary-activities">
+                                    <div class="solo-demo">
+                                        <h5>📖 Independent Study:</h5>
+                                        <div class="reflection-area">
+                                            <div class="personal-notes">
+                                                <h6>📝 My Notes:</h6>
+                                                <textarea placeholder="Write your thoughts here..." rows="3" style="width: 100%; padding: 10px; border-radius: 8px; border: 2px solid #6c757d;"></textarea>
+                                            </div>
+                                            <div class="self-check">
+                                                <h6>✅ Self-Check Questions:</h6>
+                                                <div class="checkbox-item">
+                                                    <input type="checkbox" id="understand-{{ example.id }}">
+                                                    <label for="understand-{{ example.id }}">I understand the concept</label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <input type="checkbox" id="practice-{{ example.id }}">
+                                                    <label for="practice-{{ example.id }}">I can do this on my own</label>
+                                                </div>
+                                                <div class="checkbox-item">
+                                                    <input type="checkbox" id="confident-{{ example.id }}">
+                                                    <label for="confident-{{ example.id }}">I feel confident about this</label>
+                                                </div>
+                                            </div>
+                                            <div class="personal-strategy">
+                                                <h6>🎯 My Learning Strategy:</h6>
+                                                <p>Think quietly about each step. Take your time. There's no rush when learning alone.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                <p class="expected-answer"><strong>✍️ Write Your Answer:</strong> {{ example.expected_answer }}</p>
+                            {% elif lesson_data.style == 'verbal' %}
+                                <p class="instruction"><strong>📝 Read and Learn:</strong> {{ example.instruction }}</p>
+                                <p class="task"><strong>📖 Reading Task:</strong> {{ example.task }}</p>
+                                
+                                <!-- Verbal Learning -->
+                                <div class="verbal-activities">
+                                    <div class="reading-demo">
+                                        <h5>📚 Reading & Writing Practice:</h5>
+                                        <div class="text-practice">
+                                            <div class="reading-passage">
+                                                <h6>📖 Read This Story:</h6>
+                                                <div class="story-text">
+                                                    {% if example.id == 1 %}
+                                                        <p>"On the farm, there were <strong>five happy cows</strong>. Let me count them for you: 
+                                                        <em>one cow</em>, <em>two cows</em>, <em>three cows</em>, <em>four cows</em>, <em>five cows</em>. 
+                                                        The farmer was very pleased to have exactly <strong>5 cows</strong> in his field."</p>
+                                                    {% elif example.id == 3 %}
+                                                        <p>"I have <strong>four fingers</strong> on one hand (not counting my thumb). 
+                                                        Let me spell it out: F-O-U-R. That's the word for the number 4. 
+                                                        When I count my fingers, I say: <em>one, two, three, four</em>."</p>
+                                                    {% else %}
+                                                        <p>"Numbers are everywhere in our world. We use words like <em>one, two, three</em> 
+                                                        to count things. Each number has a special name and we can write stories about them."</p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="writing-practice">
+                                                <h6>✍️ Writing Exercise:</h6>
+                                                <label>Write the number in words:</label>
+                                                <input type="text" placeholder="Type 'five' here..." style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 5px; border: 2px solid #28a745;">
+                                                <label>Write your own sentence using this number:</label>
+                                                <textarea placeholder="I can count five..." rows="2" style="width: 100%; padding: 8px; margin: 5px 0; border-radius: 5px; border: 2px solid #28a745;"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                <p class="expected-answer"><strong>✍️ Written Answer:</strong> {{ example.expected_answer }}</p>
+                            {% else %}
+                                <p class="instruction"><strong>📖 Learn:</strong> {{ example.instruction }}</p>
+                                <p class="task"><strong>📝 Task:</strong> {{ example.task }}</p>
+                                
+                                <p class="expected-answer"><strong>✅ Answer:</strong> {{ example.expected_answer }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+                <!-- Navigation -->
+                <div class="lesson-navigation">
+                    <a href="{{ url_for('curriculum_topics', level='primary', subject='maths') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Topics
+                    </a>
+                    <a href="#" class="btn btn-primary">
+                        Start Learning <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+.lesson-content-page {
+    padding: 2rem 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+.lesson-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.lesson-breadcrumb {
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.lesson-breadcrumb a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+.lesson-title {
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.counting-examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.example-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #667eea;
+}
+
+.example-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #f8f9fa;
+    padding-bottom: 1rem;
+}
+
+.example-header h3 {
+    color: #2c3e50;
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.example-content p {
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+}
+
+.instruction { color: #495057; }
+.task { color: #28a745; font-weight: 600; }
+.expected-answer { color: #dc3545; }
+
+.lesson-navigation {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .counting-examples-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .example-header {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+<script>
+// Simple Working Audio System
+function speakText(text) {
+    alert('🔊 Audio: ' + text);
+}
+
+// Audio functions for each example
+function playSimpleAudio(exampleId) {
+    const audioMessages = {
+        1: '🐄 Count the farm animals! One cow, two cows, three cows, four cows, five cows!',
+        2: '🔵 Look at the dots! Count them: one, two, three. Match to number 3!',
+        3: '✋ Count your fingers! One finger, two fingers, three fingers, four fingers!',
+        4: '🧸 Count the toys! One toy, two toys, three toys. Take your time!',
+        5: '📏 Number line counting! One, two, three, four, five, six, seven, eight, nine, ten!',
+        6: '❓ What comes next? Six, seven, eight, nine... TEN!',
+        7: '⬇️ Count backwards! Five, four, three, two, one, zero!',
+        8: '🚀 Rocket countdown! Ten, nine, eight, seven, six, five, four, three, two, one, BLAST OFF!',
+        9: '⚖️ Which group has more? Count each group and compare!',
+        10: '🔴 Which number is bigger? Seven is bigger than four!'
+    };
+    
+    const message = audioMessages[exampleId] || '🎵 Let me help you count and learn!';
+    alert('🔊 ' + message);
+}
+
+function countNumbers(exampleId) {
+    const countMessages = {
+        1: 'One! Two! Three! Four! Five!',
+        2: 'One dot! Two dots! Three dots!',
+        3: 'One finger! Two fingers! Three fingers! Four fingers!',
+        4: 'One toy! Two toys! Three toys!',
+        5: 'One! Two! Three! Four! Five! Six! Seven! Eight! Nine! Ten!'
+    };
+    
+    const message = countMessages[exampleId] || 'Let us count together!';
+    alert('🔢 ' + message);
+}
+
+function practiceNumbers(exampleId) {
+    const practiceMessages = {
+        6: 'Practice sequence: 6, 7, 8, 9, 10!',
+        7: 'Practice backwards: 5, 4, 3, 2, 1, 0!',
+        8: 'Practice countdown: 10, 9, 8, 7, 6, 5, 4!',
+        9: 'Practice comparing: Count first group, then second group!',
+        10: 'Practice bigger numbers: 7 is greater than 4!'
+    };
+    
+    const message = practiceMessages[exampleId] || 'Great practice!';
+    alert('🎯 ' + message);
+}
+
+function skipCountAudio(exampleId) {
+    const skipMessages = {
+        11: 'Skip count by 2s: Two! Four! Six! Eight! Ten!',
+        12: 'Skip count by 5s: Five! Ten! Fifteen! Twenty!',
+        13: 'Skip count by 10s: Ten! Twenty! Thirty!',
+        14: 'Number bonds: 5 + 0 = 5, 4 + 1 = 5!',
+        15: 'Place value: 15 has 1 ten and 5 ones!'
+    };
+    
+    const message = skipMessages[exampleId] || 'Skip counting is fun!';
+    alert('👟 ' + message);
+}
+
+function advancedMathAudio(exampleId) {
+    const advancedMessages = {
+        16: 'Teen numbers: 11, 12, 13, 14, 15, 16, 17, 18, 19!',
+        17: 'Ordinal numbers: First, second, third, fourth, fifth!',
+        18: 'Tally marks: Four lines, then one across makes five!',
+        19: 'Even and odd: 2 is even, 3 is odd!',
+        20: 'Number patterns: 2, 4, 6, 8... what comes next?'
+    };
+    
+    const message = advancedMessages[exampleId] || 'Advanced math is exciting!';
+    alert('🧮 ' + message);
+}
+
+function showAudioStatus(message) {
+    let statusDiv = document.getElementById('audio-status');
+    if (!statusDiv) {
+        statusDiv = document.createElement('div');
+        statusDiv.id = 'audio-status';
+        statusDiv.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+        `;
+        document.body.appendChild(statusDiv);
+    }
+    statusDiv.textContent = message;
+    statusDiv.style.display = 'block';
+}
+
+function hideAudioStatus() {
+    const statusDiv = document.getElementById('audio-status');
+    if (statusDiv) {
+        statusDiv.style.display = 'none';
+    }
+}
+
+function showAudioFallback(text) {
+    const fallbackDiv = document.createElement('div');
+    fallbackDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        border: 3px solid #007bff;
+        border-radius: 15px;
+        padding: 20px;
+        max-width: 400px;
+        z-index: 1001;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    `;
+    
+    fallbackDiv.innerHTML = `
+        <h4>🔊 Audio Text:</h4>
+        <p style="font-size: 1.1em; line-height: 1.5;">"${text}"</p>
+        <button onclick="this.parentElement.remove()" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">Close</button>
+    `;
+    
+    document.body.appendChild(fallbackDiv);
+    setTimeout(() => {
+        if (fallbackDiv.parentElement) {
+            fallbackDiv.remove();
+        }
+    }, 8000);
+}
+
+// Specialized audio functions for different counting activities
+function playCountingAudio(activityType) {
+    const audioTexts = {
+        'farm-animals': 'Let me help you count farm animals! Point to each cow and say: one cow, two cows, three cows, four cows, five cows!',
+        'dot-matching': 'Look at the dots carefully. Count each dot by pointing: one dot, two dots, three dots. Now match to the number 3!',
+        'finger-counting': 'Hold up your hand! Count each finger: one finger, two fingers, three fingers, four fingers. How many do you see?',
+        'toy-counting': 'Time to count toys! Look at each toy and count slowly: one toy, two toys, three toys. Take your time!',
+        'number-line': 'This is a number line! Point to each number as we count: one, two, three, four, five, six, seven, eight, nine, ten!',
+        'missing-numbers': 'Let us find the missing number! Count along: six, seven, eight, nine... what comes next? Ten!',
+        'backward-counting': 'Now we count backwards! Ready? Five, four, three, two, one, zero! Great job!',
+        'rocket-countdown': 'Rocket countdown time! Ten, nine, eight, seven, six, five, four, three, two, one, blast off!',
+        'more-less': 'Which group has more? Count the first group, then count the second group. Compare the numbers!',
+        'bigger-smaller': 'Which number is bigger? Look at both numbers and choose the larger one. Circle it!',
+        'skip-count-2s': 'Skip counting by twos! Two, four, six, eight, ten! Notice we skip one number each time!',
+        'skip-count-5s': 'Skip counting by fives! Five, ten, fifteen, twenty! We jump five numbers each time!',
+        'skip-count-10s': 'Skip counting by tens! Ten, twenty, thirty, forty, fifty! Big jumps of ten!',
+        'number-bonds': 'Number bonds show how numbers fit together! Five plus zero equals five. Four plus one equals five!',
+        'place-value': 'This number has tens and ones! The first digit shows tens, the second shows ones!',
+        'teen-numbers': 'Teen numbers are special! Eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen!',
+        'ordinal-numbers': 'Ordinal numbers show position! First place, second place, third place, fourth place, fifth place!',
+        'tally-marks': 'Tally marks help us count quickly! Four lines, then one across makes five. Very handy!',
+        'even-odd': 'Even numbers can make pairs! Odd numbers have one left over! Two is even, three is odd!',
+        'number-patterns': 'Look for patterns! Two, four, six, eight... they go up by two each time!',
+        'general-counting': 'Let me help you with counting! Take your time and count carefully, one by one!'
+    };
+    
+    const text = audioTexts[activityType] || 'Let me help you count and learn!';
+    speakText(text);
+}
+
+function countAloud(numberArray = [1,2,3,4,5]) {
+    const numberWords = {
+        1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five',
+        6: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine', 10: 'Ten'
+    };
+    
+    let index = 0;
+    function speakNext() {
+        if (index < numberArray.length) {
+            const word = numberWords[numberArray[index]];
+            speakText(word);
+            index++;
+            setTimeout(speakNext, 1200);
+        }
+    }
+    speakNext();
+}
+
+function skipCountAloud() {
+    const numbers = ['Two', 'Four', 'Six', 'Eight', 'Ten'];
+    let index = 0;
+    function speakNext() {
+        if (index < numbers.length) {
+            speakText(numbers[index]);
+            index++;
+            setTimeout(speakNext, 1000);
+        }
+    }
+    speakNext();
+}
+
+function skipCountBy5() {
+    const numbers = ['Five', 'Ten', 'Fifteen', 'Twenty'];
+    let index = 0;
+    function speakNext() {
+        if (index < numbers.length) {
+            speakText(numbers[index]);
+            index++;
+            setTimeout(speakNext, 1000);
+        }
+    }
+    speakNext();
+}
+
+function skipCountBy10() {
+    const numbers = ['Ten', 'Twenty', 'Thirty', 'Forty', 'Fifty'];
+    let index = 0;
+    function speakNext() {
+        if (index < numbers.length) {
+            speakText(numbers[index]);
+            index++;
+            setTimeout(speakNext, 1000);
+        }
+    }
+    speakNext();
+}
+
+function countdownAloud() {
+    const numbers = ['Ten', 'Nine', 'Eight', 'Seven', 'Six', 'Five', 'Four', 'Three', 'Two', 'One', 'Blast off!'];
+    let index = 0;
+    function speakNext() {
+        if (index < numbers.length) {
+            speakText(numbers[index]);
+            index++;
+            setTimeout(speakNext, 600);
+        }
+    }
+    speakNext();
+}
+
+// Kinesthetic Interaction Functions
+let cowCount = 0;
+function countCow(cowNumber) {
+    cowCount++;
+    document.getElementById('cow-count').textContent = cowCount;
+    
+    // Add clicked class for visual feedback
+    const cows = document.querySelectorAll('.clickable-cow');
+    if (cows[cowNumber - 1]) {
+        cows[cowNumber - 1].classList.add('clicked');
+    }
+    
+    // Speak the number
+    speakText(cowNumber.toString());
+    
+    // Reset if all cows clicked
+    if (cowCount >= 5) {
+        setTimeout(() => {
+            cowCount = 0;
+            document.getElementById('cow-count').textContent = '0';
+            cows.forEach(cow => cow.classList.remove('clicked'));
+        }, 2000);
+    }
+}
+
+let tapCount = 0;
+function tapCount() {
+    tapCount++;
+    document.getElementById('tap-count').textContent = tapCount;
+    
+    // Visual feedback
+    const tapArea = event.target.closest('.tap-area');
+    tapArea.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        tapArea.style.transform = 'scale(1)';
+    }, 100);
+    
+    // Speak the count
+    speakText(tapCount.toString());
+    
+    // Reset if reached 4
+    if (tapCount >= 4) {
+        setTimeout(() => {
+            tapCount = 0;
+            document.getElementById('tap-count').textContent = '0';
+        }, 2000);
+    }
+}
+</script>
+</style>
+{% endblock %}

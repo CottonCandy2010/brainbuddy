@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Reporting System Test - Brain Buddy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .test-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 32px;
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #f0f0f0;
+            border-radius: 10px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .test-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .danger-button {
+            background: linear-gradient(45deg, #dc3545, #c82333);
+        }
+
+        .danger-button:hover {
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+        }
+
+        .warning-button {
+            background: linear-gradient(45deg, #ffc107, #e0a800);
+            color: #333;
+        }
+
+        .warning-button:hover {
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+        }
+
+        .status-display {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .error-log {
+            color: #dc3545;
+        }
+
+        .success-log {
+            color: #28a745;
+        }
+
+        .info-log {
+            color: #17a2b8;
+        }
+
+        .description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="test-title">Error Reporting System Test</h1>
+        
+        <div class="test-section">
+            <h3 class="section-title">JavaScript Error Testing</h3>
+            <p class="description">Test client-side error capture and reporting</p>
+            
+            <button class="test-button danger-button" onclick="triggerJavaScriptError()">
+                Trigger JavaScript Error
+            </button>
+            <button class="test-button danger-button" onclick="triggerUncaughtException()">
+                Trigger Uncaught Exception
+            </button>
+            <button class="test-button danger-button" onclick="triggerPromiseRejection()">
+                Trigger Promise Rejection
+            </button>
+            
+            <div class="status-display" id="jsErrorStatus">
+                JavaScript error tests will appear here...
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3 class="section-title">Network Error Testing</h3>
+            <p class="description">Test network failure detection and reporting</p>
+            
+            <button class="test-button warning-button" onclick="triggerNetworkError()">
+                Trigger Network Error
+            </button>
+            <button class="test-button warning-button" onclick="triggerHTTPError()">
+                Trigger HTTP 404 Error
+            </button>
+            <button class="test-button warning-button" onclick="triggerServerError()">
+                Trigger HTTP 500 Error
+            </button>
+            
+            <div class="status-display" id="networkErrorStatus">
+                Network error tests will appear here...
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3 class="section-title">Performance Monitoring</h3>
+            <p class="description">Test performance issue detection</p>
+            
+            <button class="test-button" onclick="simulateSlowPerformance()">
+                Simulate Slow Performance
+            </button>
+            <button class="test-button" onclick="simulateMemoryIssue()">
+                Simulate Memory Issue
+            </button>
+            <button class="test-button" onclick="checkPerformanceMetrics()">
+                Check Performance Metrics
+            </button>
+            
+            <div class="status-display" id="performanceStatus">
+                Performance monitoring results will appear here...
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3 class="section-title">Custom Error Reporting</h3>
+            <p class="description">Test manual error reporting functionality</p>
+            
+            <button class="test-button" onclick="reportCustomError()">
+                Report Custom Error
+            </button>
+            <button class="test-button" onclick="reportUserIssue()">
+                Report User Experience Issue
+            </button>
+            <button class="test-button" onclick="showStoredErrors()">
+                Show Stored Errors
+            </button>
+            
+            <div class="status-display" id="customErrorStatus">
+                Custom error reporting results will appear here...
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3 class="section-title">Error Statistics</h3>
+            <p class="description">View error reporting statistics and system status</p>
+            
+            <button class="test-button" onclick="loadErrorStats()">
+                Load Error Statistics
+            </button>
+            <button class="test-button" onclick="viewAdminDashboard()">
+                View Admin Dashboard
+            </button>
+            <button class="test-button" onclick="clearErrorLogs()">
+                Clear Error Logs
+            </button>
+            
+            <div class="status-display" id="statsStatus">
+                Error statistics will appear here...
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Reporting System -->
+    <script src="{{ url_for('static', filename='js/error_reporting.js') }}"></script>
+
+    <script>
+        // Test Functions
+        function triggerJavaScriptError() {
+            log('jsErrorStatus', 'Triggering JavaScript error...', 'info');
+            
+            // This will cause a ReferenceError
+            try {
+                undefinedFunction();
+            } catch (error) {
+                log('jsErrorStatus', `JavaScript error triggered: ${error.message}`, 'error');
+                throw error; // Let the error reporting system catch it
+            }
+        }
+
+        function triggerUncaughtException() {
+            log('jsErrorStatus', 'Triggering uncaught exception...', 'info');
+            
+            setTimeout(() => {
+                throw new Error('This is an uncaught exception for testing');
+            }, 100);
+        }
+
+        function triggerPromiseRejection() {
+            log('jsErrorStatus', 'Triggering unhandled promise rejection...', 'info');
+            
+            new Promise((resolve, reject) => {
+                reject(new Error('This is an unhandled promise rejection for testing'));
+            });
+        }
+
+        function triggerNetworkError() {
+            log('networkErrorStatus', 'Triggering network error...', 'info');
+            
+            fetch('/nonexistent-endpoint')
+                .then(response => {
+                    if (!response.ok) {
+                        log('networkErrorStatus', `Network error: ${response.status} ${response.statusText}`, 'error');
+                    }
+                })
+                .catch(error => {
+                    log('networkErrorStatus', `Network failure: ${error.message}`, 'error');
+                });
+        }
+
+        function triggerHTTPError() {
+            log('networkErrorStatus', 'Triggering HTTP 404 error...', 'info');
+            
+            fetch('/this-page-does-not-exist')
+                .then(response => {
+                    log('networkErrorStatus', `HTTP Error: ${response.status} ${response.statusText}`, 'error');
+                })
+                .catch(error => {
+                    log('networkErrorStatus', `Request failed: ${error.message}`, 'error');
+                });
+        }
+
+        function triggerServerError() {
+            log('networkErrorStatus', 'Triggering server error...', 'info');
+            
+            // Try to trigger a server error by sending invalid data
+            fetch('/api/report-error', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: 'invalid json data'
+            })
+            .then(response => {
+                log('networkErrorStatus', `Server response: ${response.status}`, response.ok ? 'success' : 'error');
+            })
+            .catch(error => {
+                log('networkErrorStatus', `Server error: ${error.message}`, 'error');
+            });
+        }
+
+        function simulateSlowPerformance() {
+            log('performanceStatus', 'Simulating slow performance...', 'info');
+            
+            const start = performance.now();
+            
+            // Simulate heavy computation
+            let result = 0;
+            for (let i = 0; i < 10000000; i++) {
+                result += Math.random();
+            }
+            
+            const duration = performance.now() - start;
+            log('performanceStatus', `Performance test completed in ${duration.toFixed(2)}ms`, 'info');
+            
+            if (duration > 100) {
+                if (window.errorReporter) {
+                    errorReporter.capturePerformanceIssue({
+                        type: 'slow_computation',
+                        duration: duration,
+                        description: 'Heavy computation test'
+                    });
+                }
+                log('performanceStatus', 'Performance issue reported', 'error');
+            }
+        }
+
+        function simulateMemoryIssue() {
+            log('performanceStatus', 'Checking memory usage...', 'info');
+            
+            if (performance.memory) {
+                const memory = performance.memory;
+                const memoryInfo = {
+                    used: (memory.usedJSHeapSize / 1024 / 1024).toFixed(2) + ' MB',
+                    total: (memory.totalJSHeapSize / 1024 / 1024).toFixed(2) + ' MB',
+                    limit: (memory.jsHeapSizeLimit / 1024 / 1024).toFixed(2) + ' MB'
+                };
+                
+                log('performanceStatus', `Memory: ${memoryInfo.used} / ${memoryInfo.limit}`, 'info');
+            } else {
+                log('performanceStatus', 'Memory monitoring not available in this browser', 'info');
+            }
+        }
+
+        function checkPerformanceMetrics() {
+            log('performanceStatus', 'Checking performance metrics...', 'info');
+            
+            if (performance.timing) {
+                const timing = performance.timing;
+                const loadTime = timing.loadEventEnd - timing.navigationStart;
+                const domReady = timing.domContentLoadedEventEnd - timing.navigationStart;
+                
+                log('performanceStatus', `Page load time: ${loadTime}ms`, 'info');
+                log('performanceStatus', `DOM ready time: ${domReady}ms`, 'info');
+            }
+        }
+
+        function reportCustomError() {
+            log('customErrorStatus', 'Reporting custom error...', 'info');
+            
+            if (window.errorReporter) {
+                errorReporter.reportCustomError('This is a custom error for testing', {
+                    test_context: 'error_test_page',
+                    user_action: 'manual_test',
+                    timestamp: new Date().toISOString()
+                });
+                
+                log('customErrorStatus', 'Custom error reported successfully', 'success');
+            } else {
+                log('customErrorStatus', 'Error reporter not available', 'error');
+            }
+        }
+
+        function reportUserIssue() {
+            log('customErrorStatus', 'Reporting user experience issue...', 'info');
+            
+            if (window.errorReporter) {
+                errorReporter.reportCustomError('User experience issue: Slow lesson loading', {
+                    type: 'user_experience',
+                    severity: 'medium',
+                    lesson_context: 'maths_numbers_1-10'
+                });
+                
+                log('customErrorStatus', 'User issue reported successfully', 'success');
+            } else {
+                log('customErrorStatus', 'Error reporter not available', 'error');
+            }
+        }
+
+        function showStoredErrors() {
+            log('customErrorStatus', 'Checking stored errors...', 'info');
+            
+            if (window.errorReporter) {
+                const storedErrors = errorReporter.getStoredErrors();
+                
+                if (storedErrors.length > 0) {
+                    log('customErrorStatus', `Found ${storedErrors.length} stored errors`, 'info');
+                    storedErrors.forEach((error, index) => {
+                        log('customErrorStatus', `${index + 1}. ${error.type}: ${error.message}`, 'info');
+                    });
+                } else {
+                    log('customErrorStatus', 'No stored errors found', 'success');
+                }
+            } else {
+                log('customErrorStatus', 'Error reporter not available', 'error');
+            }
+        }
+
+        async function loadErrorStats() {
+            log('statsStatus', 'Loading error statistics...', 'info');
+            
+            try {
+                const response = await fetch('/api/error-stats?days=7');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const stats = data.statistics;
+                    log('statsStatus', `Total Errors: ${stats.total_errors}`, 'info');
+                    log('statsStatus', `Server Errors: ${stats.server_errors}`, 'info');
+                    log('statsStatus', `Client Errors: ${stats.client_errors}`, 'info');
+                    log('statsStatus', `Error Types: ${stats.most_common_errors.length}`, 'info');
+                } else {
+                    log('statsStatus', 'Failed to load statistics', 'error');
+                }
+            } catch (error) {
+                log('statsStatus', `Error loading stats: ${error.message}`, 'error');
+            }
+        }
+
+        function viewAdminDashboard() {
+            log('statsStatus', 'Opening admin dashboard...', 'info');
+            window.open('/admin/errors', '_blank');
+        }
+
+        function clearErrorLogs() {
+            log('statsStatus', 'Clearing error logs...', 'info');
+            
+            if (window.errorReporter) {
+                errorReporter.clearStoredErrors();
+                log('statsStatus', 'Local error logs cleared', 'success');
+            }
+            
+            // Clear all status displays
+            document.getElementById('jsErrorStatus').innerHTML = 'JavaScript error tests will appear here...';
+            document.getElementById('networkErrorStatus').innerHTML = 'Network error tests will appear here...';
+            document.getElementById('performanceStatus').innerHTML = 'Performance monitoring results will appear here...';
+            document.getElementById('customErrorStatus').innerHTML = 'Custom error reporting results will appear here...';
+            document.getElementById('statsStatus').innerHTML = 'Error statistics will appear here...';
+        }
+
+        // Utility function for logging
+        function log(containerId, message, type = 'info') {
+            const container = document.getElementById(containerId);
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'error' ? 'error-log' : type === 'success' ? 'success-log' : 'info-log';
+            
+            container.innerHTML += `<div class="${className}">[${timestamp}] ${message}</div>`;
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Initialize test page
+        document.addEventListener('DOMContentLoaded', function() {
+            log('jsErrorStatus', 'Error reporting system test page loaded', 'success');
+            log('networkErrorStatus', 'Network error testing ready', 'success');
+            log('performanceStatus', 'Performance monitoring ready', 'success');
+            log('customErrorStatus', 'Custom error reporting ready', 'success');
+            log('statsStatus', 'Error statistics module ready', 'success');
+        });
+    </script>
+</body>
+</html>

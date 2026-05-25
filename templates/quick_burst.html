@@ -1,0 +1,828 @@
+{% extends "layout.html" %}
+
+{% block title %}Quick Burst Challenges - Brain Buddy{% endblock %}
+
+{% block extra_css %}
+<style>
+.burst-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+    min-height: 100vh;
+}
+
+.burst-header {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.burst-title {
+    font-size: 2.5em;
+    font-weight: 900;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.burst-subtitle {
+    font-size: 1.2em;
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+.timer-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.timer-display {
+    font-size: 3em;
+    font-weight: 900;
+    color: #e74c3c;
+    margin-bottom: 10px;
+    font-family: 'Courier New', monospace;
+}
+
+.timer-label {
+    font-size: 1.1em;
+    color: #666;
+    font-weight: 600;
+}
+
+.challenge-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.challenge-card:hover {
+    transform: translateY(-5px);
+}
+
+.challenge-type {
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.challenge-question {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.answer-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.answer-btn {
+    background: linear-gradient(45deg, #74b9ff, #0984e3);
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+}
+
+.answer-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(116, 185, 255, 0.4);
+}
+
+.answer-btn.correct {
+    background: linear-gradient(45deg, #00b894, #00cec9);
+    animation: correctPulse 0.6s ease;
+}
+
+.answer-btn.incorrect {
+    background: linear-gradient(45deg, #e17055, #d63031);
+    animation: incorrectShake 0.6s ease;
+}
+
+@keyframes correctPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes incorrectShake {
+    0%, 20%, 40%, 60%, 80% { transform: translateX(0); }
+    10%, 30%, 50%, 70% { transform: translateX(-5px); }
+    15%, 35%, 55%, 75% { transform: translateX(5px); }
+}
+
+.progress-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.progress-bar {
+    background: #ecf0f1;
+    border-radius: 10px;
+    height: 12px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    background: linear-gradient(45deg, #00b894, #00cec9);
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+.progress-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    text-align: center;
+}
+
+.stat-item {
+    color: #2c3e50;
+}
+
+.stat-number {
+    font-size: 1.8em;
+    font-weight: 900;
+    color: #6c5ce7;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.control-btn {
+    background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+}
+
+.control-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.completion-card {
+    background: linear-gradient(135deg, #00b894, #00cec9);
+    color: white;
+    text-align: center;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    display: none;
+}
+
+.completion-title {
+    font-size: 2.5em;
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+.completion-stats {
+    font-size: 1.2em;
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
+
+.star-rating {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.subject-selector {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.subject-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.subject-btn {
+    background: linear-gradient(45deg, #74b9ff, #0984e3);
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.subject-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(116, 185, 255, 0.4);
+}
+
+.subject-btn.selected {
+    background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+    box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+}
+
+.difficulty-selector {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.difficulty-btn {
+    background: #ecf0f1;
+    border: none;
+    color: #2c3e50;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.difficulty-btn.selected {
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    color: white;
+}
+
+/* Accessibility enhancements */
+.answer-btn:focus,
+.control-btn:focus,
+.subject-btn:focus {
+    outline: 3px solid #ffff00;
+    outline-offset: 2px;
+}
+
+/* Screen reader only content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .challenge-card,
+    .timer-section,
+    .progress-section,
+    .subject-selector {
+        border: 2px solid #000;
+    }
+    
+    .answer-btn,
+    .control-btn,
+    .subject-btn {
+        border: 2px solid #000;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="burst-container">
+    <div class="burst-header">
+        <h1 class="burst-title">Quick Burst Challenges</h1>
+        <p class="burst-subtitle">Master concepts in just 2-5 minutes!</p>
+    </div>
+
+    <!-- Subject Selection -->
+    <div class="subject-selector" id="subjectSelector">
+        <h2 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">Choose Your Subject</h2>
+        <div class="subject-grid">
+            <button class="subject-btn" onclick="selectSubject('maths')" data-subject="maths">
+                <i class="fas fa-calculator"></i> Mathematics
+            </button>
+            
+            <button class="subject-btn" onclick="selectSubject('science')" data-subject="science">
+                <i class="fas fa-flask"></i> Science
+            </button>
+            
+            <button class="subject-btn" onclick="selectSubject('english')" data-subject="english">
+                <i class="fas fa-book"></i> English
+            </button>
+            
+            <button class="subject-btn" onclick="selectSubject('geography')" data-subject="geography">
+                <i class="fas fa-globe"></i> Geography
+            </button>
+        </div>
+        
+        <div class="difficulty-selector">
+            <button class="difficulty-btn selected" onclick="selectDifficulty('easy')" data-difficulty="easy">Easy</button>
+            <button class="difficulty-btn" onclick="selectDifficulty('medium')" data-difficulty="medium">Medium</button>
+            <button class="difficulty-btn" onclick="selectDifficulty('hard')" data-difficulty="hard">Hard</button>
+        </div>
+    </div>
+
+    <!-- Timer Section -->
+    <div class="timer-section" id="timerSection" style="display: none;">
+        <div class="timer-display" id="timerDisplay" aria-live="polite">2:00</div>
+        <div class="timer-label">Time Remaining</div>
+    </div>
+
+    <!-- Progress Section -->
+    <div class="progress-section" id="progressSection" style="display: none;">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-stats">
+            <div class="stat-item">
+                <div class="stat-number" id="currentQuestion">1</div>
+                <div class="stat-label">Question</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="correctAnswers">0</div>
+                <div class="stat-label">Correct</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="totalQuestions">5</div>
+                <div class="stat-label">Total</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Challenge Card -->
+    <div class="challenge-card" id="challengeCard" style="display: none;">
+        <div class="challenge-type" id="challengeType">Mathematics</div>
+        <div class="challenge-question" id="challengeQuestion" role="heading" aria-level="3">
+            Loading question...
+        </div>
+        <div class="answer-options" id="answerOptions" role="group" aria-labelledby="challengeQuestion">
+            <!-- Answer buttons will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Completion Card -->
+    <div class="completion-card" id="completionCard" style="display: none;">
+        <div class="completion-title">Challenge Complete!</div>
+        <div class="star-rating" id="starRating" aria-label="Performance rating">⭐⭐⭐</div>
+        <div class="completion-stats" id="completionStats">
+            You got 4 out of 5 questions correct in 1:23!
+        </div>
+        <div class="control-buttons">
+            <button class="control-btn" onclick="startNewChallenge()">Try Again</button>
+            <button class="control-btn" onclick="location.href='{{ url_for('index') }}'">Back to Home</button>
+        </div>
+    </div>
+
+    <!-- Control Buttons -->
+    <div class="control-buttons" id="controlButtons" style="display: none;">
+        <button class="control-btn" onclick="pauseChallenge()" id="pauseBtn">
+            <i class="fas fa-pause" aria-hidden="true"></i> Pause
+        </button>
+        <button class="control-btn" onclick="skipQuestion()" id="skipBtn">
+            <i class="fas fa-forward" aria-hidden="true"></i> Skip
+        </button>
+        <button class="control-btn" onclick="endChallenge()" id="endBtn">
+            <i class="fas fa-stop" aria-hidden="true"></i> End Challenge
+        </button>
+    </div>
+</div>
+
+<script>
+// Challenge state
+let currentChallenge = {
+    subject: '',
+    difficulty: 'easy',
+    questions: [],
+    currentQuestionIndex: 0,
+    correctAnswers: 0,
+    startTime: null,
+    timeLimit: 120, // 2 minutes in seconds
+    timer: null,
+    isPaused: false
+};
+
+// Question banks for different subjects
+const questionBanks = {
+    maths: {
+        easy: [
+            { question: "What is 5 + 3?", options: ["7", "8", "9", "10"], correct: 1 },
+            { question: "What is 10 - 4?", options: ["5", "6", "7", "8"], correct: 1 },
+            { question: "What is 3 × 2?", options: ["5", "6", "7", "8"], correct: 1 },
+            { question: "What is 12 ÷ 4?", options: ["2", "3", "4", "5"], correct: 1 },
+            { question: "What is half of 8?", options: ["3", "4", "5", "6"], correct: 1 },
+            { question: "What comes after 19?", options: ["18", "20", "21", "22"], correct: 1 },
+            { question: "How many sides does a triangle have?", options: ["2", "3", "4", "5"], correct: 1 },
+            { question: "What is 7 + 7?", options: ["13", "14", "15", "16"], correct: 1 }
+        ],
+        medium: [
+            { question: "What is 15 + 27?", options: ["41", "42", "43", "44"], correct: 1 },
+            { question: "What is 84 - 36?", options: ["46", "47", "48", "49"], correct: 2 },
+            { question: "What is 9 × 7?", options: ["61", "62", "63", "64"], correct: 2 },
+            { question: "What is 72 ÷ 8?", options: ["8", "9", "10", "11"], correct: 1 },
+            { question: "What is 25% of 80?", options: ["15", "20", "25", "30"], correct: 1 },
+            { question: "If a rectangle has length 6 and width 4, what is its area?", options: ["20", "22", "24", "26"], correct: 2 }
+        ],
+        hard: [
+            { question: "What is 127 + 256?", options: ["383", "384", "385", "386"], correct: 0 },
+            { question: "What is 15² (15 squared)?", options: ["225", "235", "245", "255"], correct: 0 },
+            { question: "What is 30% of 150?", options: ["40", "45", "50", "55"], correct: 1 },
+            { question: "Solve: 3x + 12 = 30. What is x?", options: ["4", "5", "6", "7"], correct: 2 }
+        ]
+    },
+    science: {
+        easy: [
+            { question: "How many legs does a spider have?", options: ["6", "7", "8", "9"], correct: 2 },
+            { question: "What do plants need to make food?", options: ["Water", "Sunlight", "Air", "All of these"], correct: 3 },
+            { question: "What is the largest planet in our solar system?", options: ["Earth", "Mars", "Jupiter", "Saturn"], correct: 2 },
+            { question: "What do we call baby frogs?", options: ["Tadpoles", "Froglets", "Puppies", "Kittens"], correct: 0 },
+            { question: "Which animal is known as the king of the jungle?", options: ["Tiger", "Lion", "Elephant", "Bear"], correct: 1 }
+        ],
+        medium: [
+            { question: "What is the chemical symbol for water?", options: ["H2O", "CO2", "O2", "NaCl"], correct: 0 },
+            { question: "How many bones are in an adult human body?", options: ["196", "206", "216", "226"], correct: 1 },
+            { question: "What force keeps us on Earth?", options: ["Magnetism", "Electricity", "Gravity", "Friction"], correct: 2 },
+            { question: "What gas do plants absorb from the air?", options: ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"], correct: 2 }
+        ],
+        hard: [
+            { question: "What is the speed of light?", options: ["300,000 km/s", "150,000 km/s", "450,000 km/s", "600,000 km/s"], correct: 0 },
+            { question: "What is the hardest natural substance?", options: ["Gold", "Iron", "Diamond", "Quartz"], correct: 2 },
+            { question: "What is photosynthesis?", options: ["Plant reproduction", "Plant breathing", "Plant food making", "Plant growth"], correct: 2 }
+        ]
+    },
+    english: {
+        easy: [
+            { question: "Which word is a noun?", options: ["Run", "Happy", "Dog", "Quickly"], correct: 2 },
+            { question: "What is the past tense of 'run'?", options: ["Running", "Ran", "Runs", "Runner"], correct: 1 },
+            { question: "Which word rhymes with 'cat'?", options: ["Dog", "Hat", "Car", "Book"], correct: 1 },
+            { question: "How many letters are in the alphabet?", options: ["24", "25", "26", "27"], correct: 2 }
+        ],
+        medium: [
+            { question: "What is a synonym for 'big'?", options: ["Small", "Large", "Tiny", "Little"], correct: 1 },
+            { question: "Which sentence is correct?", options: ["I are happy", "I is happy", "I am happy", "I be happy"], correct: 2 },
+            { question: "What is the plural of 'child'?", options: ["Childs", "Children", "Childes", "Childern"], correct: 1 }
+        ],
+        hard: [
+            { question: "What is a metaphor?", options: ["A type of poem", "A comparison using 'like'", "A direct comparison", "A rhyming word"], correct: 2 },
+            { question: "Which is an example of alliteration?", options: ["Big blue ball", "Happy as a clam", "Time flies", "Silent as snow"], correct: 0 }
+        ]
+    },
+    geography: {
+        easy: [
+            { question: "What is the capital of England?", options: ["Manchester", "Birmingham", "London", "Liverpool"], correct: 2 },
+            { question: "Which is the largest continent?", options: ["Africa", "Asia", "Europe", "North America"], correct: 1 },
+            { question: "What is the longest river in the world?", options: ["Amazon", "Nile", "Mississippi", "Thames"], correct: 1 },
+            { question: "How many continents are there?", options: ["5", "6", "7", "8"], correct: 2 }
+        ],
+        medium: [
+            { question: "What is the capital of Australia?", options: ["Sydney", "Melbourne", "Canberra", "Perth"], correct: 2 },
+            { question: "Which mountain range contains Mount Everest?", options: ["Alps", "Andes", "Rockies", "Himalayas"], correct: 3 },
+            { question: "What is the smallest country in the world?", options: ["Monaco", "Vatican City", "San Marino", "Liechtenstein"], correct: 1 }
+        ],
+        hard: [
+            { question: "What is the deepest ocean trench?", options: ["Puerto Rico Trench", "Mariana Trench", "Japan Trench", "Peru-Chile Trench"], correct: 1 },
+            { question: "Which country has the most time zones?", options: ["Russia", "USA", "China", "France"], correct: 3 }
+        ]
+    }
+};
+
+function selectSubject(subject) {
+    currentChallenge.subject = subject;
+    
+    // Update UI
+    document.querySelectorAll('.subject-btn').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    document.querySelector(`[data-subject="${subject}"]`).classList.add('selected');
+    
+    // Show start button
+    showStartButton();
+    
+    console.log('Selected subject:', subject);
+}
+
+function showStartButton() {
+    if (!document.getElementById('startBtn')) {
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.textAlign = 'center';
+        buttonContainer.style.marginTop = '20px';
+        
+        const startBtn = document.createElement('button');
+        startBtn.id = 'startBtn';
+        startBtn.className = 'control-btn';
+        startBtn.style.fontSize = '1.2em';
+        startBtn.style.padding = '15px 30px';
+        startBtn.innerHTML = '<i class="fas fa-play"></i> Start Challenge';
+        startBtn.onclick = startChallenge;
+        
+        buttonContainer.appendChild(startBtn);
+        document.querySelector('.subject-selector').appendChild(buttonContainer);
+    }
+}
+
+function selectDifficulty(difficulty) {
+    currentChallenge.difficulty = difficulty;
+    
+    // Update UI
+    document.querySelectorAll('.difficulty-btn').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    document.querySelector(`[data-difficulty="${difficulty}"]`).classList.add('selected');
+    
+    console.log('Selected difficulty:', difficulty);
+}
+
+function startChallenge() {
+    if (!currentChallenge.subject) {
+        alert('Please select a subject first!');
+        return;
+    }
+    
+    // Get questions for selected subject and difficulty
+    const questions = questionBanks[currentChallenge.subject][currentChallenge.difficulty];
+    currentChallenge.questions = shuffleArray([...questions]).slice(0, 5); // Get 5 random questions
+    currentChallenge.currentQuestionIndex = 0;
+    currentChallenge.correctAnswers = 0;
+    currentChallenge.startTime = Date.now();
+    
+    // Show challenge interface
+    document.getElementById('subjectSelector').style.display = 'none';
+    document.getElementById('timerSection').style.display = 'block';
+    document.getElementById('progressSection').style.display = 'block';
+    document.getElementById('challengeCard').style.display = 'block';
+    document.getElementById('controlButtons').style.display = 'flex';
+    
+    // Start timer
+    startTimer();
+    
+    // Load first question
+    loadQuestion();
+    
+    console.log('Challenge started with', currentChallenge.questions.length, 'questions');
+}
+
+function startTimer() {
+    let timeLeft = currentChallenge.timeLimit;
+    
+    currentChallenge.timer = setInterval(() => {
+        if (!currentChallenge.isPaused) {
+            timeLeft--;
+            
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timerDisplay').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft <= 0) {
+                endChallenge();
+            }
+        }
+    }, 1000);
+}
+
+function loadQuestion() {
+    const question = currentChallenge.questions[currentChallenge.currentQuestionIndex];
+    
+    // Update question display
+    document.getElementById('challengeType').textContent = 
+        currentChallenge.subject.charAt(0).toUpperCase() + currentChallenge.subject.slice(1);
+    document.getElementById('challengeQuestion').textContent = question.question;
+    
+    // Update progress
+    document.getElementById('currentQuestion').textContent = currentChallenge.currentQuestionIndex + 1;
+    document.getElementById('totalQuestions').textContent = currentChallenge.questions.length;
+    document.getElementById('correctAnswers').textContent = currentChallenge.correctAnswers;
+    
+    const progressPercent = ((currentChallenge.currentQuestionIndex + 1) / currentChallenge.questions.length) * 100;
+    document.getElementById('progressFill').style.width = progressPercent + '%';
+    
+    // Create answer buttons
+    const answerOptions = document.getElementById('answerOptions');
+    answerOptions.innerHTML = '';
+    
+    question.options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.className = 'answer-btn';
+        button.textContent = option;
+        button.onclick = () => selectAnswer(index);
+        button.setAttribute('aria-label', `Option ${index + 1}: ${option}`);
+        answerOptions.appendChild(button);
+    });
+}
+
+function selectAnswer(selectedIndex) {
+    const question = currentChallenge.questions[currentChallenge.currentQuestionIndex];
+    const answerButtons = document.querySelectorAll('.answer-btn');
+    
+    // Disable all buttons
+    answerButtons.forEach(btn => btn.disabled = true);
+    
+    // Show correct/incorrect feedback
+    answerButtons[selectedIndex].classList.add(selectedIndex === question.correct ? 'correct' : 'incorrect');
+    if (selectedIndex !== question.correct) {
+        answerButtons[question.correct].classList.add('correct');
+    }
+    
+    // Update score
+    if (selectedIndex === question.correct) {
+        currentChallenge.correctAnswers++;
+    }
+    
+    // Move to next question after delay
+    setTimeout(() => {
+        currentChallenge.currentQuestionIndex++;
+        
+        if (currentChallenge.currentQuestionIndex >= currentChallenge.questions.length) {
+            endChallenge();
+        } else {
+            loadQuestion();
+        }
+    }, 1500);
+}
+
+function skipQuestion() {
+    currentChallenge.currentQuestionIndex++;
+    
+    if (currentChallenge.currentQuestionIndex >= currentChallenge.questions.length) {
+        endChallenge();
+    } else {
+        loadQuestion();
+    }
+}
+
+function pauseChallenge() {
+    currentChallenge.isPaused = !currentChallenge.isPaused;
+    const pauseBtn = document.getElementById('pauseBtn');
+    
+    if (currentChallenge.isPaused) {
+        pauseBtn.innerHTML = '<i class="fas fa-play" aria-hidden="true"></i> Resume';
+    } else {
+        pauseBtn.innerHTML = '<i class="fas fa-pause" aria-hidden="true"></i> Pause';
+    }
+}
+
+function endChallenge() {
+    // Clear timer
+    if (currentChallenge.timer) {
+        clearInterval(currentChallenge.timer);
+    }
+    
+    // Calculate results
+    const totalTime = Math.floor((Date.now() - currentChallenge.startTime) / 1000);
+    const minutes = Math.floor(totalTime / 60);
+    const seconds = totalTime % 60;
+    const percentage = Math.round((currentChallenge.correctAnswers / currentChallenge.questions.length) * 100);
+    
+    // Show completion screen
+    document.getElementById('challengeCard').style.display = 'none';
+    document.getElementById('timerSection').style.display = 'none';
+    document.getElementById('progressSection').style.display = 'none';
+    document.getElementById('controlButtons').style.display = 'none';
+    document.getElementById('completionCard').style.display = 'block';
+    
+    // Update completion stats
+    document.getElementById('completionStats').textContent = 
+        `You got ${currentChallenge.correctAnswers} out of ${currentChallenge.questions.length} questions correct in ${minutes}:${seconds.toString().padStart(2, '0')}!`;
+    
+    // Update star rating
+    let stars = '⭐';
+    if (percentage >= 60) stars = '⭐⭐';
+    if (percentage >= 80) stars = '⭐⭐⭐';
+    if (percentage >= 90) stars = '⭐⭐⭐⭐';
+    if (percentage === 100) stars = '⭐⭐⭐⭐⭐';
+    
+    document.getElementById('starRating').textContent = stars;
+    document.getElementById('starRating').setAttribute('aria-label', `You earned ${stars.length} out of 5 stars`);
+}
+
+function startNewChallenge() {
+    // Reset challenge state
+    currentChallenge = {
+        subject: '',
+        difficulty: 'easy',
+        questions: [],
+        currentQuestionIndex: 0,
+        correctAnswers: 0,
+        startTime: null,
+        timeLimit: 120,
+        timer: null,
+        isPaused: false
+    };
+    
+    // Show subject selector
+    document.getElementById('completionCard').style.display = 'none';
+    document.getElementById('subjectSelector').style.display = 'block';
+    
+    // Reset subject selection
+    document.querySelectorAll('.subject-btn').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    
+    // Reset difficulty selection
+    document.querySelectorAll('.difficulty-btn').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    document.querySelector('[data-difficulty="easy"]').classList.add('selected');
+    
+    // Remove start button if it exists
+    const startBtn = document.getElementById('startBtn');
+    if (startBtn) {
+        startBtn.remove();
+    }
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// Initialize page
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Quick Burst Challenges loaded');
+    
+    // Add keyboard support
+    document.addEventListener('keydown', function(e) {
+        // Number keys for answer selection
+        if (e.key >= '1' && e.key <= '4') {
+            const answerButtons = document.querySelectorAll('.answer-btn:not(:disabled)');
+            const index = parseInt(e.key) - 1;
+            if (answerButtons[index]) {
+                answerButtons[index].click();
+            }
+        }
+        
+        // Space for pause/resume
+        if (e.code === 'Space' && currentChallenge.timer) {
+            e.preventDefault();
+            pauseChallenge();
+        }
+        
+        // Enter to skip
+        if (e.code === 'Enter' && currentChallenge.timer) {
+            e.preventDefault();
+            skipQuestion();
+        }
+    });
+});
+</script>
+{% endblock %}
