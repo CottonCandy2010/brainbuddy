@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Brain Buddy - AI-powered adaptive learning platform for personalized education">
-    <title>{% block title %}Brain Buddy{% endblock %} | Learning for You</title>
+    <meta name="description" content="BrainBuddy - AI-powered adaptive learning platform for personalised education">
+    <title>{% block title %}BrainBuddy{% endblock %} | Learning for You</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,12 +18,12 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     
-    <!-- Profile Corner Display - New System -->
+    <!-- Profile Corner Display -->
     <script src="{{ url_for('static', filename='js/profile-corner-new.js') }}"></script>
     
     {% block extra_head %}{% endblock %}
     
-    <!-- Page Transition Preload Script -->
+    <!-- Page Transition -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.body.classList.add('page-transition', 'loaded');
@@ -32,13 +32,10 @@
     
     <!-- Accessibility Settings -->
     <script>
-        // High contrast mode toggle
         function toggleHighContrast() {
             document.body.classList.toggle('high-contrast');
             localStorage.setItem('highContrast', document.body.classList.contains('high-contrast'));
         }
-        
-        // Font size adjustment
         function adjustFontSize(direction) {
             const currentSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
             const newSize = direction === 'increase' ? currentSize + 2 : currentSize - 2;
@@ -47,8 +44,6 @@
                 localStorage.setItem('fontSize', newSize);
             }
         }
-        
-        // Load saved accessibility preferences
         document.addEventListener('DOMContentLoaded', function() {
             if (localStorage.getItem('highContrast') === 'true') {
                 document.body.classList.add('high-contrast');
@@ -61,7 +56,7 @@
     </script>
 </head>
 <body>
-    <!-- Skip to main content link for screen readers -->
+    <!-- Skip to main content for screen readers -->
     <a href="#main-content" class="skip-link sr-only sr-only-focusable">Skip to main content</a>
     
     <!-- Top Navigation Bar -->
@@ -69,16 +64,15 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-4">
-                    <a href="/" class="text-decoration-none d-flex align-items-center" aria-label="Brain Buddy Kids home">
+                    <a href="/" class="text-decoration-none d-flex align-items-center" aria-label="BrainBuddy home">
                         <img src="{{ url_for('static', filename='images/brain-buddy-logo.png') }}" 
-                             alt="Brain Buddy Kids logo" class="nav-logo me-2">
+                             alt="BrainBuddy logo" class="nav-logo me-2">
                         <div class="brand-container">
-                            <h1 class="app-name m-0">Brain Buddy Kids</h1>
+                            <h1 class="app-name m-0">BrainBuddy</h1>
                         </div>
                     </a>
                 </div>
                 <div class="col-md-8">
-                    <!-- Navigation Items -->
                     <div class="nav-tabs-container d-flex justify-content-end">
                         <ul class="nav nav-pills top-nav-pills">
                             <li class="nav-item">
@@ -111,7 +105,6 @@
                                     <li><a class="dropdown-item" href="/auditory-numbers"><i class="fas fa-volume-up me-2"></i>Audio Learning</a></li>
                                 </ul>
                             </li>
-
                         </ul>
                     </div>
                 </div>
@@ -124,9 +117,8 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col">
-                    <div class="welcome-section text-center">
+                    <div class="welcome-section text-center"></div>
                 </div>
-
             </div>
         </div>
     </header>
@@ -135,23 +127,22 @@
     <main class="main-container">
         <div class="container">
             <main id="main-content" role="main" tabindex="-1">
-        {% block content %}{% endblock %}
-    </main>
+                {% block content %}{% endblock %}
+            </main>
         </div>
     </main>
 
-    <!-- Login/Sign Up Modal -->
+    <!-- Login / Sign Up Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content login-modal">
                 <div class="modal-header border-0">
                     <h5 class="modal-title" id="loginModalLabel">
-                        <i class="fas fa-brain me-2 text-primary"></i>Join Brain Buddy
+                        <i class="fas fa-brain me-2 text-primary"></i>Join BrainBuddy
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
-                    <!-- Tab Navigation -->
                     <ul class="nav nav-pills nav-justified mb-4" id="loginTabs" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active login-tab-btn" id="login-tab" data-bs-toggle="pill" data-bs-target="#login-pane" type="button" role="tab">
@@ -165,21 +156,16 @@
                         </li>
                     </ul>
 
-                    <!-- Tab Content -->
                     <div class="tab-content" id="loginTabContent">
                         <!-- Login Form -->
                         <div class="tab-pane fade show active" id="login-pane" role="tabpanel">
                             <form id="loginForm">
                                 <div class="mb-3">
-                                    <label for="loginEmail" class="form-label">
-                                        <i class="fas fa-envelope me-2"></i>Email
-                                    </label>
+                                    <label for="loginEmail" class="form-label"><i class="fas fa-envelope me-2"></i>Email</label>
                                     <input type="email" class="form-control login-input" id="loginEmail" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="loginPassword" class="form-label">
-                                        <i class="fas fa-lock me-2"></i>Password
-                                    </label>
+                                    <label for="loginPassword" class="form-label"><i class="fas fa-lock me-2"></i>Password</label>
                                     <input type="password" class="form-control login-input" id="loginPassword" required>
                                 </div>
                                 <div class="mb-3 form-check">
@@ -187,7 +173,7 @@
                                     <label class="form-check-label" for="rememberMe">Remember me</label>
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100 login-btn">
-                                    <i class="fas fa-sign-in-alt me-2"></i>Login to Brain Buddy
+                                    <i class="fas fa-sign-in-alt me-2"></i>Login to BrainBuddy
                                 </button>
                             </form>
                         </div>
@@ -197,9 +183,7 @@
                             <form id="signupForm">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="signupFirstName" class="form-label">
-                                            <i class="fas fa-user me-2"></i>First Name
-                                        </label>
+                                        <label for="signupFirstName" class="form-label"><i class="fas fa-user me-2"></i>First Name</label>
                                         <input type="text" class="form-control login-input" id="signupFirstName" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -208,15 +192,11 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="signupEmail" class="form-label">
-                                        <i class="fas fa-envelope me-2"></i>Email
-                                    </label>
+                                    <label for="signupEmail" class="form-label"><i class="fas fa-envelope me-2"></i>Email</label>
                                     <input type="email" class="form-control login-input" id="signupEmail" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="signupPassword" class="form-label">
-                                        <i class="fas fa-lock me-2"></i>Password
-                                    </label>
+                                    <label for="signupPassword" class="form-label"><i class="fas fa-lock me-2"></i>Password</label>
                                     <input type="password" class="form-control login-input" id="signupPassword" required>
                                 </div>
                                 <div class="mb-3">
@@ -226,17 +206,17 @@
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input" id="agreeTerms" required>
                                     <label class="form-check-label" for="agreeTerms">
-                                        I agree to the <a href="#" class="text-decoration-none">Terms & Conditions</a>
+                                        I agree to the <a href="#" class="text-decoration-none">Terms &amp; Conditions</a>
                                     </label>
                                 </div>
                                 <button type="submit" class="btn btn-success w-100 login-btn">
-                                    <i class="fas fa-user-plus me-2"></i>Create Brain Buddy Account
+                                    <i class="fas fa-user-plus me-2"></i>Create BrainBuddy Account
                                 </button>
                             </form>
                         </div>
                     </div>
 
-                    <!-- Social Login Options -->
+                    <!-- Social Login -->
                     <div class="social-login mt-4">
                         <div class="text-center mb-3">
                             <small class="text-muted">Or continue with</small>
@@ -265,10 +245,8 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <p class="footer-text mb-2">
-                        Brain Buddy &copy; 2023 | Created by Edhita
+                        BrainBuddy &copy; 2026 | Created by Edhita Sharma
                     </p>
-                    
-
                 </div>
             </div>
         </div>
@@ -280,14 +258,12 @@
     <!-- Tutorial System -->
     <script src="{{ url_for('static', filename='js/tutorial.js') }}"></script>
     
-    <!-- Error Reporting System -->
+    <!-- Error Reporting -->
     <script src="{{ url_for('static', filename='js/error_reporting.js') }}"></script>
     
-    <!-- Custom JavaScript -->
+    <!-- Custom JS -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    
 
-    
     {% block scripts %}{% endblock %}
 </body>
 </html>
