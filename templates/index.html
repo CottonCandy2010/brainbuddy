@@ -1,272 +1,392 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    {% if step == 'subject' %}Choose a Subject - Brain Buddy Kids
-    {% elif step == 'style' %}Choose a Learning Style - Brain Buddy Kids
-    {% else %}Welcome to Brain Buddy Kids{% endif %}
+    {% if step == 'level' %}Choose Your Level - BrainBuddy
+    {% elif step == 'subject' %}Choose a Subject - BrainBuddy
+    {% elif step == 'style' %}Choose a Learning Style - BrainBuddy
+    {% else %}Welcome to BrainBuddy{% endif %}
 {% endblock %}
 
 {% block content %}
-    <!-- Welcome Section (Initial View) -->
-    {% if not step %}
-    <section class="welcome-section animate-fade-in">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                <div class="content-card text-center p-4 p-md-5">
-                    <!-- Brain Buddy Logo -->
-                    <div class="welcome-logo mb-4">
-                        <img src="{{ url_for('static', filename='images/brain-buddy-logo.png') }}" 
-                             alt="Brain Buddy Kids" class="brain-logo animate-bounce">
-                    </div>
-                    <h1 class="welcome-title">Welcome to Brain Buddy Kids!</h1>
-                    <p class="welcome-subtitle">Your magical learning friend that makes education super fun!</p>
-                    <div class="row">
-                        <div class="col-12">
-                            <a href="{{ url_for('age_setup') }}" class="btn btn-brain-buddy btn-lg animate-fade-in">
-                                Start My Adventure! <i class="fas fa-rocket ms-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                    
 
-                </div>
-            </div>
-        </div>
-        
-        <!-- Study Tools Section - Mobile Friendly -->
-        <div class="study-tools-section mt-5">
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <div class="content-card">
-                        <h3 class="text-center mb-4 study-tools-title">
-                            <i class="fas fa-tools me-2"></i>Study Tools & Features
-                        </h3>
-                        
-                        <!-- Study Tools Grid -->
-                        <div class="row g-3" id="study-tools-grid">
-                            <!-- Curriculum Index -->
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <a href="{{ url_for('study_index') }}" class="study-tool-card text-decoration-none">
-                                    <div class="tool-icon">📚</div>
-                                    <div class="tool-title">Curriculum</div>
-                                    <div class="tool-subtitle">Browse Topics</div>
-                                </a>
-                            </div>
-                            
-                            <!-- Quick Challenges -->
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <a href="{{ url_for('quick_burst') }}" class="study-tool-card text-decoration-none">
-                                    <div class="tool-icon">⚡</div>
-                                    <div class="tool-title">Quick Burst</div>
-                                    <div class="tool-subtitle">Fast Challenges</div>
-                                </a>
-                            </div>
-                            
-                            <!-- Progress Dashboard -->
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <a href="{{ url_for('dashboard') }}?student_id=demo_student" class="study-tool-card text-decoration-none">
-                                    <div class="tool-icon">📊</div>
-                                    <div class="tool-title">Progress</div>
-                                    <div class="tool-subtitle">Track Learning</div>
-                                </a>
-                            </div>
-                            
-                            <!-- Study Buddy AI -->
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <a href="{{ url_for('study_buddy') }}" class="study-tool-card text-decoration-none">
-                                    <div class="tool-icon">🤖</div>
-                                    <div class="tool-title">Study Buddy</div>
-                                    <div class="tool-subtitle">AI Helper</div>
-                                </a>
-                            </div>
-                            
-                            <!-- Learning Soundtrack -->
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <a href="{{ url_for('soundtrack_generator') }}" class="study-tool-card text-decoration-none">
-                                    <div class="tool-icon">🎵</div>
-                                    <div class="tool-title">Soundtrack</div>
-                                    <div class="tool-subtitle">Study Music</div>
-                                </a>
-                            </div>
-                            
-                            <!-- Mood Study -->
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <a href="{{ url_for('mood_study') }}" class="study-tool-card text-decoration-none">
-                                    <div class="tool-icon">😊</div>
-                                    <div class="tool-title">Mood Study</div>
-                                    <div class="tool-subtitle">Adaptive Learning</div>
-                                </a>
-                            </div>
-                            
-                            <!-- Practice Questions -->
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <a href="{{ url_for('practice_questions') }}" class="study-tool-card text-decoration-none">
-                                    <div class="tool-icon">📝</div>
-                                    <div class="tool-title">Practice</div>
-                                    <div class="tool-subtitle">Test Skills</div>
-                                </a>
-                            </div>
-                            
-                            <!-- Settings -->
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <a href="{{ url_for('settings') }}" class="study-tool-card text-decoration-none">
-                                    <div class="tool-icon">⚙️</div>
-                                    <div class="tool-title">Settings</div>
-                                    <div class="tool-subtitle">Customize</div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    {% endif %}
-    
-    <!-- Subject Selection -->
-    {% if step == 'subject' %}
-    <section class="subject-selection animate-fade-in">
-        <div class="row justify-content-center mb-4">
-            <div class="col-md-8 col-lg-6">
-                <div class="content-card text-center">
-                    <h2 class="mb-3">Choose Your Subject</h2>
-                    <p class="mb-4">Explore any of our 8 subjects designed for secondary school students</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="maths">
-                    <i class="fas fa-calculator"></i>
-                    <h3 class="selection-title">Number Magic! 🔢</h3>
-                    <p class="selection-description">Amazing numbers, fun counting, and math adventures</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="science">
-                    <i class="fas fa-flask"></i>
-                    <h3 class="selection-title">Super Science! 🧪</h3>
-                    <p class="selection-description">Cool experiments, amazing discoveries, and fun facts</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="english">
-                    <i class="fas fa-book"></i>
-                    <h3 class="selection-title">Word Wizards! 📚</h3>
-                    <p class="selection-description">Story adventures, reading fun, and writing magic</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="music">
-                    <i class="fas fa-music"></i>
-                    <h3 class="selection-title">Musical Marvels! 🎵</h3>
-                    <p class="selection-description">Sing, play, dance, and create amazing music</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="computing">
-                    <i class="fas fa-laptop-code"></i>
-                    <h3 class="selection-title">Tech Explorers! 💻</h3>
-                    <p class="selection-description">Coding adventures, computer fun, and digital magic</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="history">
-                    <i class="fas fa-landmark"></i>
-                    <h3 class="selection-title">Time Travelers! 🏰</h3>
-                    <p class="selection-description">Amazing stories from the past and ancient adventures</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="geography">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="selection-title">World Wanderers! 🌍</h3>
-                    <p class="selection-description">Explore amazing places, countries, and our planet</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="art">
-                    <i class="fas fa-palette"></i>
-                    <h3 class="selection-title">Creative Artists! 🎨</h3>
-                    <p class="selection-description">Draw, paint, create, and make beautiful masterpieces</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="selection-card subject-card animate-fade-in" data-category="subject" data-value="business">
-                    <i class="fas fa-briefcase"></i>
-                    <h3 class="selection-title">Money Masters! 💰</h3>
-                    <p class="selection-description">Learn about shops, money, and how businesses work</p>
-                </div>
-            </div>
-        </div>
-        
+<style>
+.bb-hero { text-align: center; padding: 40px 20px 20px; }
+.bb-hero h1 { font-size: 2.4rem; font-weight: 800; background: linear-gradient(135deg, #6c63ff, #48cae4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
+.bb-hero p { color: #6b7280; font-size: 1.05rem; max-width: 500px; margin: 0 auto; }
+.level-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; max-width: 900px; margin: 32px auto; padding: 0 16px; }
+.level-card { background: white; border: 2px solid #e5e7eb; border-radius: 16px; padding: 28px 20px; text-align: center; cursor: pointer; transition: all 0.2s ease; text-decoration: none; color: inherit; display: block; }
+.level-card:hover { border-color: #6c63ff; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(108,99,255,0.15); }
+.level-card.selected { border-color: #6c63ff; background: linear-gradient(135deg, #f0efff, #e8f7ff); }
+.level-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.level-title { font-size: 1.1rem; font-weight: 700; color: #1f2937; margin-bottom: 4px; }
+.level-ages { font-size: 0.8rem; color: #6b7280; margin-bottom: 6px; }
+.level-example { font-size: 0.75rem; color: #9ca3af; }
+.country-grid { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 20px auto; max-width: 600px; padding: 0 16px; }
+.country-btn { background: white; border: 2px solid #e5e7eb; border-radius: 12px; padding: 10px 20px; cursor: pointer; font-size: 0.9rem; font-weight: 500; color: #374151; transition: all 0.2s; }
+.country-btn:hover, .country-btn.selected { border-color: #6c63ff; background: #f0efff; color: #6c63ff; }
+.section-label { text-align: center; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #9ca3af; margin: 28px 0 12px; }
+.bb-continue-btn { display: block; width: fit-content; margin: 24px auto; background: linear-gradient(135deg, #6c63ff, #48cae4); color: white; border: none; border-radius: 12px; padding: 14px 40px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+.bb-continue-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.bb-continue-btn:not(:disabled):hover { opacity: 0.9; }
 
-    </section>
-    {% endif %}
-    
-    <!-- Learning Style Selection -->
-    {% if step == 'style' %}
-    <section class="style-selection animate-fade-in">
-        <div class="row justify-content-center mb-4">
-            <div class="col-md-8 col-lg-6">
-                <div class="content-card text-center">
-                    <h2 class="mb-4">How Do You Learn Best?</h2>
-                    <p class="mb-4">Choose from 3 different learning styles tailored for {{ subject|capitalize }}:</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="selection-card style-card animate-fade-in" data-category="style" data-value="visual">
-                    <i class="fas fa-eye"></i>
-                    <h3 class="selection-title">Visual</h3>
-                    <p class="selection-description">Learn through pictures, diagrams, and charts</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="selection-card style-card animate-fade-in" data-category="style" data-value="verbal">
-                    <i class="fas fa-align-left"></i>
-                    <h3 class="selection-title">Verbal</h3>
-                    <p class="selection-description">Learn through written explanations and reading</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="selection-card style-card animate-fade-in" data-category="style" data-value="auditory">
-                    <i class="fas fa-volume-up"></i>
-                    <h3 class="selection-title">Auditory</h3>
-                    <p class="selection-description">Learn by listening to explanations</p>
-                </div>
-            </div>
-            
-        </div>
-        
-        <div class="row justify-content-center mt-4">
-            <div class="col-md-8 col-lg-6 text-center">
-                <button class="btn btn-brain-buddy-secondary back-btn me-2" data-step="style">
-                    <i class="fas fa-arrow-left me-2"></i> Back
-                </button>
-                <button id="continue-btn" class="btn btn-brain-buddy continue-btn" data-step="style" disabled>
-                    Start Lesson <i class="fas fa-arrow-right ms-2"></i>
-                </button>
-            </div>
-        </div>
-        
-        <input type="hidden" id="selected-style" value="">
-        <input type="hidden" id="subject-value" value="{{ subject }}">
-    </section>
-    {% endif %}
+.subject-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; max-width: 900px; margin: 24px auto; padding: 0 16px; }
+.subject-card { background: white; border: 2px solid #e5e7eb; border-radius: 14px; padding: 22px 14px; text-align: center; cursor: pointer; transition: all 0.2s ease; }
+.subject-card:hover { border-color: #6c63ff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(108,99,255,0.12); }
+.subject-card.selected { border-color: #6c63ff; background: #f0efff; }
+.subject-card .s-icon { font-size: 2rem; margin-bottom: 8px; }
+.subject-card .s-name { font-size: 0.9rem; font-weight: 600; color: #1f2937; }
+.subject-card .s-desc { font-size: 0.75rem; color: #9ca3af; margin-top: 3px; }
+
+.style-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; max-width: 700px; margin: 24px auto; padding: 0 16px; }
+.style-card { background: white; border: 2px solid #e5e7eb; border-radius: 14px; padding: 24px 16px; text-align: center; cursor: pointer; transition: all 0.2s ease; }
+.style-card:hover { border-color: #6c63ff; transform: translateY(-2px); }
+.style-card.selected { border-color: #6c63ff; background: #f0efff; }
+.style-card .st-icon { font-size: 2rem; margin-bottom: 10px; }
+.style-card .st-name { font-size: 1rem; font-weight: 700; color: #1f2937; }
+.style-card .st-desc { font-size: 0.8rem; color: #6b7280; margin-top: 4px; }
+
+.back-link { display: block; text-align: center; margin-top: 12px; color: #9ca3af; font-size: 0.85rem; cursor: pointer; text-decoration: none; }
+.back-link:hover { color: #6c63ff; }
+
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; max-width: 900px; margin: 16px auto; padding: 0 16px; }
+.tool-card { background: white; border: 1.5px solid #e5e7eb; border-radius: 12px; padding: 18px 12px; text-align: center; text-decoration: none; color: inherit; transition: all 0.2s; }
+.tool-card:hover { border-color: #6c63ff; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(108,99,255,0.1); }
+.tool-card .t-icon { font-size: 1.6rem; margin-bottom: 6px; }
+.tool-card .t-name { font-size: 0.82rem; font-weight: 600; color: #1f2937; }
+.tool-card .t-sub { font-size: 0.72rem; color: #9ca3af; margin-top: 2px; }
+
+.welcome-badge { display: inline-block; background: #f0efff; color: #6c63ff; font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; letter-spacing: 0.05em; }
+</style>
+
+<!-- ═══════════════════════════════════════════
+     WELCOME / HOME PAGE
+════════════════════════════════════════════ -->
+{% if not step %}
+<div class="bb-hero">
+    <span class="welcome-badge">AI-Powered Learning</span>
+    <h1>Welcome to BrainBuddy</h1>
+    <p>Personalised lessons for every age, every subject, every learning style — powered by AI</p>
+</div>
+
+<div style="text-align:center; padding: 8px 16px 0;">
+    <a href="{{ url_for('index') }}?step=level" class="bb-continue-btn" style="display:inline-block; text-decoration:none;">
+        Start Learning ✨
+    </a>
+</div>
+
+<div class="section-label">Study Tools</div>
+
+<div class="tools-grid">
+    <a href="{{ url_for('study_index') }}" class="tool-card">
+        <div class="t-icon">📚</div>
+        <div class="t-name">Curriculum</div>
+        <div class="t-sub">Browse Topics</div>
+    </a>
+    <a href="{{ url_for('quick_burst') }}" class="tool-card">
+        <div class="t-icon">⚡</div>
+        <div class="t-name">Quick Burst</div>
+        <div class="t-sub">Fast Challenges</div>
+    </a>
+    <a href="{{ url_for('dashboard') }}?student_id=demo_student" class="tool-card">
+        <div class="t-icon">📊</div>
+        <div class="t-name">Progress</div>
+        <div class="t-sub">Track Learning</div>
+    </a>
+    <a href="{{ url_for('study_buddy') }}" class="tool-card">
+        <div class="t-icon">🤖</div>
+        <div class="t-name">Study Buddy AI</div>
+        <div class="t-sub">Ask Anything</div>
+    </a>
+    <a href="{{ url_for('soundtrack_generator') }}" class="tool-card">
+        <div class="t-icon">🎵</div>
+        <div class="t-name">Soundtrack</div>
+        <div class="t-sub">Study Music</div>
+    </a>
+    <a href="{{ url_for('mood_study') }}" class="tool-card">
+        <div class="t-icon">😊</div>
+        <div class="t-name">Mood Study</div>
+        <div class="t-sub">Adaptive</div>
+    </a>
+    <a href="{{ url_for('practice_questions') }}" class="tool-card">
+        <div class="t-icon">📝</div>
+        <div class="t-name">Practice</div>
+        <div class="t-sub">Test Skills</div>
+    </a>
+    <a href="{{ url_for('settings') }}" class="tool-card">
+        <div class="t-icon">⚙️</div>
+        <div class="t-name">Settings</div>
+        <div class="t-sub">Customise</div>
+    </a>
+</div>
+{% endif %}
+
+<!-- ═══════════════════════════════════════════
+     STEP 1: LEVEL + COUNTRY SELECTION
+════════════════════════════════════════════ -->
+{% if step == 'level' %}
+<div class="bb-hero">
+    <h1>Who's Learning Today?</h1>
+    <p>Choose your education level so BrainBuddy can tailor everything perfectly for you</p>
+</div>
+
+<div class="section-label">Education Level</div>
+
+<div class="level-grid">
+    <div class="level-card" onclick="selectLevel('primary')" id="level-primary">
+        <div class="level-icon">🎒</div>
+        <div class="level-title">Primary School</div>
+        <div class="level-ages">Ages 5–11</div>
+        <div class="level-example">UK P1–P7 · USA Grades K–5</div>
+    </div>
+    <div class="level-card" onclick="selectLevel('secondary')" id="level-secondary">
+        <div class="level-icon">📐</div>
+        <div class="level-title">Secondary School</div>
+        <div class="level-ages">Ages 11–16</div>
+        <div class="level-example">UK S1–S4 · USA Middle & High</div>
+    </div>
+    <div class="level-card" onclick="selectLevel('highschool')" id="level-highschool">
+        <div class="level-icon">🎓</div>
+        <div class="level-title">Higher / Sixth Form</div>
+        <div class="level-ages">Ages 16–19</div>
+        <div class="level-example">UK S5–S6 · A-Levels · College</div>
+    </div>
+    <div class="level-card" onclick="selectLevel('university')" id="level-university">
+        <div class="level-icon">🏛️</div>
+        <div class="level-title">University</div>
+        <div class="level-ages">Ages 18+</div>
+        <div class="level-example">Undergraduate & Postgraduate</div>
+    </div>
+</div>
+
+<div class="section-label">Your Country / Curriculum</div>
+
+<div class="country-grid">
+    <button class="country-btn" onclick="selectCountry(this,'uk')">🇬🇧 United Kingdom</button>
+    <button class="country-btn" onclick="selectCountry(this,'usa')">🇺🇸 United States</button>
+    <button class="country-btn" onclick="selectCountry(this,'india')">🇮🇳 India</button>
+    <button class="country-btn" onclick="selectCountry(this,'aus')">🇦🇺 Australia</button>
+    <button class="country-btn" onclick="selectCountry(this,'other')">🌍 Other</button>
+</div>
+
+<button class="bb-continue-btn" id="level-continue" disabled onclick="goToSubjects()">
+    Choose My Subjects →
+</button>
+
+<a class="back-link" href="{{ url_for('index') }}">← Back to home</a>
+{% endif %}
+
+<!-- ═══════════════════════════════════════════
+     STEP 2: SUBJECT SELECTION
+════════════════════════════════════════════ -->
+{% if step == 'subject' %}
+<div class="bb-hero">
+    <h1>What Shall We Learn?</h1>
+    <p>Pick a subject and BrainBuddy AI will generate a lesson just for you</p>
+</div>
+
+<div class="section-label" id="subjects-label">Choose a Subject</div>
+<div class="subject-grid" id="subjects-grid"></div>
+
+<button class="bb-continue-btn" id="subject-continue" disabled onclick="goToStyle()">
+    Pick My Learning Style →
+</button>
+
+<a class="back-link" href="{{ url_for('index') }}?step=level">← Change level</a>
+
+<input type="hidden" id="selected-subject" value="">
+{% endif %}
+
+<!-- ═══════════════════════════════════════════
+     STEP 3: LEARNING STYLE SELECTION
+════════════════════════════════════════════ -->
+{% if step == 'style' %}
+<div class="bb-hero">
+    <h1>How Do You Learn Best?</h1>
+    <p>BrainBuddy will tailor the lesson to your style</p>
+</div>
+
+<div class="style-grid">
+    <div class="style-card" onclick="selectStyle(this,'visual')">
+        <div class="st-icon">👁️</div>
+        <div class="st-name">Visual</div>
+        <div class="st-desc">Diagrams, charts, and pictures</div>
+    </div>
+    <div class="style-card" onclick="selectStyle(this,'verbal')">
+        <div class="st-icon">📖</div>
+        <div class="st-name">Verbal</div>
+        <div class="st-desc">Clear written explanations</div>
+    </div>
+    <div class="style-card" onclick="selectStyle(this,'auditory')">
+        <div class="st-icon">🎧</div>
+        <div class="st-name">Auditory</div>
+        <div class="st-desc">Conversational, easy to follow</div>
+    </div>
+    <div class="style-card" onclick="selectStyle(this,'logical')">
+        <div class="st-icon">🧩</div>
+        <div class="st-name">Logical</div>
+        <div class="st-desc">Step-by-step reasoning</div>
+    </div>
+    <div class="style-card" onclick="selectStyle(this,'physical')">
+        <div class="st-icon">🤸</div>
+        <div class="st-name">Hands-on</div>
+        <div class="st-desc">Activities and practice</div>
+    </div>
+</div>
+
+<button class="bb-continue-btn" id="style-continue" disabled onclick="startLesson()">
+    Generate My Lesson ✨
+</button>
+
+<a class="back-link" href="{{ url_for('index') }}?step=subject">← Change subject</a>
+<input type="hidden" id="selected-style" value="">
+<input type="hidden" id="subject-value" value="{{ subject }}">
+{% endif %}
+
+<script>
+/* ── Level & Country ── */
+let chosenLevel = localStorage.getItem('bb_level') || '';
+let chosenCountry = localStorage.getItem('bb_country') || '';
+
+function selectLevel(lvl) {
+    chosenLevel = lvl;
+    localStorage.setItem('bb_level', lvl);
+    document.querySelectorAll('.level-card').forEach(c => c.classList.remove('selected'));
+    const el = document.getElementById('level-' + lvl);
+    if (el) el.classList.add('selected');
+    checkLevelReady();
+}
+
+function selectCountry(btn, country) {
+    chosenCountry = country;
+    localStorage.setItem('bb_country', country);
+    document.querySelectorAll('.country-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    checkLevelReady();
+}
+
+function checkLevelReady() {
+    const btn = document.getElementById('level-continue');
+    if (btn) btn.disabled = !(chosenLevel && chosenCountry);
+}
+
+function goToSubjects() {
+    window.location.href = '/?step=subject';
+}
+
+/* ── Subjects per level ── */
+const SUBJECTS = {
+    primary: [
+        {icon:'🔢', name:'Maths', desc:'Numbers, shapes & counting', val:'maths'},
+        {icon:'📖', name:'English', desc:'Reading, writing & phonics', val:'english'},
+        {icon:'🔬', name:'Science', desc:'Nature, animals & experiments', val:'science'},
+        {icon:'🌍', name:'Geography', desc:'Countries, maps & places', val:'geography'},
+        {icon:'🏰', name:'History', desc:'Kings, castles & the past', val:'history'},
+        {icon:'🎨', name:'Art & Craft', desc:'Draw, paint & create', val:'art'},
+        {icon:'🎵', name:'Music', desc:'Singing, rhythm & instruments', val:'music'},
+        {icon:'💻', name:'Computing', desc:'Coding basics & technology', val:'computing'},
+    ],
+    secondary: [
+        {icon:'📐', name:'Maths', desc:'Algebra, geometry & calculus', val:'maths'},
+        {icon:'⚗️', name:'Chemistry', desc:'Elements, reactions & molecules', val:'chemistry'},
+        {icon:'⚡', name:'Physics', desc:'Forces, energy & waves', val:'physics'},
+        {icon:'🧬', name:'Biology', desc:'Cells, genetics & ecosystems', val:'biology'},
+        {icon:'📚', name:'English', desc:'Literature, language & essays', val:'english'},
+        {icon:'💻', name:'Computing', desc:'Programming, algorithms & data', val:'computing'},
+        {icon:'🌍', name:'Geography', desc:'Climate, ecosystems & cities', val:'geography'},
+        {icon:'🏛️', name:'History', desc:'Wars, empires & revolutions', val:'history'},
+        {icon:'💼', name:'Business', desc:'Economics, marketing & finance', val:'business'},
+        {icon:'🎨', name:'Art & Design', desc:'Techniques, styles & theory', val:'art'},
+    ],
+    highschool: [
+        {icon:'📐', name:'Higher Maths', desc:'Advanced calculus & statistics', val:'maths'},
+        {icon:'⚡', name:'Higher Physics', desc:'Mechanics, electricity & waves', val:'physics'},
+        {icon:'⚗️', name:'Higher Chemistry', desc:'Organic chemistry & analysis', val:'chemistry'},
+        {icon:'🧬', name:'Higher Biology', desc:'Human biology & genetics', val:'biology'},
+        {icon:'📚', name:'Higher English', desc:'Critical essays & analysis', val:'english'},
+        {icon:'💻', name:'Higher Computing', desc:'Python, algorithms & databases', val:'computing'},
+        {icon:'💼', name:'Higher Business', desc:'Management, finance & strategy', val:'business'},
+        {icon:'🌍', name:'Higher Geography', desc:'Physical & human geography', val:'geography'},
+        {icon:'🤖', name:'AI & Machine Learning', desc:'Neural nets, data & models', val:'ai'},
+        {icon:'🔐', name:'Cybersecurity', desc:'Networks, threats & defence', val:'cybersecurity'},
+    ],
+    university: [
+        {icon:'🤖', name:'Machine Learning', desc:'Supervised, unsupervised & RL', val:'ml'},
+        {icon:'🧠', name:'Deep Learning', desc:'Neural networks & transformers', val:'deeplearning'},
+        {icon:'💻', name:'Computer Science', desc:'Algorithms, data structures & OS', val:'cs'},
+        {icon:'📊', name:'Data Science', desc:'Statistics, pandas & visualisation', val:'datascience'},
+        {icon:'🔐', name:'Cybersecurity', desc:'Cryptography, networks & ethics', val:'cybersecurity'},
+        {icon:'📐', name:'Mathematics', desc:'Pure & applied mathematics', val:'maths'},
+        {icon:'⚡', name:'Physics', desc:'Quantum, relativity & cosmology', val:'physics'},
+        {icon:'💼', name:'Business & Finance', desc:'Strategy, accounting & markets', val:'business'},
+    ]
+};
+
+function buildSubjectsGrid() {
+    const level = localStorage.getItem('bb_level') || 'secondary';
+    const grid = document.getElementById('subjects-grid');
+    const label = document.getElementById('subjects-label');
+    if (!grid) return;
+    const list = SUBJECTS[level] || SUBJECTS['secondary'];
+    const levelNames = {primary:'Primary School',secondary:'Secondary School',highschool:'Higher / Sixth Form',university:'University'};
+    if (label) label.textContent = levelNames[level] || 'Choose a Subject';
+    grid.innerHTML = list.map(s => `
+        <div class="subject-card" onclick="selectSubject(this,'${s.val}')">
+            <div class="s-icon">${s.icon}</div>
+            <div class="s-name">${s.name}</div>
+            <div class="s-desc">${s.desc}</div>
+        </div>`).join('');
+}
+
+function selectSubject(el, val) {
+    document.querySelectorAll('.subject-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('selected-subject').value = val;
+    localStorage.setItem('bb_subject', val);
+    document.getElementById('subject-continue').disabled = false;
+}
+
+function goToStyle() {
+    const sub = localStorage.getItem('bb_subject') || '';
+    if (sub) window.location.href = '/?step=style&subject=' + sub;
+}
+
+/* ── Learning Style ── */
+function selectStyle(el, val) {
+    document.querySelectorAll('.style-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('selected-style').value = val;
+    document.getElementById('style-continue').disabled = false;
+}
+
+function startLesson() {
+    const style = document.getElementById('selected-style').value;
+    const subject = document.getElementById('subject-value').value
+                    || localStorage.getItem('bb_subject') || 'maths';
+    const level = localStorage.getItem('bb_level') || 'secondary';
+    const country = localStorage.getItem('bb_country') || 'uk';
+    if (style) {
+        window.location.href = '/lesson?subject=' + subject
+            + '&style=' + style
+            + '&level=' + level
+            + '&country=' + country;
+    }
+}
+
+/* ── On page load ── */
+document.addEventListener('DOMContentLoaded', function() {
+    /* Restore level selection if returning */
+    if (chosenLevel) {
+        const el = document.getElementById('level-' + chosenLevel);
+        if (el) el.classList.add('selected');
+    }
+    if (chosenCountry) {
+        document.querySelectorAll('.country-btn').forEach(b => {
+            if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + chosenCountry + "'"))
+                b.classList.add('selected');
+        });
+    }
+    checkLevelReady();
+    buildSubjectsGrid();
+});
+</script>
 {% endblock %}
